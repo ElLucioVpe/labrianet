@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="netriaModelStoreContainer" CdmEntityContainer="netriaEntities1">
+    <EntitySetMapping Name="juego">
+      <EntityTypeMapping TypeName="netriaModel.juego">
+        <MappingFragment StoreEntitySet="juego">
+          <ScalarProperty Name="idJuego" ColumnName="idJuego" />
+          <ScalarProperty Name="User_loginnameUser" ColumnName="User_loginnameUser" />
+          <ScalarProperty Name="tituloJuego" ColumnName="tituloJuego" />
+          <ScalarProperty Name="descripcionJuego" ColumnName="descripcionJuego" />
+          <ScalarProperty Name="esPrivadoJuego" ColumnName="esPrivadoJuego" />
+          <ScalarProperty Name="coverJuego" ColumnName="coverJuego" />
+          <ScalarProperty Name="Musica_idMusica" ColumnName="Musica_idMusica" />
+          <ScalarProperty Name="activadoJuego" ColumnName="activadoJuego" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="musica">
+      <EntityTypeMapping TypeName="netriaModel.musica">
+        <MappingFragment StoreEntitySet="musica">
+          <ScalarProperty Name="idMusica" ColumnName="idMusica" />
+          <ScalarProperty Name="urlMusica" ColumnName="urlMusica" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pregunta">
+      <EntityTypeMapping TypeName="netriaModel.pregunta">
+        <MappingFragment StoreEntitySet="pregunta">
+          <ScalarProperty Name="idPregunta" ColumnName="idPregunta" />
+          <ScalarProperty Name="Juego_idJuego" ColumnName="Juego_idJuego" />
+          <ScalarProperty Name="segundosPregunta" ColumnName="segundosPregunta" />
+          <ScalarProperty Name="puntosPregunta" ColumnName="puntosPregunta" />
+          <ScalarProperty Name="contenidoPregunta" ColumnName="contenidoPregunta" />
+          <ScalarProperty Name="tipoPregunta" ColumnName="tipoPregunta" />
+          <ScalarProperty Name="urlAyudaPregunta" ColumnName="urlAyudaPregunta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="respuesta">
+      <EntityTypeMapping TypeName="netriaModel.respuesta">
+        <MappingFragment StoreEntitySet="respuesta">
+          <ScalarProperty Name="idRespuesta" ColumnName="idRespuesta" />
+          <ScalarProperty Name="Pregunta_idPregunta" ColumnName="Pregunta_idPregunta" />
+          <ScalarProperty Name="esCorrectoRespuesta" ColumnName="esCorrectoRespuesta" />
+          <ScalarProperty Name="contenidoRespuesta" ColumnName="contenidoRespuesta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user">
+      <EntityTypeMapping TypeName="netriaModel.user">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="loginnameUser" ColumnName="loginnameUser" />
+          <ScalarProperty Name="nickUser" ColumnName="nickUser" />
+          <ScalarProperty Name="passwordUser" ColumnName="passwordUser" />
+          <ScalarProperty Name="fechaUser" ColumnName="fechaUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="jugo" TypeName="netriaModel.jugo" StoreEntitySet="jugo">
+      <EndProperty Name="juego">
+        <ScalarProperty Name="idJuego" ColumnName="Juego_idJuego" />
+      </EndProperty>
+      <EndProperty Name="user">
+        <ScalarProperty Name="loginnameUser" ColumnName="User_loginnameUser" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="respondio" TypeName="netriaModel.respondio" StoreEntitySet="respondio">
+      <EndProperty Name="respuesta">
+        <ScalarProperty Name="idRespuesta" ColumnName="Respuesta_idRespuesta" />
+      </EndProperty>
+      <EndProperty Name="user">
+        <ScalarProperty Name="loginnameUser" ColumnName="User_loginnameUser" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
