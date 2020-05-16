@@ -228,7 +228,7 @@
           <NavigationProperty Name="musica" Relationship="Self.juego_fk_Juego_Musica1" FromRole="juego" ToRole="musica" />
           <NavigationProperty Name="user" Relationship="Self.juego_fk_Juego_User1" FromRole="juego" ToRole="user" />
           <NavigationProperty Name="pregunta" Relationship="Self.pregunta_fk_Pregunta_Juego1" FromRole="juego" ToRole="pregunta" />
-          <NavigationProperty Name="user1" Relationship="Self.jugo" FromRole="juego" ToRole="user" />
+          <NavigationProperty Name="jugadores" Relationship="Self.jugo" FromRole="juego" ToRole="user" />
         </EntityType>
         <EntityType Name="musica">
           <Key>
@@ -236,7 +236,7 @@
           </Key>
           <Property Name="idMusica" Type="Int32" Nullable="false" />
           <Property Name="urlMusica" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="juego" Relationship="Self.juego_fk_Juego_Musica1" FromRole="musica" ToRole="juego" />
+          <NavigationProperty Name="juegos" Relationship="Self.juego_fk_Juego_Musica1" FromRole="musica" ToRole="juego" />
         </EntityType>
         <EntityType Name="pregunta">
           <Key>
@@ -250,7 +250,7 @@
           <Property Name="tipoPregunta" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="urlAyudaPregunta" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="juego" Relationship="Self.pregunta_fk_Pregunta_Juego1" FromRole="pregunta" ToRole="juego" />
-          <NavigationProperty Name="respuesta" Relationship="Self.respuesta_fk_Respuesta_Pregunta1" FromRole="pregunta" ToRole="respuesta" />
+          <NavigationProperty Name="respuestas" Relationship="Self.respuesta_fk_Respuesta_Pregunta1" FromRole="pregunta" ToRole="respuesta" />
         </EntityType>
         <EntityType Name="respuesta">
           <Key>
@@ -261,7 +261,7 @@
           <Property Name="esCorrectoRespuesta" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
           <Property Name="contenidoRespuesta" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="pregunta" Relationship="Self.respuesta_fk_Respuesta_Pregunta1" FromRole="respuesta" ToRole="pregunta" />
-          <NavigationProperty Name="user" Relationship="Self.respondio" FromRole="respuesta" ToRole="user" />
+          <NavigationProperty Name="respondieron" Relationship="Self.respondio" FromRole="respuesta" ToRole="user" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -271,9 +271,9 @@
           <Property Name="nickUser" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="passwordUser" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="fechaUser" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="juego" Relationship="Self.juego_fk_Juego_User1" FromRole="user" ToRole="juego" />
-          <NavigationProperty Name="juego1" Relationship="Self.jugo" FromRole="user" ToRole="juego" />
-          <NavigationProperty Name="respuesta" Relationship="Self.respondio" FromRole="user" ToRole="respuesta" />
+          <NavigationProperty Name="creo" Relationship="Self.juego_fk_Juego_User1" FromRole="user" ToRole="juego" />
+          <NavigationProperty Name="jugo" Relationship="Self.jugo" FromRole="user" ToRole="juego" />
+          <NavigationProperty Name="respondio" Relationship="Self.respondio" FromRole="user" ToRole="respuesta" />
         </EntityType>
         <Association Name="juego_fk_Juego_Musica1">
           <End Role="musica" Type="Self.musica" Multiplicity="1" />
