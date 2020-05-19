@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataTransferObjects\DTOPregunta.cs" />
+    <Compile Include="DataTransferObjects\DTORespuesta.cs" />
     <Compile Include="DataTransferObjects\DTOUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
