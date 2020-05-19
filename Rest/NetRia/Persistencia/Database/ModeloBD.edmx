@@ -213,7 +213,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="netriaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="juego">
+        <EntityType Name="Juego">
           <Key>
             <PropertyRef Name="idJuego" />
           </Key>
@@ -230,7 +230,7 @@
           <NavigationProperty Name="pregunta" Relationship="Self.pregunta_fk_Pregunta_Juego1" FromRole="juego" ToRole="pregunta" />
           <NavigationProperty Name="jugadores" Relationship="Self.jugo" FromRole="juego" ToRole="user" />
         </EntityType>
-        <EntityType Name="musica">
+        <EntityType Name="Musica">
           <Key>
             <PropertyRef Name="idMusica" />
           </Key>
@@ -238,7 +238,7 @@
           <Property Name="urlMusica" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="juegos" Relationship="Self.juego_fk_Juego_Musica1" FromRole="musica" ToRole="juego" />
         </EntityType>
-        <EntityType Name="pregunta">
+        <EntityType Name="Pregunta">
           <Key>
             <PropertyRef Name="idPregunta" />
           </Key>
@@ -252,7 +252,7 @@
           <NavigationProperty Name="juego" Relationship="Self.pregunta_fk_Pregunta_Juego1" FromRole="pregunta" ToRole="juego" />
           <NavigationProperty Name="respuestas" Relationship="Self.respuesta_fk_Respuesta_Pregunta1" FromRole="pregunta" ToRole="respuesta" />
         </EntityType>
-        <EntityType Name="respuesta">
+        <EntityType Name="Respuesta">
           <Key>
             <PropertyRef Name="idRespuesta" />
           </Key>
@@ -263,7 +263,7 @@
           <NavigationProperty Name="pregunta" Relationship="Self.respuesta_fk_Respuesta_Pregunta1" FromRole="respuesta" ToRole="pregunta" />
           <NavigationProperty Name="respondieron" Relationship="Self.respondio" FromRole="respuesta" ToRole="user" />
         </EntityType>
-        <EntityType Name="user">
+        <EntityType Name="User">
           <Key>
             <PropertyRef Name="loginnameUser" />
           </Key>
@@ -276,8 +276,8 @@
           <NavigationProperty Name="respondio" Relationship="Self.respondio" FromRole="user" ToRole="respuesta" />
         </EntityType>
         <Association Name="juego_fk_Juego_Musica1">
-          <End Role="musica" Type="Self.musica" Multiplicity="1" />
-          <End Role="juego" Type="Self.juego" Multiplicity="*" />
+          <End Role="musica" Type="netriaModel.Musica" Multiplicity="1" />
+          <End Role="juego" Type="netriaModel.Juego" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="musica">
               <PropertyRef Name="idMusica" />
@@ -288,8 +288,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="juego_fk_Juego_User1">
-          <End Role="user" Type="Self.user" Multiplicity="1" />
-          <End Role="juego" Type="Self.juego" Multiplicity="*" />
+          <End Role="user" Type="netriaModel.User" Multiplicity="1" />
+          <End Role="juego" Type="netriaModel.Juego" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="user">
               <PropertyRef Name="loginnameUser" />
@@ -300,8 +300,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="pregunta_fk_Pregunta_Juego1">
-          <End Role="juego" Type="Self.juego" Multiplicity="1" />
-          <End Role="pregunta" Type="Self.pregunta" Multiplicity="*" />
+          <End Role="juego" Type="netriaModel.Juego" Multiplicity="1" />
+          <End Role="pregunta" Type="netriaModel.Pregunta" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="juego">
               <PropertyRef Name="idJuego" />
@@ -312,8 +312,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="respuesta_fk_Respuesta_Pregunta1">
-          <End Role="pregunta" Type="Self.pregunta" Multiplicity="1" />
-          <End Role="respuesta" Type="Self.respuesta" Multiplicity="*" />
+          <End Role="pregunta" Type="netriaModel.Pregunta" Multiplicity="1" />
+          <End Role="respuesta" Type="netriaModel.Respuesta" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="pregunta">
               <PropertyRef Name="idPregunta" />
@@ -324,42 +324,42 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="jugo">
-          <End Role="juego" Type="Self.juego" Multiplicity="*" />
-          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <End Role="juego" Type="netriaModel.Juego" Multiplicity="*" />
+          <End Role="user" Type="netriaModel.User" Multiplicity="*" />
         </Association>
         <Association Name="respondio">
-          <End Role="respuesta" Type="Self.respuesta" Multiplicity="*" />
-          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <End Role="respuesta" Type="netriaModel.Respuesta" Multiplicity="*" />
+          <End Role="user" Type="netriaModel.User" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="netriaEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="juego" EntityType="Self.juego" />
-          <EntitySet Name="musica" EntityType="Self.musica" />
-          <EntitySet Name="pregunta" EntityType="Self.pregunta" />
-          <EntitySet Name="respuesta" EntityType="Self.respuesta" />
-          <EntitySet Name="user" EntityType="Self.user" />
+        <EntityContainer Name="netriaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Juegoes1" EntityType="netriaModel.Juego" />
+          <EntitySet Name="Musicas1" EntityType="netriaModel.Musica" />
+          <EntitySet Name="Preguntas1" EntityType="netriaModel.Pregunta" />
+          <EntitySet Name="Respuestas1" EntityType="netriaModel.Respuesta" />
+          <EntitySet Name="Users1" EntityType="netriaModel.User" />
           <AssociationSet Name="juego_fk_Juego_Musica1" Association="Self.juego_fk_Juego_Musica1">
-            <End Role="musica" EntitySet="musica" />
-            <End Role="juego" EntitySet="juego" />
+            <End Role="musica" EntitySet="Musicas1" />
+            <End Role="juego" EntitySet="Juegoes1" />
           </AssociationSet>
           <AssociationSet Name="juego_fk_Juego_User1" Association="Self.juego_fk_Juego_User1">
-            <End Role="user" EntitySet="user" />
-            <End Role="juego" EntitySet="juego" />
+            <End Role="user" EntitySet="Users1" />
+            <End Role="juego" EntitySet="Juegoes1" />
           </AssociationSet>
           <AssociationSet Name="pregunta_fk_Pregunta_Juego1" Association="Self.pregunta_fk_Pregunta_Juego1">
-            <End Role="juego" EntitySet="juego" />
-            <End Role="pregunta" EntitySet="pregunta" />
+            <End Role="juego" EntitySet="Juegoes1" />
+            <End Role="pregunta" EntitySet="Preguntas1" />
           </AssociationSet>
           <AssociationSet Name="respuesta_fk_Respuesta_Pregunta1" Association="Self.respuesta_fk_Respuesta_Pregunta1">
-            <End Role="pregunta" EntitySet="pregunta" />
-            <End Role="respuesta" EntitySet="respuesta" />
+            <End Role="pregunta" EntitySet="Preguntas1" />
+            <End Role="respuesta" EntitySet="Respuestas1" />
           </AssociationSet>
           <AssociationSet Name="jugo" Association="Self.jugo">
-            <End Role="juego" EntitySet="juego" />
-            <End Role="user" EntitySet="user" />
+            <End Role="juego" EntitySet="Juegoes1" />
+            <End Role="user" EntitySet="Users1" />
           </AssociationSet>
           <AssociationSet Name="respondio" Association="Self.respondio">
-            <End Role="respuesta" EntitySet="respuesta" />
-            <End Role="user" EntitySet="user" />
+            <End Role="respuesta" EntitySet="Respuestas1" />
+            <End Role="user" EntitySet="Users1" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -367,9 +367,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="netriaModelStoreContainer" CdmEntityContainer="netriaEntities1">
-          <EntitySetMapping Name="juego">
-            <EntityTypeMapping TypeName="netriaModel.juego">
+        <EntityContainerMapping StorageEntityContainer="netriaModelStoreContainer" CdmEntityContainer="netriaEntities">
+          <EntitySetMapping Name="Juegoes1">
+            <EntityTypeMapping TypeName="netriaModel.Juego">
               <MappingFragment StoreEntitySet="juego">
                 <ScalarProperty Name="idJuego" ColumnName="idJuego" />
                 <ScalarProperty Name="User_loginnameUser" ColumnName="User_loginnameUser" />
@@ -382,16 +382,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="musica">
-            <EntityTypeMapping TypeName="netriaModel.musica">
+          <EntitySetMapping Name="Musicas1">
+            <EntityTypeMapping TypeName="netriaModel.Musica">
               <MappingFragment StoreEntitySet="musica">
                 <ScalarProperty Name="idMusica" ColumnName="idMusica" />
                 <ScalarProperty Name="urlMusica" ColumnName="urlMusica" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="pregunta">
-            <EntityTypeMapping TypeName="netriaModel.pregunta">
+          <EntitySetMapping Name="Preguntas1">
+            <EntityTypeMapping TypeName="netriaModel.Pregunta">
               <MappingFragment StoreEntitySet="pregunta">
                 <ScalarProperty Name="idPregunta" ColumnName="idPregunta" />
                 <ScalarProperty Name="Juego_idJuego" ColumnName="Juego_idJuego" />
@@ -403,8 +403,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="respuesta">
-            <EntityTypeMapping TypeName="netriaModel.respuesta">
+          <EntitySetMapping Name="Respuestas1">
+            <EntityTypeMapping TypeName="netriaModel.Respuesta">
               <MappingFragment StoreEntitySet="respuesta">
                 <ScalarProperty Name="idRespuesta" ColumnName="idRespuesta" />
                 <ScalarProperty Name="Pregunta_idPregunta" ColumnName="Pregunta_idPregunta" />
@@ -413,8 +413,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="user">
-            <EntityTypeMapping TypeName="netriaModel.user">
+          <EntitySetMapping Name="Users1">
+            <EntityTypeMapping TypeName="netriaModel.User">
               <MappingFragment StoreEntitySet="user">
                 <ScalarProperty Name="loginnameUser" ColumnName="loginnameUser" />
                 <ScalarProperty Name="nickUser" ColumnName="nickUser" />
@@ -453,7 +453,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

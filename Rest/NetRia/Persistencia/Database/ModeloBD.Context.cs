@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NetRia.Models
+namespace Persistencia.Database
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class netriaEntities1 : DbContext
+    public partial class netriaEntities : DbContext
     {
-        public netriaEntities1()
-            : base("name=netriaEntities1")
+        public netriaEntities()
+            : base("name=netriaEntities")
         {
         }
     
@@ -25,10 +25,10 @@ namespace NetRia.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<juego> juego { get; set; }
-        public virtual DbSet<musica> musica { get; set; }
-        public virtual DbSet<pregunta> pregunta { get; set; }
-        public virtual DbSet<respuesta> respuesta { get; set; }
-        public virtual DbSet<user> user { get; set; }
+        public virtual DbSet<Juego> Juegos { get; set; }
+        public virtual DbSet<Musica> Musicas { get; set; }
+        public virtual DbSet<Pregunta> Preguntas { get; set; }
+        public virtual DbSet<Respuesta> Respuestas { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

@@ -7,23 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NetRia.Models
+namespace Persistencia.Database
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class musica
+    public partial class Respuesta
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public musica()
+        public Respuesta()
         {
-            this.juegos = new HashSet<juego>();
+            this.respondieron = new HashSet<User>();
         }
     
-        public int idMusica { get; set; }
-        public string urlMusica { get; set; }
+        public int idRespuesta { get; set; }
+        public int Pregunta_idPregunta { get; set; }
+        public string esCorrectoRespuesta { get; set; }
+        public string contenidoRespuesta { get; set; }
     
+        public virtual Pregunta pregunta { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<juego> juegos { get; set; }
+        public virtual ICollection<User> respondieron { get; set; }
     }
 }

@@ -8,36 +8,60 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using NetRia.Models;
+using Common.DataTransferObjects;
+using NetRia.DataModel.Mappers;
+using NetRia.DataModel.Repositories;
+using Persistencia.Database;
 
 namespace NetRia.Controllers
 {
     public class JuegoController : ApiController
     {
-        private netriaEntities1 db = new netriaEntities1();
+        private JuegoMapper _mapper;
+        public JuegoController()
+        {
+            _mapper = new JuegoMapper();
+        }
 
         // GET: api/Juego
-        public IQueryable<juego> Getjuego()
+        public List<DTOJuego> GetAll()
         {
-            return db.juego;
+            List<DTOJuego> juegos = new List<DTOJuego>();
+            using (netriaEntities context = new netriaEntities())
+            {
+                JuegoRepository repositorio = new JuegoRepository(context);
+
+                var entityList = repositorio.GetAll();
+                foreach (var entity in entityList)
+                {
+                    juegos.Add(_mapper.MapToDTO(entity));
+                }
+            }
+            return juegos;
         }
 
         // GET: api/Juego/5
-        [ResponseType(typeof(juego))]
-        public IHttpActionResult Getjuego(int id)
+        [ResponseType(typeof(DTOJuego))]
+        public IHttpActionResult GetJuego(int id)
         {
-            juego juego = db.juego.Find(id);
-            if (juego == null)
+            using (netriaEntities context = new netriaEntities())
             {
-                return NotFound();
-            }
+                JuegoRepository repositorio = new JuegoRepository(context);
 
-            return Ok(juego);
+                var entity = repositorio.Get(id);
+                if (entity == null)
+                {
+                    return NotFound();
+                }
+
+                DTOJuego juego = _mapper.MapToDTO(entity);
+                return Ok(juego);
+            }
         }
 
         // PUT: api/Juego/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult Putjuego(int id, juego juego)
+        public IHttpActionResult UpdateJuego(int id, DTOJuego juego)
         {
             if (!ModelState.IsValid)
             {
@@ -49,85 +73,89 @@ namespace NetRia.Controllers
                 return BadRequest();
             }
 
-            db.Entry(juego).State = EntityState.Modified;
-
             try
             {
-                db.SaveChanges();
+                using (netriaEntities context = new netriaEntities())
+                {
+                    JuegoRepository repositorio = new JuegoRepository(context);
+
+                    Juego entity = repositorio.Get(juego.idJuego);
+                    entity.idJuego = juego.idJuego;
+                    entity.User_loginnameUser = juego.User_loginnameUser;
+                    entity.tituloJuego = juego.tituloJuego;
+                    entity.descripcionJuego = juego.descripcionJuego;
+                    entity.esPrivadoJuego = juego.esPrivadoJuego;
+                    entity.coverJuego = juego.coverJuego;
+                    entity.Musica_idMusica = juego.Musica_idMusica;
+                    entity.activadoJuego = juego.activadoJuego;
+
+                    context.SaveChanges();
+                }
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if (!juegoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw ex;
             }
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/Juego
-        [ResponseType(typeof(juego))]
-        public IHttpActionResult Postjuego(juego juego)
+        [ResponseType(typeof(void))]
+        public IHttpActionResult CreateJuego(DTOJuego juego)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.juego.Add(juego);
-
             try
             {
-                db.SaveChanges();
+                using (netriaEntities context = new netriaEntities())
+                {
+                    JuegoRepository repositorio = new JuegoRepository(context);
+
+                    if (repositorio.juegoExists(juego.idJuego))
+                    {
+                        throw new Exception("Código de articulo existente.");
+                    }
+                    repositorio.Create(_mapper.MapFromDTO(juego));
+                    context.SaveChanges();
+                }
             }
-            catch (DbUpdateException)
+            catch (Exception ex)
             {
-                if (juegoExists(juego.idJuego))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                throw ex;
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = juego.idJuego }, juego);
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // DELETE: api/Juego/5
-        [ResponseType(typeof(juego))]
-        public IHttpActionResult Deletejuego(int id)
+        [ResponseType(typeof(void))]
+        public IHttpActionResult DeleteJuego(int id)
         {
-            juego juego = db.juego.Find(id);
-            if (juego == null)
+            try
             {
-                return NotFound();
+                using (netriaEntities context = new netriaEntities())
+                {
+                    JuegoRepository repositorio = new JuegoRepository(context);
+
+                    if (!repositorio.juegoExists(id))
+                    {
+                        throw new Exception("Código de articulo inexistente.");
+                    }
+
+                    repositorio.Delete(id);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
-            db.juego.Remove(juego);
-            db.SaveChanges();
-
-            return Ok(juego);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool juegoExists(int id)
-        {
-            return db.juego.Count(e => e.idJuego == id) > 0;
+            return StatusCode(HttpStatusCode.NoContent);
         }
     }
 }

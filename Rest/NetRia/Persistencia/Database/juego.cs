@@ -7,18 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NetRia.Models
+namespace Persistencia.Database
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class juego
+    public partial class Juego
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public juego()
+        public Juego()
         {
-            this.pregunta = new HashSet<pregunta>();
-            this.jugadores = new HashSet<user>();
+            this.pregunta = new HashSet<Pregunta>();
+            this.jugadores = new HashSet<User>();
         }
     
         public int idJuego { get; set; }
@@ -30,11 +30,11 @@ namespace NetRia.Models
         public int Musica_idMusica { get; set; }
         public Nullable<short> activadoJuego { get; set; }
     
-        public virtual musica musica { get; set; }
-        public virtual user user { get; set; }
+        public virtual Musica musica { get; set; }
+        public virtual User user { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<pregunta> pregunta { get; set; }
+        public virtual ICollection<Pregunta> pregunta { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<user> jugadores { get; set; }
+        public virtual ICollection<User> jugadores { get; set; }
     }
 }

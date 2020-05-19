@@ -7,19 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NetRia.Models
+namespace Persistencia.Database
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class user
+    public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public user()
+        public User()
         {
-            this.creo = new HashSet<juego>();
-            this.jugo = new HashSet<juego>();
-            this.respondio = new HashSet<respuesta>();
+            this.creo = new HashSet<Juego>();
+            this.jugo = new HashSet<Juego>();
+            this.respondio = new HashSet<Respuesta>();
         }
     
         public string loginnameUser { get; set; }
@@ -28,10 +28,10 @@ namespace NetRia.Models
         public Nullable<System.DateTime> fechaUser { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<juego> creo { get; set; }
+        public virtual ICollection<Juego> creo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<juego> jugo { get; set; }
+        public virtual ICollection<Juego> jugo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<respuesta> respondio { get; set; }
+        public virtual ICollection<Respuesta> respondio { get; set; }
     }
 }

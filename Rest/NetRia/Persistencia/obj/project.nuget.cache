@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Pw4I1/2gwiRpiNMzHCYeg3uLdqhBAwow1X9K3i5aH3znVRffGBtxa/7JPnnbo3zLq5z/dnqT7LOaz27JTn105A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Esteban\\Documents\\GitHub\\labrianet (mis cambios)\\Rest\\NetRia\\Persistencia\\Persistencia.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Esteban\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512"
+  ],
+  "logs": []
+}
