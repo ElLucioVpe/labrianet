@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Common.DataTransferObjects
 {
-<<<<<<< HEAD
     public class DTORespuesta
     {
         public int idRespuesta { get; set; }
@@ -15,9 +14,6 @@ namespace Common.DataTransferObjects
         public string contenidoRespuesta { get; set; }
 
         public List <DTOUser> respondieron { get; set; }
-=======
-    class DTORespuesta
-    {
->>>>>>> 0430315c3c44dae055b6bf386d68850f257afd66
+
     }
 }
