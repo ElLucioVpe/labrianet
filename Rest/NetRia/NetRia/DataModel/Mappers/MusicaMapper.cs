@@ -21,7 +21,7 @@ namespace NetRia.DataModel.Mappers
             };
             return pMusica;
         }
-        public Musica MapFromDTOUser(DTOMusica dto)
+        public Musica MapFromDTO(DTOMusica dto)
         {
             if (dto == null)
                 return null;

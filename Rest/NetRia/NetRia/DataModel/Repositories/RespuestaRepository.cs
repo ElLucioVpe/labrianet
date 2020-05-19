@@ -10,8 +10,12 @@ namespace NetRia.DataModel.Repositories
 {
     public class RespuestaRepository
     {
-        private netriaEntities db = new netriaEntities();
-        
+        private readonly netriaEntities db;
+        public RespuestaRepository(netriaEntities context)
+        {
+            this.db = context;
+        }
+
         public List<Respuesta> GetAll()
         {
             return db.Respuestas.ToList();
@@ -63,7 +67,7 @@ namespace NetRia.DataModel.Repositories
             db.SaveChanges();
         }
 
-        private bool respuestaExists(int id)
+        public bool respuestaExists(int id)
         {
             return db.Respuestas.Count(e => e.idRespuesta == id) > 0;
         }

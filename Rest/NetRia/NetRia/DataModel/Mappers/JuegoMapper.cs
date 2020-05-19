@@ -12,6 +12,8 @@ namespace NetRia.DataModel.Mappers
     {
         public DTOJuego MapToDTO(Juego juego)
         {
+            UserMapper dd = new UserMapper();
+
             if (juego == null)
                 return null;
             DTOJuego pJuego = new DTOJuego()
@@ -27,7 +29,7 @@ namespace NetRia.DataModel.Mappers
             };
             return pJuego;
         }
-        public Juego MapFromDTOUser(DTOJuego dto)
+        public Juego MapFromDTO(DTOJuego dto)
         {
             if (dto == null)
                 return null;

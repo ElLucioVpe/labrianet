@@ -22,7 +22,7 @@ namespace NetRia.DataModel.Mappers
             };
             return pUser;
         }
-        public User MapFromDTOUser(DTOUser dto)
+        public User MapFromDTO(DTOUser dto)
         {
             if (dto == null)
                 return null;

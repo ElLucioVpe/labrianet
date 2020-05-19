@@ -10,7 +10,11 @@ namespace NetRia.DataModel.Repositories
 {
     public class MusicaRepository
     {
-        private netriaEntities db = new netriaEntities();
+        private readonly netriaEntities db;
+        public MusicaRepository(netriaEntities context)
+        {
+            this.db = context;
+        }
 
         public List<Musica> GetAll()
         {
@@ -63,7 +67,7 @@ namespace NetRia.DataModel.Repositories
             db.SaveChanges();
         }
 
-        private bool musicaExists(int id)
+        public bool musicaExists(int id)
         {
             return db.Musicas.Count(e => e.idMusica == id) > 0;
         }

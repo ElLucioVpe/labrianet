@@ -10,7 +10,11 @@ namespace NetRia.DataModel.Repositories
 {
     public class UserRepository
     {
-        private netriaEntities db = new netriaEntities();
+        private readonly netriaEntities db;
+        public UserRepository(netriaEntities context)
+        {
+            this.db = context;
+        }
 
         public List<User> GetAll()
         {
@@ -59,7 +63,7 @@ namespace NetRia.DataModel.Repositories
             db.SaveChanges();
         }
 
-        private bool userExists(string id)
+        public bool userExists(string id)
         {
             return db.Users.Count(e => e.loginnameUser == id) > 0;
         }
