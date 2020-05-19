@@ -1,0 +1,101 @@
+body {
+  margin: 0;
+  font-family: 'Lato', 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+:root {
+  --main1: #CE84AD;
+  --main2: #CE96A6;
+  --main3: #D1A7A0;
+  --main4: #D4CBB3;
+  --main5: #D2E0BF;
+}
+/*
+:root {
+  --main1: #AD7A99;
+  --main2: #B2CEDE;
+  --main3: #8CDFD6;
+  --main4: #6DC0D5;
+  --main5: #5A716A;
+}
+*/
+
+h1 {
+  font-family: Montserrat;
+}
+
+.index {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.main_menu img {
+  width: 200px;
+}
+
+button {
+  font-family: Lato;
+  border: none;
+  height: 100px;
+  width: 200px;
+  border-radius: 50px;
+  font-size: 20px;
+  color: #3b035f;
+  background-image: linear-gradient(to right, var(--main4) , var(--main5));
+}
+
+#root {
+  height: 100vh;
+}
+
+.main_menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 50px;
+  background: var(--main2);
+  border-radius: 25px;
+  margin: 0;
+}
+
+.main_menu .item {
+  margin: 10px;
+}
+
+/**/
+
+.main_introduction {
+  border: 5px solid var(--main2);
+  border-radius: 25px;
+  height: 540px;
+  padding: 10px;
+  font-family: Lato;
+  font-size: 25px;
+  max-width: 600px;
+  font-weight: 300;
+  text-align: right;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+@media only screen and (max-width: 600px) {
+  .main_introduction {
+    display: none;
+  }
+}
+

@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import Index from './Views/Index.js'
 import CrearJuego from './Views/CrearJuego.js'
+import Perfil from './Views/Profile.js'
+import SignUp from './Views/SignUp'
+import Login from './Views/Login.js'
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -12,20 +16,28 @@ import {
 export default function App() {
     return (
         <Router>
-            <div>
-                <Switch>
-                    <Route exact path="/">
-                        <Index />
-                    </Route>
-                    <Route path="/crear">
-                        <CrearJuego />
-                    </Route>
-                    <Route path="/jugar">
-                        <CrearJuego />
-                    </Route>
-                </Switch>
-            </div>
-        </Router>    );
+            <Switch>
+                <Route exact path="/">
+                    <Index />
+                </Route>
+                <Route path="/crear">
+                    <CrearJuego />
+                </Route>
+                <Route path="/jugar">
+                    <CrearJuego />
+                </Route>
+                <Route path="/perfil">
+                    <Perfil />
+                </Route>
+                <Route path="/registro">
+                    <SignUp />
+                </Route>
+                <Route path="/login">
+                    <Login />
+                </Route>
+            </Switch>
+        </Router>
+    );
 }
 
 ReactDOM.render(
