@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2cb06d545e5d46b584d1d68d8cfe2bb0" Name="Diagram1">
+      <Diagram DiagramId="aa583ba18b7a45b9b2e72f9d128c68f9" Name="Diagram1">
         <EntityTypeShape EntityType="netriaModel.juego" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="netriaModel.musica" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="netriaModel.pregunta" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="netriaModel.respuesta" Width="1.5" PointX="7.5" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="netriaModel.user" Width="1.5" PointX="10.125" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="netriaModel.user" Width="1.5" PointX="9.75" PointY="1.5" IsExpanded="true" />
         <AssociationConnector Association="netriaModel.juego_fk_Juego_Musica1" ManuallyRouted="false" />
         <AssociationConnector Association="netriaModel.juego_fk_Juego_User1" ManuallyRouted="false" />
         <AssociationConnector Association="netriaModel.pregunta_fk_Pregunta_Juego1" ManuallyRouted="false" />
