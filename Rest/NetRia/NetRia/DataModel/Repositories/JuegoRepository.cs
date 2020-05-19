@@ -12,9 +12,9 @@ namespace NetRia.DataModel.Repositories
     {
         private netriaEntities db = new netriaEntities();
 
-        public IQueryable<Juego> GetAll()
+        public List<Juego> GetAll()
         {
-            return db.Juegos;
+            return db.Juegos.ToList();
         }
 
         // GET: api/Juego/5
