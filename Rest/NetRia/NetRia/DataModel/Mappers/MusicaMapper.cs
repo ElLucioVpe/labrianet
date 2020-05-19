@@ -10,5 +10,28 @@ namespace NetRia.DataModel.Mappers
 {
     public class MusicaMapper
     {
+        public DTOMusica MapToDTO(Musica musica)
+        {
+            if (musica == null)
+                return null;
+            DTOMusica pMusica = new DTOMusica()
+            {
+                idMusica = musica.idMusica,
+                urlMusica = musica.urlMusica
+            };
+            return pMusica;
+        }
+        public Musica MapFromDTOUser(DTOMusica dto)
+        {
+            if (dto == null)
+                return null;
+            Musica musica = new Musica()
+            {
+                idMusica = dto.idMusica,
+                urlMusica = dto.urlMusica
+            };
+
+            return musica;
+        }
     }
 }
