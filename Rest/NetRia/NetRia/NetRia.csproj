@@ -166,6 +166,16 @@
     <Compile Include="Controllers\JuegoController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="DataModel\Mappers\JuegoMapper.cs" />
+    <Compile Include="DataModel\Mappers\MusicaMapper.cs" />
+    <Compile Include="DataModel\Mappers\PreguntaMapper.cs" />
+    <Compile Include="DataModel\Mappers\RespuestaMapper.cs" />
+    <Compile Include="DataModel\Mappers\UserMapper.cs" />
+    <Compile Include="DataModel\Repositories\JuegoRepository.cs" />
+    <Compile Include="DataModel\Repositories\MusicaRepository.cs" />
+    <Compile Include="DataModel\Repositories\PreguntaRepository.cs" />
+    <Compile Include="DataModel\Repositories\RespuestaRepository.cs" />
+    <Compile Include="DataModel\Repositories\UserRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -224,8 +234,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="DataModel\Mappers\" />
-    <Folder Include="DataModel\Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -258,6 +266,16 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{930251a8-e929-4750-ae7d-bc69bd6f3997}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Persistencia\Persistencia.csproj">
+      <Project>{fef56214-c257-4bd8-8154-1e523281d4cb}</Project>
+      <Name>Persistencia</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

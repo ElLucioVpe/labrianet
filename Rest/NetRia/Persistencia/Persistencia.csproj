@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database\juego.cs">
+    <Compile Include="Database\Juego.cs">
       <DependentUpon>ModeloBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\ModeloBD.Context.cs">
@@ -62,16 +62,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModeloBD.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Database\musica.cs">
+    <Compile Include="Database\Pregunta.cs">
       <DependentUpon>ModeloBD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\pregunta.cs">
+    <Compile Include="Database\Respuesta.cs">
       <DependentUpon>ModeloBD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\respuesta.cs">
-      <DependentUpon>ModeloBD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\user.cs">
+    <Compile Include="Database\User.cs">
       <DependentUpon>ModeloBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

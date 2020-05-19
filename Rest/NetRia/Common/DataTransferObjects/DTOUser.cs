@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Common.DataTransferObjects
 {
-    class DTOUser
+    public class DTOUser
     {
+        public string loginnameUser { get; set; }
+        public string nickUser { get; set; }
+        public string passwordUser { get; set; }
+        public Nullable<System.DateTime> fechaUser { get; set; }
     }
 }
