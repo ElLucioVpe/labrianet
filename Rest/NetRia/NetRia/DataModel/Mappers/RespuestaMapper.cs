@@ -53,7 +53,7 @@ namespace NetRia.DataModel.Mappers
             {
                 foreach (DTOUser us in dto.respondieron)
                 {
-                    respuesta.respondieron.Add(_mapperUser.MapFromDTOUser(us));
+                    respuesta.respondieron.Add(_mapperUser.MapFromDTO(us));
                 }
 
 
