@@ -117,7 +117,7 @@ namespace NetRia.Controllers
 
                     if (repositorio.juegoExists(juego.idJuego))
                     {
-                        throw new Exception("Código de articulo existente.");
+                        throw new Exception("Código de juego existente.");
                     }
                     repositorio.Create(_mapper.MapFromDTO(juego));
                     context.SaveChanges();
@@ -143,7 +143,7 @@ namespace NetRia.Controllers
 
                     if (!repositorio.juegoExists(id))
                     {
-                        throw new Exception("Código de articulo inexistente.");
+                        throw new Exception("Código de juego inexistente.");
                     }
 
                     repositorio.Delete(id);
