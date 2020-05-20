@@ -16,16 +16,6 @@ namespace NetRia.DataModel.Repositories
             this.db = context;
         }
 
-        public bool Login(string loginname, string password)
-        {
-            if (!userExists(loginname)) return false;
-
-            User user = db.Users.Find(loginname);
-            if (password == user.passwordUser) return true;
-            
-            return false;
-        }
-
         public List<User> GetAll()
         {
             return db.Users.ToList();

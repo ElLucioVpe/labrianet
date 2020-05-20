@@ -19,7 +19,6 @@ namespace NetRia.DataModel.Mappers
                 loginnameUser = user.loginnameUser,
                 nickUser = user.nickUser,
                 fechaUser = user.fechaUser
-                //la password no la pasamos
             };
             return pUser;
         }
@@ -31,9 +30,7 @@ namespace NetRia.DataModel.Mappers
             {
                 loginnameUser = dto.loginnameUser,
                 nickUser = dto.nickUser,
-                fechaUser = dto.fechaUser,
-                //pasamos la password para el create
-                passwordUser = dto.passwordUser
+                fechaUser = dto.fechaUser
             };
 
             return user;
