@@ -1,7 +1,6 @@
 ﻿using Common.DataTransferObjects;
-using NetRia.DataModel.Mappers;
-using NetRia.DataModel.Repositories;
-using Persistencia.Database;
+using BusinessLogic.DataModel.Mappers;
+using BusinessLogic.DataModel.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
