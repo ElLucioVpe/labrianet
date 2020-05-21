@@ -6,8 +6,9 @@ using System.Net.Http;
 using System.Web.Http;
 
 using Common.DataTransferObjects;
-using BusinessLogic.DataModel.Mappers;
-using BusinessLogic.DataModel.Repositories;
+using NetRia.DataModel.Mappers;
+using NetRia.DataModel.Repositories;
+using Persistencia.Database;
 using System.Web.Http.Description;
 
 

@@ -5,8 +5,6 @@ import CrearJuego from './Views/CrearJuego.js'
 import Perfil from './Views/Profile.js'
 import SignUp from './Views/SignUp'
 import Login from './Views/Login.js'
-import Header from './Components/Header.js'
-import './App.css';
 
 import {
     BrowserRouter as Router,
@@ -18,7 +16,6 @@ import {
 export default function App() {
     return (
         <Router>
-            <Header/>
             <Switch>
                 <Route exact path="/">
                     <Index />
