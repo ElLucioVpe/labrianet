@@ -12,12 +12,12 @@ using System.Web.Http.Description;
 
 namespace NetRia.Controllers
 {
-    public class MusicaController : ApiController
+    public class MusicaControllerAPI : ApiController
     {
         private MusicaMapper _mapper;
        
 
-        public MusicaController()
+        public MusicaControllerAPI()
         {
             _mapper = new MusicaMapper();
         }
