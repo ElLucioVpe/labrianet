@@ -1,5 +1,8 @@
 import React from 'react'
-import Button from '../Components/Button'
+import {
+    Link
+} from "react-router-dom";
+import '../App.css';
 
 class Index extends React.Component {
     render() {
@@ -10,8 +13,8 @@ class Index extends React.Component {
                 </div>
                 <div class="main_menu">
                     <img class="item" src="logo.svg"/><h1>QuizMaster</h1>
-                    <Button class="item" to="/jugar" value="Jugar" size="large"/>
-                    <Button class="item" to="/crear" value="Crear" size="large"/>
+                    <Link class="item" to="/jugar"><button>Jugar</button></Link>
+                    <Link class="item" to="/crear"><button>Crear juego</button></Link>
                 </div>
             </div>
         )

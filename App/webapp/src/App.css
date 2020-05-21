@@ -1,56 +1,76 @@
 body {
   margin: 0;
-  font-family: 'Lato', 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Lato", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
 :root {
-  --main1: #CE84AD;
-  --main2: #CE96A6;
-  --main3: #D1A7A0;
-  --main4: #D4CBB3;
-  --main5: #D2E0BF;
+  --main1: #ce84ad;
+  --main2: #ce96a6;
+  --main3: #d1a7a0;
+  --main4: #d4cbb3;
+  --main5: #d2e0bf;
   --text1: #4c2f3f;
 }
-
-::selection {
-  background-color: var(--main1);
-  border-radius: 15px;
+/*
+:root {
+  --main1: #AD7A99;
+  --main2: #B2CEDE;
+  --main3: #8CDFD6;
+  --main4: #6DC0D5;
+  --main5: #5A716A;
 }
+*/
 
 #root {
   margin: 0 50px;
 }
 
-h1, h2, h3, h4, h5, span, p, th {
-  font-family: Lato, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  color: var(--text1)
+h1,
+h2,
+h3,
+h4,
+h5,
+span,
+p,
+th {
+  font-family: Lato, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  color: var(--text1);
 }
-
-/*
-  Welcome screen
- */
 
 .index {
   display: flex;
   align-items: center;
-  /*height: 100%;*/
+  height: 100%;
   flex-direction: row;
-  justify-content: space-between;
-  max-width: 1600px;
-  margin: auto;
+  justify-content: space-around;
 }
 
 .main_menu img {
   width: 200px;
+}
+
+button {
+  font-family: Lato;
+  border: none;
+  height: 100px;
+  width: 200px;
+  border-radius: 50px;
+  font-size: 20px;
+  color: #3b035f;
+  background-image: linear-gradient(to right, var(--main4), var(--main5));
+}
+
+#root {
+  height: 100vh;
 }
 
 .main_menu {
@@ -69,12 +89,14 @@ h1, h2, h3, h4, h5, span, p, th {
   margin: 10px;
 }
 
+/**/
+
 .main_introduction {
   border: 5px solid var(--main2);
   border-radius: 25px;
   height: 540px;
   padding: 10px;
-  font-family: Montserrat, Serif;
+  font-family: Lato;
   font-size: 25px;
   max-width: 600px;
   font-weight: 300;
@@ -101,18 +123,19 @@ button.btn-large {
   border-radius: 50px;
   font-size: 20px;
   color: #3b035f;
-  background-image: linear-gradient(to right, var(--main4) , var(--main5));
+  background-image: linear-gradient(to right, var(--main4), var(--main5));
   margin: 13px;
 }
 
-button.btn-regular, input.btn-regular {
+button.btn-regular,
+input.btn-regular {
   font-family: Lato;
   border: none;
   height: 40px;
   padding: 0 25px;
   border-radius: 24px;
   font-size: 17px;
-  background-image: linear-gradient(to right, var(--main4) , var(--main5));
+  background-image: linear-gradient(to right, var(--main4), var(--main5));
 }
 
 /*
@@ -181,7 +204,7 @@ a.logo {
   width: 100px;
   object-fit: cover;
   border-radius: 10px;
-  margin-right: 10px
+  margin-right: 10px;
 }
 
 .usernameSection a {
@@ -213,8 +236,9 @@ a.logo {
   vertical-align: bottom;
 }
 
-.profile-user-stats td, .profile-user-stats th {
-  padding: .5em 1em;
+.profile-user-stats td,
+.profile-user-stats th {
+  padding: 0.5em 1em;
 }
 
 .profile-user-stats tr:nth-child(2n-1) td {
