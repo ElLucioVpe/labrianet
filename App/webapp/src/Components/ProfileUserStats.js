@@ -1,5 +1,4 @@
 import React from "react";
-import ProfileUserInfo from "./ProfileUserInfo";
 
 export const ProfileUserStats = () => {
     return (

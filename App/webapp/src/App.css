@@ -18,6 +18,7 @@ code {
   --main3: #D1A7A0;
   --main4: #D4CBB3;
   --main5: #D2E0BF;
+  --text1: #4c2f3f;
 }
 
 ::selection {
@@ -25,8 +26,13 @@ code {
   border-radius: 15px;
 }
 
-h1, h2, h3, h4, h5, span, p {
+#root {
+  margin: 0 50px;
+}
+
+h1, h2, h3, h4, h5, span, p, th {
   font-family: Lato, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  color: var(--text1)
 }
 
 /*
@@ -99,14 +105,13 @@ button.btn-large {
   margin: 13px;
 }
 
-button.btn-regular {
+button.btn-regular, input.btn-regular {
   font-family: Lato;
   border: none;
   height: 40px;
   padding: 0 25px;
   border-radius: 24px;
   font-size: 17px;
-  color: #3b035f;
   background-image: linear-gradient(to right, var(--main4) , var(--main5));
 }
 
@@ -147,7 +152,6 @@ div.header {
 }
 
 a.logo {
-  color: black;
   text-decoration: none;
 }
 
@@ -180,8 +184,56 @@ a.logo {
   margin-right: 10px
 }
 
+.usernameSection a {
+  margin-left: auto;
+}
+
 .profile-user-info {
   background-color: var(--main2);
   border-radius: 15px;
   padding: 15px;
+}
+
+.profile-user-stats {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-user-stats table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  empty-cells: show;
+  border: 1px solid var(--main1);
+  border-radius: 15px;
+}
+
+.profile-user-stats table thead {
+  background-color: var(--main2);
+  text-align: left;
+  vertical-align: bottom;
+}
+
+.profile-user-stats td, .profile-user-stats th {
+  padding: .5em 1em;
+}
+
+.profile-user-stats tr:nth-child(2n-1) td {
+  background-color: #e6d1d7;
+}
+
+/*
+  Login
+ */
+
+input {
+  height: 30px;
+  border-radius: 25px;
+  border: 2px solid var(--main2);
+  padding: 5px;
+  padding-left: 20px;
+}
+
+form {
+  display: grid;
+  grid-row-gap: 20px;
 }
