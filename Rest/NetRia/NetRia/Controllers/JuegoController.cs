@@ -9,9 +9,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Common.DataTransferObjects;
-using NetRia.DataModel.Mappers;
-using NetRia.DataModel.Repositories;
-using Persistencia.Database;
+using BusinessLogic.DataModel.Mappers;
+using BusinessLogic.DataModel.Repositories;
 
 namespace NetRia.Controllers
 {
