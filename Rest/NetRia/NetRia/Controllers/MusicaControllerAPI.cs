@@ -22,128 +22,104 @@ namespace NetRia.Controllers
             _mapper = new MusicaMapper();
         }
 
-        public List<DTOMusica> GetAll()
+        public IEnumerable<DTOMusica> GetAll()
         {
-            List<DTOMusica> musicas = new List<DTOMusica>();
-            using (netriaEntities context = new netriaEntities())
-            {
-                MusicaRepository repositorio = new MusicaRepository(context);
-                var entityList = repositorio.GetAll();
-                foreach (var enity in entityList)
-                {
-                    musicas.Add(_mapper.MapToDTO(enity));
 
-                }
-                return musicas;
-            }
+            MusicaController controller = new MusicaController();
+            List<DTOMusica> musicas = controller.GetAll();
+
+            return musicas;
         }
-
         // GET: api/Musica/5
-        [ResponseType(typeof(DTOMusica))]
         public IHttpActionResult GetMusica(int id)
         {
-            using (netriaEntities context = new netriaEntities())
+            MusicaControllerAPI controller = new MusicaControllerAPI();
+            var musica = controller.GetMusica(id);
+            if (musica == null)
             {
-                MusicaRepository repositorio = new MusicaRepository(context);
-                var entity = repositorio.Get(id);
-                if (entity == null)
-                {
-                    return NotFound();
-                }
-                DTOMusica musica = _mapper.MapToDTO(entity);
-                return Ok(musica);
+                return NotFound();
             }
+            return Ok(musica);
         }
 
         //PUT: api/Musica/5
-        [ResponseType(typeof(void))]
+        [HttpPost]
         public IHttpActionResult UpdateMusica(int id, DTOMusica musica)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
             if (id != musica.idMusica)
             {
                 return BadRequest();
             }
 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            DTOBaseResponse response = new DTOBaseResponse();
             try
             {
-                using (netriaEntities context = new netriaEntities())
-                {
-                    MusicaRepository repositorio = new MusicaRepository(context);
-
-                    Musica entity = repositorio.Get(musica.idMusica);
-                    entity.idMusica = musica.idMusica;
-                    entity.urlMusica = musica.urlMusica;
-
-                    context.SaveChanges();
-                }
+                MusicaControllerAPI controller = new MusicaControllerAPI();
+                controller.UpdateMusica(id, musica);
+                response.Success = true;
             }
             catch (Exception ex)
             {
-                throw ex;
+                response.Success = false;
+                response.Error = ex.ToString();
             }
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(response);
         }
 
+
         // POST: api/Musica
-        [ResponseType(typeof(void))]
-        public IHttpActionResult CreateMusica(DTOMusica musica)
+        [HttpPost]
+        public IHttpActionResult CreateUser(DTOMusica musica)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
+            DTOBaseResponse response = new DTOBaseResponse();
             try
             {
-                using (netriaEntities context = new netriaEntities())
-                {
-                    MusicaRepository repositorio = new MusicaRepository(context);
-
-                    if (repositorio.MusicaExists(musica.urlMusica))
-                    {
-                        throw new Exception("Canción existente.");
-                    }
-                    repositorio.Create(_mapper.MapFromDTO(musica));
-                    context.SaveChanges();
-                }
+                MusicaControllerAPI controller = new MusicaControllerAPI();
+                controller.CreateMusica(musica);
+                response.Success = true;
             }
             catch (Exception ex)
             {
-                throw ex;
+                response.Success = false;
+                response.Error = ex.ToString();
             }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(response);
         }
+
 
         // DELETE: api/Musica/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult DeleteMusica(int id)
+        [HttpPost]
+        public IHttpActionResult DeleteUser(int id)
         {
+            DTOBaseResponse response = new DTOBaseResponse();
             try
             {
-                using (netriaEntities context = new netriaEntities())
-                {
-                    MusicaRepository repositorio = new MusicaRepository(context);
-
-                    if (!repositorio.MusicaExists(id))
-                    {
-                        throw new Exception("Canción no existe.");
-                    }
-
-                    repositorio.Delete(id);
-                    context.SaveChanges();
-                }
+                MusicaControllerAPI controller = new MusicaControllerAPI();
+                controller.DeleteMusica(id);
+                response.Success = true;
             }
             catch (Exception ex)
             {
-                throw ex;
+                response.Success = false;
+                response.Error = ex.ToString();
             }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(response);
         }
     }
 }
