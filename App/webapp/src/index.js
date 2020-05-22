@@ -6,7 +6,7 @@ import Perfil from "./Views/Profile.js";
 import SignUp from "./Views/SignUp";
 import Login from "./Views/Login.js";
 import Header from "./Components/Header.js";
-import { AppContext } from "./libs/contextLib";
+import { AppContext } from "./Libraries/contextLib";
 import "./App.css";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
