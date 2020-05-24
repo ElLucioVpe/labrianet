@@ -5,6 +5,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using BusinessLogic.Controllers;
+using Common.DataTransferObjects;
 
 namespace NetRia
 {
@@ -12,7 +14,7 @@ namespace NetRia
     {
         public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
-            context.Validated(); // 
+            context.Validated(); //
         }
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
@@ -21,12 +23,15 @@ namespace NetRia
 
             //Llamamos el login de estaban bro
             //El UserName del context tendria que ser el correo si se pueden editar el nick, no me acuerdo xD LOQUENDO, mareado con el otro proyecto o que ase bordy
-            if (context.UserName == "user" && context.Password == "user")
+            UserController controller = new UserController();
+            
+            if (controller.Login(context.UserName, context.Password))
             {
-
+                DTOUser dto = controller.GetUser(context.UserName);
                 identity.AddClaim(new Claim(ClaimTypes.Role, "user"));
                 identity.AddClaim(new Claim("correo", "correoUser"));
-                identity.AddClaim(new Claim("nick", "nickUser"));
+                identity.AddClaim(new Claim("nick", dto.nickUser));
+                identity.AddClaim(new Claim("fecha", dto.fechaUser.ToString()));
 
                 context.Validated(identity);
             }

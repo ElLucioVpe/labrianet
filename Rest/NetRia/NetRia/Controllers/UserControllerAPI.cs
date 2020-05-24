@@ -21,7 +21,7 @@ namespace NetRia.Controllers
             _mapper = new UserMapper();
         }
 
-        //Login
+        /*/Login
         [HttpPost]
         public IHttpActionResult Login(string loginname, string password)
         {
@@ -37,7 +37,7 @@ namespace NetRia.Controllers
                 response.Error = ex.ToString();
             }
             return Ok(response);
-        }
+        }*/
 
         // GET: api/User
         public IEnumerable<DTOUser> GetAll()
