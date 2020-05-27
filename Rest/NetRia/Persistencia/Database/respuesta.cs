@@ -17,7 +17,7 @@ namespace Persistencia.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Respuesta()
         {
-            this.users = new HashSet<User>();
+            this.respondieron = new HashSet<User>();
         }
     
         public int idRespuesta { get; set; }
@@ -27,6 +27,6 @@ namespace Persistencia.Database
     
         public virtual Pregunta pregunta { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> users { get; set; }
+        public virtual ICollection<User> respondieron { get; set; }
     }
 }
