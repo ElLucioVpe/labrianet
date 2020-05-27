@@ -16,6 +16,19 @@
         <AssociationConnector Association="netriaModel.respuesta_fk_Respuesta_Pregunta1" ManuallyRouted="false" />
         <AssociationConnector Association="netriaModel.jugo" ManuallyRouted="false" />
         <AssociationConnector Association="netriaModel.respondio" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="netriaModel.Juego" Width="1.5" PointX="3" PointY="2.125" />
+        <EntityTypeShape EntityType="netriaModel.Partida" Width="1.5" PointX="12" PointY="4" />
+        <EntityTypeShape EntityType="netriaModel.Musica" Width="1.5" PointX="0.75" PointY="3" />
+        <EntityTypeShape EntityType="netriaModel.Pregunta" Width="1.5" PointX="5.25" PointY="5.25" />
+        <EntityTypeShape EntityType="netriaModel.Respuesta" Width="1.5" PointX="7.5" PointY="5.5" />
+        <EntityTypeShape EntityType="netriaModel.User" Width="1.5" PointX="9.75" PointY="5.375" />
+        <AssociationConnector Association="netriaModel.juego_fk_Juego_Musica1" />
+        <AssociationConnector Association="netriaModel.juego_fk_Juego_User1" />
+        <AssociationConnector Association="netriaModel.jugo_fk_Jugo_Juego" />
+        <AssociationConnector Association="netriaModel.pregunta_fk_Pregunta_Juego1" />
+        <AssociationConnector Association="netriaModel.jugo_fk_Jugo_User1" />
+        <AssociationConnector Association="netriaModel.respuesta_fk_Respuesta_Pregunta1" />
+        <AssociationConnector Association="netriaModel.respondio" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
