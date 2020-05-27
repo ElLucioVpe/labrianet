@@ -18,7 +18,7 @@ namespace Persistencia.Database
         public string User_loginnameUser { get; set; }
         public string nickUsuario { get; set; }
     
-        public virtual Juego juego { get; set; }
         public virtual User user { get; set; }
+        public virtual Juego juego { get; set; }
     }
 }
