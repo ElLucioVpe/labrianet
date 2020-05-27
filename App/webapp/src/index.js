@@ -5,6 +5,7 @@ import CrearJuego from "./Views/CrearJuego.js";
 import Perfil from "./Views/Profile.js";
 import SignUp from "./Views/SignUp";
 import Login from "./Views/Login.js";
+import ConfigurarJuego from "./Views/ConfigurarJuego.js";
 import Header from "./Components/Header.js";
 import { AppContext } from "./Libraries/contextLib";
 import "./App.css";
@@ -36,6 +37,9 @@ export default function App() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/configurarJuego">
+            <ConfigurarJuego />
           </Route>
         </Switch>
       </Router>
