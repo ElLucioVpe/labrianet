@@ -28,8 +28,8 @@ namespace Persistencia.Database
         public string tipoPregunta { get; set; }
         public string urlAyudaPregunta { get; set; }
     
-        public virtual Juego juego { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Respuesta> respuestas { get; set; }
+        public virtual Juego juego { get; set; }
     }
 }

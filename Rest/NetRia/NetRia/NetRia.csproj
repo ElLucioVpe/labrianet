@@ -185,9 +185,11 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="AuthorizeAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\JuegoController.cs" />
-    <Compile Include="Controllers\RespuestaController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\JuegoControllerAPI.cs" />
+    <Compile Include="Controllers\MusicaControllerAPI.cs" />
+    <Compile Include="Controllers\PreguntaControllerAPI.cs" />
+    <Compile Include="Controllers\RespuestaControllerAPI.cs" />
+    <Compile Include="Controllers\UserControllerAPI.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DataModel\Mappers\JuegoMapper.cs" />
     <Compile Include="DataModel\Mappers\MusicaMapper.cs" />
@@ -293,13 +295,13 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
+      <Project>{79222480-1619-45e2-9000-454c33ef68c5}</Project>
+      <Name>BusinessLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{930251a8-e929-4750-ae7d-bc69bd6f3997}</Project>
       <Name>Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Persistencia\Persistencia.csproj">
-      <Project>{fef56214-c257-4bd8-8154-1e523281d4cb}</Project>
-      <Name>Persistencia</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
