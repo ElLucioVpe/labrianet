@@ -99,3 +99,112 @@ button {
   }
 }
 
+.ComienzoJuego{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: auto;
+  font-family: Lato;
+  font-size: 25px;
+  height :100%;
+  background: var(--main2);
+  margin: 0;
+
+}
+
+.LinkInput{
+  padding: 10px;
+  width: 90%;
+  height: 10%;
+  font-family: Lato;
+  font-size: 25px;
+  text-align: center;
+}
+
+
+.menu2 {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background: var(--main2);
+
+}
+.menu2 .imagen {
+  height: 200px;
+  width: 200px;
+
+}
+
+
+div.scrollhorizontal {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: auto;
+  background: var(--main5);
+  border-radius: 15px;
+  padding:4px;
+  width: 80%;
+  height: 25%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  text-align:center;
+}
+
+input.joingame {
+  width: 80%;
+  height: 5%;
+  padding: 5px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+input.passwordgame {
+  width: 25%;
+  height: 5%;
+  padding: 5px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: auto;
+  margin-right: 10%;
+  box-sizing: border-box;
+}
+input.filtrogame {
+  width: 25%;
+  height: 5%;
+  padding: 5px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 10%;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+div.gamecontainer{
+  width :20%;
+  height :24%;
+
+}
+.ComienzoJuego .imagen {
+  height: 200px;
+  width: 200px;
+}
+
+button.aceptar {
+  font-family: Lato;
+  border: none;
+  height: 100px;
+  width: 200px;
+  margin-bottom :10px;
+margin-left: 1350px;
+  border-radius: 50px;
+  font-size: 20px;
+  color: #3b035f;
+  background-image: linear-gradient(to right, var(--main4) , var(--main5));
+}
