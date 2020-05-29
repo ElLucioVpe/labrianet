@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BusinessLogic.Controllers;
+using System.Security.Claims;
 
 namespace NetRia.Controllers
 {
@@ -21,7 +22,7 @@ namespace NetRia.Controllers
             _mapper = new UserMapper();
         }
 
-        //Login
+        /*/Login
         [HttpPost]
         public IHttpActionResult Login(string loginname, string password)
         {
@@ -37,7 +38,7 @@ namespace NetRia.Controllers
                 response.Error = ex.ToString();
             }
             return Ok(response);
-        }
+        }*/
 
         // GET: api/User
         public IEnumerable<DTOUser> GetAll()
@@ -62,6 +63,7 @@ namespace NetRia.Controllers
         }
 
         // PUT: api/User/5
+        [Authorize]
         [HttpPost]
         public IHttpActionResult UpdateUser(string id, DTOUser user)
         {
@@ -70,7 +72,11 @@ namespace NetRia.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != user.loginnameUser)
+            var identity = (ClaimsIdentity)User.Identity;
+            var identity_mail = identity.Claims.Where(c => c.Type == ClaimTypes.Email)
+               .Select(c => c.Value).SingleOrDefault();
+
+            if ((id != user.loginnameUser) && (id != identity_mail))
             {
                 return BadRequest();
             }
@@ -120,15 +126,24 @@ namespace NetRia.Controllers
         }
 
         // DELETE: api/User/5
+        [Authorize]
         [HttpPost]
         public IHttpActionResult DeleteUser(string id)
         {
             DTOBaseResponse response = new DTOBaseResponse();
             try
             {
-                UserControllerAPI controller = new UserControllerAPI();
-                controller.DeleteUser(id);
-                response.Success = true;
+                var identity = (ClaimsIdentity)User.Identity;
+                var identity_mail = identity.Claims.Where(c => c.Type == ClaimTypes.Email)
+                   .Select(c => c.Value).SingleOrDefault();
+
+                if (id == identity_mail)
+                {
+                    UserControllerAPI controller = new UserControllerAPI();
+                    controller.DeleteUser(id);
+                    response.Success = true;
+                }
+                else response.Success = false;
             }
             catch (Exception ex)
             {

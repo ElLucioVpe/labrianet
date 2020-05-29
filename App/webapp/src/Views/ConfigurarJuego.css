@@ -1,0 +1,13 @@
+.grid {
+    height: 100%; /*arreglo*/
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+    grid-template-areas:
+            "seccion1-config seccion2-config"
+            "seccion1-config seccion2-config";
+}
+
+.descripcion {
+    resize: none;
+}

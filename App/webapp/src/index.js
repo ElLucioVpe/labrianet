@@ -5,6 +5,8 @@ import CrearJuego from "./Views/CrearJuego.js";
 import Perfil from "./Views/Profile.js";
 import SignUp from "./Views/SignUp";
 import Login from "./Views/Login.js";
+import ConfigurarJuego from "./Views/ConfigurarJuego.js";
+import PlayerRanking from "./Views/PlayerRanking.js";
 import Header from "./Components/Header.js";
 import { UserProvider } from "./Libraries/ContextLib";
 import "./App.css";
@@ -28,6 +30,9 @@ export default function App() {
           <Route path="/jugar">
             <CrearJuego />
           </Route>
+          <Route path="/playerRanking">
+            <PlayerRanking />
+          </Route>
           <Route path="/perfil">
             <Perfil />
           </Route>
@@ -36,6 +41,9 @@ export default function App() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/configurarJuego">
+            <ConfigurarJuego />
           </Route>
         </Switch>
       </Router>
