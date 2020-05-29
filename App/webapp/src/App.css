@@ -99,6 +99,11 @@ button {
   }
 }
 
+
+
+
+/*ZONA RIGBY START */
+
 .ComienzoJuego{
   display: flex;
   flex-direction: column;
@@ -137,8 +142,6 @@ button {
   width: 200px;
 
 }
-
-
 div.scrollhorizontal {
   display: flex;
   flex-direction: row;
@@ -154,7 +157,6 @@ div.scrollhorizontal {
   overflow-y: hidden;
   text-align:center;
 }
-
 input.joingame {
   width: 80%;
   height: 5%;
@@ -208,3 +210,4 @@ margin-left: 1350px;
   color: #3b035f;
   background-image: linear-gradient(to right, var(--main4) , var(--main5));
 }
+/*ZONA RIGBY END */

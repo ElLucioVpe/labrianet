@@ -5,6 +5,8 @@ import CrearJuego from './Views/CrearJuego.js'
 import Perfil from './Views/Profile.js'
 import SignUp from './Views/SignUp'
 import Login from './Views/Login.js'
+import Enlace from './Views/Enlace.js'
+import ComienzoJuego from './Views/ComienzoJuego.js'
 
 import {
     BrowserRouter as Router,
@@ -22,6 +24,12 @@ export default function App() {
                 </Route>
                 <Route path="/crear">
                     <CrearJuego />
+                </Route>
+                <Route path="/enlace">
+                    <Enlace/>
+                </Route>
+                <Route path="/comienzojuego">
+                    <ComienzoJuego />
                 </Route>
                 <Route path="/jugar">
                     <CrearJuego />
