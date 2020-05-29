@@ -49,6 +49,84 @@ h1, h2, h3, h4, h5, span, p, th {
   margin: auto;
 }
 
+
+/*
+  Resumen juego screen
+ */
+.resumenJuego{
+  display: grid;
+  grid-template-columns: 0.3fr 0.7fr;
+  grid-template-rows: 1fr;
+}
+
+
+.resumenJuego_Info {
+  border: 5px solid var(--main2);
+  border-radius: 25px;
+  height: 540px;
+  padding: 10px;
+  font-family: Montserrat, Serif;
+  font-size: 25px;
+  max-width: 600px;
+  font-weight: 300;
+  text-align: left;
+  padding-left: 50px;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between;
+}
+
+.resumenJuego_Preguntas{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 50px;
+  background: var(--main2);
+  border-radius: 25px;
+  margin: 0;
+
+}
+
+.listaPreguntas{
+  height:200px;
+  overflow:auto;
+  width: 50%;
+}
+
+/*
+  PreJuego screen
+ */
+.preJuego{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin: auto;
+  padding: 50px;
+  background: var(--main2);
+  border-radius: 25px;
+  margin: 0;
+}
+
+.infoGame{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 100px;
+}
+
+.infoGame div{
+  background-color: white;
+  border-radius: 25px;
+  padding: 10px;
+  margin: 20px;
+  align-items: center;
+}
+
+
 .main_menu img {
   width: 200px;
 }

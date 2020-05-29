@@ -19,6 +19,23 @@ namespace BusinessLogic.Controllers
             _mapperPregunta = new PreguntaMapper();
         }
 
+        public List<DTOPregunta> GetAll()
+        {
+            List<DTOPregunta> preguntas = new List<DTOPregunta>();
+            using (netriaEntities context = new netriaEntities())
+            {
+                PreguntaRepository repositorio = new PreguntaRepository(context);
+                var entityList = repositorio.GetAll();
+                foreach (var enity in entityList)
+                {
+                    preguntas.Add(_mapperPregunta.MapToDTO(enity));
+
+                }
+                return preguntas;
+            }
+
+        }
+
         public DTOPregunta GetPregunta(int id)
         {
             using (netriaEntities context = new netriaEntities())
