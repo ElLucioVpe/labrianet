@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from '../Components/Button'
+import '../Css/Index.css'
 
 class Index extends React.Component {
     render() {
