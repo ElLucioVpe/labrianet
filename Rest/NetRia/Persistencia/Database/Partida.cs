@@ -14,11 +14,12 @@ namespace Persistencia.Database
     
     public partial class Partida
     {
+        public int id { get; set; }
         public int Juego_idJuego { get; set; }
         public string User_loginnameUser { get; set; }
         public string nickUsuario { get; set; }
     
-        public virtual User user { get; set; }
         public virtual Juego juego { get; set; }
+        public virtual User user { get; set; }
     }
 }
