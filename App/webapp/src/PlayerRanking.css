@@ -1,0 +1,89 @@
+/*
+ PlayerRanking
+ */
+
+     .container {
+       display: grid;
+       grid-template-columns: auto auto auto ;
+       grid-template-rows: 50px 100px 500px 50px;
+     }
+     .tituloJuego{
+
+       grid-column-start: 2;
+       grid-column-end: 3;
+       grid-row-start: 1;
+       grid-row-end: 2;
+       /*background-color: rgb(173, 158, 17);*/
+
+
+     }
+     .userPuntaje{
+       grid-column-start: 2;
+       grid-column-end: 3;
+       grid-row-start: 2;
+       grid-row-end: 3;
+
+     /*  background-color: rgb(173, 158, 17);*/
+     }
+     grid-center {
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 200%;
+}
+.contenedor {
+display: flex; /* or inline-flex */
+justify-content: space-between;
+}
+.flex-item {
+font-size: 230%;
+}
+.puntajeGeneral{
+grid-column-start: 2;
+grid-column-end: 3;
+grid-row-start: 3;
+grid-row-end: 4;
+font-size: 150%;
+
+/*  background-color: rgb(173, 158, 17);*/
+}
+.botoncito{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 4;
+    grid-row-end: 5;
+   
+    /*  background-color: rgb(173, 158, 17);*/
+    }
+.flex-Button{
+    display: flex; /* or inline-flex */
+    justify-content:  flex-end; 
+    margin-top: 30px;
+}
+table {
+counter-reset: rowNumber;
+width: auto;
+border-collapse: collapse;
+
+
+
+}
+.all {
+        width: 100%;
+    }
+table tr::before {
+display: table-cell;
+counter-increment: rowNumber;
+content: counter(rowNumber) ".";
+padding-right: 0.3em;
+text-align: right;
+}
+ul.a {
+list-style-type: circle;
+}
+.derecha {
+text-align: right;
+}
+.scroll {
+overflow-x:auto;height: 500px;
+}

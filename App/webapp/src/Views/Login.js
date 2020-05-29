@@ -1,17 +1,24 @@
-import React from 'react'
+import React from "react";
+import { useAppContext } from "../Libraries/contextLib";
 
 class Login extends React.Component {
-    render() {
-        return (
-            <div>
-                <h1>WIP</h1>
-                <img
-                    src="/img/xd.jpg"
-                    alt="new"
-                />
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div class="login">
+        <div>
+          <h1>Bienvenido!</h1>
+        </div>
+        <div>
+          <form>
+            <input type="text" name="name" placeholder="Usuario" />
+            <input type="password" name="password" placeholder="********" />
+
+            <input type="submit" class="btn-regular" value="Registrarme" />
+          </form>
+        </div>
+      </div>
+    );
+  }
 }
 
-export default Login
+export default Login;

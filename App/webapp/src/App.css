@@ -12,53 +12,123 @@ code {
     monospace;
 }
 
-
 :root {
   --main1: #CE84AD;
   --main2: #CE96A6;
   --main3: #D1A7A0;
   --main4: #D4CBB3;
   --main5: #D2E0BF;
+  --text1: #4c2f3f;
 }
-/*
-:root {
-  --main1: #AD7A99;
-  --main2: #B2CEDE;
-  --main3: #8CDFD6;
-  --main4: #6DC0D5;
-  --main5: #5A716A;
-}
-*/
 
-h1 {
-  font-family: Montserrat;
+::selection {
+  background-color: var(--main1);
+  border-radius: 15px;
 }
+
+#root {
+  margin: 0 50px;
+}
+
+h1, h2, h3, h4, h5, span, p, th {
+  font-family: Lato, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  color: var(--text1)
+}
+
+/*
+  Welcome screen
+ */
 
 .index {
   display: flex;
   align-items: center;
-  height: 100%;
+  /*height: 100%;*/
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
+  max-width: 1600px;
+  margin: auto;
 }
+
+
+/*
+  Resumen juego screen
+ */
+.resumenJuego{
+  display: grid;
+  grid-template-columns: 0.3fr 0.7fr;
+  grid-template-rows: 1fr;
+}
+
+
+.resumenJuego_Info {
+  border: 5px solid var(--main2);
+  border-radius: 25px;
+  height: 540px;
+  padding: 10px;
+  font-family: Montserrat, Serif;
+  font-size: 25px;
+  max-width: 600px;
+  font-weight: 300;
+  text-align: left;
+  padding-left: 50px;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between;
+}
+
+.resumenJuego_Preguntas{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 50px;
+  background: var(--main2);
+  border-radius: 25px;
+  margin: 0;
+
+}
+
+.listaPreguntas{
+  height:200px;
+  overflow:auto;
+  width: 50%;
+}
+
+/*
+  PreJuego screen
+ */
+.preJuego{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin: auto;
+  padding: 50px;
+  background: var(--main2);
+  border-radius: 25px;
+  margin: 0;
+}
+
+.infoGame{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 100px;
+}
+
+.infoGame div{
+  background-color: white;
+  border-radius: 25px;
+  padding: 10px;
+  margin: 20px;
+  align-items: center;
+}
+
 
 .main_menu img {
   width: 200px;
-}
-
-button {
-  font-family: Lato;
-  border: none;
-  height: 100px;
-  width: 200px;
-  border-radius: 50px;
-  font-size: 20px;
-  color: #3b035f;
-  background-image: linear-gradient(to right, var(--main4) , var(--main5));
-}
-
-#root {
-  height: 100vh;
 }
 
 .main_menu {
@@ -77,14 +147,12 @@ button {
   margin: 10px;
 }
 
-/**/
-
 .main_introduction {
   border: 5px solid var(--main2);
   border-radius: 25px;
   height: 540px;
   padding: 10px;
-  font-family: Lato;
+  font-family: Montserrat, Serif;
   font-size: 25px;
   max-width: 600px;
   font-weight: 300;
@@ -99,115 +167,151 @@ button {
   }
 }
 
+/*
+  Button Component
+*/
 
-
-
-/*ZONA RIGBY START */
-
-.ComienzoJuego{
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  margin: auto;
-  font-family: Lato;
-  font-size: 25px;
-  height :100%;
-  background: var(--main2);
-  margin: 0;
-
-}
-
-.LinkInput{
-  padding: 10px;
-  width: 90%;
-  height: 10%;
-  font-family: Lato;
-  font-size: 25px;
-  text-align: center;
-}
-
-
-.menu2 {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  background: var(--main2);
-
-}
-.menu2 .imagen {
-  height: 200px;
-  width: 200px;
-
-}
-div.scrollhorizontal {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  margin: auto;
-  background: var(--main5);
-  border-radius: 15px;
-  padding:4px;
-  width: 80%;
-  height: 25%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  text-align:center;
-}
-input.joingame {
-  width: 80%;
-  height: 5%;
-  padding: 5px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  margin-left: auto;
-  margin-right: auto;
-  box-sizing: border-box;
-}
-input.passwordgame {
-  width: 25%;
-  height: 5%;
-  padding: 5px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  margin-left: auto;
-  margin-right: 10%;
-  box-sizing: border-box;
-}
-input.filtrogame {
-  width: 25%;
-  height: 5%;
-  padding: 5px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  margin-left: 10%;
-  margin-right: auto;
-  box-sizing: border-box;
-}
-
-div.gamecontainer{
-  width :20%;
-  height :24%;
-
-}
-.ComienzoJuego .imagen {
-  height: 200px;
-  width: 200px;
-}
-
-button.aceptar {
+button.btn-large {
   font-family: Lato;
   border: none;
   height: 100px;
   width: 200px;
-  margin-bottom :10px;
-margin-left: 1350px;
   border-radius: 50px;
   font-size: 20px;
   color: #3b035f;
   background-image: linear-gradient(to right, var(--main4) , var(--main5));
+  margin: 13px;
 }
-/*ZONA RIGBY END */
+
+button.btn-regular, input.btn-regular {
+  font-family: Lato;
+  border: none;
+  height: 40px;
+  padding: 0 25px;
+  border-radius: 24px;
+  font-size: 17px;
+  background-image: linear-gradient(to right, var(--main4) , var(--main5));
+}
+
+/*
+  Header Component
+*/
+
+div.header {
+  height: 50px;
+  max-width: 1600px;
+  margin: 20px auto;
+  border-radius: 30px;
+  background-color: var(--main2);
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+}
+
+.header .alignRight {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  margin-right: 5px;
+  flex-basis: calc(50% - 5px);
+}
+
+.header .alignLeft {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-left: 15px;
+  flex-basis: calc(50% - 15px);
+}
+
+.header .alignLeft img {
+  height: 25px;
+  margin-right: 10px;
+}
+
+a.logo {
+  text-decoration: none;
+}
+
+/*
+  Perfil
+*/
+
+.profile {
+  max-width: 1600px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-row-gap: 20px;
+}
+
+.usernameSection {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.usernameSection img {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 10px
+}
+
+.usernameSection a {
+  margin-left: auto;
+}
+
+.profile-user-info {
+  background-color: var(--main2);
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.profile-user-stats {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-user-stats table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  empty-cells: show;
+  border: 1px solid var(--main1);
+  border-radius: 15px;
+}
+
+.profile-user-stats table thead {
+  background-color: var(--main2);
+  text-align: left;
+  vertical-align: bottom;
+}
+
+.profile-user-stats td, .profile-user-stats th {
+  padding: .5em 1em;
+}
+
+.profile-user-stats tr:nth-child(2n-1) td {
+  background-color: #e6d1d7;
+}
+
+/*
+  Login
+ */
+
+input {
+  height: 30px;
+  border-radius: 25px;
+  border: 2px solid var(--main2);
+  padding: 5px;
+  padding-left: 20px;
+}
+
+form {
+  display: grid;
+  grid-row-gap: 20px;
+}
