@@ -6,6 +6,7 @@ import Perfil from "./Views/Profile.js";
 import SignUp from "./Views/SignUp";
 import Login from "./Views/Login.js";
 import ConfigurarJuego from "./Views/ConfigurarJuego.js";
+import PlayerRanking from "./Views/PlayerRanking.js";
 import Header from "./Components/Header.js";
 import { AppContext } from "./Libraries/contextLib";
 import "./App.css";
