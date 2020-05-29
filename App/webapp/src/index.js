@@ -5,6 +5,7 @@ import CrearJuego from "./Views/CrearJuego.js";
 import Perfil from "./Views/Profile.js";
 import SignUp from "./Views/SignUp";
 import Login from "./Views/Login.js";
+import PlayerRanking from "./Views/PlayerRanking.js";
 import Header from "./Components/Header.js";
 import { AppContext } from "./Libraries/contextLib";
 import "./App.css";
@@ -27,6 +28,9 @@ export default function App() {
           </Route>
           <Route path="/jugar">
             <CrearJuego />
+          </Route>
+          <Route path="/playerRanking">
+            <PlayerRanking />
           </Route>
           <Route path="/perfil">
             <Perfil />
