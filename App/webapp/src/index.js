@@ -6,16 +6,16 @@ import Perfil from "./Views/Profile.js";
 import SignUp from "./Views/SignUp";
 import Login from "./Views/Login.js";
 import Header from "./Components/Header.js";
-import { AppContext } from "./Libraries/contextLib";
+import { UserProvider } from "./Libraries/ContextLib";
 import "./App.css";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 export default function App() {
-  const [isAuthenticated] = useState(false);
+  const [isUserLoggedIn, setUserLoggedIn] = useState(false);
 
   return (
-    <AppContext.Provider value={{ isAuthenticated }}>
+    <UserProvider value={{isUserLoggedIn, setUserLoggedIn}}>
       <Router>
         <Header />
         <Switch>
@@ -39,7 +39,7 @@ export default function App() {
           </Route>
         </Switch>
       </Router>
-    </AppContext.Provider>
+    </UserProvider>
   );
 }
 

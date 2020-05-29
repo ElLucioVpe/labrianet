@@ -3,10 +3,10 @@ import {
     Link
 } from "react-router-dom";
 
-export const Button = ({size="regular", to="/", value=""}) => {
+export const Button = ({size="regular", to="/", value="", classList}) => {
     size = "btn-" + size
     return (
-        <Link to={to} ><button class={size}>{value}</button></Link>
+        <Link to={to} class={classList} ><button class={size}>{value}</button></Link>
     )
 }
 
