@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, {Component, useState} from "react";
 import ReactDOM from "react-dom";
 import Index from "./Views/Index.js";
 import CrearJuego from "./Views/CrearJuego.js";
@@ -8,47 +8,47 @@ import Login from "./Views/Login.js";
 import ConfigurarJuego from "./Views/ConfigurarJuego.js";
 import PlayerRanking from "./Views/PlayerRanking.js";
 import Header from "./Components/Header.js";
-import { UserProvider } from "./Libraries/ContextLib";
+import {UserProvider} from "./Libraries/ContextLib";
 import "./App.css";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 export default function App() {
-  const [isUserLoggedIn, setUserLoggedIn] = useState(false);
+    const [isUserLoggedIn, setUserLoggedIn] = useState(false);
 
-  return (
-    <UserProvider value={{isUserLoggedIn, setUserLoggedIn}}>
-      <Router>
-        <Header />
-        <Switch>
-          <Route exact path="/">
-            <Index />
-          </Route>
-          <Route path="/crear">
-            <CrearJuego />
-          </Route>
-          <Route path="/jugar">
-            <CrearJuego />
-          </Route>
-          <Route path="/playerRanking">
-            <PlayerRanking />
-          </Route>
-          <Route path="/perfil">
-            <Perfil />
-          </Route>
-          <Route path="/registro">
-            <SignUp />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/configurarJuego">
-            <ConfigurarJuego />
-          </Route>
-        </Switch>
-      </Router>
-    </UserProvider>
-  );
+    return (
+        <UserProvider value={{isUserLoggedIn, setUserLoggedIn}}>
+            <Router>
+                <Header/>
+                <Switch>
+                    <Route exact path="/">
+                        <Index/>
+                    </Route>
+                    <Route path="/crear">
+                        <CrearJuego/>
+                    </Route>
+                    <Route path="/jugar">
+                        <CrearJuego/>
+                    </Route>
+                    <Route path="/playerRanking">
+                        <PlayerRanking/>
+                    </Route>
+                    <Route path="/perfil">
+                        <Perfil/>
+                    </Route>
+                    <Route path="/registro">
+                        <SignUp/>
+                    </Route>
+                    <Route path="/login">
+                        <Login/>
+                    </Route>
+                    <Route path="/configurarJuego">
+                        <ConfigurarJuego/>
+                    </Route>
+                </Switch>
+            </Router>
+        </UserProvider>
+    );
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<App/>, document.getElementById("root"));

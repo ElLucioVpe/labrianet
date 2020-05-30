@@ -1,0 +1,29 @@
+/*
+  PreJuego screen
+ */
+.preJuego {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: auto;
+    padding: 50px;
+    background: var(--main2);
+    border-radius: 25px;
+    margin: 0;
+}
+
+.infoGame {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 100px;
+}
+
+.infoGame div {
+    background-color: white;
+    border-radius: 25px;
+    padding: 10px;
+    margin: 20px;
+    align-items: center;
+}
