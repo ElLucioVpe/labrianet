@@ -21,7 +21,7 @@ class CrearPreguntas extends React.Component {
                             <Input placeholder="1000 pts" size="regular"/>
                         </div>
                         <div class="flex w-80 justify-content-center">
-                            <img src="img/perfil.png"/>
+                            <img class="pregunta_foto" src="img/perfil.png"/>
                         </div>
                     </div>
                     <div class="grid-2-2 mt-20">
