@@ -481,6 +481,8 @@ input.joingame {
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
+  border: 5px solid var(--main2);
+  border-radius: 25px;
 }
 input.passwordgame {
   width: 25%;
@@ -491,6 +493,8 @@ input.passwordgame {
   margin-left: auto;
   margin-right: 10%;
   box-sizing: border-box;
+  border: 5px solid var(--main2);
+  border-radius: 25px;
 }
 input.filtrogame {
   width: 25%;
@@ -501,6 +505,8 @@ input.filtrogame {
   margin-left: 10%;
   margin-right: auto;
   box-sizing: border-box;
+  border: 5px solid var(--main2);
+  border-radius: 25px;
 }
 
 div.gamecontainer{
@@ -518,6 +524,7 @@ button.aceptar {
   border: none;
   height: 100px;
   width: 200px;
+  margin-top :10px;
   margin-bottom :10px;
   margin-left: 1350px;
   border-radius: 50px;
