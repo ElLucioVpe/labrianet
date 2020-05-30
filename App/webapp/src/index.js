@@ -8,6 +8,7 @@ import Login from "./Views/Login.js";
 import ConfigurarJuego from "./Views/ConfigurarJuego.js";
 import PlayerRanking from "./Views/PlayerRanking.js";
 import Header from "./Components/Header.js";
+import Grafica from "./Views/Grafica.js";
 import { UserProvider } from "./Libraries/ContextLib";
 import "./App.css";
 
@@ -32,6 +33,9 @@ export default function App() {
           </Route>
           <Route path="/playerRanking">
             <PlayerRanking />
+          </Route>
+          <Route path="/grafica">
+            <Grafica/>
           </Route>
           <Route path="/perfil">
             <Perfil />
