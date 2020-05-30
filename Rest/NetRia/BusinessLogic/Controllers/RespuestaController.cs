@@ -1,6 +1,6 @@
 ﻿using Common.DataTransferObjects;
 using BusinessLogic.DataModel.Mappers;
-using BusinessLogic.DataModel.Repositories;
+using BusinessLogic.DataModel;
 using Persistencia.Database;
 using System;
 using System.Collections.Generic;
@@ -21,10 +21,9 @@ namespace BusinessLogic.Controllers
         public List<DTORespuesta> GetAll()
         {
             List<DTORespuesta> respuestas = new List<DTORespuesta>();
-            using (netriaEntities context = new netriaEntities())
+            using (UnitOfWork uow = new UnitOfWork())
             {
-                RespuestaRepository repositorio = new RespuestaRepository(context);
-                var entityList = repositorio.GetAll();
+                var entityList = uow.RespuestaRepository.GetAll();
                 foreach (var enity in entityList)
                 {
                     respuestas.Add(_mapper.MapToDTO(enity));
@@ -37,10 +36,9 @@ namespace BusinessLogic.Controllers
 
         public DTORespuesta GetRespuesta(int id)
         {
-            using (netriaEntities context = new netriaEntities())
+            using (UnitOfWork uow = new UnitOfWork())
             {
-                RespuestaRepository repositorio = new RespuestaRepository(context);
-                var entity = repositorio.Get(id);
+                var entity = uow.RespuestaRepository.Get(id);
                 if (entity == null)
                 {
                     return null;
@@ -55,11 +53,9 @@ namespace BusinessLogic.Controllers
         {
             try
             {
-                using (netriaEntities context = new netriaEntities())
+                using (UnitOfWork uow = new UnitOfWork())
                 {
-                    RespuestaRepository repositorio = new RespuestaRepository(context);
-                    UserRepository repositorioU = new UserRepository(context);
-                    Respuesta entity = repositorio.Get(respuesta.idRespuesta);
+                    Respuesta entity = uow.RespuestaRepository.Get(respuesta.idRespuesta);
                     entity.idRespuesta = respuesta.idRespuesta;
                     entity.contenidoRespuesta = respuesta.contenidoRespuesta;
                     entity.esCorrectoRespuesta = respuesta.esCorrectoRespuesta;
@@ -79,7 +75,7 @@ namespace BusinessLogic.Controllers
 
                     entity.respondieron = usario;
 
-                    context.SaveChanges();
+                    uow.SaveChanges();
                 }
                 
             }
@@ -95,15 +91,15 @@ namespace BusinessLogic.Controllers
 
             try
             {
-                using (netriaEntities context = new netriaEntities())
+                using (UnitOfWork uow = new UnitOfWork())
                 {
-                    RespuestaRepository repositorio = new RespuestaRepository(context);
-                    if (repositorio.respuestaExists(respuesta.idRespuesta))
+
+                    if (uow.RespuestaRepository.respuestaExists(respuesta.idRespuesta))
                     {
                         throw new Exception("El codigo de esta respuesta ya existe");
                     }
-                    repositorio.Create(_mapper.MapFromDTORespuesta(respuesta));
-                    context.SaveChanges();
+                    uow.RespuestaRepository.Create(_mapper.MapFromDTORespuesta(respuesta));
+                    uow.SaveChanges();
                 }
             }
             catch(Exception ex)
@@ -117,15 +113,14 @@ namespace BusinessLogic.Controllers
         {
             try
             {
-                using (netriaEntities context = new netriaEntities())
+                using (UnitOfWork uow = new UnitOfWork())
                 {
-                    RespuestaRepository repositorio = new RespuestaRepository(context);
-                    if (!repositorio.respuestaExists(id))
+                    if (!uow.RespuestaRepository.respuestaExists(id))
                      {
                         throw new Exception("Codigo de la respuesta no existe");
                      }
-                    repositorio.Delete(id);
-                    context.SaveChanges();
+                    uow.RespuestaRepository.Delete(id);
+                    uow.SaveChanges();
                 }
 
             }

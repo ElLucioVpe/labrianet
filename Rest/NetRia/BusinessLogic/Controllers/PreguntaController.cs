@@ -5,7 +5,7 @@ using System.Net;
 
 using Common.DataTransferObjects;
 using BusinessLogic.DataModel.Mappers;
-using BusinessLogic.DataModel.Repositories;
+using BusinessLogic.DataModel;
 using Persistencia.Database;
 
 
@@ -22,10 +22,9 @@ namespace BusinessLogic.Controllers
         public List<DTOPregunta> GetAll()
         {
             List<DTOPregunta> preguntas = new List<DTOPregunta>();
-            using (netriaEntities context = new netriaEntities())
+            using (UnitOfWork uow = new UnitOfWork())
             {
-                PreguntaRepository repositorio = new PreguntaRepository(context);
-                var entityList = repositorio.GetAll();
+                var entityList = uow.PreguntaRepository.GetAll();
                 foreach (var enity in entityList)
                 {
                     preguntas.Add(_mapperPregunta.MapToDTO(enity));
@@ -38,11 +37,10 @@ namespace BusinessLogic.Controllers
 
         public DTOPregunta GetPregunta(int id)
         {
-            using (netriaEntities context = new netriaEntities())
+            using (UnitOfWork uow = new UnitOfWork())
             {
-                PreguntaRepository repositorio = new PreguntaRepository(context);
 
-                var entity = repositorio.Get(id);
+                var entity = uow.PreguntaRepository.Get(id);
                 if (entity == null)
                 {
                     return null;
@@ -58,11 +56,10 @@ namespace BusinessLogic.Controllers
 
             try
             {
-                using (netriaEntities context = new netriaEntities())
+                using (UnitOfWork uow = new UnitOfWork())
                 {
-                    PreguntaRepository repositorio = new PreguntaRepository(context);
 
-                    Pregunta entity = repositorio.Get(pregunta.idPregunta);
+                    Pregunta entity = uow.PreguntaRepository.Get(pregunta.idPregunta);
     
                     entity.contenidoPregunta = pregunta.contenidoPregunta;
                     entity.segundosPregunta = pregunta.segundosPregunta;
@@ -70,7 +67,7 @@ namespace BusinessLogic.Controllers
                     entity.urlAyudaPregunta = pregunta.urlAyudaPregunta;
 
 
-                    context.SaveChanges();
+                    uow.SaveChanges();
                 }
             }
             catch (Exception ex)
@@ -85,16 +82,15 @@ namespace BusinessLogic.Controllers
 
             try
             {
-                using (netriaEntities context = new netriaEntities())
+                using (UnitOfWork uow = new UnitOfWork())
                 {
-                    PreguntaRepository repositorio = new PreguntaRepository(context);
 
-                    if (repositorio.preguntaExists(pregunta.idPregunta))
+                    if (uow.PreguntaRepository.preguntaExists(pregunta.idPregunta))
                     {
                         throw new Exception("Id de pregunta existente.");
                     }
-                    repositorio.Create(_mapperPregunta.MapFromDTOPregunta(pregunta));
-                    context.SaveChanges();
+                    uow.PreguntaRepository.Create(_mapperPregunta.MapFromDTOPregunta(pregunta));
+                    uow.SaveChanges();
                 }
             }
             catch (Exception ex)
@@ -108,17 +104,16 @@ namespace BusinessLogic.Controllers
         {
             try
             {
-                using (netriaEntities context = new netriaEntities())
+                using (UnitOfWork uow = new UnitOfWork())
                 {
-                    PreguntaRepository repositorio = new PreguntaRepository(context);
 
-                    if (!repositorio.preguntaExists(id))
+                    if (!uow.PreguntaRepository.preguntaExists(id))
                     {
                         throw new Exception("Id de pregunta inexistente");
                     }
 
-                    repositorio.Delete(id);
-                    context.SaveChanges();
+                    uow.PreguntaRepository.Delete(id);
+                    uow.SaveChanges();
                 }
             }
             catch (Exception ex)
