@@ -6,6 +6,7 @@ import Perfil from "./Views/Profile.js";
 import SignUp from "./Views/SignUp";
 import Login from "./Views/Login.js";
 import ConfigurarJuego from "./Views/ConfigurarJuego.js";
+import ComienzoJuego from "./Views/ComienzoJuego";
 import PlayerRanking from "./Views/PlayerRanking.js";
 import Header from "./Components/Header.js";
 import {UserProvider} from "./Libraries/ContextLib";
@@ -26,6 +27,9 @@ export default function App() {
                     </Route>
                     <Route path="/crear">
                         <CrearJuego/>
+                    </Route>
+                    <Route path="/comienzojuego">
+                        <ComienzoJuego />
                     </Route>
                     <Route path="/jugar">
                         <CrearJuego/>
