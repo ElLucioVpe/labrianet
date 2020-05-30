@@ -1,0 +1,17 @@
+.crearJuegoPreguntas {
+    background-color: white;
+    border-radius: 25px;
+    margin-bottom: 20px;
+    padding: 5px 25px;
+}
+
+.PreguntaPreview {
+    height: 70px;
+    width: 50%;
+    object-fit: cover;
+}
+
+.crearJuegoPreguntas p {
+    margin-block-start: 5px;
+    margin-block-end: 5px;
+}

@@ -8,11 +8,11 @@
 
 .crearPreguntas {
     width: 100%;
-    height: calc(100% - 20px);
     margin: auto;
     margin-top: 20px;
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: calc(30% - 20px) 70%;
+    column-gap: 20px;
 }
 
 .pregunta {
@@ -29,5 +29,5 @@
 }
 
 img.pregunta_foto {
-    height: 60vh;
+    height: 50vh;
 }
