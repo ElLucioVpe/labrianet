@@ -60,11 +60,10 @@ class ConfigurarJuego extends React.Component {
 
                         </div>
                     </div>
-                    <center>
+
+                    <div className="configuracionJuego-submit">
                         <input type="submit" className="btn-regular" value="OK"/>
-                    </center>
-
-
+                    </div>
                 </form>
             </div>
         )
