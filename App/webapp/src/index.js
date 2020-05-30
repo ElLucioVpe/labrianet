@@ -9,7 +9,8 @@ import ConfigurarJuego from "./Views/ConfigurarJuego.js";
 import ComienzoJuego from "./Views/ComienzoJuego";
 import PlayerRanking from "./Views/PlayerRanking.js";
 import Header from "./Components/Header.js";
-import {UserProvider} from "./Libraries/ContextLib";
+import Grafica from "./Views/Grafica.js";
+import { UserProvider } from "./Libraries/ContextLib";
 import "./App.css";
 
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
@@ -17,42 +18,42 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 export default function App() {
     const [isUserLoggedIn, setUserLoggedIn] = useState(false);
 
-    return (
-        <UserProvider value={{isUserLoggedIn, setUserLoggedIn}}>
-            <Router>
-                <Header/>
-                <Switch>
-                    <Route exact path="/">
-                        <Index/>
-                    </Route>
-                    <Route path="/crear">
-                        <CrearJuego/>
-                    </Route>
-                    <Route path="/comienzojuego">
-                        <ComienzoJuego />
-                    </Route>
-                    <Route path="/jugar">
-                        <CrearJuego/>
-                    </Route>
-                    <Route path="/playerRanking">
-                        <PlayerRanking/>
-                    </Route>
-                    <Route path="/perfil">
-                        <Perfil/>
-                    </Route>
-                    <Route path="/registro">
-                        <SignUp/>
-                    </Route>
-                    <Route path="/login">
-                        <Login/>
-                    </Route>
-                    <Route path="/configurarJuego">
-                        <ConfigurarJuego/>
-                    </Route>
-                </Switch>
-            </Router>
-        </UserProvider>
-    );
+  return (
+    <UserProvider value={{isUserLoggedIn, setUserLoggedIn}}>
+      <Router>
+        <Header />
+        <Switch>
+          <Route exact path="/">
+            <Index />
+          </Route>
+          <Route path="/crear">
+            <CrearJuego />
+          </Route>
+          <Route path="/jugar">
+            <CrearJuego />
+          </Route>
+          <Route path="/playerRanking">
+            <PlayerRanking />
+          </Route>
+          <Route path="/grafica">
+            <Grafica/>
+          </Route>
+          <Route path="/perfil">
+            <Perfil />
+          </Route>
+          <Route path="/registro">
+            <SignUp />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/configurarJuego">
+            <ConfigurarJuego />
+          </Route>
+        </Switch>
+      </Router>
+    </UserProvider>
+  );
 }
 
 ReactDOM.render(<App/>, document.getElementById("root"));
