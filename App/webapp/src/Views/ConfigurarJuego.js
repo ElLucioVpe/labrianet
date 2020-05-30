@@ -1,36 +1,56 @@
 import React from 'react'
-import Button from "../Components/Button";
+import CheckBox from "../Components/CheckBox";
+
 import "../Css/ConfigurarJuego.css";
 
 class ConfigurarJuego extends React.Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            privacidad: [
+                {id: 1, value: "Público", isChecked: false},
+                {id: 2, value: "Privado", isChecked: false}
+            ]
+        }
+    }
+
+    handleCheckChieldElement = (event) => {
+        let privacidad = this.state.privacidad
+        privacidad.forEach(item => {
+            if (item.value === event.target.value)
+                item.isChecked =  event.target.checked
+            else item.isChecked = false;
+        })
+        this.setState({privacidad: privacidad})
+    }
+
     render() {
         return (
-            <div className="configuracion">
+            <div className="configuracionJuego">
                 <form>
                     <h2>Game Summary</h2>
-                    <div className="grid">
+                    <div className="grid-configuracionJuego">
                         <div className="seccion1-config">
                             <p>
-                                <input type="text" name="titulo" placeholder="Titulo"/>
+                                <input className="input" type="text" name="titulo" placeholder="Titulo"/>
                             </p>
-                            <textarea className="descripcion" placeholder="Descripción" rows="10" cols="50">
+                            <textarea className="descripcion-juego" placeholder="Descripción" rows="10" cols="50">
                             </textarea><br/>
 
-                            <label>
-                                <input type="checkbox" onChange={this.PrivacidadOnChange} className="esPrivado"
-                                       value="false" name="privacidad"/>Público</label>
-                            <br/>
-                            <label>
-                                <input type="checkbox" className="esPrivado" value="true"
-                                       name="privacidad"/>Privado</label>
-                            <p><input type="text" name="password" placeholder="Password"/></p>
+                            <ul>
+                                {
+                                    this.state.privacidad.map((item) => {
+                                        return (<CheckBox handleCheckChieldElement={this.handleCheckChieldElement} {...item} />)
+                                    })
+                                }
+                            </ul>
+                            <p><input className="input" type="text" name="password" placeholder="Password"/></p>
 
                         </div>
 
                         <div className="seccion2-config">
-                            <img id="gamecover" width="450" height="300" src="../../img/gamecover.png"
-                                 placeholder="GameCover"/>
+                            <img id="gamecover" width="450" height="300" src="../../img/gamecover.png" placeholder="GameCover"/>
                             <br/>
                             <select id="musica-juego">
                                 <option selected>Musica del juego</option>
@@ -40,23 +60,14 @@ class ConfigurarJuego extends React.Component {
 
                         </div>
                     </div>
-                    <input type="submit" className="btn-regular" value="OK"/>
+                    <center>
+                        <input type="submit" className="btn-regular" value="OK"/>
+                    </center>
+
+
                 </form>
             </div>
         )
-    }
-
-    PrivacidadOnChange() {
-        /*$("input:checkbox").on('click', function () {
-            let $box = $(this);
-            if ($box.is(":checked")) {
-                let group = "input:checkbox[name='" + $box.attr("name") + "']";
-                $(group).prop("checked", false);
-                $box.prop("checked", true);
-            } else {
-                $box.prop("checked", false);
-            }
-        });*/
     }
 }
 

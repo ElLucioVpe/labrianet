@@ -1,5 +1,9 @@
-.grid {
-    height: 100%; /*arreglo*/
+.configuracionJuego {
+    margin: 10px;
+}
+
+.grid-configuracionJuego {
+    height: 100%;
     display: grid;
     grid-template-columns: 50% 50%;
     grid-template-rows: 50% 50%;
@@ -8,6 +12,14 @@
             "seccion1-config seccion2-config";
 }
 
-.descripcion {
+.configuracionJuego input.input , select {
+    height: 30px;
+    border-radius: 25px;
+    border: 2px solid var(--main2);
+    padding: 5px;
+    padding-left: 20px;
+}
+
+.descripcion-juego {
     resize: none;
 }
