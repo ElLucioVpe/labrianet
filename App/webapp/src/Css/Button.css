@@ -1,0 +1,25 @@
+/*
+  Button Component
+*/
+
+button.btn-large {
+    font-family: Lato;
+    border: none;
+    height: 100px;
+    width: 200px;
+    border-radius: 50px;
+    font-size: 20px;
+    color: #3b035f;
+    background-image: linear-gradient(to right, var(--main4), var(--main5));
+    margin: 13px;
+}
+
+button.btn-regular, input.btn-regular {
+    font-family: Lato;
+    border: none;
+    height: 40px;
+    padding: 0 25px;
+    border-radius: 24px;
+    font-size: 17px;
+    background-image: linear-gradient(to right, var(--main4), var(--main5));
+}

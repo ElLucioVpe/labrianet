@@ -1,6 +1,6 @@
 ﻿using Common.DataTransferObjects;
 using BusinessLogic.DataModel.Mappers;
-using BusinessLogic.DataModel.Repositories;
+using BusinessLogic.DataModel;
 using Persistencia.Database;
 using System;
 using System.Collections.Generic;
@@ -20,11 +20,10 @@ namespace BusinessLogic.Controllers
 
         public bool Login(string loginname, string password)
         {
-            using (netriaEntities context = new netriaEntities())
+            using (UnitOfWork uow = new UnitOfWork())
             {
-                UserRepository repositorio = new UserRepository(context);
 
-                bool retorno = repositorio.Login(loginname, password);
+                bool retorno = uow.UserRepository.Login(loginname, password);
                 return retorno;
             }
         }
@@ -32,11 +31,10 @@ namespace BusinessLogic.Controllers
         public List<DTOUser> GetAll()
         {
             List<DTOUser> users = new List<DTOUser>();
-            using (netriaEntities context = new netriaEntities())
+            using (UnitOfWork uow = new UnitOfWork())
             {
-                UserRepository repositorio = new UserRepository(context);
 
-                var entityList = repositorio.GetAll();
+                var entityList = uow.UserRepository.GetAll();
                 foreach (var entity in entityList)
                 {
                     users.Add(_mapper.MapToDTO(entity));
@@ -47,11 +45,10 @@ namespace BusinessLogic.Controllers
 
         public DTOUser GetUser(string id)
         {
-            using (netriaEntities context = new netriaEntities())
+            using(UnitOfWork uow = new UnitOfWork())
             {
-                UserRepository repositorio = new UserRepository(context);
 
-                var entity = repositorio.Get(id);
+                var entity = uow.UserRepository.Get(id);
                 if (entity == null)
                 {
                     return null;
@@ -67,17 +64,16 @@ namespace BusinessLogic.Controllers
 
             try
             {
-                using (netriaEntities context = new netriaEntities())
+                using (UnitOfWork uow = new UnitOfWork())
                 {
-                    UserRepository repositorio = new UserRepository(context);
 
-                    User entity = repositorio.Get(user.loginnameUser);
+                    User entity = uow.UserRepository.Get(user.loginnameUser);
                     entity.loginnameUser = user.loginnameUser;
                     entity.nickUser = user.nickUser;
                     entity.passwordUser = user.passwordUser;
                     entity.fechaUser = user.fechaUser;
 
-                    context.SaveChanges();
+                    uow.SaveChanges();
                 }
             }
             catch (Exception ex)
@@ -92,16 +88,15 @@ namespace BusinessLogic.Controllers
 
             try
             {
-                using (netriaEntities context = new netriaEntities())
+                using (UnitOfWork uow = new UnitOfWork())
                 {
-                    UserRepository repositorio = new UserRepository(context);
 
-                    if (repositorio.userExists(user.loginnameUser))
+                    if (uow.UserRepository.userExists(user.loginnameUser))
                     {
                         throw new Exception("Nombre de usuario existente.");
                     }
-                    repositorio.Create(_mapper.MapFromDTO(user));
-                    context.SaveChanges();
+                    uow.UserRepository.Create(_mapper.MapFromDTO(user));
+                    uow.SaveChanges();
                 }
             }
             catch (Exception ex)
@@ -115,17 +110,16 @@ namespace BusinessLogic.Controllers
         {
             try
             {
-                using (netriaEntities context = new netriaEntities())
+                using (UnitOfWork uow = new UnitOfWork())
                 {
-                    UserRepository repositorio = new UserRepository(context);
 
-                    if (!repositorio.userExists(id))
+                    if (!uow.UserRepository.userExists(id))
                     {
                         throw new Exception("Nombre de usuario inexistente.");
                     }
 
-                    repositorio.Delete(id);
-                    context.SaveChanges();
+                    uow.UserRepository.Delete(id);
+                    uow.SaveChanges();
                 }
             }
             catch (Exception ex)

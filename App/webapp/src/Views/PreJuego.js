@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from '../Components/Button'
+import '../Css/PreJuego.css'
 
 class PreJuego extends React.Component {
     render() {

@@ -1,0 +1,16 @@
+/*
+  Login
+ */
+
+.login input.input {
+    height: 30px;
+    border-radius: 25px;
+    border: 2px solid var(--main2);
+    padding: 5px;
+    padding-left: 20px;
+}
+
+.login form {
+    display: grid;
+    grid-row-gap: 20px;
+}

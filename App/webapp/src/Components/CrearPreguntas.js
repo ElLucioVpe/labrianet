@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from "../Components/Button";
+import Input from '../Components/Input';
 
 class CrearPreguntas extends React.Component {
     render() {
@@ -12,12 +13,12 @@ class CrearPreguntas extends React.Component {
                 </div>
                 <div class="pregunta">
                     <div class="flex justify-content-center">
-                        <input placeholder="Pregunta" class="regular w-80"/>
+                        <Input placeholder="Pregunta" classList="w-80" size="regular"/>
                     </div>
                     <div class="flex justify-content-center mt-10">
                         <div class="flex flex-direction-column justify-content-center w-20">
-                            <input placeholder="20s" class="regular"/>
-                            <input placeholder="1000 pts" class="regular"/>
+                            <Input placeholder="20s" size="regular"/>
+                            <Input placeholder="1000 pts" size="regular"/>
                         </div>
                         <div class="flex w-80 justify-content-center">
                             <img src="img/perfil.png"/>
