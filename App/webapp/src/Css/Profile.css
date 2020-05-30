@@ -1,0 +1,65 @@
+/*
+  Perfil
+*/
+
+.profile {
+    max-width: 1600px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-row-gap: 20px;
+}
+
+.usernameSection {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.usernameSection img {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 10px
+}
+
+.usernameSection a {
+    margin-left: auto;
+}
+
+.profile-user-info {
+    background-color: var(--main2);
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.profile-user-stats {
+    display: flex;
+    justify-content: center;
+}
+
+.profile-user-stats table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    border: 1px solid var(--main1);
+    border-radius: 15px;
+}
+
+.profile-user-stats table thead {
+    background-color: var(--main2);
+    text-align: left;
+    vertical-align: bottom;
+}
+
+.profile-user-stats td, .profile-user-stats th {
+    padding: .5em 1em;
+}
+
+.profile-user-stats tr:nth-child(2n-1) td {
+    background-color: #e6d1d7;
+}

@@ -62,7 +62,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModeloBD.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Database\Musica.cs" />
+    <Compile Include="Database\Musica.cs">
+      <DependentUpon>ModeloBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Partida.cs">
+      <DependentUpon>ModeloBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\Pregunta.cs">
       <DependentUpon>ModeloBD.tt</DependentUpon>
     </Compile>

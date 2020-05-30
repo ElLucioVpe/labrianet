@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Net;
+
 using Common.DataTransferObjects;
+using BusinessLogic.DataModel;
 using BusinessLogic.DataModel.Mappers;
-using BusinessLogic.DataModel.Repositories;
 using Persistencia.Database;
 
 namespace BusinessLogic.Controllers
@@ -21,11 +22,9 @@ namespace BusinessLogic.Controllers
         public List<DTOJuego> GetAll()
         {
             List<DTOJuego> juegos = new List<DTOJuego>();
-            using (netriaEntities context = new netriaEntities())
+            using (UnitOfWork uow = new UnitOfWork())
             {
-                JuegoRepository repositorio = new JuegoRepository(context);
-
-                var entityList = repositorio.GetAll();
+                var entityList = uow.JuegoRepository.GetAll();
                 foreach (var entity in entityList)
                 {
                     juegos.Add(_mapper.MapToDTO(entity));
@@ -36,11 +35,9 @@ namespace BusinessLogic.Controllers
 
         public DTOJuego GetJuego(int id)
         {
-            using (netriaEntities context = new netriaEntities())
+            using (UnitOfWork uow = new UnitOfWork())
             {
-                JuegoRepository repositorio = new JuegoRepository(context);
-
-                var entity = repositorio.Get(id);
+                var entity = uow.JuegoRepository.Get(id);
                 if (entity == null)
                 {
                     return null;
@@ -56,11 +53,10 @@ namespace BusinessLogic.Controllers
 
             try
             {
-                using (netriaEntities context = new netriaEntities())
+                using (UnitOfWork uow = new UnitOfWork())
                 {
-                    JuegoRepository repositorio = new JuegoRepository(context);
 
-                    Juego entity = repositorio.Get(juego.idJuego);
+                    Juego entity = uow.JuegoRepository.Get(juego.idJuego);
                     entity.idJuego = juego.idJuego;
                     entity.User_loginnameUser = juego.User_loginnameUser;
                     entity.tituloJuego = juego.tituloJuego;
@@ -70,7 +66,7 @@ namespace BusinessLogic.Controllers
                     entity.Musica_idMusica = juego.Musica_idMusica;
                     entity.activadoJuego = juego.activadoJuego;
 
-                    context.SaveChanges();
+                    uow.SaveChanges();
                 }
             }
             catch (Exception ex)
@@ -83,16 +79,15 @@ namespace BusinessLogic.Controllers
         {
             try
             {
-                using (netriaEntities context = new netriaEntities())
+                using (UnitOfWork uow = new UnitOfWork())
                 {
-                    JuegoRepository repositorio = new JuegoRepository(context);
 
-                    if (repositorio.juegoExists(juego.idJuego))
+                    if (uow.JuegoRepository.juegoExists(juego.idJuego))
                     {
                         throw new Exception("Código de juego existente.");
                     }
-                    repositorio.Create(_mapper.MapFromDTO(juego));
-                    context.SaveChanges();
+                    uow.JuegoRepository.Create(_mapper.MapFromDTO(juego));
+                    uow.SaveChanges();
                 }
             }
             catch (Exception ex)
@@ -105,17 +100,15 @@ namespace BusinessLogic.Controllers
         {
             try
             {
-                using (netriaEntities context = new netriaEntities())
+                using (UnitOfWork uow = new UnitOfWork())
                 {
-                    JuegoRepository repositorio = new JuegoRepository(context);
-
-                    if (!repositorio.juegoExists(id))
+                    if (!uow.JuegoRepository.juegoExists(id))
                     {
                         throw new Exception("Código de juego inexistente.");
                     }
 
-                    repositorio.Delete(id);
-                    context.SaveChanges();
+                    uow.JuegoRepository.Delete(id);
+                    uow.SaveChanges();
                 }
             }
             catch (Exception ex)

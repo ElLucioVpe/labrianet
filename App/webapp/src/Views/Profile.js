@@ -2,8 +2,7 @@ import React from 'react'
 import ProfileUserInfo from '../Components/ProfileUserInfo.js'
 import ProfileUserStats from '../Components/ProfileUserStats.js'
 import Button from '../Components/Button'
-
-import '../App.css';
+import '../Css/Profile.css'
 
 class Profile extends React.Component {
     render() {

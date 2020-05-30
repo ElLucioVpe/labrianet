@@ -1,0 +1,29 @@
+/*
+  Crear quiz
+*/
+
+.titleHeader {
+    display: flex;
+}
+
+.crearPreguntas {
+    width: 100%;
+    height: calc(100% - 20px);
+    margin: auto;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+.pregunta {
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-2-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+}
