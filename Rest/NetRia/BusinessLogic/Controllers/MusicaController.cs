@@ -1,6 +1,6 @@
 ﻿using Common.DataTransferObjects;
 using BusinessLogic.DataModel.Mappers;
-using BusinessLogic.DataModel.Repositories;
+using BusinessLogic.DataModel;
 using Persistencia.Database;
 using System;
 using System.Collections.Generic;
@@ -20,10 +20,9 @@ namespace BusinessLogic.Controllers
         public List<DTOMusica> GetAll()
         {
             List<DTOMusica> musicas = new List<DTOMusica>();
-            using (netriaEntities context = new netriaEntities())
+            using (UnitOfWork uow = new UnitOfWork())
             {
-                MusicaRepository repositorio = new MusicaRepository(context);
-                var entityList = repositorio.GetAll();
+                var entityList = uow.MusicaRepository.GetAll();
                 foreach (var enity in entityList)
                 {
                     musicas.Add(_mapper.MapToDTO(enity));
@@ -35,10 +34,9 @@ namespace BusinessLogic.Controllers
 
         public DTOMusica GetMusica(int id)
         {
-            using (netriaEntities context = new netriaEntities())
+            using (UnitOfWork uow = new UnitOfWork())
             {
-                MusicaRepository repositorio = new MusicaRepository(context);
-                var entity = repositorio.Get(id);
+                var entity = uow.MusicaRepository.Get(id);
                 if (entity == null)
                 {
                     return null;
@@ -53,15 +51,14 @@ namespace BusinessLogic.Controllers
 
             try
             {
-                using (netriaEntities context = new netriaEntities())
+                using (UnitOfWork uow = new UnitOfWork())
                 {
-                    MusicaRepository repositorio = new MusicaRepository(context);
 
-                    Musica entity = repositorio.Get(musica.idMusica);
+                    Musica entity = uow.MusicaRepository.Get(musica.idMusica);
                     entity.idMusica = musica.idMusica;
                     entity.urlMusica = musica.urlMusica;
 
-                    context.SaveChanges();
+                    uow.SaveChanges();
                 }
             }
             catch (Exception ex)
@@ -75,16 +72,15 @@ namespace BusinessLogic.Controllers
 
             try
             {
-                using (netriaEntities context = new netriaEntities())
+                using (UnitOfWork uow = new UnitOfWork())
                 {
-                    MusicaRepository repositorio = new MusicaRepository(context);
 
-                    if (repositorio.musicaExists(musica.idMusica))
+                    if (uow.MusicaRepository.musicaExists(musica.idMusica))
                     {
                         throw new Exception("Canción existente.");
                     }
-                    repositorio.Create(_mapper.MapFromDTO(musica));
-                    context.SaveChanges();
+                    uow.MusicaRepository.Create(_mapper.MapFromDTO(musica));
+                    uow.SaveChanges();
                 }
             }
             catch (Exception ex)
@@ -98,17 +94,16 @@ namespace BusinessLogic.Controllers
         {
             try
             {
-                using (netriaEntities context = new netriaEntities())
+                using (UnitOfWork uow = new UnitOfWork())
                 {
-                    MusicaRepository repositorio = new MusicaRepository(context);
 
-                    if (!repositorio.musicaExists(id))
+                    if (!uow.MusicaRepository.musicaExists(id))
                     {
                         throw new Exception("Canción no existe.");
                     }
 
-                    repositorio.Delete(id);
-                    context.SaveChanges();
+                    uow.MusicaRepository.Delete(id);
+                    uow.SaveChanges();
                 }
             }
             catch (Exception ex)

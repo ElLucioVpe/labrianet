@@ -60,6 +60,8 @@ input.joingame {
     width: 80%;
     height: 5%;
     padding: 5px;
+    border: 5px solid var(--main2);
+    border-radius: 25px;
     margin-top: 15px;
     margin-bottom: 15px;
     margin-left: auto;
@@ -69,6 +71,8 @@ input.joingame {
 
 input.passwordgame {
     width: 25%;
+    border: 5px solid var(--main2);
+    border-radius: 25px;
     height: 5%;
     padding: 5px;
     margin-top: 15px;
@@ -80,6 +84,8 @@ input.passwordgame {
 
 input.filtrogame {
     width: 25%;
+    border: 5px solid var(--main2);
+    border-radius: 25px;
     height: 5%;
     padding: 5px;
     margin-top: 15px;
@@ -106,6 +112,7 @@ button.aceptar {
     height: 100px;
     width: 200px;
     margin-bottom: 10px;
+    margin-top: 10px;
     margin-left: 1350px;
     border-radius: 50px;
     font-size: 20px;
