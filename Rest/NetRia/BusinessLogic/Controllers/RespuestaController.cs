@@ -12,7 +12,6 @@ namespace BusinessLogic.Controllers
     public class RespuestaController
     {
         private RespuestaMapper _mapper;
-        private UserMapper _maperU;
 
         public RespuestaController()
         {
@@ -60,20 +59,21 @@ namespace BusinessLogic.Controllers
                     entity.contenidoRespuesta = respuesta.contenidoRespuesta;
                     entity.esCorrectoRespuesta = respuesta.esCorrectoRespuesta;
                     entity.Pregunta_idPregunta = respuesta.Pregunta_idPregunta;
-                    List < User> usario = new List<User>();
-                    foreach(var entityU in respuesta.respondieron)
+                    List < Partida> partidas = new List<Partida>();
+                    foreach(var entityP in respuesta.respondieron)
                     {
-                        User user = new User();
-                        user.nickUser = entityU.nickUser;
-                        user.loginnameUser = entityU.loginnameUser;
-                        user.fechaUser = entityU.fechaUser;
-                        usario.Add(user);
+                        Partida partida = new Partida();
+                        partida.id = entityP.id;
+                        partida.Juego_idJuego = entityP.Juego_idJuego;
+                        partida.User_loginnameUser = entityP.User_loginnameUser;
+                        partida.nickUsuario = entityP.nickUsuario;
+                        partidas.Add(partida);
                     }
 
                     //User entityU = repositorioU.Get(respuesta.respondieron)
 
 
-                    entity.respondieron = usario;
+                    entity.respondieron = partidas;
 
                     uow.SaveChanges();
                 }

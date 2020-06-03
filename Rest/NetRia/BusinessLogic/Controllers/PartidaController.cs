@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Persistencia.Database;
 
 namespace BusinessLogic.Controllers
 {
@@ -55,7 +56,7 @@ namespace BusinessLogic.Controllers
                 using (UnitOfWork uow = new UnitOfWork())
                 {
 
-                    partida entity = uow.JuegoRepository.Get(partida.id);
+                    Partida entity = uow.PartidaRepository.Get(partida.id);
                     entity.id = partida.id;
                     entity.Juego_idJuego = partida.Juego_idJuego;
                     entity.nickUsuario = partida.nickUsuario;
@@ -82,7 +83,7 @@ namespace BusinessLogic.Controllers
                     {
                         throw new Exception("Código de partida existente.");
                     }
-                    uow.JuegoRepository.Create(_mapper.MapFromDTO(partida));
+                    uow.PartidaRepository.Create(_mapper.MapFromDTO(partida));
                     uow.SaveChanges();
                 }
             }
