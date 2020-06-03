@@ -57,7 +57,6 @@
     <Compile Include="Controllers\PreguntaController.cs" />
     <Compile Include="Controllers\RespuestaController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="DataModel\Class1.cs" />
     <Compile Include="DataModel\Mappers\JuegoMapper.cs" />
     <Compile Include="DataModel\Mappers\MusicaMapper.cs" />
     <Compile Include="DataModel\Mappers\PartidaMapper.cs" />
@@ -70,6 +69,7 @@
     <Compile Include="DataModel\Repositories\PreguntaRepository.cs" />
     <Compile Include="DataModel\Repositories\RespuestaRepository.cs" />
     <Compile Include="DataModel\Repositories\UserRepository.cs" />
+    <Compile Include="DataModel\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
