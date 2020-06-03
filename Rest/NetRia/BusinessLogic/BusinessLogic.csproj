@@ -53,17 +53,20 @@
   <ItemGroup>
     <Compile Include="Controllers\JuegoController.cs" />
     <Compile Include="Controllers\MusicaController.cs" />
+    <Compile Include="Controllers\PartidaController.cs" />
     <Compile Include="Controllers\PreguntaController.cs" />
     <Compile Include="Controllers\RespuestaController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DataModel\Class1.cs" />
     <Compile Include="DataModel\Mappers\JuegoMapper.cs" />
     <Compile Include="DataModel\Mappers\MusicaMapper.cs" />
+    <Compile Include="DataModel\Mappers\PartidaMapper.cs" />
     <Compile Include="DataModel\Mappers\PreguntaMapper.cs" />
     <Compile Include="DataModel\Mappers\RespuestaMapper.cs" />
     <Compile Include="DataModel\Mappers\UserMapper.cs" />
     <Compile Include="DataModel\Repositories\JuegoRepository.cs" />
     <Compile Include="DataModel\Repositories\MusicaRepository.cs" />
+    <Compile Include="DataModel\Repositories\PartidaRepository.cs" />
     <Compile Include="DataModel\Repositories\PreguntaRepository.cs" />
     <Compile Include="DataModel\Repositories\RespuestaRepository.cs" />
     <Compile Include="DataModel\Repositories\UserRepository.cs" />

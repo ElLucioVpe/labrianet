@@ -20,19 +20,11 @@ namespace BusinessLogic.DataModel.Mappers
                 idRespuesta = respuesta.idRespuesta,
                 Pregunta_idPregunta = respuesta.Pregunta_idPregunta,
                 esCorrectoRespuesta = respuesta.esCorrectoRespuesta,
-                contenidoRespuesta = respuesta.contenidoRespuesta
+                contenidoRespuesta = respuesta.contenidoRespuesta,
+                respondieron = respuesta.respondieron.Count
 
             };
-            UserMapper _mapperUser = new UserMapper();
-            if (respuesta.respondieron != null)
-            {
-                foreach (User us in respuesta.respondieron)
-                {
-                    pRespuesta.respondieron.Add(_mapperUser.MapToDTO(us));
-                }
-               
-
-            }
+       
 
             return pRespuesta;
         }
