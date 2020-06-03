@@ -4,7 +4,7 @@ import Input from '../Components/Input';
 import CrearJuegoPreguntas from "../Views/CrearJuegoPreguntas";
 import '../Css/CrearJuegoPreguntas.css'
 
-import ScrollArea from 'react-scrollbar'
+import ScrollArea from 'react-scrollbar';
 
 class CrearPreguntas extends React.Component {
     render() {

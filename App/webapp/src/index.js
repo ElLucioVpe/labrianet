@@ -10,16 +10,16 @@ import ComienzoJuego from "./Views/ComienzoJuego";
 import PlayerRanking from "./Views/PlayerRanking.js";
 import Header from "./Components/Header.js";
 import Grafica from "./Views/Grafica.js";
-import { UserProvider } from "./Libraries/ContextLib";
+import { UserProvider } from "./Libraries/contextLib";
 import "./App.css";
 
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 export default function App() {
     const [isUserLoggedIn, setUserLoggedIn] = useState(false);
-
+    const Juego = 5;
   return (
-    <UserProvider value={{isUserLoggedIn, setUserLoggedIn}}>
+    <UserProvider value={{isUserLoggedIn, setUserLoggedIn, Juego}}>
       <Router>
         <Header />
         <Switch>

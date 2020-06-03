@@ -1,22 +1,37 @@
 import React from 'react'
 import CheckBox from "../Components/CheckBox";
-
 import "../Css/ConfigurarJuego.css";
+import UserContext from "../Libraries/contextLib";
+import Select from "react-select";
+
+//array de canciones por defecto, por si ocurre un error
+const canciones = [
+    { value: '0', label: 'Musica del juego' },
+];
+//
 
 class ConfigurarJuego extends React.Component {
+    static contextType = UserContext
 
     constructor(props) {
         super(props)
         this.state = {
             privacidad: [
-                {id: 1, value: "Público", isChecked: false},
+                {id: 1, value: "Público", isChecked: true},
                 {id: 2, value: "Privado", isChecked: false}
-            ]
+            ],
+            juego: [],
+            cancionSeleccionada: {value:'null',label:'Musica del juego'},
         }
     }
 
+    handleChangeMusica = cancionSeleccionada => {
+        this.setState({ cancionSeleccionada });
+        //console.log(`Option selected:`, cancionSeleccionada);
+    }
+
     handleCheckChieldElement = (event) => {
-        let privacidad = this.state.privacidad
+        let privacidad = this.state.privacidad;
         privacidad.forEach(item => {
             if (item.value === event.target.value)
                 item.isChecked =  event.target.checked
@@ -25,7 +40,44 @@ class ConfigurarJuego extends React.Component {
         this.setState({privacidad: privacidad})
     }
 
+    async componentDidMount() {
+        const user = this.context;
+
+        console.log("hola");
+
+        const response = await fetch("http://localhost:44353/api/Juego/"+user.Juego);
+        const data = await response.json();
+        this.setState({juego: data});
+
+        console.log(data);
+        //Modifico los checkbox de privacidad
+        let privacidad = this.state.privacidad;
+        if(data.esPrivadoJuego === "true") {
+            privacidad.forEach(item => {
+                if (item.value === "Privado")
+                    item.isChecked = true;
+                else item.isChecked = false;
+            })
+        }
+        this.setState({privacidad: privacidad})
+        //
+
+        //Cargo select de musica
+        const responseM = await fetch("http://localhost:44353/api/Musica/");
+        let data_canciones = await responseM.json();
+        data_canciones.forEach(item => {
+            let valor = {value: item.idMusica, label: item.urlMusica};
+            canciones.concat(valor);//deberia ser titulo
+            if(item.idMusica === data.Musica_idMusica) {
+                this.setState({cancionSeleccionada: valor})
+            }
+        })
+        //
+    }
+
     render() {
+        const { cancionSeleccionada } = this.state;
+
         return (
             <div className="configuracionJuego">
                 <form>
@@ -33,9 +85,11 @@ class ConfigurarJuego extends React.Component {
                     <div className="grid-configuracionJuego">
                         <div className="seccion1-config">
                             <p>
-                                <input className="input" type="text" name="titulo" placeholder="Titulo"/>
+                                <input className="input" type="text" name="titulo" placeholder="Titulo"
+                                value={this.state.juego.tituloJuego}/>
                             </p>
                             <textarea className="descripcion-juego" placeholder="Descripción" rows="10" cols="50">
+                                {this.state.juego.descripcionJuego}
                             </textarea><br/>
 
                             <ul>
@@ -45,18 +99,22 @@ class ConfigurarJuego extends React.Component {
                                     })
                                 }
                             </ul>
-                            <p><input className="input" type="text" name="password" placeholder="Password"/></p>
+                            <p>
+                                <input className="input" type="text" name="password" placeholder="Password"
+                                value={this.state.juego.password}/>
+                            </p>
 
                         </div>
 
                         <div className="seccion2-config">
-                            <img id="gamecover" width="450" height="300" src="../../img/gamecover.png" placeholder="GameCover"/>
+                            <img id="gamecover" width="450" height="300" src={"../../public/img/"+this.state.juego.coverJuego} placeholder="GameCover"/>
                             <br/>
-                            <select id="musica-juego">
-                                <option selected>Musica del juego</option>
-                                <option value="cancion1">Cancion1</option>
-                                <option value="cancion2">Cancion2</option>
-                            </select>
+
+                            <Select
+                                value={cancionSeleccionada}
+                                onChange={this.handleChangeMusica}
+                                options={canciones}
+                            />
 
                         </div>
                     </div>
