@@ -21,10 +21,16 @@ namespace BusinessLogic.DataModel.Mappers
                 Pregunta_idPregunta = respuesta.Pregunta_idPregunta,
                 esCorrectoRespuesta = respuesta.esCorrectoRespuesta,
                 contenidoRespuesta = respuesta.contenidoRespuesta,
-                respondieron = respuesta.respondieron.Count
-
             };
-       
+
+            PartidaMapper _mapperPartida = new PartidaMapper();
+            if (respuesta.respondieron != null) {
+                foreach (Partida part in respuesta.respondieron)
+                {
+                    pRespuesta.respondieron.Add(_mapperPartida.MapToDTO(part));
+                }
+            }
+
 
             return pRespuesta;
         }
@@ -40,12 +46,12 @@ namespace BusinessLogic.DataModel.Mappers
                 contenidoRespuesta = dto.contenidoRespuesta
             };
 
-            UserMapper _mapperUser = new UserMapper();
+            PartidaMapper _mapperPartida = new PartidaMapper();
             if (dto.respondieron != null)
             {
-                foreach (DTOUser us in dto.respondieron)
+                foreach (DTOPartida part in dto.respondieron)
                 {
-                    respuesta.respondieron.Add(_mapperUser.MapFromDTO(us));
+                    respuesta.respondieron.Add(_mapperPartida.MapFromDTO(part));
                 }
 
 
