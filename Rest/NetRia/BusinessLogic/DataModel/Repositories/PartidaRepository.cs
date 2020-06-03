@@ -1,12 +1,15 @@
-﻿using System;
+﻿using Persistencia.Database;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BusinessLogic.DataModel.Repositories
 {
-    class PartidaRepository
+    public class PartidaRepository
     {
         private readonly netriaEntities db;
         public PartidaRepository(netriaEntities context)
@@ -45,7 +48,7 @@ namespace BusinessLogic.DataModel.Repositories
         public void Create(Partida partida)
         {
 
-            db.Juegos.Add(partuda);
+            db.Partidas.Add(partida);
 
             try
             {
@@ -61,7 +64,7 @@ namespace BusinessLogic.DataModel.Repositories
         {
             Partida partida = db.Partidas.Find(id);
 
-            db.Juegos.Remove(partida);
+            db.Partidas.Remove(partida);
             db.SaveChanges();
         }
 

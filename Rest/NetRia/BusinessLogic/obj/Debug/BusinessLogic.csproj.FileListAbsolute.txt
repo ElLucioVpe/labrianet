@@ -1,0 +1,17 @@
+C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\BusinessLogic\bin\Debug\BusinessLogic.dll.config
+C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\BusinessLogic\bin\Debug\BusinessLogic.dll
+C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\BusinessLogic\bin\Debug\BusinessLogic.pdb
+C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\BusinessLogic\bin\Debug\Common.dll
+C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\BusinessLogic\bin\Debug\EntityFramework.dll
+C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\BusinessLogic\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\BusinessLogic\bin\Debug\Persistencia.dll
+C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\BusinessLogic\bin\Debug\Common.pdb
+C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\BusinessLogic\bin\Debug\Persistencia.pdb
+C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\BusinessLogic\bin\Debug\Persistencia.dll.config
+C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\BusinessLogic\bin\Debug\EntityFramework.xml
+C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\BusinessLogic\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\BusinessLogic\obj\Debug\BusinessLogic.csprojAssemblyReference.cache
+C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\BusinessLogic\obj\Debug\BusinessLogic.csproj.CoreCompileInputs.cache
+C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\BusinessLogic\obj\Debug\BusinessLogic.csproj.CopyComplete
+C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\BusinessLogic\obj\Debug\BusinessLogic.dll
+C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\BusinessLogic\obj\Debug\BusinessLogic.pdb

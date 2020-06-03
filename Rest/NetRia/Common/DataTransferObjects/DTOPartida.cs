@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common.DataTransferObjects
 {
-    class DTOPartida
+    public class DTOPartida
     {
         public int id { get; set; }
         public int Juego_idJuego { get; set; }
