@@ -13,7 +13,7 @@ namespace Common.DataTransferObjects
         public string esCorrectoRespuesta { get; set; }
         public string contenidoRespuesta { get; set; }
 
-        public int respondieron { get; set; }
+        public List<DTOPartida> respondieron { get; set; }
 
     }
 }

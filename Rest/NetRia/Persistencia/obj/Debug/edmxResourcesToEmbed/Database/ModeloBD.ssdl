@@ -12,14 +12,7 @@
     <Property Name="coverJuego" Type="nvarchar" MaxLength="500" />
     <Property Name="Musica_idMusica" Type="int" Nullable="false" />
     <Property Name="activadoJuego" Type="smallint" />
-  </EntityType>
-  <EntityType Name="jugo">
-    <Key>
-      <PropertyRef Name="Juego_idJuego" />
-      <PropertyRef Name="User_loginnameUser" />
-    </Key>
-    <Property Name="Juego_idJuego" Type="int" Nullable="false" />
-    <Property Name="User_loginnameUser" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="musica">
     <Key>
@@ -27,6 +20,16 @@
     </Key>
     <Property Name="idMusica" Type="int" Nullable="false" />
     <Property Name="urlMusica" Type="nvarchar" MaxLength="200" />
+    <Property Name="tituloMusica" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="partida">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Juego_idJuego" Type="int" Nullable="false" />
+    <Property Name="User_loginnameUser" Type="nvarchar" MaxLength="100" />
+    <Property Name="nickUsuario" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
   <EntityType Name="pregunta">
     <Key>
@@ -42,10 +45,10 @@
   </EntityType>
   <EntityType Name="respondio">
     <Key>
-      <PropertyRef Name="User_loginnameUser" />
+      <PropertyRef Name="Jugo_idJugo" />
       <PropertyRef Name="Respuesta_idRespuesta" />
     </Key>
-    <Property Name="User_loginnameUser" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Jugo_idJugo" Type="int" Nullable="false" />
     <Property Name="Respuesta_idRespuesta" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="respuesta">
@@ -66,6 +69,18 @@
     <Property Name="passwordUser" Type="nvarchar" MaxLength="100" />
     <Property Name="fechaUser" Type="datetime2" Precision="0" />
   </EntityType>
+  <Association Name="FK_User_Jugo">
+    <End Role="partida" Type="Self.partida" Multiplicity="1" />
+    <End Role="respondio" Type="Self.respondio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="partida">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="respondio">
+        <PropertyRef Name="Jugo_idJugo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="juego$fk_Juego_Musica1">
     <End Role="musica" Type="Self.musica" Multiplicity="1" />
     <End Role="juego" Type="Self.juego" Multiplicity="*" />
@@ -92,24 +107,24 @@
   </Association>
   <Association Name="jugo$fk_Jugo_Juego">
     <End Role="juego" Type="Self.juego" Multiplicity="1" />
-    <End Role="jugo" Type="Self.jugo" Multiplicity="*" />
+    <End Role="partida" Type="Self.partida" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="juego">
         <PropertyRef Name="idJuego" />
       </Principal>
-      <Dependent Role="jugo">
+      <Dependent Role="partida">
         <PropertyRef Name="Juego_idJuego" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="jugo$fk_Jugo_User1">
-    <End Role="user" Type="Self.user" Multiplicity="1" />
-    <End Role="jugo" Type="Self.jugo" Multiplicity="*" />
+    <End Role="user" Type="Self.user" Multiplicity="0..1" />
+    <End Role="partida" Type="Self.partida" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="user">
         <PropertyRef Name="loginnameUser" />
       </Principal>
-      <Dependent Role="jugo">
+      <Dependent Role="partida">
         <PropertyRef Name="User_loginnameUser" />
       </Dependent>
     </ReferentialConstraint>
@@ -138,18 +153,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="respondio$fk_Respondio_User1">
-    <End Role="user" Type="Self.user" Multiplicity="1" />
-    <End Role="respondio" Type="Self.respondio" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="user">
-        <PropertyRef Name="loginnameUser" />
-      </Principal>
-      <Dependent Role="respondio">
-        <PropertyRef Name="User_loginnameUser" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="respuesta$fk_Respuesta_Pregunta1">
     <End Role="pregunta" Type="Self.pregunta" Multiplicity="1" />
     <End Role="respuesta" Type="Self.respuesta" Multiplicity="*" />
@@ -164,12 +167,16 @@
   </Association>
   <EntityContainer Name="netriaModelStoreContainer">
     <EntitySet Name="juego" EntityType="Self.juego" Schema="netria" store:Type="Tables" />
-    <EntitySet Name="jugo" EntityType="Self.jugo" Schema="netria" store:Type="Tables" />
     <EntitySet Name="musica" EntityType="Self.musica" Schema="netria" store:Type="Tables" />
+    <EntitySet Name="partida" EntityType="Self.partida" Schema="netria" store:Type="Tables" />
     <EntitySet Name="pregunta" EntityType="Self.pregunta" Schema="netria" store:Type="Tables" />
     <EntitySet Name="respondio" EntityType="Self.respondio" Schema="netria" store:Type="Tables" />
     <EntitySet Name="respuesta" EntityType="Self.respuesta" Schema="netria" store:Type="Tables" />
     <EntitySet Name="user" EntityType="Self.user" Schema="netria" store:Type="Tables" />
+    <AssociationSet Name="FK_User_Jugo" Association="Self.FK_User_Jugo">
+      <End Role="partida" EntitySet="partida" />
+      <End Role="respondio" EntitySet="respondio" />
+    </AssociationSet>
     <AssociationSet Name="juego$fk_Juego_Musica1" Association="Self.juego$fk_Juego_Musica1">
       <End Role="musica" EntitySet="musica" />
       <End Role="juego" EntitySet="juego" />
@@ -180,11 +187,11 @@
     </AssociationSet>
     <AssociationSet Name="jugo$fk_Jugo_Juego" Association="Self.jugo$fk_Jugo_Juego">
       <End Role="juego" EntitySet="juego" />
-      <End Role="jugo" EntitySet="jugo" />
+      <End Role="partida" EntitySet="partida" />
     </AssociationSet>
     <AssociationSet Name="jugo$fk_Jugo_User1" Association="Self.jugo$fk_Jugo_User1">
       <End Role="user" EntitySet="user" />
-      <End Role="jugo" EntitySet="jugo" />
+      <End Role="partida" EntitySet="partida" />
     </AssociationSet>
     <AssociationSet Name="pregunta$fk_Pregunta_Juego1" Association="Self.pregunta$fk_Pregunta_Juego1">
       <End Role="juego" EntitySet="juego" />
@@ -192,10 +199,6 @@
     </AssociationSet>
     <AssociationSet Name="respondio$fk_Respondio_Respuesta1" Association="Self.respondio$fk_Respondio_Respuesta1">
       <End Role="respuesta" EntitySet="respuesta" />
-      <End Role="respondio" EntitySet="respondio" />
-    </AssociationSet>
-    <AssociationSet Name="respondio$fk_Respondio_User1" Association="Self.respondio$fk_Respondio_User1">
-      <End Role="user" EntitySet="user" />
       <End Role="respondio" EntitySet="respondio" />
     </AssociationSet>
     <AssociationSet Name="respuesta$fk_Respuesta_Pregunta1" Association="Self.respuesta$fk_Respuesta_Pregunta1">

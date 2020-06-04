@@ -5,21 +5,21 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="aa583ba18b7a45b9b2e72f9d128c68f9" Name="Diagram1" ZoomLevel="86">
-        <EntityTypeShape EntityType="netriaModel.Musica" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="netriaModel.Pregunta" Width="1.5" PointX="12.5" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="netriaModel.User" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
         <AssociationConnector Association="netriaModel.jugo" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="netriaModel.Juego" Width="1.5" PointX="9" PointY="2.125" />
+        <EntityTypeShape EntityType="netriaModel.Juego" Width="1.5" PointX="3" PointY="2.875" />
+        <EntityTypeShape EntityType="netriaModel.Musica" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="netriaModel.Partida" Width="1.5" PointX="8.25" PointY="3.5" />
+        <EntityTypeShape EntityType="netriaModel.Pregunta" Width="1.5" PointX="5.25" PointY="3.25" />
+        <EntityTypeShape EntityType="netriaModel.Respuesta" Width="1.5" PointX="10.5" PointY="3.5" />
+        <EntityTypeShape EntityType="netriaModel.User" Width="1.5" PointX="0.75" PointY="3.5" />
         <AssociationConnector Association="netriaModel.juego_fk_Juego_Musica1" />
         <AssociationConnector Association="netriaModel.juego_fk_Juego_User1" />
-        <AssociationConnector Association="netriaModel.pregunta_fk_Pregunta_Juego1" />
-        <EntityTypeShape EntityType="netriaModel.Partida" Width="1.5" PointX="9" PointY="6.375" />
         <AssociationConnector Association="netriaModel.jugo_fk_Jugo_Juego" />
+        <AssociationConnector Association="netriaModel.pregunta_fk_Pregunta_Juego1" />
         <AssociationConnector Association="netriaModel.jugo_fk_Jugo_User1" />
-        <EntityTypeShape EntityType="netriaModel.Respuesta" Width="1.5" PointX="12.875" PointY="5.25" />
         <AssociationConnector Association="netriaModel.respuesta_fk_Respuesta_Pregunta1" />
         <AssociationConnector Association="netriaModel.respondio" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

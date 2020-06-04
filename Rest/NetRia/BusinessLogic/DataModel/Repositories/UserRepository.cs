@@ -28,7 +28,7 @@ namespace BusinessLogic.DataModel.Repositories
 
         public List<User> GetAll()
         {
-            return db.Users.ToList();
+            return db.Users.ToList(); 
         }
 
         public User Get(string id)

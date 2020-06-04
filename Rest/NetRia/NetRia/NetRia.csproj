@@ -185,22 +185,12 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="AuthorizeAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\JuegoControllerAPI.cs" />
-    <Compile Include="Controllers\MusicaControllerAPI.cs" />
-    <Compile Include="Controllers\PreguntaControllerAPI.cs" />
-    <Compile Include="Controllers\RespuestaControllerAPI.cs" />
-    <Compile Include="Controllers\UserControllerAPI.cs" />
+    <Compile Include="Controllers\JuegoController.cs" />
+    <Compile Include="Controllers\MusicaController.cs" />
+    <Compile Include="Controllers\PreguntaController.cs" />
+    <Compile Include="Controllers\RespuestaController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="DataModel\Mappers\JuegoMapper.cs" />
-    <Compile Include="DataModel\Mappers\MusicaMapper.cs" />
-    <Compile Include="DataModel\Mappers\PreguntaMapper.cs" />
-    <Compile Include="DataModel\Mappers\RespuestaMapper.cs" />
-    <Compile Include="DataModel\Mappers\UserMapper.cs" />
-    <Compile Include="DataModel\Repositories\JuegoRepository.cs" />
-    <Compile Include="DataModel\Repositories\MusicaRepository.cs" />
-    <Compile Include="DataModel\Repositories\PreguntaRepository.cs" />
-    <Compile Include="DataModel\Repositories\RespuestaRepository.cs" />
-    <Compile Include="DataModel\Repositories\UserRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -322,7 +312,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53996</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44353/</IISUrl>
+          <IISUrl>http://localhost:44353/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
