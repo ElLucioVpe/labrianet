@@ -12,6 +12,7 @@ using Common.DataTransferObjects;
 using BusinessLogic.DataModel.Mappers;
 using BusinessLogic.DataModel.Repositories;
 using BusinessLogic.Controllers;
+using System.Security.Claims;
 
 namespace NetRia.Controllers
 {
@@ -46,6 +47,7 @@ namespace NetRia.Controllers
         }
 
         // PUT: api/Juego/5
+        [Authorize]
         [HttpPost]
         public IHttpActionResult UpdateJuego(int id, DTOJuego juego)
         {
@@ -54,7 +56,11 @@ namespace NetRia.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != juego.idJuego)
+            var identity = (ClaimsIdentity)User.Identity;
+            var identity_mail = identity.Claims.Where(c => c.Type == ClaimTypes.Email)
+               .Select(c => c.Value).SingleOrDefault();
+
+            if ((id != juego.idJuego) || (juego.User_loginnameUser != identity_mail))
             {
                 return BadRequest();
             }
@@ -104,15 +110,24 @@ namespace NetRia.Controllers
         }
 
         // DELETE: api/Juego/5
+        [Authorize]
         [HttpPost]
         public IHttpActionResult DeleteJuego(int id)
         {
+            var identity = (ClaimsIdentity)User.Identity;
+            var identity_mail = identity.Claims.Where(c => c.Type == ClaimTypes.Email)
+               .Select(c => c.Value).SingleOrDefault();
+
             DTOBaseResponse response = new DTOBaseResponse();
             try
             {
                 BusinessLogic.Controllers.JuegoController controller = new BusinessLogic.Controllers.JuegoController();
-                controller.DeleteJuego(id);
-                response.Success = true;
+                DTOJuego juego = controller.GetJuego(id);
+                if (juego.User_loginnameUser == identity_mail)
+                {
+                    controller.DeleteJuego(id);
+                    response.Success = true;
+                } else response.Success = false;
             }
             catch (Exception ex)
             {
@@ -121,5 +136,6 @@ namespace NetRia.Controllers
             }
             return Ok(response);
         }
+
     }
 }
