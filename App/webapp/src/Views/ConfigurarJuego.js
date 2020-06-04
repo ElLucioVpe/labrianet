@@ -45,14 +45,15 @@ class ConfigurarJuego extends React.Component {
 
         console.log("hola");
 
-        const response = await fetch("http://localhost:44353/api/Juego/"+user.Juego);
+        const response = await fetch("http://localhost:44353/api/Juego/GetJuego/"+user.Juego);
         const data = await response.json();
         this.setState({juego: data});
 
-        console.log(data);
+        console.log(this.state.juego);
+        console.log(this.state.juego.esPrivadoJuego);
         //Modifico los checkbox de privacidad
         let privacidad = this.state.privacidad;
-        if(data.esPrivadoJuego === "true") {
+        if(data.esPrivadoJuego === 1) {
             privacidad.forEach(item => {
                 if (item.value === "Privado")
                     item.isChecked = true;
@@ -63,10 +64,10 @@ class ConfigurarJuego extends React.Component {
         //
 
         //Cargo select de musica
-        const responseM = await fetch("http://localhost:44353/api/Musica/");
+        const responseM = await fetch("http://localhost:44353/api/Musica/GetAll");
         let data_canciones = await responseM.json();
         data_canciones.forEach(item => {
-            let valor = {value: item.idMusica, label: item.urlMusica};
+            let valor = {value: item.idMusica, label: item.tituloMusica};
             canciones.concat(valor);//deberia ser titulo
             if(item.idMusica === data.Musica_idMusica) {
                 this.setState({cancionSeleccionada: valor})
@@ -88,8 +89,8 @@ class ConfigurarJuego extends React.Component {
                                 <input className="input" type="text" name="titulo" placeholder="Titulo"
                                 value={this.state.juego.tituloJuego}/>
                             </p>
-                            <textarea className="descripcion-juego" placeholder="Descripción" rows="10" cols="50">
-                                {this.state.juego.descripcionJuego}
+                            <textarea className="descripcion-juego" placeholder="Descripción" rows="10" cols="50"
+                            value={this.state.juego.descripcionJuego}>
                             </textarea><br/>
 
                             <ul>

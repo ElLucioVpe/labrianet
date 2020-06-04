@@ -10,7 +10,7 @@
     <Property Name="descripcionJuego" Type="nvarchar" MaxLength="2000" />
     <Property Name="esPrivadoJuego" Type="smallint" />
     <Property Name="coverJuego" Type="nvarchar" MaxLength="500" />
-    <Property Name="Musica_idMusica" Type="int" Nullable="false" />
+    <Property Name="Musica_idMusica" Type="int" />
     <Property Name="activadoJuego" Type="smallint" />
     <Property Name="password" Type="nvarchar" MaxLength="200" />
   </EntityType>
@@ -82,7 +82,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="juego$fk_Juego_Musica1">
-    <End Role="musica" Type="Self.musica" Multiplicity="1" />
+    <End Role="musica" Type="Self.musica" Multiplicity="0..1" />
     <End Role="juego" Type="Self.juego" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="musica">

@@ -17,7 +17,7 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 export default function App() {
     const [isUserLoggedIn, setUserLoggedIn] = useState(false);
-    const Juego = 5;
+    const Juego = 1;
   return (
     <UserProvider value={{isUserLoggedIn, setUserLoggedIn, Juego}}>
       <Router>

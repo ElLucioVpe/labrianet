@@ -1,21 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="netriaModelStoreContainer" CdmEntityContainer="netriaEntities">
-    <EntitySetMapping Name="Juegoes1">
-      <EntityTypeMapping TypeName="netriaModel.Juego">
-        <MappingFragment StoreEntitySet="juego">
-          <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="activadoJuego" ColumnName="activadoJuego" />
-          <ScalarProperty Name="Musica_idMusica" ColumnName="Musica_idMusica" />
-          <ScalarProperty Name="coverJuego" ColumnName="coverJuego" />
-          <ScalarProperty Name="esPrivadoJuego" ColumnName="esPrivadoJuego" />
-          <ScalarProperty Name="descripcionJuego" ColumnName="descripcionJuego" />
-          <ScalarProperty Name="tituloJuego" ColumnName="tituloJuego" />
-          <ScalarProperty Name="User_loginnameUser" ColumnName="User_loginnameUser" />
-          <ScalarProperty Name="idJuego" ColumnName="idJuego" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Musicas1">
       <EntityTypeMapping TypeName="netriaModel.Musica">
         <MappingFragment StoreEntitySet="musica">
@@ -76,5 +61,20 @@
         <ScalarProperty Name="id" ColumnName="Jugo_idJugo" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="Juegoes1">
+      <EntityTypeMapping TypeName="netriaModel.Juego">
+        <MappingFragment StoreEntitySet="juego">
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="activadoJuego" ColumnName="activadoJuego" />
+          <ScalarProperty Name="Musica_idMusica" ColumnName="Musica_idMusica" />
+          <ScalarProperty Name="coverJuego" ColumnName="coverJuego" />
+          <ScalarProperty Name="esPrivadoJuego" ColumnName="esPrivadoJuego" />
+          <ScalarProperty Name="descripcionJuego" ColumnName="descripcionJuego" />
+          <ScalarProperty Name="tituloJuego" ColumnName="tituloJuego" />
+          <ScalarProperty Name="User_loginnameUser" ColumnName="User_loginnameUser" />
+          <ScalarProperty Name="idJuego" ColumnName="idJuego" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
