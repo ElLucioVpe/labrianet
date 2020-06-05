@@ -2319,8 +2319,8 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -336,
-											"top": 256,
+											"left": -368,
+											"top": 160,
 											"height": 13
 										},
 										{
@@ -2330,9 +2330,9 @@
 												"$ref": "AAAAAAFyC/CsK+otb9A="
 											},
 											"font": "Arial;13;1",
-											"left": 405,
-											"top": 615,
-											"width": 140.5625,
+											"left": 389,
+											"top": 567,
+											"width": 157.9169921875,
 											"height": 13,
 											"text": "Respondio"
 										},
@@ -2344,8 +2344,8 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -336,
-											"top": 256,
+											"left": -368,
+											"top": 160,
 											"width": 73.67724609375,
 											"height": 13,
 											"text": "(from Model)"
@@ -2358,16 +2358,16 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -336,
-											"top": 256,
+											"left": -368,
+											"top": 160,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 400,
-									"top": 608,
-									"width": 150.5625,
+									"left": 384,
+									"top": 560,
+									"width": 167.9169921875,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFyC/CsK+ouHoI="
@@ -2402,11 +2402,11 @@
 												"$ref": "AAAAAAFyC/DbhOpUcxg="
 											},
 											"font": "Arial;13;0",
-											"left": 405,
-											"top": 638,
-											"width": 140.5625,
+											"left": 389,
+											"top": 590,
+											"width": 157.9169921875,
 											"height": 13,
-											"text": "+IdUsuario: Integer {PK}",
+											"text": "+IdPartida: Integer {PK}",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2419,18 +2419,18 @@
 												"$ref": "AAAAAAFyC/D0bupbyzQ="
 											},
 											"font": "Arial;13;0",
-											"left": 405,
-											"top": 653,
-											"width": 140.5625,
+											"left": 389,
+											"top": 605,
+											"width": 157.9169921875,
 											"height": 13,
-											"text": "+IdJuego: Integer {PK}",
+											"text": "+IdRespuesta: Integer {PK}",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 400,
-									"top": 633,
-									"width": 150.5625,
+									"left": 384,
+									"top": 585,
+									"width": 167.9169921875,
 									"height": 38
 								},
 								{
@@ -2443,9 +2443,9 @@
 										"$ref": "AAAAAAFyC/CsK+oqhmw="
 									},
 									"font": "Arial;13;0",
-									"left": 400,
-									"top": 671,
-									"width": 150.5625,
+									"left": 384,
+									"top": 623,
+									"width": 167.9169921875,
 									"height": 10
 								},
 								{
@@ -2459,8 +2459,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -168,
-									"top": 128,
+									"left": -184,
+									"top": 80,
 									"width": 10,
 									"height": 10
 								},
@@ -2475,17 +2475,17 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -168,
-									"top": 128,
+									"left": -184,
+									"top": 80,
 									"width": 10,
 									"height": 10
 								}
 							],
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 400,
-							"top": 608,
-							"width": 150.5625,
+							"left": 384,
+							"top": 560,
+							"width": 167.9169921875,
 							"height": 73,
 							"nameCompartment": {
 								"$ref": "AAAAAAFyC/CsK+otb9A="
@@ -3327,7 +3327,7 @@
 								"$ref": "AAAAAAFyC/CsK+osWLo="
 							},
 							"lineStyle": 1,
-							"points": "399:661;182:711"
+							"points": "383:630;182:711"
 						},
 						{
 							"_type": "UMLAssociationView",
@@ -5666,7 +5666,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFyC/CsK+oqhmw="
 							},
-							"name": "IdUsuario",
+							"name": "IdPartida",
 							"type": "Integer {PK}"
 						},
 						{
@@ -5675,7 +5675,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFyC/CsK+oqhmw="
 							},
-							"name": "IdJuego",
+							"name": "IdRespuesta",
 							"type": "Integer {PK}"
 						}
 					]
