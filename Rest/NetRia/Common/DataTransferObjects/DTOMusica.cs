@@ -10,5 +10,6 @@ namespace Common.DataTransferObjects
     {
         public int idMusica { get; set; }
         public string urlMusica { get; set; }
+        public string tituloMusica { get; set; }
     }
 }

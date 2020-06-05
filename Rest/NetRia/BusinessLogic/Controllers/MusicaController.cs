@@ -57,6 +57,7 @@ namespace BusinessLogic.Controllers
                     Musica entity = uow.MusicaRepository.Get(musica.idMusica);
                     entity.idMusica = musica.idMusica;
                     entity.urlMusica = musica.urlMusica;
+                    entity.tituloMusica = musica.tituloMusica;
 
                     uow.SaveChanges();
                 }
