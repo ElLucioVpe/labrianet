@@ -43,14 +43,10 @@ class ConfigurarJuego extends React.Component {
     async componentDidMount() {
         const user = this.context;
 
-        console.log("hola");
-
         const response = await fetch("http://localhost:44353/api/Juego/GetJuego/"+user.Juego);
         const data = await response.json();
         this.setState({juego: data});
 
-        console.log(this.state.juego);
-        console.log(this.state.juego.esPrivadoJuego);
         //Modifico los checkbox de privacidad
         let privacidad = this.state.privacidad;
         if(data.esPrivadoJuego === 1) {
