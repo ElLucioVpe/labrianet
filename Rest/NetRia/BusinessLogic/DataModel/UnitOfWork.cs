@@ -19,6 +19,7 @@ namespace BusinessLogic.DataModel
         private PreguntaRepository _PreguntaRepository;
         private RespuestaRepository _RespuestaRepository;
         private MusicaRepository _MusicaRepository;
+        private PartidaRepository _PartidaRepository;
         //
 
         public UserRepository UserRepository
@@ -78,6 +79,18 @@ namespace BusinessLogic.DataModel
                     _MusicaRepository = new MusicaRepository(_context);
                 }
                 return _MusicaRepository;
+            }
+        }
+
+        public PartidaRepository PartidaRepository
+        {
+            get
+            {
+                if (this._UserRepository == null)
+                {
+                    _PartidaRepository = new PartidaRepository(_context);
+                }
+                return _PartidaRepository;
             }
         }
 

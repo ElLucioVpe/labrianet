@@ -17,8 +17,8 @@ namespace Persistencia.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Juego()
         {
+            this.partidas = new HashSet<Partida>();
             this.preguntas = new HashSet<Pregunta>();
-            this.jugadores = new HashSet<Partida>();
         }
     
         public int idJuego { get; set; }
@@ -27,15 +27,15 @@ namespace Persistencia.Database
         public string descripcionJuego { get; set; }
         public Nullable<short> esPrivadoJuego { get; set; }
         public string coverJuego { get; set; }
-        public int Musica_idMusica { get; set; }
+        public Nullable<int> Musica_idMusica { get; set; }
         public Nullable<short> activadoJuego { get; set; }
         public string password { get; set; }
     
         public virtual Musica musica { get; set; }
         public virtual User user { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pregunta> preguntas { get; set; }
+        public virtual ICollection<Partida> partidas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Partida> jugadores { get; set; }
+        public virtual ICollection<Pregunta> preguntas { get; set; }
     }
 }

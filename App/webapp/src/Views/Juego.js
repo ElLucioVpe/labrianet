@@ -3,6 +3,22 @@ import Button from '../Components/Button'
 import '../Css/Juego.css'
 
 class Juego extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            info_juego: [],
+        }
+    }
+
+    async componentDidMount() {
+
+        let id_juego = this.props.match.params.idJuego;
+
+        const response = await fetch("http://localhost:44353/api/Juego/GetJuego/"+id_juego);
+        const data = await response.json();
+        this.setState({info_juego: data});
+    }
+
     render() {
         return (
             <div class="juegoMasterParent">

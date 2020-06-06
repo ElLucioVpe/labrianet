@@ -17,13 +17,14 @@ namespace Persistencia.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Musica()
         {
-            this.juegoes = new HashSet<Juego>();
+            this.juegos = new HashSet<Juego>();
         }
     
         public int idMusica { get; set; }
         public string urlMusica { get; set; }
+        public string tituloMusica { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Juego> juegoes { get; set; }
+        public virtual ICollection<Juego> juegos { get; set; }
     }
 }

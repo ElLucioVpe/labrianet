@@ -1,14 +1,15 @@
-﻿using Common.DataTransferObjects;
-using NetRia.DataModel.Mappers;
-using NetRia.DataModel.Repositories;
-using Persistencia.Database;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Common.DataTransferObjects;
+using BusinessLogic.DataModel.Mappers;
+using BusinessLogic.DataModel.Repositories;
+using BusinessLogic.Controllers;
+
 
 namespace NetRia.Controllers
 {
@@ -89,7 +90,7 @@ namespace NetRia.Controllers
             DTOBaseResponse response = new DTOBaseResponse();
             try
             {
-                MusicaControllerAPI controller = new MusicaControllerAPI();
+                MusicaController controller = new MusicaController();
                 controller.CreateMusica(musica);
                 response.Success = true;
             }
@@ -110,7 +111,7 @@ namespace NetRia.Controllers
             DTOBaseResponse response = new DTOBaseResponse();
             try
             {
-                MusicaControllerAPI controller = new MusicaControllerAPI();
+                MusicaController controller = new MusicaController();
                 controller.DeleteMusica(id);
                 response.Success = true;
             }

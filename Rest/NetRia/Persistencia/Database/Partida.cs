@@ -14,12 +14,20 @@ namespace Persistencia.Database
     
     public partial class Partida
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Partida()
+        {
+            this.respuestas = new HashSet<Respuesta>();
+        }
+    
         public int id { get; set; }
         public int Juego_idJuego { get; set; }
         public string User_loginnameUser { get; set; }
         public string nickUsuario { get; set; }
     
-        public virtual Juego juego { get; set; }
         public virtual User user { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Respuesta> respuestas { get; set; }
+        public virtual Juego juego { get; set; }
     }
 }

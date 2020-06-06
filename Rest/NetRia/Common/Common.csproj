@@ -44,6 +44,7 @@
     <Compile Include="DataTransferObjects\DTOBaseResponse.cs" />
     <Compile Include="DataTransferObjects\DTOJuego.cs" />
     <Compile Include="DataTransferObjects\DTOMusica.cs" />
+    <Compile Include="DataTransferObjects\DTOPartida.cs" />
     <Compile Include="DataTransferObjects\DTOPregunta.cs" />
     <Compile Include="DataTransferObjects\DTORespuesta.cs" />
     <Compile Include="DataTransferObjects\DTOUser.cs" />
