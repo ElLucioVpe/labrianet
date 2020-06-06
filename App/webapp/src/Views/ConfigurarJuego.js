@@ -1,5 +1,7 @@
 import React from 'react'
 import CheckBox from "../Components/CheckBox";
+import Input from '../Components/Input'
+import Button from '../Components/Button'
 
 import "../Css/ConfigurarJuego.css";
 
@@ -19,7 +21,7 @@ class ConfigurarJuego extends React.Component {
         let privacidad = this.state.privacidad
         privacidad.forEach(item => {
             if (item.value === event.target.value)
-                item.isChecked =  event.target.checked
+                item.isChecked = event.target.checked
             else item.isChecked = false;
         })
         this.setState({privacidad: privacidad})
@@ -27,21 +29,24 @@ class ConfigurarJuego extends React.Component {
 
     render() {
         return (
-            <div className="configuracionJuego">
+            <div className="configuracionJuego container">
                 <form>
                     <h2>Game Summary</h2>
                     <div className="grid-configuracionJuego">
-                        <div className="seccion1-config">
+                        <div className="seccion1-config card">
                             <p>
                                 <input className="input" type="text" name="titulo" placeholder="Titulo"/>
                             </p>
-                            <textarea className="descripcion-juego" placeholder="Descripción" rows="10" cols="50">
-                            </textarea><br/>
+
+                            <Input className="descripcion-juego" placeholder="Descripción" type="textarea" rows="10"
+                                   cols="50">
+                            </Input><br/>
 
                             <ul>
                                 {
                                     this.state.privacidad.map((item) => {
-                                        return (<CheckBox handleCheckChieldElement={this.handleCheckChieldElement} {...item} />)
+                                        return (<CheckBox
+                                            handleCheckChieldElement={this.handleCheckChieldElement} {...item} />)
                                     })
                                 }
                             </ul>
@@ -49,8 +54,9 @@ class ConfigurarJuego extends React.Component {
 
                         </div>
 
-                        <div className="seccion2-config">
-                            <img id="gamecover" width="450" height="300" src="../../img/gamecover.png" placeholder="GameCover"/>
+                        <div className="seccion2-config card">
+                            <img id="gamecover" width="450" height="300" src="../../img/gamecover.png"
+                                 placeholder="GameCover"/>
                             <br/>
                             <select id="musica-juego">
                                 <option selected>Musica del juego</option>
@@ -61,7 +67,7 @@ class ConfigurarJuego extends React.Component {
                         </div>
                     </div>
 
-                    <div className="configuracionJuego-submit">
+                    <div className="configuracionJuego-submit mt-20">
                         <input type="submit" className="btn-regular" value="OK"/>
                     </div>
                 </form>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const CheckBox = props => {
+export const HeaderChangeThemeButton = props => {
     let id = "CheckBox-" + props.id
     return (
         <li>
@@ -11,4 +11,4 @@ export const CheckBox = props => {
     )
 }
 
-export default CheckBox
+export default HeaderChangeThemeButton

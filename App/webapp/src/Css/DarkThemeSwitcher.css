@@ -1,0 +1,43 @@
+.dot {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-top: 7px;
+}
+
+.dark-mode .dot.moon {
+    background-color: #E8B00A;
+    position: absolute;
+    right: 10px;
+}
+
+.dark-theme-switcher.light-mode {
+    background-color: #261830;
+}
+
+.light-mode .dot.moontop {
+    background-color: #261830;
+    position: absolute;
+    left: 20px;
+}
+
+.dark-theme-switcher.dark-mode {
+    background-color: #B2DCF2;
+}
+
+.light-mode .dot.moon {
+    background-color: white;
+}
+
+.dark-mode .dot.moontop {
+    display: none;
+}
+
+.dark-theme-switcher {
+    width: 50px;
+    height: 40px;
+    padding: 0 10px;
+    border-radius: 24px;
+    position: relative;
+}

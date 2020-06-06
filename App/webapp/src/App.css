@@ -4,20 +4,16 @@ body {
     "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: var(--background);
+}
+
+* {
+    transition: all .3s ease;
 }
 
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-
-:root {
-    --main1: #ce84ad;
-    --main2: #ce96a6;
-    --main3: #d1a7a0;
-    --main4: #d4cbb3;
-    --main5: #d2e0bf;
-    --text1: #4c2f3f;
 }
 
 ::selection {
@@ -49,8 +45,33 @@ th {
     color: var(--text1);
 }
 
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
 .flex {
     display: flex;
+}
+
+.grid {
+    display: grid;
+}
+
+.rotate-45 {
+    transform: rotate(45deg);
+}
+
+.align-self-self-end {
+    align-self: self-end;
+}
+
+.align-self-self-start {
+    align-self: self-start;
 }
 
 .justify-content-center {
@@ -102,6 +123,10 @@ th {
     margin-bottom: 10px;
 }
 
+.mr-10 {
+    margin-right: 10px;
+}
+
 .justify-self-end {
     justify-self: end;
 }
@@ -114,4 +139,8 @@ th {
     background-color: var(--main2);
     border-radius: 25px;
     padding: 25px;
+}
+
+.align-items-center {
+    align-items: center;
 }

@@ -19,3 +19,11 @@
     padding: 5px;
     padding-left: 20px;
 }
+
+textarea.textarea-regular {
+    border-radius: 25px;
+    border: 2px solid var(--main2);
+    padding: 16px 5px;
+    padding-left: 20px;
+    font-family: sans-serif;
+}

@@ -15,9 +15,10 @@ div.header {
 .header .alignRight {
     display: flex;
     align-items: center;
-    flex-direction: row-reverse;
+    flex-direction: row;
     margin-right: 5px;
     flex-basis: calc(50% - 5px);
+    place-content: flex-end;
 }
 
 .header .alignLeft {

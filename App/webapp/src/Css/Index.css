@@ -46,6 +46,41 @@
     flex-direction: column-reverse;
 }
 
+.grid-main-introduction {
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+    height: 100%;
+}
+
+.dark-mode .grid-main-introduction {
+    filter: brightness(2);
+}
+
+.dark-mode .main_introduction p {
+    color: var(--main2);
+}
+
+div.astronauta img {
+    width: 20vh;
+    top: 5vh;
+    position: relative;
+    height: 25vh;
+    -webkit-animation: MoveUpDown 5s linear infinite;
+    animation: MoveUpDown 8s linear infinite;
+}
+
+div.mundo img {
+    width: 10vh;
+}
+
+@keyframes MoveUpDown {
+    0%, 100% {
+        top: 5vh;
+    }
+    50% {
+        top: 10vh;
+    }
+}
+
 @media only screen and (max-width: 600px) {
     .main_introduction {
         display: none;

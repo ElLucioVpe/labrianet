@@ -1,9 +1,11 @@
 import React from 'react'
 import Button from "./Button";
+import DarkThemeSwitcher from "./DarkThemeSwitcher";
 import {Link} from "react-router-dom";
 import '../Css/Header.css'
 
 export const Header = () => {
+    let usuario = false;
     return (
         <header class="container">
             <div class="header">
@@ -16,7 +18,15 @@ export const Header = () => {
                     </Link>
                 </div>
                 <div class="alignRight">
-                    <Button class="item" to="/login" value="Login" size="regular"/>
+                    <DarkThemeSwitcher/>
+                    {
+                        usuario ? (
+                            <Button class="item" to="/login" value="Login" size="regular"/>
+                        ) : (
+                            <Button class="item" to="/logout" value="Logout" size="regular"/>
+                        )
+                    }
+
                 </div>
             </div>
         </header>

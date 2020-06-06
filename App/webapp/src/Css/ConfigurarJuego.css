@@ -1,19 +1,13 @@
-.configuracionJuego {
-    width: 80%;
-    margin: auto;
-}
 
 .grid-configuracionJuego {
     height: 100%;
+    width: calc(100% - 20px);
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows: 50% 50%;
-    grid-template-areas:
-            "seccion1-config seccion2-config"
-            "seccion1-config seccion2-config";
+    column-gap: 20px;
 }
 
-.configuracionJuego input.input , select {
+.configuracionJuego input.input, select {
     height: 30px;
     border-radius: 25px;
     border: 2px solid var(--main2);
@@ -22,7 +16,7 @@
 }
 
 .configuracionJuego-submit {
-    text-align: center;
+    text-align: right;
 }
 
 .descripcion-juego {
