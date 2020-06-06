@@ -23,7 +23,7 @@ class Index extends React.Component {
                 <div className="main_introduction flex flex-direction-column">
                     <div className="grid grid-main-introduction">
                         <div className="mundo flex justify-content-center align-self-self-start">
-                            <img src="/views/index/brillar.svg" alt=""/>
+                            <img className="display-none" src="/views/index/brillar.svg" alt=""/>
                         </div>
                         <div className="astronauta flex justify-content-center">
                             <img src="/views/index/astronauta.svg" alt=""/>
