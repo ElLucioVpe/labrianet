@@ -147,20 +147,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Esteban\\.nuget\\packages\\": {}
+    "C:\\Users\\antus\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Esteban\\Documents\\GitHub\\labrianet (mis cambios)\\Rest\\NetRia\\Persistencia\\Persistencia.csproj",
+      "projectUniqueName": "C:\\Users\\antus\\Desktop\\labrianet\\Rest\\NetRia\\Persistencia\\Persistencia.csproj",
       "projectName": "Persistencia",
-      "projectPath": "C:\\Users\\Esteban\\Documents\\GitHub\\labrianet (mis cambios)\\Rest\\NetRia\\Persistencia\\Persistencia.csproj",
-      "packagesPath": "C:\\Users\\Esteban\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Esteban\\Documents\\GitHub\\labrianet (mis cambios)\\Rest\\NetRia\\Persistencia\\obj\\",
+      "projectPath": "C:\\Users\\antus\\Desktop\\labrianet\\Rest\\NetRia\\Persistencia\\Persistencia.csproj",
+      "packagesPath": "C:\\Users\\antus\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\antus\\Desktop\\labrianet\\Rest\\NetRia\\Persistencia\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [
-        "C:\\Users\\Esteban\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\antus\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

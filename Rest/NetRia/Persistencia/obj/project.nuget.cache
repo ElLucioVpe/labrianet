@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Pw4I1/2gwiRpiNMzHCYeg3uLdqhBAwow1X9K3i5aH3znVRffGBtxa/7JPnnbo3zLq5z/dnqT7LOaz27JTn105A==",
+  "dgSpecHash": "OcY9PFC7vsOi9DrK3HdluO+J0p19Zfe3EZdOLRLkuqvhP/S5/eLHGyqUNfPdS8EXg5kZmxhnEecjPYCx8kfoAA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Esteban\\Documents\\GitHub\\labrianet (mis cambios)\\Rest\\NetRia\\Persistencia\\Persistencia.csproj",
+  "projectFilePath": "C:\\Users\\antus\\Desktop\\labrianet\\Rest\\NetRia\\Persistencia\\Persistencia.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Esteban\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512"
+    "C:\\Users\\antus\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512"
   ],
   "logs": []
 }
