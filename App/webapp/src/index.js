@@ -12,6 +12,7 @@ import Header from "./Components/Header.js";
 import Loading from "./Components/Loading.js";
 import Grafica from "./Views/Grafica.js";
 import { UsuarioProvider, useUsuario } from "./Libraries/UserContextLib";
+import {JuegoProvider, useJuego} from "./Libraries/JuegoContextLib";
 import ThemeContext, { ThemeProvider } from "./Libraries/ThemeContextLib";
 import "./App.css";
 
@@ -20,7 +21,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 export default () => (
   <ThemeProvider>
     <UsuarioProvider>
-      <App></App>
+      <JuegoProvider>
+        <App></App>
+      </JuegoProvider>
     </UsuarioProvider>
   </ThemeProvider>
 );
@@ -29,6 +32,7 @@ function App() {
   const [error, setError] = useState(null);
   const { cargandoUsuario, usuario, login, signup, logout } = useUsuario();
   const { dark } = useContext(ThemeContext);
+  const { id_juego, juegoTemp, cargarJuego, cargarJuegoTemp} = useJuego();
 
   function mostrarError(mensaje) {
     setError(mensaje);
@@ -74,8 +78,7 @@ function App() {
         <Route path="/login">
           <Login />
         </Route>
-        <Route path="/configurarJuego">
-          <ConfigurarJuego />
+        <Route path="/configurarJuego:id" component={ConfigurarJuego}>
         </Route>
       </Switch>
     </Router>
@@ -85,7 +88,9 @@ function App() {
 ReactDOM.render(
   <ThemeProvider>
     <UsuarioProvider>
-      <App></App>
+      <JuegoProvider>
+        <App></App>
+      </JuegoProvider>
     </UsuarioProvider>
   </ThemeProvider>,
   document.getElementById("root")

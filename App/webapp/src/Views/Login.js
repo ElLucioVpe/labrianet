@@ -1,30 +1,48 @@
 import React, {useState} from "react";
 import {useUsuario} from "../Libraries/UserContextLib";
 import "../Css/Login.css";
+import ConfigurarJuego from "./ConfigurarJuego";
 
-export default function Login() {
-    const usuario = useUsuario();
-    const [email, setEmail] = useState("");
-    console.log(usuario);
+const usuario = useUsuario();
+const [email, setEmail] = useState("");
 
-    function validateForm() {
-        console.log("WIP");
+class Login extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: '',
+            password: ''
+        };
+
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    function handleSubmit(event) {
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
+    }
+
+    handleSubmit(event) {
         event.preventDefault();
-        setEmail(email.target.elements.name.value);
-        usuario.login(email, event.target.elements.password.value);
+        setEmail(this.state.name);
+        usuario.login(this.state.name, this.state.password);
     }
 
-    function render() {
+    render() {
         return (
             <div class="login container">
                 <div>
                     <h1>Bienvenido!</h1>
                 </div>
                 <div>
-                    <form onSubmit={handleSubmit}>
+                    <form>
                         <input
                             className="input"
                             type="text"
@@ -50,8 +68,6 @@ export default function Login() {
         );
     }
 
-    function login() {
-    }
-
-    return render();
 }
+export default Login;
+
