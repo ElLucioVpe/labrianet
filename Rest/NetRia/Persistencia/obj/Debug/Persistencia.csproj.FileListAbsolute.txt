@@ -8,3 +8,13 @@ C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\Persistenc
 C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\Persistencia\obj\Debug\Persistencia.csproj.CopyComplete
 C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\Persistencia\obj\Debug\Persistencia.dll
 C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\Persistencia\obj\Debug\Persistencia.pdb
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\Persistencia\bin\Debug\Persistencia.dll.config
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\Persistencia\bin\Debug\Persistencia.dll
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\Persistencia\bin\Debug\Persistencia.pdb
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\Persistencia\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\Persistencia\bin\Debug\EntityFramework.dll
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\Persistencia\obj\Debug\Persistencia.csprojAssemblyReference.cache
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\Persistencia\obj\Debug\Persistencia.csproj.CoreCompileInputs.cache
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\Persistencia\obj\Debug\Persistencia.csproj.CopyComplete
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\Persistencia\obj\Debug\Persistencia.dll
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\Persistencia\obj\Debug\Persistencia.pdb
