@@ -70,6 +70,8 @@
     <Property Name="urlAyudaPregunta" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="respuestas" Relationship="netriaModel.respuesta_fk_Respuesta_Pregunta1" FromRole="pregunta" ToRole="respuesta" />
     <NavigationProperty Name="juego" Relationship="netriaModel.pregunta_fk_Pregunta_Juego1" FromRole="Pregunta" ToRole="juego" />
+    <Property Name="startAyuda" Type="Int32" />
+    <Property Name="endAyuda" Type="Int32" />
   </EntityType>
   <EntityType Name="Respuesta">
     <Key>

@@ -15,7 +15,8 @@ namespace Common.DataTransferObjects
         public string contenidoPregunta { get; set; }
         public string tipoPregunta { get; set; }
         public string urlAyudaPregunta { get; set; }
-
+        public Nullable<int> startAyuda { get; set; }
+        public Nullable<int> endAyuda { get; set; }
 
         public List<DTORespuesta> respuestas { get; set; }
 

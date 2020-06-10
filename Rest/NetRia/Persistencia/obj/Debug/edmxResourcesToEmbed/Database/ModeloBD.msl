@@ -23,6 +23,8 @@
     <EntitySetMapping Name="Preguntas1">
       <EntityTypeMapping TypeName="netriaModel.Pregunta">
         <MappingFragment StoreEntitySet="pregunta">
+          <ScalarProperty Name="endAyuda" ColumnName="endAyuda" />
+          <ScalarProperty Name="startAyuda" ColumnName="startAyuda" />
           <ScalarProperty Name="urlAyudaPregunta" ColumnName="urlAyudaPregunta" />
           <ScalarProperty Name="tipoPregunta" ColumnName="tipoPregunta" />
           <ScalarProperty Name="contenidoPregunta" ColumnName="contenidoPregunta" />

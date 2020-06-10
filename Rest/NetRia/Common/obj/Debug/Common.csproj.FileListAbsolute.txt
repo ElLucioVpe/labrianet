@@ -10,3 +10,9 @@ C:\Users\antus\Desktop\labrianet\Rest\NetRia\Common\obj\Debug\Common.csprojAssem
 C:\Users\antus\Desktop\labrianet\Rest\NetRia\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
 C:\Users\antus\Desktop\labrianet\Rest\NetRia\Common\obj\Debug\Common.dll
 C:\Users\antus\Desktop\labrianet\Rest\NetRia\Common\obj\Debug\Common.pdb
+C:\GameQuizz\Git\labrianet\Rest\NetRia\Common\bin\Debug\Common.dll
+C:\GameQuizz\Git\labrianet\Rest\NetRia\Common\bin\Debug\Common.pdb
+C:\GameQuizz\Git\labrianet\Rest\NetRia\Common\obj\Debug\Common.csprojAssemblyReference.cache
+C:\GameQuizz\Git\labrianet\Rest\NetRia\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+C:\GameQuizz\Git\labrianet\Rest\NetRia\Common\obj\Debug\Common.dll
+C:\GameQuizz\Git\labrianet\Rest\NetRia\Common\obj\Debug\Common.pdb

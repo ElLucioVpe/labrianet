@@ -8,9 +8,9 @@
         <AssociationConnector Association="netriaModel.jugo" ManuallyRouted="false" />
         <EntityTypeShape EntityType="netriaModel.Musica" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="netriaModel.Partida" Width="1.5" PointX="8.25" PointY="3.5" />
-        <EntityTypeShape EntityType="netriaModel.Pregunta" Width="1.5" PointX="5.25" PointY="3.25" />
+        <EntityTypeShape EntityType="netriaModel.Pregunta" Width="1.5" PointX="5.25" PointY="2.75" />
         <EntityTypeShape EntityType="netriaModel.Respuesta" Width="1.5" PointX="10.5" PointY="3.5" />
-        <EntityTypeShape EntityType="netriaModel.User" Width="1.5" PointX="0.75" PointY="3.5" />
+        <EntityTypeShape EntityType="netriaModel.User" Width="1.5" PointX="0.625" PointY="4.25" />
         <AssociationConnector Association="netriaModel.jugo_fk_Jugo_User1" />
         <AssociationConnector Association="netriaModel.respuesta_fk_Respuesta_Pregunta1" />
         <AssociationConnector Association="netriaModel.respondio" />

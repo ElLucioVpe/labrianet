@@ -22,9 +22,12 @@ namespace BusinessLogic.DataModel.Mappers
                 puntosPregunta = pregunta.puntosPregunta,
                 contenidoPregunta = pregunta.contenidoPregunta,
                 tipoPregunta = pregunta.tipoPregunta,
-                urlAyudaPregunta = pregunta.urlAyudaPregunta
-               
+                urlAyudaPregunta = pregunta.urlAyudaPregunta,  
+                startAyuda = pregunta.startAyuda,
+                endAyuda = pregunta.endAyuda
+
             };
+
 
             RespuestaMapper _mapperResp = new RespuestaMapper();
             if (pregunta.respuestas != null) {
@@ -49,7 +52,9 @@ namespace BusinessLogic.DataModel.Mappers
                 puntosPregunta = dto.puntosPregunta,
                 contenidoPregunta = dto.contenidoPregunta,
                 tipoPregunta = dto.tipoPregunta,
-                urlAyudaPregunta = dto.urlAyudaPregunta
+                urlAyudaPregunta = dto.urlAyudaPregunta,
+                startAyuda = dto.startAyuda,
+                endAyuda = dto.endAyuda
 
             };
 
