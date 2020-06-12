@@ -14,19 +14,17 @@ class CrearPreguntas extends React.Component {
                     <div>
                         <h2>Tablero</h2>
                     </div>
-                    <div>
-                        <ScrollArea horizontal={false}>
-                            <CrearJuegoPreguntas/>
-                            <CrearJuegoPreguntas/>
-                            <CrearJuegoPreguntas/>
-                            <CrearJuegoPreguntas/>
-                            <CrearJuegoPreguntas/>
-                            <CrearJuegoPreguntas/>
-                            <CrearJuegoPreguntas/>
-                        </ScrollArea>
+                    <div class="inner-tablero">
+                        <CrearJuegoPreguntas/>
+                        <CrearJuegoPreguntas/>
+                        <CrearJuegoPreguntas/>
+                        <CrearJuegoPreguntas/>
+                        <CrearJuegoPreguntas/>
+                        <CrearJuegoPreguntas/>
+                        <CrearJuegoPreguntas/>
                     </div>
                     <div>
-                        <Button class=" item" to="/" value="Nueva" size="regular"/>
+                        <Button buttonClass="mt-10" to="/" value="Nueva" size="regular"/>
                     </div>
                 </div>
                 <div class="pregunta card">

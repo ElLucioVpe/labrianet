@@ -18,6 +18,7 @@
 .pregunta {
     display: flex;
     flex-direction: column;
+    height: calc(50vh + 210px);
 }
 
 .grid-2-2 {
@@ -30,4 +31,9 @@
 
 img.pregunta_foto {
     height: 50vh;
+}
+
+.inner-tablero {
+    max-height: calc(50vh + 90px);
+    overflow: overlay;
 }

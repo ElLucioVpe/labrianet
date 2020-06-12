@@ -9,7 +9,7 @@ class CrearJuego extends React.Component {
         return (
             <div class="container" style={{height: '100%'}}>
                 <div class="titleHeader">
-                    <Input placeholder="Titulo" size="big"/>
+                    <Input classList="mr-10" placeholder="Titulo" size="big"/>
                     <Button class="item" to="/login" value="Configurar" size="regular"/>
                 </div>
                 <CrearPreguntas/>

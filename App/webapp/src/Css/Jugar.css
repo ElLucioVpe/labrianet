@@ -1,0 +1,27 @@
+.invite-input {
+    padding-left: 45px;
+}
+
+.filter-input {
+    padding-left: 45px;
+    width: calc(100% - 45px);
+}
+
+.invite-key {
+    height: 30px;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+}
+
+.filter-search {
+    height: 25px;
+    position: absolute;
+    top: 7px;
+    left: 14px;
+}
+
+.join {
+    width: fit-content;
+    padding-right: 80px;
+}
