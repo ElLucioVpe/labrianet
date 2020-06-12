@@ -33,12 +33,14 @@ export function UsuarioProvider(props) {
             //usuario                 //aca mandar las variables
         });
         setUsuario(data.usuario);
-        setToken(data.token);
+        //setToken(data.token);
+        process.env.API_TOKEN = data.token;
     }
 
     function logout() {
         setUsuario(null);
-        deleteToken();
+        //deleteToken();
+        process.env.API_TOKEN = '';
     }
 
     const value = useMemo(() => {

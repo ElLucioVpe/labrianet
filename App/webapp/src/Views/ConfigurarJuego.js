@@ -1,9 +1,9 @@
 import React from "react";
 import CheckBox from "../Components/CheckBox";
 import Input from "../Components/Input";
-import Button from "../Components/Button";
 import "../Css/ConfigurarJuego.css";
 import Select from "react-select";
+import Axios from "axios";
 
 //array de canciones por defecto, por si ocurre un error
 const canciones = [{value: "0", label: "Musica del juego"}];
@@ -38,36 +38,44 @@ class ConfigurarJuego extends React.Component {
     };
 
     async componentDidMount() {
-        const user = this.context;
+        const juego_context = this.context;
 
-        const response = await fetch(
-            "http://localhost:44353/api/Juego/GetJuego/" + user.Juego
-        );
-        const data = await response.json();
-        this.setState({juego: data});
+        if((this.props.match.params.id != null) && (juego_context.juegoTemp == null)) {
 
-        //Modifico los checkbox de privacidad
-        let privacidad = this.state.privacidad;
-        if (data.esPrivadoJuego === 1) {
-            privacidad.forEach((item) => {
-                if (item.value === "Privado") item.isChecked = true;
-                else item.isChecked = false;
+            const {data} = await Axios.get('http://localhost:44353/api/Juego/GetJuego/'
+                + this.props.match.params.id, {
+                headers: {
+                    'Authorization': 'Token ' + process.env.API_TOKEN,
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
             });
+            this.setState({juego: data});
+        } else if(juego_context.juegoTemp != null) {
+            this.setState({juego: juego_context.juegoTemp});
         }
-        this.setState({privacidad: privacidad});
-        //
 
-        //Cargo select de musica
-        const responseM = await fetch("http://localhost:44353/api/Musica/GetAll");
-        let data_canciones = await responseM.json();
-        data_canciones.forEach((item) => {
-            let valor = {value: item.idMusica, label: item.tituloMusica};
-            canciones.concat(valor); //deberia ser titulo
-            if (item.idMusica === data.Musica_idMusica) {
-                this.setState({cancionSeleccionada: valor});
+            //Modifico los checkbox de privacidad
+            let privacidad = this.state.privacidad;
+            if (this.state.juego.esPrivadoJuego === 1) {
+                privacidad.forEach((item) => {
+                    if (item.value === "Privado") item.isChecked = true;
+                    else item.isChecked = false;
+                });
             }
-        });
-        //
+            this.setState({privacidad: privacidad});
+            //
+
+            //Cargo select de musica
+            const responseM = await fetch("http://localhost:44353/api/Musica/GetAll");
+            let data_canciones = await responseM.json();
+            data_canciones.forEach((item) => {
+                let valor = {value: item.idMusica, label: item.tituloMusica};
+                canciones.concat(valor); //deberia ser titulo
+                if (item.idMusica === this.state.juego.Musica_idMusica) {
+                    this.setState({cancionSeleccionada: valor});
+                }
+            });
+            //
     }
 
     render() {
@@ -85,12 +93,14 @@ class ConfigurarJuego extends React.Component {
                                     type="text"
                                     name="titulo"
                                     placeholder="Titulo"
-                                    value={this.state.juego.tituloJuego}
+                                    defaultValue={this.state.juego.tituloJuego}
                                 />
                             </p>
 
                             <Input
-                                className="descripcion-juego"
+                                classList="descripcion-juego"
+                                name="descripcion"
+                                id="descripcion"
                                 placeholder="Descripción"
                                 type="textarea"
                                 rows="10"
@@ -127,7 +137,6 @@ class ConfigurarJuego extends React.Component {
                                 height="300"
                                 src={"../../public/img/" + this.state.juego.coverJuego}
                                 placeholder="GameCover"
-                                placeholder="GameCover"
                             />
                             <br/>
 
@@ -142,6 +151,7 @@ class ConfigurarJuego extends React.Component {
                     <div className="configuracionJuego-submit mt-20">
                         <input type="submit" className="btn-regular" value="OK"/>
                     </div>
+
                 </form>
             </div>
         );

@@ -42,6 +42,8 @@
     <Property Name="contenidoPregunta" Type="nvarchar" MaxLength="200" />
     <Property Name="tipoPregunta" Type="nvarchar" MaxLength="10" />
     <Property Name="urlAyudaPregunta" Type="nvarchar" MaxLength="200" />
+    <Property Name="startAyuda" Type="int" />
+    <Property Name="endAyuda" Type="int" />
   </EntityType>
   <EntityType Name="respondio">
     <Key>

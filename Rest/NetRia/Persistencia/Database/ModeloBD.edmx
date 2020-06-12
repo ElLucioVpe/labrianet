@@ -47,6 +47,8 @@
           <Property Name="contenidoPregunta" Type="nvarchar" MaxLength="200" />
           <Property Name="tipoPregunta" Type="nvarchar" MaxLength="10" />
           <Property Name="urlAyudaPregunta" Type="nvarchar" MaxLength="200" />
+          <Property Name="startAyuda" Type="int" />
+          <Property Name="endAyuda" Type="int" />
         </EntityType>
         <EntityType Name="respondio">
           <Key>
@@ -285,6 +287,8 @@
           <Property Name="urlAyudaPregunta" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="respuestas" Relationship="netriaModel.respuesta_fk_Respuesta_Pregunta1" FromRole="pregunta" ToRole="respuesta" />
           <NavigationProperty Name="juego" Relationship="netriaModel.pregunta_fk_Pregunta_Juego1" FromRole="Pregunta" ToRole="juego" />
+          <Property Name="startAyuda" Type="Int32" />
+          <Property Name="endAyuda" Type="Int32" />
         </EntityType>
         <EntityType Name="Respuesta">
           <Key>
@@ -430,6 +434,8 @@
           <EntitySetMapping Name="Preguntas1">
             <EntityTypeMapping TypeName="netriaModel.Pregunta">
               <MappingFragment StoreEntitySet="pregunta">
+                <ScalarProperty Name="endAyuda" ColumnName="endAyuda" />
+                <ScalarProperty Name="startAyuda" ColumnName="startAyuda" />
                 <ScalarProperty Name="urlAyudaPregunta" ColumnName="urlAyudaPregunta" />
                 <ScalarProperty Name="tipoPregunta" ColumnName="tipoPregunta" />
                 <ScalarProperty Name="contenidoPregunta" ColumnName="contenidoPregunta" />

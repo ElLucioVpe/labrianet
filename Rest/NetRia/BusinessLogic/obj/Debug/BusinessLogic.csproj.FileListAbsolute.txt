@@ -15,3 +15,37 @@ C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\BusinessLo
 C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\BusinessLogic\obj\Debug\BusinessLogic.csproj.CopyComplete
 C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\BusinessLogic\obj\Debug\BusinessLogic.dll
 C:\Users\Esteban\Documents\GitHub\labrianet (mis cambios)\Rest\NetRia\BusinessLogic\obj\Debug\BusinessLogic.pdb
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\BusinessLogic\obj\Debug\BusinessLogic.csprojAssemblyReference.cache
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\BusinessLogic\obj\Debug\BusinessLogic.csproj.CoreCompileInputs.cache
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\BusinessLogic\obj\Debug\BusinessLogic.dll
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\BusinessLogic\obj\Debug\BusinessLogic.pdb
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\BusinessLogic\bin\Debug\BusinessLogic.dll.config
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\BusinessLogic\bin\Debug\BusinessLogic.dll
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\BusinessLogic\bin\Debug\BusinessLogic.pdb
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\BusinessLogic\bin\Debug\Common.dll
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\BusinessLogic\bin\Debug\EntityFramework.dll
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\BusinessLogic\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\BusinessLogic\bin\Debug\Persistencia.dll
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\BusinessLogic\bin\Debug\Common.pdb
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\BusinessLogic\bin\Debug\Persistencia.pdb
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\BusinessLogic\bin\Debug\Persistencia.dll.config
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\BusinessLogic\bin\Debug\EntityFramework.xml
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\BusinessLogic\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\antus\Desktop\labrianet\Rest\NetRia\BusinessLogic\obj\Debug\BusinessLogic.csproj.CopyComplete
+C:\GameQuizz\Git\labrianet\Rest\NetRia\BusinessLogic\bin\Debug\BusinessLogic.dll.config
+C:\GameQuizz\Git\labrianet\Rest\NetRia\BusinessLogic\bin\Debug\BusinessLogic.dll
+C:\GameQuizz\Git\labrianet\Rest\NetRia\BusinessLogic\bin\Debug\BusinessLogic.pdb
+C:\GameQuizz\Git\labrianet\Rest\NetRia\BusinessLogic\bin\Debug\Common.dll
+C:\GameQuizz\Git\labrianet\Rest\NetRia\BusinessLogic\bin\Debug\EntityFramework.dll
+C:\GameQuizz\Git\labrianet\Rest\NetRia\BusinessLogic\bin\Debug\EntityFramework.SqlServer.dll
+C:\GameQuizz\Git\labrianet\Rest\NetRia\BusinessLogic\bin\Debug\Persistencia.dll
+C:\GameQuizz\Git\labrianet\Rest\NetRia\BusinessLogic\bin\Debug\Common.pdb
+C:\GameQuizz\Git\labrianet\Rest\NetRia\BusinessLogic\bin\Debug\Persistencia.pdb
+C:\GameQuizz\Git\labrianet\Rest\NetRia\BusinessLogic\bin\Debug\Persistencia.dll.config
+C:\GameQuizz\Git\labrianet\Rest\NetRia\BusinessLogic\bin\Debug\EntityFramework.xml
+C:\GameQuizz\Git\labrianet\Rest\NetRia\BusinessLogic\bin\Debug\EntityFramework.SqlServer.xml
+C:\GameQuizz\Git\labrianet\Rest\NetRia\BusinessLogic\obj\Debug\BusinessLogic.csprojAssemblyReference.cache
+C:\GameQuizz\Git\labrianet\Rest\NetRia\BusinessLogic\obj\Debug\BusinessLogic.csproj.CoreCompileInputs.cache
+C:\GameQuizz\Git\labrianet\Rest\NetRia\BusinessLogic\obj\Debug\BusinessLogic.csproj.CopyComplete
+C:\GameQuizz\Git\labrianet\Rest\NetRia\BusinessLogic\obj\Debug\BusinessLogic.dll
+C:\GameQuizz\Git\labrianet\Rest\NetRia\BusinessLogic\obj\Debug\BusinessLogic.pdb

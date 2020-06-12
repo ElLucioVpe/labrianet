@@ -65,6 +65,8 @@ namespace BusinessLogic.Controllers
                     entity.segundosPregunta = pregunta.segundosPregunta;
                     entity.tipoPregunta = pregunta.tipoPregunta;
                     entity.urlAyudaPregunta = pregunta.urlAyudaPregunta;
+                    entity.startAyuda = pregunta.startAyuda;
+                    entity.endAyuda = pregunta.endAyuda;
 
 
                     uow.SaveChanges();

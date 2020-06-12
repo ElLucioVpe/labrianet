@@ -90,7 +90,7 @@ namespace NetRia.Controllers
             DTOBaseResponse response = new DTOBaseResponse();
             try
             {
-                UserController controller = new UserController();
+                BusinessLogic.Controllers.UserController controller = new BusinessLogic.Controllers.UserController();
                 controller.UpdateUser(id, user);
                 response.Success = true;
             }
@@ -114,7 +114,7 @@ namespace NetRia.Controllers
             DTOBaseResponse response = new DTOBaseResponse();
             try
             {
-                UserController controller = new UserController();
+                BusinessLogic.Controllers.UserController controller = new BusinessLogic.Controllers.UserController();
                 controller.CreateUser(user);
                 response.Success = true;
             }
@@ -140,7 +140,7 @@ namespace NetRia.Controllers
 
                 if (id == identity_mail)
                 {
-                    UserController controller = new UserController();
+                    BusinessLogic.Controllers.UserController controller = new BusinessLogic.Controllers.UserController();
                     controller.DeleteUser(id);
                     response.Success = true;
                 }

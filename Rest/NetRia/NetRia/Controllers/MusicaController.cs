@@ -80,7 +80,7 @@ namespace NetRia.Controllers
 
         // POST: api/Musica
         [HttpPost]
-        public IHttpActionResult CreateUser(DTOMusica musica)
+        public IHttpActionResult CreateMusica(DTOMusica musica)
         {
             if (!ModelState.IsValid)
             {
@@ -106,7 +106,7 @@ namespace NetRia.Controllers
         // DELETE: api/Musica/5
         [ResponseType(typeof(void))]
         [HttpPost]
-        public IHttpActionResult DeleteUser(int id)
+        public IHttpActionResult DeleteMusica(int id)
         {
             DTOBaseResponse response = new DTOBaseResponse();
             try
