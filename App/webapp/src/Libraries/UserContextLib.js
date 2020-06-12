@@ -16,8 +16,8 @@ export function UsuarioProvider(props) {
         }
     });
 
-    async function login(email, password) {
-        let body = 'grant_type=password&username=' + email + '&password=' + password;
+    async function login(user, password) {
+        let body = 'grant_type=password&username=' + user + '&password=' + password;
         const {data} = await Axios.post(BASE_URL + '/token', body,
             {
                 headers: {

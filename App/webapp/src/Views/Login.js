@@ -4,7 +4,7 @@ import "../Css/Login.css";
 
 export default function Login() {
     const usuario = useUsuario();
-    const [email, setEmail] = useState("");
+    const [username, seUsername] = useState("");
     console.log(usuario);
 
     function validateForm() {
@@ -13,8 +13,8 @@ export default function Login() {
 
     function handleSubmit(event) {
         event.preventDefault();
-        setEmail(email.target.elements.name.value);
-        usuario.login(email, event.target.elements.password.value);
+        seUsername(event.target.elements.name.value);
+        usuario.login(username, event.target.elements.password.value);
     }
 
     function render() {
@@ -49,9 +49,6 @@ export default function Login() {
             </div>
         );
     }
-
-    function login() {
-    }
-
+    
     return render();
 }
