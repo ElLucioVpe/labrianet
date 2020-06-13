@@ -5,8 +5,22 @@ import Axios from 'axios';
 const UserContext = React.createContext(null);
 const BASE_URL = "http://localhost:44353"
 
+let config = {
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    }
+};
+
 export function UsuarioProvider(props) {
-    const [usuario, setUsuario] = useState(null);
+    const [usuario, setUsuario] = useState("");
+    const [nickname, setNickname] = useState("");
+    const [fechaUser, setFechaUser] = useState("");
+
+    const [accessToken, setAccessToken] = useState("");
+    const [tokenType, setTokenType] = useState("");
+    const [tokenExpiration, setTokenExpiration] = useState("");
+
     const [cargandoUsuario, setCargandoUsuario] = useState(false);
 
     useEffect(() => {
@@ -16,29 +30,75 @@ export function UsuarioProvider(props) {
         }
     });
 
-    async function login(user, password) {
-        let body = 'grant_type=password&username=' + user + '&password=' + password;
-        const {data} = await Axios.post(BASE_URL + '/token', body,
-            {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+    async function getUserData() {
+        console.log("xd " + usuario);
+
+        if (usuario !== null && usuario !== "") {
+            Axios.get(BASE_URL + '/api/User/GetUser',
+                {
+                    params: {
+                        id: usuario
+                    },
+                    headers: {
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer ' + accessToken
+                    }
                 }
+            ).then(function (response) {
+                console.log(response);
+                console.log("xd2 " + accessToken + " " + tokenType + " " + usuario);
+
+                setNickname(response.data.nickUser);
+                setFechaUser(response.data.fechaUser);
+                return true;
+            }).catch(function (error) {
+                console.log("xd3 " + accessToken + " " + tokenType + " " + usuario);
+
+                // handle error
+                return false;
             });
-        setUsuario(data.usuario);
-        setToken(data.token);
+        } else {
+            console.log("error xd ");
+            return false;
+        }
     }
 
-    async function signup(loginname, nickuser, password, fecha) {
-        const {data} = await Axios.post(BASE_URL + '/api/User/CreateUser', {
+    async function login(user, password) {
+        let body = 'grant_type=password&username=' + user + '&password=' + password;
+        await Axios.post(BASE_URL + '/token', body).then(function (response) {
+            setUsuario(user);
+            setAccessToken(response.data.access_token);
+            setTokenType(response.data.token_type);
+            setTokenExpiration(response.data.expires_in);
+
+            return !!getUserData();
+        }).catch(function (error) {
+            // handle error
+            console.log(error);
+            return false;
+        });
+    }
+
+    async function signUp(loginname, nickuser, password, fecha) {
+        Axios.post('http://localhost:44353/api/User/CreateUser', {
             loginnameUser: loginname,
             nickUser: nickuser,
             passwordUser: password,
             fechaUser: fecha
+        }, config).then(function (response) {
+            if (login(loginname, password)) {
+                return true;
+            } else {
+                return false;
+            }
+        }).catch(function (error) {
+            // handle error
+            console.log(error);
+            return false;
         });
-        setUsuario(data.usuario);
-        console.log(data);
+
         //setToken(data.token);
-        process.env.API_TOKEN = data.token;
+        //process.env.API_TOKEN = data.token;
     }
 
     function logout() {
@@ -50,12 +110,14 @@ export function UsuarioProvider(props) {
     const value = useMemo(() => {
         return ({
             usuario,
+            nickname,
+            fechaUser,
             cargandoUsuario,
-            signup,
+            signUp,
             login,
             logout
         })
-    }, [usuario, cargandoUsuario])
+    }, [usuario, cargandoUsuario]);
 
     return <UserContext.Provider value={value} {...props}/>
 }
