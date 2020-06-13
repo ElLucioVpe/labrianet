@@ -41,6 +41,7 @@ namespace NetRia.Controllers
         }*/
 
         // GET: api/User
+        [Authorize]
         [HttpGet]
         public IEnumerable<DTOUser> GetAll()
         {
@@ -52,9 +53,10 @@ namespace NetRia.Controllers
         }
 
         // GET: api/User/5
-        public IHttpActionResult GetUser(int id)
+        [Authorize]
+        public IHttpActionResult GetUser(string id)
         {
-            UserController controller = new UserController();
+            BusinessLogic.Controllers.UserController controller = new BusinessLogic.Controllers.UserController();
             var user = controller.GetUser(id);
             if (user == null)
             {
