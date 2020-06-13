@@ -1,29 +1,41 @@
-import React from 'react'
+import React, {useState} from "react";
+import {useUsuario} from "../Libraries/UserContextLib";
+import Input from "../Components/Input";
 
-class SignUp extends React.Component {
+export default function SignUp() {
+    const usuario = useUsuario();
+    const [username, seUsername] = useState("");
+    console.log(usuario);
 
+    function handleSubmit(event) {
+        event.preventDefault();
+        let username = event.target.elements.username.value;
+        let nickuser = event.target.elements.nickuser.value;
+        let password = event.target.elements.password.value;
+        let fecha = "some fecha xd";
 
-    handleClick(event) {
-
+        usuario.signup(username, nickuser, password, fecha);
     }
 
-    render() {
+    function render() {
         return (
-            <div class="login">
+            <div class="login container">
                 <div>
                     <h1>Únete y empieza a jugar!</h1>
                 </div>
                 <div>
-                    <form>
-                        <input type="text" name="name" placeholder="Usuario" />
-                        <input type="password" name="password" placeholder="********" />
+                    <form onSubmit={handleSubmit}>
+                        <Input type="text" name="username" placeholder="Usuario"/>
+                        <Input type="text" name="nickuser" placeholder="Nick"/>
+                        <Input type="password" name="password" placeholder="********"/>
 
-                        <input type="submit" class="btn-regular" value="Registrarme" onClick={(event) => this.handleClick(event)}/>
+                        <button type="submit" className="btn-regular">Registrarme
+                        </button>
                     </form>
                 </div>
             </div>
         )
     }
-}
 
-export default SignUp
+    return render();
+}

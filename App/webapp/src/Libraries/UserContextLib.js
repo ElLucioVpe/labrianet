@@ -16,8 +16,8 @@ export function UsuarioProvider(props) {
         }
     });
 
-    async function login(email, password) {
-        let body = 'grant_type=password&username=' + email + '&password=' + password;
+    async function login(user, password) {
+        let body = 'grant_type=password&username=' + user + '&password=' + password;
         const {data} = await Axios.post(BASE_URL + '/token', body,
             {
                 headers: {
@@ -28,11 +28,15 @@ export function UsuarioProvider(props) {
         setToken(data.token);
     }
 
-    async function signup(usuario) {
-        const {data} = await Axios.post('/somethingidk', {
-            //usuario                 //aca mandar las variables
+    async function signup(loginname, nickuser, password, fecha) {
+        const {data} = await Axios.post(BASE_URL + '/api/User/CreateUser', {
+            loginnameUser: loginname,
+            nickUser: nickuser,
+            passwordUser: password,
+            fechaUser: fecha
         });
         setUsuario(data.usuario);
+        console.log(data);
         //setToken(data.token);
         process.env.API_TOKEN = data.token;
     }
