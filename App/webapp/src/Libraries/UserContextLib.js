@@ -21,6 +21,7 @@ export function UsuarioProvider(props) {
     const [tokenType, setTokenType] = useState("");
     const [tokenExpiration, setTokenExpiration] = useState("");
 
+    const [inicioSesion, setInicioSesion] = useState(false);
     const [cargandoUsuario, setCargandoUsuario] = useState(false);
 
     useEffect(() => {
@@ -61,10 +62,14 @@ export function UsuarioProvider(props) {
     async function login(user, password) {
         let body = 'grant_type=password&username=' + user + '&password=' + password;
         await Axios.post(BASE_URL + '/token', body).then(function (response) {
+            console.log("lo hizo igual");
+
             setUsuario(user);
             setAccessToken(response.data.access_token);
             setTokenType(response.data.token_type);
             setTokenExpiration(response.data.expires_in);
+
+            setInicioSesion(true);
 
             return !!getUserData();
         }).catch(function (error) {
@@ -95,6 +100,7 @@ export function UsuarioProvider(props) {
 
     function logout() {
         setUsuario(null);
+        console.log("usuario eliminado");
         //deleteToken();
         process.env.API_TOKEN = '';
     }
@@ -114,11 +120,12 @@ export function UsuarioProvider(props) {
             setTokenType,
             tokenExpiration,
             setTokenExpiration,
+            inicioSesion,
             signUp,
             login,
             logout
         })
-    }, [usuario, cargandoUsuario]);
+    }, [usuario, cargandoUsuario, inicioSesion]);
 
     return <UserContext.Provider value={value} {...props}/>
 }

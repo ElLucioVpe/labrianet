@@ -7,7 +7,6 @@ export default function SignUp() {
     const usuario = useUsuario();
     const [userCreated, setUserCreated] = useState(false);
     const [password, setPassword] = useState(false);
-    console.log(usuario.usuario);
 
     async function handleSubmit(event) {
         event.preventDefault();

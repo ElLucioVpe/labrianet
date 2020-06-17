@@ -18,6 +18,7 @@ import "./App.css";
 
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Jugar from "./Views/Jugar";
+import Logout from "./Views/Logout";
 
 function QuizMaster() {
     return (
@@ -80,6 +81,9 @@ function App() {
                 </Route>
                 <Route path="/login">
                     <Login/>
+                </Route>
+                <Route path="/logout">
+                    <Logout/>
                 </Route>
                 <Route path="/configurarJuego:id" component={ConfigurarJuego}>
                 </Route>

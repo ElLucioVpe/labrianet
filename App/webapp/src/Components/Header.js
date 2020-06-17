@@ -1,11 +1,13 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Button from "./Button";
 import DarkThemeSwitcher from "./DarkThemeSwitcher";
 import {Link} from "react-router-dom";
+import {useUsuario} from "../Libraries/UserContextLib";
 import '../Css/Header.css'
 
 export const Header = () => {
-    let usuario = false;
+    const usuario = useUsuario();
+
     return (
         <header class="container">
             <div class="header">
@@ -20,10 +22,10 @@ export const Header = () => {
                 <div class="alignRight">
                     <DarkThemeSwitcher/>
                     {
-                        usuario ? (
-                            <Button class="item" to="/login" value="Login" size="regular"/>
-                        ) : (
+                        usuario.inicioSesion ? (
                             <Button class="item" to="/logout" value="Logout" size="regular"/>
+                        ) : (
+                            <Button class="item" to="/login" value="Login" size="regular"/>
                         )
                     }
 
