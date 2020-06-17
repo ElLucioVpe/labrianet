@@ -45,15 +45,10 @@ export function UsuarioProvider(props) {
                     }
                 }
             ).then(function (response) {
-                console.log(response);
-                console.log("xd2 " + accessToken + " " + tokenType + " " + usuario);
-
                 setNickname(response.data.nickUser);
                 setFechaUser(response.data.fechaUser);
                 return true;
             }).catch(function (error) {
-                console.log("xd3 " + accessToken + " " + tokenType + " " + usuario);
-
                 // handle error
                 return false;
             });
@@ -96,9 +91,6 @@ export function UsuarioProvider(props) {
             console.log(error);
             return false;
         });
-
-        //setToken(data.token);
-        //process.env.API_TOKEN = data.token;
     }
 
     function logout() {
@@ -110,9 +102,18 @@ export function UsuarioProvider(props) {
     const value = useMemo(() => {
         return ({
             usuario,
+            setUsuario,
             nickname,
+            setNickname,
             fechaUser,
+            setFechaUser,
             cargandoUsuario,
+            accessToken,
+            setAccessToken,
+            tokenType,
+            setTokenType,
+            tokenExpiration,
+            setTokenExpiration,
             signUp,
             login,
             logout
