@@ -104,7 +104,7 @@ class ConfigurarJuego extends React.Component {
                                 placeholder="Descripción"
                                 type="textarea"
                                 rows="10"
-                                defaultValue="{this.state.juego.descripcionJuego}"
+                                value={this.state.juego.descripcionJuego}
                                 cols="50"
                             />
                             <br/>
