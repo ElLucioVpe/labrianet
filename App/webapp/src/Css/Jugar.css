@@ -25,3 +25,25 @@
     width: fit-content;
     padding-right: 80px;
 }
+
+@media screen and (max-width: 1000px) {
+
+p{
+width: 120px;
+}
+
+    .invite-input{
+        width:100px;
+        padding-left:35px;
+
+    }
+
+    .invite-key {
+        height: 30px;
+        position: absolute;
+        top: 5px;
+        left: 8px;
+    }
+
+
+}

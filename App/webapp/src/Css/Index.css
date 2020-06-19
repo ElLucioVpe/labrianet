@@ -81,8 +81,21 @@ div.mundo img {
     }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1000px) {
+
+    .index {
+
+
+        flex-direction: column-reverse;
+
+    }
+.main_menu{
+    width: 74%;
+
+}
+
     .main_introduction {
         display: none;
+        width: 93%;
     }
 }
