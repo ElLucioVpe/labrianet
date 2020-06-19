@@ -4,16 +4,16 @@ import Button from "../Components/Button";
 class CrearJuegoPreguntas extends React.Component {
     render() {
         return (
-            <div class="crearJuegoPreguntas flex flex-direction-column">
+            <div class="crearJuegoPreguntas flex flex-direction-column" onClick={this.props.onClick}>
                 <div class="text-align-center">
-                    <p>Pregunta 1</p>
+                    <p>{this.props.titulo || ''}</p>
                 </div>
                 <div class="text-align-center">
-                    <img src="img/perfil.png" class="PreguntaPreview"/>
+                    <img src={this.props.imgUrl || 'img/perfil.png'} class="PreguntaPreview"/>
                 </div>
                 <div class="flex flex-direction-row justify-content-space-between">
-                    <p>20s</p>
-                    <p>Quiz</p>
+                    <p>{this.props.puntaje === null ? '0p' : this.props.puntaje + "p"}</p>
+                    <p>{this.props.segundos === null ? "0s" : this.props.segundos + "s"}</p>
                 </div>
             </div>
         )

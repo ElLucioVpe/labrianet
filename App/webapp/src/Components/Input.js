@@ -11,6 +11,7 @@ export const Input = ({
                           name = "",
                           rows,
                           cols,
+                          onChange
                       }) => {
     size = "input-" + size;
     let html = "";
@@ -23,6 +24,7 @@ export const Input = ({
                 name={name}
                 id={id}
                 type={type}
+                onChange={onChange}
             />
         );
     } else if (type === "textarea") {

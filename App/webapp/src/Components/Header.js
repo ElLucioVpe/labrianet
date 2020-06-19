@@ -9,23 +9,23 @@ export const Header = () => {
     const usuario = useUsuario();
 
     return (
-        <header class="container">
-            <div class="header">
-                <div class="alignLeft">
-                    <Link to="/" class="logo">
+        <header className="container">
+            <div className="header">
+                <div className="alignLeft">
+                    <Link to="/" className="logo">
                         <img src="logo.svg" alt=""/>
                     </Link>
-                    <Link to="/" class="logo">
+                    <Link to="/" className="logo">
                         <span>QuizMaster</span>
                     </Link>
                 </div>
-                <div class="alignRight">
+                <div className="alignRight">
                     <DarkThemeSwitcher/>
                     {
                         usuario.inicioSesion ? (
-                            <Button class="item" to="/logout" value="Logout" size="regular"/>
+                            <Button className="item" to="/logout" value="Logout" size="regular"/>
                         ) : (
-                            <Button class="item" to="/login" value="Login" size="regular"/>
+                            <Button className="item" to="/login" value="Login" size="regular"/>
                         )
                     }
 
