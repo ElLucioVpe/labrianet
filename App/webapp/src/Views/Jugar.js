@@ -4,8 +4,26 @@ import Input from '../Components/Input'
 import QuizPreview from '../Components/QuizPreview'
 
 import "../Css/Jugar.css"
+import CrearJuegoPreguntas from "./CrearJuegoPreguntas";
 
 class Jugar extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            juegos: [],
+        };
+    }
+
+    async crearJuego() {
+        this.setState({
+            juegos: this.state.juegos.concat({
+                titulo: null,
+                imgUrl: null,
+            })
+        })
+    }
+
     render() {
         return (
             <div className="Jugar container">
@@ -23,21 +41,8 @@ class Jugar extends React.Component {
                     </div>
                     <div
                         className="listado overflow-overlay bg-white border-radius-25px flex flex-direction-row mt-10">
-                        <QuizPreview/>
-                        <QuizPreview/>
-                        <QuizPreview/>
-                        <QuizPreview/>
-                        <QuizPreview/>
-                        <QuizPreview/>
-                        <QuizPreview/>
-                        <QuizPreview/>
-                        <QuizPreview/>
-                        <QuizPreview/>
-                        <QuizPreview/>
-                        <QuizPreview/>
-                        <QuizPreview/>
-                        <QuizPreview/>
-                        <QuizPreview/>
+                        {this.state.juegos.map((juego, i) => <QuizPreview
+                            key={i} id={i} {...juego}/>)}
                     </div>
                 </div>
             </div>

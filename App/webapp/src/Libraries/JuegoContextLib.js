@@ -1,28 +1,17 @@
 import React, {useState, useEffect, useMemo} from "react";
-import {setToken, deleteToken, getToken} from '../Libraries/AuthHelpers';
-import Axios from 'axios';
 
 const JuegoContext = React.createContext(null);
-const BASE_URL = "http://localhost:44353";
 
 export function JuegoProvider(props) {
     const [id_juego, setJuego] = useState(null);
     const [juegoTemp, setJuegoTemp] = useState(null);
 
-    function cargarJuego(juego) {
-        setJuego(juego);
-    }
-
-    function cargarJuegoTemp(juegoTemp) {
-        setJuegoTemp(juegoTemp);
-    }
-
     const value = useMemo(() => {
         return ({
             id_juego,
+            setJuego,
             juegoTemp,
-            cargarJuego,
-            cargarJuegoTemp
+            setJuegoTemp
         })
     }, [id_juego, juegoTemp])
 

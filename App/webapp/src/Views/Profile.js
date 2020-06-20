@@ -27,7 +27,7 @@ class Profile extends React.Component {
             <div class="profile">
                 <div class="usernameSection">
                     <img class="profile-img" src="img/perfil.png"/>
-                    <h1>{data.nickUser}</h1>
+                    <h1>{this.state.data.nickUser}</h1>
                     <Button class="item" to="/crear" value="Crear quiz nueva" size="regular"/>
                 </div>
                 <ProfileUserInfo/>

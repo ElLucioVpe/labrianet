@@ -23,3 +23,11 @@ button.btn-regular, input.btn-regular {
     font-size: 17px;
     background-image: linear-gradient(to right, var(--main4), var(--main5));
 }
+
+button.alert {
+    background-image: linear-gradient(to right, #ce9a01, var(--wrong));
+}
+
+button.confirm {
+    background-image: linear-gradient(to right, #4f9db5, var(--right))
+}

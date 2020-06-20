@@ -219,8 +219,24 @@ border-radius-25px {
     right: 0;
     margin: auto;
     z-index: 5;
-    background-color: var(--main5);
+    background-color: var(--main3);
     border: 4px solid var(--background);
     border-radius: 25px;
     padding: 15px;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.width-inherit {
+    width: inherit;
+}
+
+.p-10 {
+    padding: 10px;
 }

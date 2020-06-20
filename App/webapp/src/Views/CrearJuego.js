@@ -6,6 +6,7 @@ import '../Css/CrearJuego.css'
 import '../Css/CrearJuegoPreguntas.css'
 import CrearJuegoPreguntas from "./CrearJuegoPreguntas";
 import CrearPreguntas from "../Components/CrearPreguntas";
+import {useJuego} from "../Libraries/JuegoContextLib";
 import QuizMasterService from '../Libraries/QuizMasterServices';
 import {useUsuario} from "../Libraries/UserContextLib";
 import ConfigurarRespuesta from "../Components/ConfigurarRespuesta";
@@ -13,7 +14,7 @@ import ConfigurarRespuesta from "../Components/ConfigurarRespuesta";
 import update from 'immutability-helper';
 
 class CrearJuego extends React.Component {
-    //static contextType = useUsuario; // Por alguna razon no me deja importar useUsuario en componentes de clases (en componentes funcionales anda 10 de 10)
+    //static contextType = useUsuario;
 
     constructor(props) {
         super(props);
@@ -25,24 +26,13 @@ class CrearJuego extends React.Component {
             titulo: "kek",
             configurarRespuesta: null
         };
-
-        this.crearPregunta = this.crearPregunta.bind(this);
-        this.cambiarPregunta = this.cambiarPregunta.bind(this);
-        this.cambiarTitulo = this.cambiarTitulo.bind(this);
-        this.cambiarPuntaje = this.cambiarPuntaje.bind(this);
-        this.cambiarSegundos = this.cambiarSegundos.bind(this);
-        this.cambiarImgUrl = this.cambiarImgUrl.bind(this);
-        this.componentDidMount = this.componentDidMount.bind(this);
-        this.configurarRespuesta = this.configurarRespuesta.bind(this);
-
-
     }
 
     handleChange(event) {
         this.setState({titulo: event.target.value})
     }
 
-    async componentDidMount() {
+    async componentWillMount() {
         const context = this.context;
         /*await QuizMasterService.crearJuego({
             idJuego: null,
@@ -54,14 +44,20 @@ class CrearJuego extends React.Component {
             Musica_idMusica: null,
             activadoJuego: false,
         });*/ // Por alguna razon no me deja usar esta funcion
-        console.log(context.usuario);
         await this.crearPregunta();
     }
 
     async crearPregunta() {
-        console.log(this.state.titulo);
         this.setState({
-            preguntas: this.state.preguntas.concat({titulo: null, segundos: null, puntaje: null, imgUrl: null})
+            preguntas: this.state.preguntas.concat({
+                titulo: null,
+                segundos: null,
+                puntaje: null,
+                imgUrl: null,
+                activo: false,
+                respuestaCorrecta: null,
+                respuestas: [null, null, null, null]
+            })
         })
     }
 
@@ -81,24 +77,45 @@ class CrearJuego extends React.Component {
         this.setState({preguntas: update(this.state.preguntas, {[this.state.preguntaSeleccionada]: {puntaje: {$set: _value}}})});
     }
 
+    cambiarRespuestaCorrecta(_value) {
+        this.setState({preguntas: update(this.state.preguntas, {[this.state.preguntaSeleccionada]: {respuestaCorrecta: {$set: this.state.configurarRespuesta}}})});
+    }
+
     cambiarPregunta(id, pregunta) {
         this.setState({
             preguntaSeleccionada: id
         });
-        console.log(id);
+    }
+
+    async eliminarPregunta(id) {
+        if (this.state.preguntas.length > 1) {
+            if (this.state.preguntas.length === 2) {
+                await this.cambiarPregunta(0);
+            }
+            await this.setState({
+                preguntas: this.state.preguntas.filter((_, i) => i !== id)
+            });
+        }
+    }
+
+    cambiarRespuesta(_respuesta) {
+        this.setState({preguntas: update(this.state.preguntas, {[this.state.preguntaSeleccionada]: {respuestas: {[this.state.configurarRespuesta]: {$set: _respuesta}}}})});
     }
 
     configurarRespuesta(respuesta) {
-        console.log("jacoedfsdajkdjsfJKASKJJKDSKJ");
         console.log(respuesta);
 
         this.setState({
-            configurarRespuesta: 1
+            configurarRespuesta: respuesta
         });
     }
 
     obtenerPreguntasDeAPI() {
 
+    }
+
+    cerrarModalConfigurarRespuesta() {
+        this.setState({configurarRespuesta: null});
     }
 
     subirJuego() {
@@ -129,8 +146,10 @@ class CrearJuego extends React.Component {
                         </div>
                         <div className="inner-tablero">
                             {this.state.preguntas.map((pregunta, i) => <CrearJuegoPreguntas
-                                key={i} id={i}
-                                onClick={(e) => this.cambiarPregunta(i, e)} {...pregunta}/>)}
+                                key={i} id={i} className={this.state.preguntaSeleccionada === i ? 'selected' : ''}
+                                onClick={(e) => this.cambiarPregunta(i, e)}
+                                eliminarPregunta={this.eliminarPregunta}
+                                mostrarCerrar={this.state.preguntas.length > 1} {...pregunta}/>)}
                         </div>
                         <div>
                             <button className="mt-10 btn-regular"
@@ -148,9 +167,15 @@ class CrearJuego extends React.Component {
                         {...this.state.preguntas[this.state.preguntaSeleccionada]}/>
                 </div>
                 <div className="flex justify-content-end mt-20">
-                    <Button className="item" size="regular" value="Publicar"/>
+                    <Button className="item" size="regular" status="confirm" value="Publicar"/>
                 </div>
-                {this.state.configurarRespuesta === null ? '' : <ConfigurarRespuesta/>}
+                {this.state.configurarRespuesta === null ? '' :
+                    <ConfigurarRespuesta cerrarModal={this.cerrarModalConfigurarRespuesta}
+                                         cambiarRespuesta={this.cambiarRespuesta}
+                                         cambiarRespuestaCorrecta={this.cambiarRespuestaCorrecta}
+                                         respuesta={this.state.preguntas[this.state.preguntaSeleccionada].respuestas[this.state.preguntas[this.state.preguntaSeleccionada].configurarRespuesta]}
+                                         esCorrecta={this.state.respuestaCorrecta}
+                    />}
             </div>
         )
     }

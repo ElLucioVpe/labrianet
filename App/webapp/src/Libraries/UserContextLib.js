@@ -62,7 +62,6 @@ export function UsuarioProvider(props) {
     async function login(user, password) {
         let body = 'grant_type=password&username=' + user + '&password=' + password;
         await Axios.post(BASE_URL + '/token', body).then(function (response) {
-            console.log("lo hizo igual");
 
             setUsuario(user);
             setAccessToken(response.data.access_token);
