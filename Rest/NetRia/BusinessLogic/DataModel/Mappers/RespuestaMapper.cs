@@ -40,7 +40,7 @@ namespace BusinessLogic.DataModel.Mappers
                 return null;
             Respuesta respuesta = new Respuesta()
             {
-                idRespuesta = dto.idRespuesta,
+           
                 Pregunta_idPregunta = dto.Pregunta_idPregunta,
                 esCorrectoRespuesta = dto.esCorrectoRespuesta,
                 contenidoRespuesta = dto.contenidoRespuesta

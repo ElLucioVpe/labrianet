@@ -79,10 +79,6 @@ namespace BusinessLogic.Controllers
                 using (UnitOfWork uow = new UnitOfWork())
                 {
 
-                    if (uow.PartidaRepository.partidaExists(partida.id))
-                    {
-                        throw new Exception("Código de partida existente.");
-                    }
                     uow.PartidaRepository.Create(_mapper.MapFromDTO(partida));
                     uow.SaveChanges();
                 }

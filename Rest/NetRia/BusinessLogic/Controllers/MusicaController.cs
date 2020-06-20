@@ -76,10 +76,6 @@ namespace BusinessLogic.Controllers
                 using (UnitOfWork uow = new UnitOfWork())
                 {
 
-                    if (uow.MusicaRepository.musicaExists(musica.idMusica))
-                    {
-                        throw new Exception("Canción existente.");
-                    }
                     uow.MusicaRepository.Create(_mapper.MapFromDTO(musica));
                     uow.SaveChanges();
                 }

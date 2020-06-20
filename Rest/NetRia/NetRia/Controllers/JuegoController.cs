@@ -94,19 +94,20 @@ namespace NetRia.Controllers
                 return BadRequest(ModelState);
             }
 
-            DTOBaseResponse response = new DTOBaseResponse();
+            //DTOBaseResponse response = new DTOBaseResponse();
+            int idGame;
+
             try
             {
                 BusinessLogic.Controllers.JuegoController controller = new BusinessLogic.Controllers.JuegoController();
-                controller.CreateJuego(juego);
-                response.Success = true;
+                idGame = controller.CreateJuego(juego);
+                
             }
             catch (Exception ex)
             {
-                response.Success = false;
-                response.Error = ex.ToString();
+                idGame = -1;
             }
-            return Ok(response);
+            return Ok(idGame);
         }
 
         // DELETE: api/Juego/5

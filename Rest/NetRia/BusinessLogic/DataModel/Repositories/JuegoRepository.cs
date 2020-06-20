@@ -44,7 +44,7 @@ namespace BusinessLogic.DataModel.Repositories
         }
 
         // POST: api/Juego
-        public void Create(Juego juego)
+        public int Create(Juego juego)
         {
 
             db.Juegos.Add(juego);
@@ -52,9 +52,12 @@ namespace BusinessLogic.DataModel.Repositories
             try
             {
                 db.SaveChanges();
+                return juego.idJuego;
+               
             }
             catch (DbUpdateException)
             {
+                return -1;
             }
         }
 

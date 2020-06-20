@@ -35,7 +35,7 @@ namespace BusinessLogic.DataModel.Mappers
                 return null;
             Juego juego = new Juego()
             {
-                idJuego = dto.idJuego,
+              
                 User_loginnameUser = dto.User_loginnameUser,
                 tituloJuego = dto.tituloJuego,
                 descripcionJuego = dto.descripcionJuego,

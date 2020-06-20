@@ -75,19 +75,17 @@ namespace BusinessLogic.Controllers
             }
         }
 
-        public void CreateJuego(DTOJuego juego)
+        public int CreateJuego(DTOJuego juego)
         {
             try
             {
+                int idGame;
                 using (UnitOfWork uow = new UnitOfWork())
                 {
 
-                    if (uow.JuegoRepository.juegoExists(juego.idJuego))
-                    {
-                        throw new Exception("Código de juego existente.");
-                    }
-                    uow.JuegoRepository.Create(_mapper.MapFromDTO(juego));
+                    idGame = uow.JuegoRepository.Create(_mapper.MapFromDTO(juego));
                     uow.SaveChanges();
+                    return idGame;
                 }
             }
             catch (Exception ex)

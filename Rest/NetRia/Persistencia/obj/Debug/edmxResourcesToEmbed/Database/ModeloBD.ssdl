@@ -4,7 +4,7 @@
     <Key>
       <PropertyRef Name="idJuego" />
     </Key>
-    <Property Name="idJuego" Type="int" Nullable="false" />
+    <Property Name="idJuego" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="User_loginnameUser" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="tituloJuego" Type="nvarchar" MaxLength="200" />
     <Property Name="descripcionJuego" Type="nvarchar" MaxLength="2000" />
@@ -18,7 +18,7 @@
     <Key>
       <PropertyRef Name="idMusica" />
     </Key>
-    <Property Name="idMusica" Type="int" Nullable="false" />
+    <Property Name="idMusica" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="urlMusica" Type="nvarchar" MaxLength="200" />
     <Property Name="tituloMusica" Type="nvarchar" MaxLength="100" />
   </EntityType>
@@ -35,7 +35,7 @@
     <Key>
       <PropertyRef Name="idPregunta" />
     </Key>
-    <Property Name="idPregunta" Type="int" Nullable="false" />
+    <Property Name="idPregunta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Juego_idJuego" Type="int" Nullable="false" />
     <Property Name="segundosPregunta" Type="int" />
     <Property Name="puntosPregunta" Type="int" />
@@ -57,7 +57,7 @@
     <Key>
       <PropertyRef Name="idRespuesta" />
     </Key>
-    <Property Name="idRespuesta" Type="int" Nullable="false" />
+    <Property Name="idRespuesta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Pregunta_idPregunta" Type="int" Nullable="false" />
     <Property Name="esCorrectoRespuesta" Type="nvarchar" MaxLength="45" />
     <Property Name="contenidoRespuesta" Type="nvarchar" MaxLength="200" />

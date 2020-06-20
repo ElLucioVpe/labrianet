@@ -87,10 +87,6 @@ namespace BusinessLogic.Controllers
                 using (UnitOfWork uow = new UnitOfWork())
                 {
 
-                    if (uow.PreguntaRepository.preguntaExists(pregunta.idPregunta))
-                    {
-                        throw new Exception("Id de pregunta existente.");
-                    }
                     uow.PreguntaRepository.Create(_mapperPregunta.MapFromDTOPregunta(pregunta));
                     uow.SaveChanges();
                 }

@@ -28,7 +28,7 @@ namespace BusinessLogic.DataModel.Mappers
                 return null;
             Musica musica = new Musica()
             {
-                idMusica = dto.idMusica,
+              
                 urlMusica = dto.urlMusica,
                 tituloMusica = dto.tituloMusica
             };

@@ -46,7 +46,7 @@ namespace BusinessLogic.DataModel.Mappers
                 return null;
             Pregunta pregunta = new Pregunta()
             {
-                Juego_idJuego = dto.Juego_idJuego,
+        
                 idPregunta = dto.idPregunta,
                 segundosPregunta = dto.segundosPregunta,
                 puntosPregunta = dto.puntosPregunta,
