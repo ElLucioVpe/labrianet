@@ -13,6 +13,7 @@
     margin: 0;
 }
 
+
 .infoGame {
     display: flex;
     flex-direction: row;
@@ -26,4 +27,27 @@
     padding: 10px;
     margin: 20px;
     align-items: center;
+}
+
+@media only screen and (max-width: 1000px) {
+
+    .preJuego {
+        flex-direction: column;
+        height: 100%;
+        padding: 20px;
+        width: 100%;
+
+    }
+    .infoGame {
+        flex-direction: row;
+    padding: 0px;
+    }
+
+    .infoGame div {
+        flex-direction: column;
+        height: 100px;
+        width: 80px;
+        margin: 10px;
+
+    }
 }

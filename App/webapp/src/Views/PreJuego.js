@@ -11,14 +11,14 @@ class PreJuego extends React.Component {
                 </div>
 
                 <div className="infoGame">
-                    <div>
+
                         <div>
                             NameQuiz
                         </div>
                         <div>
                             DescQuiz
                         </div>
-                    </div>
+
 
                     <div>GameCover</div>
                 </div>
