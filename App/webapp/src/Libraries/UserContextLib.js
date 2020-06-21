@@ -32,8 +32,6 @@ export function UsuarioProvider(props) {
     });
 
     async function getUserData() {
-        console.log("xd " + usuario);
-
         if (usuario !== null && usuario !== "") {
             Axios.get(BASE_URL + '/api/User/GetUser',
                 {
@@ -54,7 +52,6 @@ export function UsuarioProvider(props) {
                 return false;
             });
         } else {
-            console.log("error xd ");
             return false;
         }
     }
@@ -85,11 +82,7 @@ export function UsuarioProvider(props) {
             passwordUser: password,
             fechaUser: fecha
         }, config).then(function (response) {
-            if (login(loginname, password)) {
-                return true;
-            } else {
-                return false;
-            }
+            return !!login(loginname, password);
         }).catch(function (error) {
             // handle error
             console.log(error);

@@ -3,17 +3,34 @@ import React, {useState, useEffect, useMemo} from "react";
 const JuegoContext = React.createContext(null);
 
 export function JuegoProvider(props) {
-    const [id_juego, setJuego] = useState(null);
+    const [idJuego, setIdJuego] = useState(null);
     const [juegoTemp, setJuegoTemp] = useState(null);
+
+    const [preguntas, setPreguntas] = useState([{
+        titulo: null,
+        segundos: null,
+        puntaje: null,
+        imgUrl: null,
+        activo: false,
+        respuestaCorrecta: null,
+        respuestas: [null, null, null, null]
+    }]);
+    const [preguntaSeleccionada, setPreguntaSeleccionada] = useState(0);
+    const [titulo, setTitulo] = useState("kek");
+    const [configurandoRespuesta, setConfigurandoRespuesta] = useState(null);
 
     const value = useMemo(() => {
         return ({
-            id_juego,
-            setJuego,
+            idJuego,
+            setIdJuego,
             juegoTemp,
-            setJuegoTemp
+            setJuegoTemp,
+            preguntas,
+            setPreguntas,
+            titulo,
+            setTitulo
         })
-    }, [id_juego, juegoTemp])
+    }, [idJuego, juegoTemp])
 
     return <JuegoContext.Provider value={value} {...props}/>
 }

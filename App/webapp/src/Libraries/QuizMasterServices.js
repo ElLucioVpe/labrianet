@@ -1,42 +1,33 @@
 import Axios from 'axios';
-import {useMemo} from "react";
-import CrearJuego from "../Views/CrearJuego";
+import {useUsuario} from "../Libraries/UserContextLib";
 
 const BASE_URL = "http://localhost:44353"
 
 let config = {
     headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Accept': 'application/json',
     }
 };
 
-export function QuizMasterServices() {
-
-    async function crearJuego(props) {
-        Axios.post(BASE_URL + '/api/User/crearJuego',
+const QuizMasterServices = {
+    crearJuego: function (props) {
+        Axios.post(BASE_URL + '/api/Juego/CreateJuego',
+            props,
             {
-                params: {
-                    idJuego: props.idJuego,
-                    User_loginnameUser: props.User_loginnameUser,
-                    tituloJuego: props.tituloJuego,
-                    descripcionJuego: props.descripcionJuego,
-                    esPrivadoJuego: props.esPrivadoJuego,
-                    coverJuego: props.coverJuego,
-                    Musica_idMusica: props.Musica_idMusica,
-                    activadoJuego: props.activadoJuego,
-                },
-                config
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + props.accessToken
             }
         ).then(function (response) {
             return true;
         }).catch(function (error) {
             // handle error
+            console.log(error);
             return false;
         });
-    }
-
-    async function crearPregunta(props) {
+    },
+    crearPregunta: function (props) {
         Axios.post(BASE_URL + '/api/User/crearPregunta',
             {
                 params: {
@@ -72,12 +63,19 @@ export function QuizMasterServices() {
             // handle error
             return false;
         });
+    },
+    obtenerJuego: function (props) {
+        const {data} = Axios.get('http://localhost:44353/api/Juego/GetJuego/'
+            + props.id, {
+            headers: {
+                'Authorization': 'Token ' + process.env.API_TOKEN,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        });
+    },
+    obtenerListadoMusica: function () {
+        return Axios.get('http://localhost:44353/api/Musica/GetAll');
     }
-
-    return ({
-        crearJuego,
-        crearPregunta
-    })
 }
 
-export default QuizMasterServices
+export default QuizMasterServices;
