@@ -94,10 +94,11 @@ function App() {
                 <Route path="/logout">
                     <Logout/>
                 </Route>
-                <Route path="/resumenJuego">
-                    <Resumenjuego/>
+                <Route path="/configurarJuego/:id">
+                    <ConfigurarJuego/>
                 </Route>
-                <Route path="/configurarJuego:id" component={ConfigurarJuego}>
+                <Route path="/configurarJuego">
+                    <ConfigurarJuego/>
                 </Route>
             </Switch>
         </Router>

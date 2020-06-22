@@ -1,86 +1,77 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import CheckBox from "../Components/CheckBox";
 import Input from "../Components/Input";
-import "../Css/ConfigurarJuego.css";
 import Select from "react-select";
-import Axios from "axios";
+import QuizMasterService from '../Libraries/QuizMasterServices';
+import {useJuego} from "../Libraries/JuegoContextLib";
+import {BrowserRouter as useLocation} from "react-router-dom";
+
+
+import "../Css/ConfigurarJuego.css";
 
 //array de canciones por defecto, por si ocurre un error
 const canciones = [{value: "0", label: "Musica del juego"}];
 
-class ConfigurarJuego extends React.Component {
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            privacidad: [
-                {id: 1, value: "Público", isChecked: true},
-                {id: 2, value: "Privado", isChecked: false},
-            ],
-            juego: [],
-            cancionSeleccionada: {value: "null", label: "Musica del juego"},
-        };
-    }
+export default function ConfigurarJuego(props) {
+    const [privacidad, setPrivacidad] = useState([
+        {id: 1, value: "Público", isChecked: true},
+        {id: 2, value: "Privado", isChecked: false},
+    ]);
+    const [juego, setJuego] = useState([]);
+    const [cancionSeleccionada, setCancionSeleccionada] = useState({value: "null", label: "Musica del juego"});
 
-    handleChangeMusica = (cancionSeleccionada) => {
-        this.setState({cancionSeleccionada});
-        //console.log(`Option selected:`, cancionSeleccionada);
-    };
+    const juego_context = useJuego();
+    //let query = useQuery();
 
-    handleCheckChieldElement = (event) => {
-        let privacidad = this.state.privacidad;
+    const handleChangeMusica = ((cancionSeleccionada) => {
+        setCancionSeleccionada(cancionSeleccionada);
+    });
+
+    const handleCheckChieldElement = ((event) => {
+        let tmpPrivacidad = privacidad;
         privacidad.forEach((item) => {
             if (item.value === event.target.value)
                 item.isChecked = event.target.checked;
             else item.isChecked = false;
         });
-        this.setState({privacidad: privacidad});
-    };
+        setPrivacidad(tmpPrivacidad);
+    });
 
-    async componentDidMount() {
-        const juego_context = this.context;
-
-        if((this.props.match.params.id != null) && (juego_context.juegoTemp == null)) {
-
-            const {data} = await Axios.get('http://localhost:44353/api/Juego/GetJuego/'
-                + this.props.match.params.id, {
-                headers: {
-                    'Authorization': 'Token ' + process.env.API_TOKEN,
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            });
-            this.setState({juego: data});
-        } else if(juego_context.juegoTemp != null) {
-            this.setState({juego: juego_context.juegoTemp});
+    useEffect(() => {
+        if ((props.match.params.id != null) && (juego_context.juegoTemp == null)) {
+            let data = QuizMasterService.obtenerJuego({"id": props.match.params.id});
+            setJuego(data);
+        } else if (juego_context.juegoTemp != null) {
+            setJuego(juego_context.juegoTemp);
         }
 
-            //Modifico los checkbox de privacidad
-            let privacidad = this.state.privacidad;
-            if (this.state.juego.esPrivadoJuego === 1) {
-                privacidad.forEach((item) => {
-                    if (item.value === "Privado") item.isChecked = true;
-                    else item.isChecked = false;
-                });
-            }
-            this.setState({privacidad: privacidad});
-            //
-
-            //Cargo select de musica
-            const responseM = await fetch("http://localhost:44353/api/Musica/GetAll");
-            let data_canciones = await responseM.json();
-            data_canciones.forEach((item) => {
-                let valor = {value: item.idMusica, label: item.tituloMusica};
-                canciones.concat(valor); //deberia ser titulo
-                if (item.idMusica === this.state.juego.Musica_idMusica) {
-                    this.setState({cancionSeleccionada: valor});
-                }
+        //Modifico los checkbox de privacidad
+        let tmpPrivacidad = privacidad;
+        if (juego.esPrivadoJuego === 1) {
+            tmpPrivacidad.forEach((item) => {
+                if (item.value === "Privado") item.isChecked = true;
+                else item.isChecked = false;
             });
-            //
-    }
+        }
+        setPrivacidad(tmpPrivacidad);
 
-    render() {
-        const {cancionSeleccionada} = this.state;
+        //Cargo select de musica
+        let data_canciones = QuizMasterService.obtenerListadoMusica();
+        data_canciones.forEach((item) => {
+            let valor = {value: item.idMusica, label: item.tituloMusica};
+            canciones.concat(valor); //deberia ser titulo
+            if (item.idMusica === juego.Musica_idMusica) {
+                setCancionSeleccionada(valor);
+            }
+        });
 
+    }, []);
+
+    function render() {
         return (
             <div className="configuracionJuego container">
                 <form>
@@ -93,7 +84,7 @@ class ConfigurarJuego extends React.Component {
                                     type="text"
                                     name="titulo"
                                     placeholder="Titulo"
-                                    defaultValue={this.state.juego.tituloJuego}
+                                    defaultValue={juego.titulo}
                                 />
                             </p>
 
@@ -104,16 +95,16 @@ class ConfigurarJuego extends React.Component {
                                 placeholder="Descripción"
                                 type="textarea"
                                 rows="10"
-                                value={this.state.juego.descripcionJuego}
+                                value={juego.descripcion}
                                 cols="50"
                             />
                             <br/>
 
                             <ul>
-                                {this.state.privacidad.map((item) => {
+                                {privacidad.map((item) => {
                                     return (
                                         <CheckBox
-                                            handleCheckChieldElement={this.handleCheckChieldElement}
+                                            handleCheckChieldElement={handleCheckChieldElement}
                                             {...item}
                                         />
                                     );
@@ -125,7 +116,7 @@ class ConfigurarJuego extends React.Component {
                                     type="text"
                                     name="password"
                                     placeholder="Password"
-                                    value={this.state.juego.password}
+                                    value={juego.password}
                                 />
                             </p>
                         </div>
@@ -136,14 +127,14 @@ class ConfigurarJuego extends React.Component {
                                 id="gamecover"
                                 width="450"
                                 height="300"
-                                src={"../../public/img/" + this.state.juego.coverJuego}
+                                src={"../../public/img/" + juego.coverJuego}
                                 placeholder="GameCover"
                             />
                             <br/>
 
                             <Select
                                 value={cancionSeleccionada}
-                                onChange={this.handleChangeMusica}
+                                onChange={handleChangeMusica}
                                 options={canciones}
                             />
                         </div>
@@ -157,6 +148,6 @@ class ConfigurarJuego extends React.Component {
             </div>
         );
     }
-}
 
-export default ConfigurarJuego;
+    return render();
+}
