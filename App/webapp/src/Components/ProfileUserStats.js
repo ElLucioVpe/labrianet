@@ -4,7 +4,7 @@ import Button from "./Button";
 export const ProfileUserStats = () => {
     return (
         <div class="profile-user-stats">
-            <table>
+            <table class = "profile-user-stats-table">
                 <thead>
                 <tr>
                     <th>Nombre</th>

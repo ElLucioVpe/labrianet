@@ -132,6 +132,7 @@ class ConfigurarJuego extends React.Component {
 
                         <div className="seccion2-config card">
                             <img
+                                class="gamecoverImage"
                                 id="gamecover"
                                 width="450"
                                 height="300"

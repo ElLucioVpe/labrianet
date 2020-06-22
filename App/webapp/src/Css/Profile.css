@@ -63,3 +63,38 @@
 .profile-user-stats tr:nth-child(2n-1) td {
     background-color: #e6d1d7;
 }
+@media screen and (max-width: 1000px) {
+    .profile {
+        margin: auto;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 1fr auto 1fr 3fr;
+        grid-row-gap: 20px;
+    }
+    .usernameSection {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .profile-user-stats-table{
+       width: 100%;
+        padding: 0%;
+    }
+    .profile-user-stats table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        empty-cells: show;
+        border: 1px solid var(--main1);
+        border-radius: 0px;
+        padding: 0%;
+    }
+    .profile-user-stats tr {
+        padding: 0%;
+    }
+    .profile-user-stats td {
+        padding: 0%;
+    }
+}

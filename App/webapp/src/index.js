@@ -11,6 +11,7 @@ import Header from "./Components/Header.js";
 import Loading from "./Components/Loading.js";
 import Grafica from "./Views/Grafica.js";
 import Enlace from "./Views/Enlace.js";
+import Resumenjuego from "./Views/ResumenJuego";
 import {UsuarioProvider, useUsuario} from "./Libraries/UserContextLib";
 import {JuegoProvider, useJuego} from "./Libraries/JuegoContextLib";
 import ThemeContext, {ThemeProvider} from "./Libraries/ThemeContextLib";
@@ -92,6 +93,9 @@ function App() {
                 </Route>
                 <Route path="/logout">
                     <Logout/>
+                </Route>
+                <Route path="/resumenJuego">
+                    <Resumenjuego/>
                 </Route>
                 <Route path="/configurarJuego:id" component={ConfigurarJuego}>
                 </Route>
