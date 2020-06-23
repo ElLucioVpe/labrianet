@@ -84,5 +84,3 @@ export default function Grafica() {
         return render();
     }
 }
-
-export default Grafica;
