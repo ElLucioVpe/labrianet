@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Button from "../Components/Button";
 import Input from '../Components/Input'
 import QuizPreview from '../Components/QuizPreview'
@@ -6,25 +6,22 @@ import QuizPreview from '../Components/QuizPreview'
 import "../Css/Jugar.css"
 import CrearJuegoPreguntas from "../Components/CrearJuegoPreguntas";
 
-class Jugar extends React.Component {
-    constructor(props) {
-        super(props);
+export default function Jugar(){
+    const [juegos, set_juegos] = useState([]);
+    useEffect(() => {
 
-        this.state = {
-            juegos: [],
-        };
-    }
+    }, []);
 
-    async crearJuego() {
+    const crearJuego = (async () => {
         this.setState({
             juegos: this.state.juegos.concat({
                 titulo: null,
                 imgUrl: null,
             })
         })
-    }
+    });
 
-    render() {
+    function render() {
         return (
             <div className="Jugar container">
                 <div className="join card flex flex-direction-row align-items-center">
@@ -47,7 +44,6 @@ class Jugar extends React.Component {
                 </div>
             </div>
         )
+        return render();
     }
 }
-
-export default Jugar

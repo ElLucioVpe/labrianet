@@ -4,8 +4,8 @@ import CanvasJSReact from '../Libraries/canvasjs.react';
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-class Grafica extends React.Component {
-    render() {
+export default function Grafica() {
+    function render() {
 
         var PreguntaNumber = 9;
         var esMultiple = true;
@@ -81,6 +81,7 @@ class Grafica extends React.Component {
                 {/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
             </div>
         );
+        return render();
     }
 }
 
