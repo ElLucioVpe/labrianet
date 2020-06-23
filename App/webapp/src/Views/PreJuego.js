@@ -2,8 +2,8 @@ import React from 'react'
 import Button from '../Components/Button'
 import '../Css/PreJuego.css'
 
-class PreJuego extends React.Component {
-    render() {
+export default function PreJuego(){
+    function render() {
         return (
             <div className="preJuego">
                 <div>
@@ -34,7 +34,7 @@ class PreJuego extends React.Component {
 
             </div>
         );
+
+        return render();
     }
 }
-
-export default PreJuego;
