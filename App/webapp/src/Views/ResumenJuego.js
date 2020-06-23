@@ -1,21 +1,15 @@
 import React from 'react'
 import Button from "../Components/Button";
 import '../Css/ResumenJuego.css'
+import CrearJuegoPreguntas from "../Components/CrearJuegoPreguntas";
 
-class ResumenJuego extends React.Component {
-    render() {
-        const data = [{"name": "test1"}, {"name": "test2"}, {"name": "test2"},
-            {"name": "test2"}, {"name": "test2"}, {"name": "test2"}, {"name": "test2"}, {"name": "test2"},
-            {"name": "test2"}, {"name": "test2"}, {"name": "test2"}, {"name": "test2"}, {"name": "test2"}, {"name": "test2"}, {"name": "test2"}, {"name": "test2"}, {"name": "test2"}, {"name": "test2"},
-            {"name": "test2"}, {"name": "test2"}, {"name": "test2"}, {"name": "test2"}, {"name": "test2"}, {"name": "test2"}, {"name": "test2"}, {"name": "test2"}, {"name": "test2"}, {"name": "test2"},
-            {"name": "test2"}, {"name": "test2"}, {"name": "test2"}, {"name": "test2"}, {"name": "test2"}, {"name": "test2"}, {"name": "test2"}, {"name": "test2"}, {"name": "test2"}, {"name": "test2"}
-        ];
-        const listItems = data.map((d) => <li key={d.name}>{d.name}</li>);
+export default function ResumenJuego() {
+    const data = [{"name": "test1"}, {"name": "test2"}];
 
+    function render() {
         return (
             <div className="resumenJuego">
                 <div className="resumenJuego_Info">
-
                     <div id="COVER GAME">
                         <img alt="Mi titulo de la imagen"/>
                     </div>
@@ -42,24 +36,20 @@ class ResumenJuego extends React.Component {
 
                 </div>
                 <div className="resumenJuego_Preguntas">
-
                     <div>
                         Preguntas(x)
                     </div>
                     <div className="listaPreguntas">
                         <ul>
-                            {listItems}
+                            {data.map((d) => <li key={d.name}>{d.name}</li>)}
                         </ul>
                     </div>
-
                     <div>
-
                     </div>
-
                 </div>
             </div>
         )
     }
-}
 
-export default ResumenJuego
+    return render();
+}

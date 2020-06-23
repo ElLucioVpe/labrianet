@@ -5,8 +5,8 @@ import GameRanking from "../Components/GameRanking.js";
 import "../Css/PlayerRanking.css";
 import Button from "../Components/Button";
 
-class PlayerRanking extends React.Component {
-    render() {
+export default function PlayerRanking() {
+    function render() {
         return (
             <div class="Ranking">
                 <div class="containerRanking">
@@ -159,6 +159,6 @@ class PlayerRanking extends React.Component {
             </div>
         );
     }
-}
 
-export default PlayerRanking;
+    return render();
+}

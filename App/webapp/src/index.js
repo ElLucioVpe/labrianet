@@ -88,12 +88,14 @@ function App() {
                 <Route path="/prejuego">
                     <PreJuego/>
                 </Route>
-
+                <Route path="/logout">
+                    <Logout/>
+                </Route>
                 <Route path="/login">
                     <Login/>
                 </Route>
-                <Route path="/logout">
-                    <Logout/>
+                <Route path="/resumen">
+                    <Resumenjuego/>
                 </Route>
                 <Route path="/configurarJuego/:id">
                     <ConfigurarJuego/>

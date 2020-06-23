@@ -73,6 +73,15 @@ const QuizMasterServices = {
             }
         });
     },
+    obtenerProfile: function (props) {
+        const {data} = Axios.get('http://localhost:44353/api/Juego/GetJuego/'
+            + props.id, {
+            headers: {
+                'Authorization': 'Token ' + process.env.API_TOKEN,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        });
+    },
     obtenerListadoMusica: function () {
         return Axios.get('http://localhost:44353/api/Musica/GetAll');
     }
