@@ -24,12 +24,12 @@ class CrearJuegoPreguntas extends React.Component {
     render() {
         return (
             <div class={`crearJuegoPreguntas flex flex-direction-column ${this.props.className} relative`}>
-                <div onClick={this.props.onClick}>
+                <div onClick={this.props.onClick} class="crearJuegoPreguntasContainer">
                     <div className="text-align-center">
                         <p>{this.props.titulo || ''}</p>
                     </div>
-                    <div className="text-align-center">
-                        <img src={this.props.imgUrl || 'img/perfil.png'} className="PreguntaPreview"/>
+                    <div  className="text-align-center PreguntaPreviewBox">
+                        <img  src={this.props.imgUrl || 'img/perfil.png'} className="PreguntaPreview "/>
                     </div>
                     <div className="flex flex-direction-row justify-content-space-between">
                         <p>{this.props.puntaje === null ? '0p' : this.props.puntaje + "p"}</p>

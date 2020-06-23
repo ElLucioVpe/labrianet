@@ -94,3 +94,29 @@
     overflow-x: auto;
     height: 500px;
 }
+@media screen and (max-width: 1000px) {
+    .containerRanking {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-template-rows: 50px 100px 300px 50px;
+    }
+    
+    .userPuntaje{
+        font-size: smaller;
+    }
+    .containerRanking .scroll {
+        overflow-x: auto;
+
+        font-size: smaller;
+
+        height: 300px;
+    }
+    .puntajeGeneral{
+        height: 300px;
+
+    }
+    .table{
+        font-size: small;
+    }
+   
+}

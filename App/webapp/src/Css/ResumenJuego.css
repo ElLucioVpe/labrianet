@@ -43,3 +43,26 @@
     overflow: auto;
     width: 50%;
 }
+@media screen and (max-width: 1000px) {
+    .resumenJuego {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 0.5fr;
+    }
+    .resumenJuego_Info {
+        border: 5px solid var(--main2);
+        border-radius: 25px;
+        height: 540px;
+        padding: 10px;
+        font-family: Montserrat, Serif;
+        font-size: 25px;
+        max-width: 1000px;
+        font-weight: 300;
+        text-align: left;
+        padding-left: 50px;
+        padding-top: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}

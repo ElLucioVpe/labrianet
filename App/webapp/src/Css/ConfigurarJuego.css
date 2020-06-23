@@ -12,7 +12,8 @@
     border-radius: 25px;
     border: 2px solid var(--main2);
     padding: 5px;
-    padding-left: 20px;
+    width: 100%;
+    /*padding-left: 20px;*/
 }
 
 .configuracionJuego-submit {
@@ -21,4 +22,40 @@
 
 .descripcion-juego {
     resize: none;
+}
+@media screen and (max-width: 1000px) {
+    body{width: 100%; min-width:200px ;}
+    .configuracionJuego input.input{
+        height: 30px;
+        border-radius: 25px;
+        border: 2px solid var(--main2);
+        padding: 5px;
+        width: 100%;
+        /*padding-left: 20px;*/
+    }
+    .descripcion-juego {
+        resize: both;
+        width: 90%;
+    }
+   
+    .gamecoverImage{
+        width: 100% /*auto-fit revisar cuando tenga imágenes*/;
+    }
+    .seccion1-config{       
+        width: 100%;
+    }
+    .seccion1-config p{       
+        width: 100%;
+    }
+    .seccion2-config {       
+        width: 100% ; 
+    }
+    .grid-configuracionJuego {
+        height: 100%;
+        width: 90%;
+        display: grid;
+        grid-template-columns: 100% ; 
+        grid-template-rows: 50% 50% auto-fit;
+        /*column-gap: 20px;*/
+    }
 }
