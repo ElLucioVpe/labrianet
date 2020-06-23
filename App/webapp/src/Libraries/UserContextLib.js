@@ -31,15 +31,17 @@ export function UsuarioProvider(props) {
         }
     });
 
-    /*
     useEffect(() => {
-        if (Cookies.get('usuario') !== null || Cookies.get('usuario') !== "") {
-            setUsuario(Cookies.get('usuario'));
-            setAccessToken(Cookies.get('accessToken'));
-            getUserData();
+        console.log("me cago en todo lo que cagable willy");
+        if (Cookies.get('username') !== null || Cookies.get('username') !== "") {
+            if (Cookies.get('accessToken') !== null) {
+                setUsuario(Cookies.get('username'));
+                setAccessToken(Cookies.get('accessToken'));
+                setInicioSesion(true);
+                getUserData();
+            }
         }
-    });
-    */
+    }, []);
 
     async function getUserData() {
         if (usuario !== null && usuario !== "") {
@@ -76,7 +78,7 @@ export function UsuarioProvider(props) {
             setTokenExpiration(response.data.expires_in);
 
             Cookies.set('username', usuario);
-            Cookies.set('accessToken', accessToken);
+            Cookies.set('accessToken', response.data.access_token);
 
             setInicioSesion(true);
 
