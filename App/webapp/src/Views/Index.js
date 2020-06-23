@@ -2,22 +2,9 @@ import React from 'react'
 import Button from '../Components/Button'
 import '../Css/Index.css'
 
-class Index extends React.Component {
-    constructor(props) {
-        super(props);
+export default function Index() {
 
-        this.state = {x: 0, y: 0};
-    }
-
-    _onMouseMove(e) {
-        this.setState({x: e.screenX, y: e.screenY});
-    }
-
-    parallelEffect() {
-        console.log("wip");
-    }
-
-    render() {
+    function render() {
         return (
             <div class="index">
                 <div className="main_introduction flex flex-direction-column">
@@ -45,6 +32,6 @@ class Index extends React.Component {
             </div>
         )
     }
-}
 
-export default Index
+    return render();
+}

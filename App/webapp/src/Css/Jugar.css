@@ -28,13 +28,14 @@
 
 @media screen and (max-width: 1000px) {
 
-p{
-width: 120px;
-}
-
-    .invite-input{
-        width:100px;
-        padding-left:35px;
+    /* Disculpame rigby pero me rompe el index
+    p{
+    width: 120px;
+    }
+    */
+    .invite-input {
+        width: 100px;
+        padding-left: 35px;
 
     }
 

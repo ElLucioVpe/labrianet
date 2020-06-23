@@ -4,7 +4,7 @@ import Button from "../Components/Button";
 import Input from '../Components/Input'
 import '../Css/CrearJuego.css'
 import '../Css/CrearJuegoPreguntas.css'
-import CrearJuegoPreguntas from "./CrearJuegoPreguntas";
+import CrearJuegoPreguntas from "../Components/CrearJuegoPreguntas";
 import CrearPreguntas from "../Components/CrearPreguntas";
 import {useJuego} from "../Libraries/JuegoContextLib";
 import QuizMasterService from '../Libraries/QuizMasterServices';
@@ -27,7 +27,7 @@ export default function CrearJuego() {
         respuestas: [null, null, null, null]
     }]);
     const [preguntaSeleccionada, setPreguntaSeleccionada] = useState(0);
-    const [titulo, setTitulo] = useState("kek");
+    const [titulo, setTitulo] = useState(null);
     const [configurandoRespuesta, setConfigurandoRespuesta] = useState(null);
 
     console.log(QuizMasterService);
@@ -39,7 +39,6 @@ export default function CrearJuego() {
     useEffect(() => {
         juego.setPreguntas(preguntas);
         juego.setTitulo(titulo);
-
     }, [preguntas, titulo]);
 
     const crearPregunta = (async (event) => {
@@ -110,13 +109,12 @@ export default function CrearJuego() {
     const publicarJuego = (async () => {
         console.log(usuario.usuario);
         await QuizMasterService.crearJuego({
-            "idJuego": 0,
             "User_loginnameUser": usuario.usuario,
             "tituloJuego": titulo,
             "descripcionJuego": "sample string 4",
             "esPrivadoJuego": 0,
             "coverJuego": "sample string 5",
-            "Musica_idMusica": 0,
+            "Musica_idMusica": 1,
             "activadoJuego": 1,
             accessToken: usuario.accessToken
         });
@@ -131,7 +129,7 @@ export default function CrearJuego() {
                     <Button class="item" to="/configurarJuego" value="Configurar" size="regular"/>
                 </div>
                 <div className="crearPreguntas">
-                    <div className="tablero card">
+                    <div className="tablero card mb-20">
                         <div>
                             <h2>Tablero</h2>
                         </div>

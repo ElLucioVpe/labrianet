@@ -3,6 +3,7 @@ import ProfileUserInfo from '../Components/ProfileUserInfo.js'
 import ProfileUserStats from '../Components/ProfileUserStats.js'
 import Button from '../Components/Button'
 import '../Css/Profile.css'
+import QuizMasterService from '../Libraries/QuizMasterServices';
 
 class Profile extends React.Component {
     constructor(props) {
@@ -15,9 +16,8 @@ class Profile extends React.Component {
     }
 
     componentDidMount() {
-        fetch('https://api.mydomain.com')
-            .then(response => response.json())
-            .then(data => this.setState({data}));
+        let data = QuizMasterService.getProfile();
+        this.setState({"data.nickUser": "xdxdxd"});
     }
 
     render() {

@@ -4,7 +4,7 @@ import Input from '../Components/Input'
 import QuizPreview from '../Components/QuizPreview'
 
 import "../Css/Jugar.css"
-import CrearJuegoPreguntas from "./CrearJuegoPreguntas";
+import CrearJuegoPreguntas from "../Components/CrearJuegoPreguntas";
 
 class Jugar extends React.Component {
     constructor(props) {

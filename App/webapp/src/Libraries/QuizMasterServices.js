@@ -20,7 +20,7 @@ const QuizMasterServices = {
                 'Authorization': 'Bearer ' + props.accessToken
             }
         ).then(function (response) {
-            return true;
+            return response;
         }).catch(function (error) {
             // handle error
             console.log(error);

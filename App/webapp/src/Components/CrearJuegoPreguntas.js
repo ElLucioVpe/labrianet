@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from "../Components/Button";
+import Button from "./Button";
 
 class CrearJuegoPreguntas extends React.Component {
     constructor(props) {
@@ -28,8 +28,8 @@ class CrearJuegoPreguntas extends React.Component {
                     <div className="text-align-center">
                         <p>{this.props.titulo || ''}</p>
                     </div>
-                    <div  className="text-align-center PreguntaPreviewBox">
-                        <img  src={this.props.imgUrl || 'img/perfil.png'} className="PreguntaPreview "/>
+                    <div className="text-align-center PreguntaPreviewBox">
+                        <img src={this.props.imgUrl || 'img/perfil.png'} className="PreguntaPreview "/>
                     </div>
                     <div className="flex flex-direction-row justify-content-space-between">
                         <p>{this.props.puntaje === null ? '0p' : this.props.puntaje + "p"}</p>

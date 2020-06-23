@@ -31,6 +31,7 @@ export function UsuarioProvider(props) {
         }
     });
 
+    /*
     useEffect(() => {
         if (Cookies.get('usuario') !== null || Cookies.get('usuario') !== "") {
             setUsuario(Cookies.get('usuario'));
@@ -38,6 +39,7 @@ export function UsuarioProvider(props) {
             getUserData();
         }
     });
+    */
 
     async function getUserData() {
         if (usuario !== null && usuario !== "") {

@@ -6,7 +6,7 @@ import Button from "../Components/Button";
 export default function SignUp() {
     const usuario = useUsuario();
     const [userCreated, setUserCreated] = useState(false);
-    const [password, setPassword] = useState(false);
+    const [password, setPassword] = useState(null);
 
     async function handleSubmit(event) {
         event.preventDefault();
