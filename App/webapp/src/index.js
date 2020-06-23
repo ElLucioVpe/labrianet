@@ -21,6 +21,7 @@ import Jugar from "./Views/Jugar";
 import Logout from "./Views/Logout";
 import PreJuego from "./Views/PreJuego";
 
+
 function QuizMaster() {
     return (
         <ThemeProvider>

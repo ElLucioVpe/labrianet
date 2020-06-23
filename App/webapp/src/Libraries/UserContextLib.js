@@ -1,9 +1,9 @@
 import React, {useState, useEffect, useMemo} from "react";
-import {setToken, deleteToken, getToken} from '../Libraries/AuthHelpers';
 import Axios from 'axios';
+import Cookies from 'js-cookie'
 
 const UserContext = React.createContext(null);
-const BASE_URL = "http://localhost:44353"
+const BASE_URL = "http://localhost:44353";
 
 let config = {
     headers: {
@@ -28,6 +28,14 @@ export function UsuarioProvider(props) {
         async function cargarUsuario() {
             console.log("WIP");
             return;
+        }
+    });
+
+    useEffect(() => {
+        if (Cookies.get('usuario') !== null || Cookies.get('usuario') !== "") {
+            setUsuario(Cookies.get('usuario'));
+            setAccessToken(Cookies.get('accessToken'));
+            getUserData();
         }
     });
 
@@ -64,6 +72,9 @@ export function UsuarioProvider(props) {
             setAccessToken(response.data.access_token);
             setTokenType(response.data.token_type);
             setTokenExpiration(response.data.expires_in);
+
+            Cookies.set('username', usuario);
+            Cookies.set('accessToken', accessToken);
 
             setInicioSesion(true);
 
