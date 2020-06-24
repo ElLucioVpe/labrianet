@@ -63,6 +63,16 @@ namespace BusinessLogic.Controllers
             }
         }
 
+        public int PlayersQueJugaron(int id)
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                int players = 0;
+                players = uow.JuegoRepository.PlayersQueJugaron(id);
+                return players;
+            }
+        }
+
         public void UpdateJuego(int id, DTOJuego juego)
         {
 

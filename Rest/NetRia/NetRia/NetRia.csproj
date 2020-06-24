@@ -186,6 +186,7 @@
     <Compile Include="AuthorizeAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JuegoController.cs" />
+    <Compile Include="Controllers\PartidaController.cs" />
     <Compile Include="Controllers\MusicaController.cs" />
     <Compile Include="Controllers\PreguntaController.cs" />
     <Compile Include="Controllers\RespuestaController.cs" />

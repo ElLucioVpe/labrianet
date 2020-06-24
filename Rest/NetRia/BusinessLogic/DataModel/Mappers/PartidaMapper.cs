@@ -9,7 +9,7 @@ using Common.DataTransferObjects;
 
 namespace BusinessLogic.DataModel.Mappers
 {
-    class PartidaMapper
+    public class PartidaMapper
     {
         public DTOPartida MapToDTO(Partida partida)
         {

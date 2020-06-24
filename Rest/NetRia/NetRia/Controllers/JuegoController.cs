@@ -56,6 +56,14 @@ namespace NetRia.Controllers
             return Ok(juego);
         }
 
+        // GET: api/Juego/5
+        public IHttpActionResult GetPlayersQueJugaron(int id)
+        {
+            BusinessLogic.Controllers.JuegoController controller = new BusinessLogic.Controllers.JuegoController();
+            int players = controller.PlayersQueJugaron(id);
+            return Ok(players);
+        }
+
         // PUT: api/Juego/5
         [Authorize]
         [HttpPost]

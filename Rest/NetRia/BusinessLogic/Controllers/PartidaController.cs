@@ -10,7 +10,7 @@ using Persistencia.Database;
 
 namespace BusinessLogic.Controllers
 {
-    class PartidaController
+    public class PartidaController
     {
         private PartidaMapper _mapper;
         public PartidaController()
