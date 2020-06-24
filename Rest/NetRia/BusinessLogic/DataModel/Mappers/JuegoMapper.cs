@@ -25,7 +25,8 @@ namespace BusinessLogic.DataModel.Mappers
                 esPrivadoJuego = juego.esPrivadoJuego,
                 coverJuego = juego.coverJuego,
                 Musica_idMusica = juego.Musica_idMusica.GetValueOrDefault(),
-                activadoJuego = juego.activadoJuego
+                activadoJuego = juego.activadoJuego,
+                password = juego.password
             };
             return pJuego;
         }
@@ -42,7 +43,9 @@ namespace BusinessLogic.DataModel.Mappers
                 esPrivadoJuego = dto.esPrivadoJuego,
                 coverJuego = dto.coverJuego,
                 Musica_idMusica = dto.Musica_idMusica,
-                activadoJuego = dto.activadoJuego
+                activadoJuego = dto.activadoJuego,
+                password = dto.password
+
             };
 
             return juego;

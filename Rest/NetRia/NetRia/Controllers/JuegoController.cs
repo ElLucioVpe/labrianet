@@ -34,6 +34,16 @@ namespace NetRia.Controllers
             return juegos;
         }
 
+        // GET: api/Juego
+        public IEnumerable<DTOJuego> GetJuegosJugador(string loginName)
+        {
+
+            BusinessLogic.Controllers.JuegoController controller = new BusinessLogic.Controllers.JuegoController();
+            List<DTOJuego> juegos = controller.GetJuegosJugador(loginName);
+
+            return juegos;
+        }
+
         // GET: api/Juego/5
         public IHttpActionResult GetJuego(int id)
         {

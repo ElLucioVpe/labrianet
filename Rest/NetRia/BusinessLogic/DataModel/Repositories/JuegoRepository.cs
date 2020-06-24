@@ -28,6 +28,14 @@ namespace BusinessLogic.DataModel.Repositories
             return juego;
         }
 
+        // GET: api/Juego/5
+        public List<Juego> GetJuegosJugador(string loginName)
+        {
+            List<Juego> juegos = db.Juegos
+                   .Where(j => j.User_loginnameUser == loginName).ToList();
+            return juegos;
+        }
+
         // PUT: api/Juego/5
         public void Update(int id, Juego juego)
         {

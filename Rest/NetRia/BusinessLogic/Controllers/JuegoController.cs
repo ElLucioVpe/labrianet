@@ -33,6 +33,21 @@ namespace BusinessLogic.Controllers
             return juegos;
         }
 
+        public List<DTOJuego> GetJuegosJugador(string loginName)
+        {
+            List<DTOJuego> juegos = new List<DTOJuego>();
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                var entityList = uow.JuegoRepository.GetJuegosJugador(loginName);
+                foreach (var entity in entityList)
+                {
+                    juegos.Add(_mapper.MapToDTO(entity));
+                }
+            }
+            return juegos;
+        }
+
+
         public DTOJuego GetJuego(int id)
         {
             using (UnitOfWork uow = new UnitOfWork())
@@ -65,6 +80,7 @@ namespace BusinessLogic.Controllers
                     entity.coverJuego = juego.coverJuego;
                     entity.Musica_idMusica = juego.Musica_idMusica;
                     entity.activadoJuego = juego.activadoJuego;
+                    entity.password = juego.password;
 
                     uow.SaveChanges();
                 }
