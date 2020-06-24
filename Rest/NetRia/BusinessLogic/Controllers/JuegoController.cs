@@ -73,6 +73,45 @@ namespace BusinessLogic.Controllers
             }
         }
 
+        public List<DTORank> GetRanking(int id)
+        {
+            List<DTORank> ranking = new List<DTORank>();
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                var entity = uow.JuegoRepository.Get(id);
+                if (entity == null)
+                {
+                    return null;
+                }
+             
+                    string nickUsuarioActual;
+                    Nullable<int> puntajeActual = 0;
+                    foreach (Partida partida in entity.partidas)
+                    {
+                        nickUsuarioActual = partida.nickUsuario;
+                        foreach (Respuesta respuesta in partida.respuestas)
+                        {
+                            if (respuesta.esCorrectoRespuesta == "1")
+                            {
+
+                                puntajeActual += respuesta.pregunta.puntosPregunta;
+
+                            }
+                        }
+                        DTORank rankingActual = new DTORank()
+                        {
+                            nickUsuario = nickUsuarioActual,
+                            Puntaje = puntajeActual,
+                        };
+                        ranking.Add(rankingActual);
+                    }
+
+                return ranking;
+              
+            }
+        }
+
+
         public void UpdateJuego(int id, DTOJuego juego)
         {
 

@@ -39,7 +39,6 @@ namespace BusinessLogic.DataModel.Mappers
                 return null;
             Partida partida = new Partida()
             {
-      
                 Juego_idJuego = dto.Juego_idJuego,
                 nickUsuario = dto.nickUsuario
             };
