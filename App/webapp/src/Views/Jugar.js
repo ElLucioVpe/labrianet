@@ -6,11 +6,8 @@ import QuizPreview from '../Components/QuizPreview'
 import "../Css/Jugar.css"
 import CrearJuegoPreguntas from "../Components/CrearJuegoPreguntas";
 
-export default function Jugar(){
+export default function Jugar() {
     const [juegos, set_juegos] = useState([]);
-    useEffect(() => {
-
-    }, []);
 
     const crearJuego = (async () => {
         this.setState({
@@ -18,7 +15,7 @@ export default function Jugar(){
                 titulo: null,
                 imgUrl: null,
             })
-        })
+        });
     });
 
     function render() {
@@ -38,12 +35,13 @@ export default function Jugar(){
                     </div>
                     <div
                         className="listado overflow-overlay bg-white border-radius-25px flex flex-direction-row mt-10">
-                        {this.state.juegos.map((juego, i) => <QuizPreview
+                        {juegos.map((juego, i) => <QuizPreview
                             key={i} id={i} {...juego}/>)}
                     </div>
                 </div>
             </div>
         )
-        return render();
     }
+
+    return render();
 }
