@@ -6,6 +6,7 @@ import Input from '../Components/Input';
 
 export function CrearPreguntas(props) {
     const inputFile = useRef(null);
+    const [imagen, setImagen] = useState(null);
 
     const handleClickImage = (() => {
         inputFile.current.click();
@@ -35,8 +36,9 @@ export function CrearPreguntas(props) {
     });
 
     const onImageChange = ((e) => {
-        this.setState({file: e.target.files[0]})
-        this.onImageSubmit()
+        setImagen(e.target.files[0]);
+        props.subirImagen(e);
+        //this.onImageSubmit()
     });
 
     const fileUpload = ((file) => {
@@ -60,14 +62,15 @@ export function CrearPreguntas(props) {
                 </div>
                 <div className="flex justify-content-center mt-10">
                     <div className="flex flex-direction-column justify-content-center w-20 p-10">
-                        <Input placeholder="20s" size="regular" value={props.segundos || ''}
+                        <input placeholder="20s" className="w-80 input-regular" value={props.segundos || ''}
                                onChange={handleChangeSegundos}/>
-                        <Input placeholder="1000 pts" size="regular" classList="mt-10"
+                        <input placeholder="1000 pts" className="w-80 input-regular mt-10"
                                value={props.puntaje || ''} onChange={handleChangePuntaje}/>
                     </div>
                     <div className="flex w-80 justify-content-center">
                         <div className="relative width-inherit" onClick={handleClickImage}>
-                            <img className="pregunta_foto" src={props.imgUrl || 'img/perfil.png'}/>
+                            <img className="pregunta_foto"
+                                 src={props.imgUrl || 'img/perfil.png'}/>
                             <div className="absolute imgUpload">
                                 <img className="editImg"
                                      src="/views/crear/upload.svg"/>
@@ -89,7 +92,7 @@ export function CrearPreguntas(props) {
                             value={props.respuestas[3] || 'Respuesta 4'} size="regular"
                             onClick={((e) => handleConfigurarRespuesta(e, 3))}/>
                 </div>
-                <form onSubmit={onImageSubmit} className="display-none">
+                <form className="display-none">
                     <input type="file" onChange={onImageChange} ref={inputFile}/>
                 </form>
             </div>

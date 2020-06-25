@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Input from "../Components/Input";
 import Select from "react-select";
 import QuizMasterService from '../Libraries/QuizMasterServices';
@@ -6,6 +6,7 @@ import {useJuego} from "../Libraries/JuegoContextLib";
 import {BrowserRouter as useLocation} from "react-router-dom";
 
 import "../Css/ConfigurarJuego.css";
+import Button from "../Components/Button";
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -13,14 +14,15 @@ function useQuery() {
 
 export default function ConfigurarJuego(props) {
     const [canciones, setCanciones] = useState([]);
-    const [esPrivadoJuego, setEsPrivadoJuego] = useState(true);
     const [juego, setJuego] = useState([]);
-    const [esContext, setEsContext] = useState(false);
+    const [esContext, setEsContext] = useState(true);
+    const inputFile = useRef(null);
 
     const juego_context = useJuego();
 
     const handleChangeMusica = ((event) => {
-        esContext ? juego.setCancionSeleccionada(event.target.value) : juego_context.setCancionSeleccionada(event.target.value);
+        //console.log(event);
+        !esContext ? juego.setCancionSeleccionada(event.value) : juego_context.setCancionSeleccionada(event.value);
     });
 
     useEffect(() => {
@@ -30,6 +32,7 @@ export default function ConfigurarJuego(props) {
             let data = QuizMasterService.obtenerJuego({"id": props.match.params.id});
             setJuego(data);
             setEsContext(false);
+            console.log("wtf!?");
         } else if (juego_context.idJuego != null) {
             setEsContext(true);
         }
@@ -42,7 +45,7 @@ export default function ConfigurarJuego(props) {
                 let valor = {value: item.idMusica, label: item.tituloMusica};
                 tmpCanciones.push(valor);
                 if (item.idMusica === juego.idMusica) {
-                    esContext ? juego.setCancionSeleccionada(valor) : juego_context.setCancionSeleccionada(valor);
+                    !esContext ? juego.setCancionSeleccionada(valor) : juego_context.setCancionSeleccionada(valor);
                 }
             });
             await setCanciones(tmpCanciones);
@@ -51,7 +54,7 @@ export default function ConfigurarJuego(props) {
     }, []);
 
     const handleChangeDescripcion = ((event) => {
-        esContext ? juego.setDescripcion(event.target.value) : juego_context.setDescripcion(event.target.value);
+        !esContext ? juego.setDescripcion(event.target.value) : juego_context.setDescripcion(event.target.value);
     });
 
     const cambiarImagen = ((_value) => {
@@ -59,7 +62,7 @@ export default function ConfigurarJuego(props) {
     });
 
     const cambiarPrivacidad = ((event) => {
-        esContext ? juego.setEsPrivadoJuego(event.target.checked) : juego_context.setEsPrivadoJuego(event.target.checked);
+        !esContext ? juego.setEsPrivadoJuego(event.target.checked) : juego_context.setEsPrivadoJuego(event.target.checked);
     });
 
     const cambiarMusica = ((_value) => {
@@ -67,7 +70,31 @@ export default function ConfigurarJuego(props) {
     });
 
     const cambiarPassword = ((event) => {
-        esContext ? juego.setPassword(event.target.value) : juego_context.setPassword(event.target.value);
+        !esContext ? juego.setPassword(event.target.value) : juego_context.setPassword(event.target.value);
+    });
+
+    function subirImagen(event) {
+        let filesSelected = event.target.files;
+        if (filesSelected.length > 0) {
+            var fileToLoad = filesSelected[0];
+            var fileReader = new FileReader();
+
+            fileReader.onload = function (fileLoadedEvent) {
+                !esContext ? juego.setCoverJuego(fileLoadedEvent.target.result) : juego_context.setCoverJuego(fileLoadedEvent.target.result);
+                !esContext ? juego.setCoverEsVideo(false) : juego_context.setCoverEsVideo(false);
+            };
+            fileReader.readAsDataURL(fileToLoad);
+        }
+    }
+
+    const handleClickImage = (() => {
+        inputFile.current.click();
+    });
+
+    const onImageChange = ((e) => {
+        //esContext ? juego.setCoverJuego(e.target.files[0]) : juego_context.setCoverJuego(e.target.files[0]);
+        subirImagen(e);
+        //this.onImageSubmit()
     });
 
     function render() {
@@ -83,7 +110,7 @@ export default function ConfigurarJuego(props) {
                                     type="text"
                                     name="titulo"
                                     placeholder="Titulo"
-                                    defaultChecked={esContext ? juego.titulo : juego_context.titulo}
+                                    defaultChecked={!esContext ? juego.titulo : juego_context.titulo}
                                 />
                             </p>
 
@@ -94,7 +121,7 @@ export default function ConfigurarJuego(props) {
                                 placeholder="Descripción"
                                 type="textarea"
                                 rows="10"
-                                value={esContext ? juego.descripcion : juego_context.descripcion}
+                                value={!esContext ? juego.descripcion : juego_context.descripcion}
                                 onChange={handleChangeDescripcion}
                                 cols="50"
                             />
@@ -103,7 +130,7 @@ export default function ConfigurarJuego(props) {
                             <ul>
                                 <li>
                                     <input onChange={cambiarPrivacidad} type="checkbox"
-                                           defaultValue={esContext ? juego.esPrivadoJuego : juego_context.esPrivadoJuego}
+                                           defaultValue={!esContext ? juego.esPrivadoJuego : juego_context.esPrivadoJuego}
                                     /> <label>Es privado</label>
                                 </li>
                             </ul>
@@ -119,19 +146,25 @@ export default function ConfigurarJuego(props) {
                             </p>
                         </div>
 
-                        <div className="seccion2-config card">
-                            <img
-                                class="gamecoverImage"
-                                id="gamecover"
-                                width="450"
-                                height="300"
-                                src={"/img/" + (esContext ? juego.coverJuego : juego_context.coverJuego)}
-                                placeholder="GameCover"
-                            />
+                        <div className="seccion2-config card ">
+                            <div className="relative width-inherit" onClick={handleClickImage}>
+                                <img
+                                    class="gamecoverImage"
+                                    id="gamecover"
+                                    width="450"
+                                    height="300"
+                                    src={(!esContext ? juego.coverJuego : juego_context.coverJuego) != null ? (!esContext ? juego.coverJuego : juego_context.coverJuego) : 'img/perfil.png'}
+                                    onChange={subirImagen}
+                                />
+                                <div className="absolute imgUpload">
+                                    <img className="editImg"
+                                         src="/views/crear/upload.svg"/>
+                                </div>
+                            </div>
                             <br/>
 
                             <Select
-                                value={juego.cancionSeleccionada}
+                                defaultValue={(!esContext ? juego.cancionSeleccionada : juego_context.cancionSeleccionada) != null ? (!esContext ? juego.cancionSeleccionada : juego_context.cancionSeleccionada) : ''}
                                 onChange={handleChangeMusica}
                                 options={canciones}
                             />
@@ -139,9 +172,16 @@ export default function ConfigurarJuego(props) {
                     </div>
 
                     <div className="configuracionJuego-submit mt-20">
-                        <input type="submit" className="btn-regular" value="OK"/>
+                        {
+                            esContext ?
+                                <Button size="regular" value="Volver" to="/crear"/> :
+                                <Button size="regular" value="Guardar" to="/configurarJuego"/>
+                        }
                     </div>
 
+                </form>
+                <form className="display-none">
+                    <input type="file" onChange={onImageChange} ref={inputFile}/>
                 </form>
             </div>
         );

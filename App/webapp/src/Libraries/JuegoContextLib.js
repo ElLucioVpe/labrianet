@@ -10,7 +10,8 @@ export function JuegoProvider(props) {
     const [preguntaSeleccionada, setPreguntaSeleccionada] = useState(0);
     const [titulo, setTitulo] = useState("kek");
     const [idMusica, setIdMusica] = useState(null);
-    const [coverJuego, setCoverJuego] = useState("perfil.png");
+    const [coverJuego, setCoverJuego] = useState(null);
+    const [coverEsVideo, setCoverEsVideo] = useState(false);
     const [esPrivadoJuego, setEsPrivadoJuego] = useState(false);
     const [configurandoRespuesta, setConfigurandoRespuesta] = useState(null);
     const [cancionSeleccionada, setCancionSeleccionada] = useState(null);
@@ -45,7 +46,9 @@ export function JuegoProvider(props) {
             cancionSeleccionada,
             setCancionSeleccionada,
             coverJuego,
-            setCoverJuego
+            setCoverJuego,
+            coverEsVideo,
+            setCoverEsVideo
         })
     }, [
         idJuego,
@@ -65,7 +68,11 @@ export function JuegoProvider(props) {
         idMusica,
         setIdMusica,
         cancionSeleccionada,
-        setCancionSeleccionada
+        setCancionSeleccionada,
+        coverJuego,
+        setCoverJuego,
+        coverEsVideo,
+        setCoverEsVideo
     ])
 
     return <JuegoContext.Provider value={value} {...props}/>

@@ -106,18 +106,68 @@ export default function CrearJuego() {
     });
 
     const publicarJuego = (async () => {
-        console.log(usuario.usuario);
-        await QuizMasterService.crearJuego({
+        var dataJuego = {
             "User_loginnameUser": usuario.usuario,
-            "tituloJuego": titulo,
+            "tituloJuego": (titulo || "Titulo"),
             "descripcionJuego": "sample string 4",
             "esPrivadoJuego": 0,
-            "coverJuego": "sample string 5",
-            "Musica_idMusica": 1,
-            "activadoJuego": 1,
-            accessToken: usuario.accessToken
+            "coverJuego": juego.coverJuego != null ? juego.coverJuego : "",
+            "Musica_idMusica": juego.idMusica != null ? juego.idMusica : "1",
+            "activadoJuego": juego.esPrivadoJuego != null ? juego.esPrivadoJuego : "1",
+            "accessToken": usuario.accessToken,
+            "preguntas": []
+        };
+        let xd;
+        preguntas.forEach(xd = async function (item, i) {
+            /*console.log(i);
+            console.log(item);*/
+            let respuestas = [];
+            let respuestaCorrecta = item.respuestaCorrecta;
+            await item.respuestas.forEach(function (item, i) {
+                respuestas.push({
+                    "esCorrectoRespuesta": respuestaCorrecta === i ? 1 : 0,
+                    "contenidoRespuesta": item != null ? item : "Respuesta"
+                });
+            });
+            await dataJuego.preguntas.push({
+                "segundosPregunta": item.segundos != null ? item.segundos : 40,
+                "puntosPregunta": item.puntaje != null ? item.puntaje : 100,
+                "contenidoPregunta": item.titulo != null ? item.titulo : "Pregunta",
+                "tipoPregunta": "asd",
+                "urlAyudaPregunta": item.imgUrl != null ? item.imgUrl : "",
+                "startAyuda": 1,
+                "endAyuda": 1,
+                "respuestas": respuestas
+            });
         });
+        console.log(dataJuego);
+        await QuizMasterService.crearJuego(dataJuego);
     });
+
+    function uploadFile(event) {
+        let file = event.target.files[0];
+        console.log(file);
+
+        if (file) {
+            let data = new FormData();
+            data.append('file', file);
+            // axios.post('/files', data)...
+        }
+    }
+
+    function subirImagen(event) {
+        let filesSelected = event.target.files;
+        if (filesSelected.length > 0) {
+            var fileToLoad = filesSelected[0];
+            var fileReader = new FileReader();
+
+            fileReader.onload = function (fileLoadedEvent) {
+                cambiarImgUrl(fileLoadedEvent.target.result);
+                juego.setCoverEsVideo(false);
+            };
+            fileReader.readAsDataURL(fileToLoad);
+        }
+    }
 
     function render() {
         return (
@@ -151,6 +201,7 @@ export default function CrearJuego() {
                         cambiarPuntaje={cambiarPuntaje}
                         cambiarSegundos={cambiarSegundos}
                         configurarRespuesta={setConfigurandoRespuesta}
+                        subirImagen={subirImagen}
 
                         {...preguntas[preguntaSeleccionada]}/>
                 </div>
