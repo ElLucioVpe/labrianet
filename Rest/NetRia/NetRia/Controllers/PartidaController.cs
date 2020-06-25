@@ -86,20 +86,17 @@ namespace NetRia.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            DTOBaseResponse response = new DTOBaseResponse();
+            int idPartida;
             try
             {
                 BusinessLogic.Controllers.PartidaController controller = new BusinessLogic.Controllers.PartidaController();
-                controller.CreatePartida(partida);
-                response.Success = true;
+                idPartida=controller.CreatePartida(partida);
             }
             catch (Exception ex)
             {
-                response.Success = false;
-                response.Error = ex.ToString();
+                idPartida = -1;
             }
-            return Ok(response);
+            return Ok(idPartida);
         }
 
 

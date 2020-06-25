@@ -17,6 +17,7 @@ namespace Common.DataTransferObjects
         public int Musica_idMusica { get; set; }
         public Nullable<short> activadoJuego { get; set; }
         public string password { get; set; }
+
         public List<DTOPregunta> preguntas { get; set; }
     }
 }

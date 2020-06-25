@@ -72,15 +72,17 @@ namespace BusinessLogic.Controllers
             }
         }
 
-        public void CreatePartida(DTOPartida partida)
+        public int CreatePartida(DTOPartida partida)
         {
             try
             {
+                int idPartida;
                 using (UnitOfWork uow = new UnitOfWork())
                 {
 
-                    uow.PartidaRepository.Create(_mapper.MapFromDTO(partida));
+                    idPartida = uow.PartidaRepository.Create(_mapper.MapFromDTO(partida));
                     uow.SaveChanges();
+                    return idPartida;
                 }
             }
             catch (Exception ex)
