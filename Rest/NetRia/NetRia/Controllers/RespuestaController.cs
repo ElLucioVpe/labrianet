@@ -121,5 +121,30 @@ namespace NetRia.Controllers
             }
             return Ok(response);
         }
+
+
+        // POST: api/Respuesta
+        [HttpPost]
+        public IHttpActionResult RespuestaRespondida(int idRespuesta, int idPartida)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            DTOBaseResponse response = new DTOBaseResponse();
+            try
+            {
+                BusinessLogic.Controllers.RespuestaController controller = new BusinessLogic.Controllers.RespuestaController();
+                controller.RespuestaRespondida(idRespuesta, idPartida);
+                response.Success = true;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Error = ex.ToString();
+            }
+            return Ok(response);
+        }
     }
 }
