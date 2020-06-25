@@ -28,6 +28,16 @@ namespace BusinessLogic.DataModel.Mappers
                 activadoJuego = juego.activadoJuego,
                 password = juego.password
             };
+
+            PreguntaMapper _mapperPreg = new PreguntaMapper();
+            if (pJuego.preguntas != null)
+            {
+                foreach (Pregunta preg in juego.preguntas)
+                {
+                    pJuego.preguntas.Add(_mapperPreg.MapToDTO(preg));
+                }
+            }
+
             return pJuego;
         }
         public Juego MapFromDTO(DTOJuego dto)
@@ -47,6 +57,15 @@ namespace BusinessLogic.DataModel.Mappers
                 password = dto.password
 
             };
+
+            PreguntaMapper _mapperPreg = new PreguntaMapper();
+            if (dto.preguntas != null)
+            {
+                foreach (DTOPregunta preg in dto.preguntas)
+                {
+                    juego.preguntas.Add(_mapperPreg.MapFromDTOPregunta(preg));
+                }
+            }
 
             return juego;
         }

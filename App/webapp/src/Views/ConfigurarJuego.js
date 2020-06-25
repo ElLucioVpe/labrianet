@@ -1,75 +1,74 @@
 import React, {useEffect, useState} from "react";
-import CheckBox from "../Components/CheckBox";
 import Input from "../Components/Input";
 import Select from "react-select";
 import QuizMasterService from '../Libraries/QuizMasterServices';
 import {useJuego} from "../Libraries/JuegoContextLib";
 import {BrowserRouter as useLocation} from "react-router-dom";
 
-
 import "../Css/ConfigurarJuego.css";
-
-//array de canciones por defecto, por si ocurre un error
-const canciones = [{value: "0", label: "Musica del juego"}];
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
 
 export default function ConfigurarJuego(props) {
-    const [privacidad, setPrivacidad] = useState([
-        {id: 1, value: "Público", isChecked: true},
-        {id: 2, value: "Privado", isChecked: false},
-    ]);
+    const [canciones, setCanciones] = useState([]);
+    const [esPrivadoJuego, setEsPrivadoJuego] = useState(true);
     const [juego, setJuego] = useState([]);
-    const [cancionSeleccionada, setCancionSeleccionada] = useState({value: "null", label: "Musica del juego"});
+    const [esContext, setEsContext] = useState(false);
 
     const juego_context = useJuego();
-    //let query = useQuery();
 
-    const handleChangeMusica = ((cancionSeleccionada) => {
-        setCancionSeleccionada(cancionSeleccionada);
-    });
-
-    const handleCheckChieldElement = ((event) => {
-        let tmpPrivacidad = privacidad;
-        privacidad.forEach((item) => {
-            if (item.value === event.target.value)
-                item.isChecked = event.target.checked;
-            else item.isChecked = false;
-        });
-        setPrivacidad(tmpPrivacidad);
+    const handleChangeMusica = ((event) => {
+        esContext ? juego.setCancionSeleccionada(event.target.value) : juego_context.setCancionSeleccionada(event.target.value);
     });
 
     useEffect(() => {
-        if ((props.match.params.id != null) && (juego_context.juegoTemp == null)) {
+        setCanciones([{value: "0", label: "Musica del juego"}]);
+
+        if ((props.match != null) && (juego_context.idJuego == null)) {
             let data = QuizMasterService.obtenerJuego({"id": props.match.params.id});
             setJuego(data);
-        } else if (juego_context.juegoTemp != null) {
-            setJuego(juego_context.juegoTemp);
+            setEsContext(false);
+        } else if (juego_context.idJuego != null) {
+            setEsContext(true);
         }
+        doIt();
 
-        //Modifico los checkbox de privacidad
-        let tmpPrivacidad = privacidad;
-        if (juego.esPrivadoJuego === 1) {
-            tmpPrivacidad.forEach((item) => {
-                if (item.value === "Privado") item.isChecked = true;
-                else item.isChecked = false;
+        async function doIt() {
+            let tmpCanciones = canciones;
+            let data_canciones = await QuizMasterService.obtenerListadoMusica();
+            await data_canciones.forEach((item) => {
+                let valor = {value: item.idMusica, label: item.tituloMusica};
+                tmpCanciones.push(valor);
+                if (item.idMusica === juego.idMusica) {
+                    esContext ? juego.setCancionSeleccionada(valor) : juego_context.setCancionSeleccionada(valor);
+                }
             });
+            await setCanciones(tmpCanciones);
         }
-        setPrivacidad(tmpPrivacidad);
-
-        //Cargo select de musica
-        let data_canciones = QuizMasterService.obtenerListadoMusica();
-        data_canciones.forEach((item) => {
-            let valor = {value: item.idMusica, label: item.tituloMusica};
-            canciones.concat(valor); //deberia ser titulo
-            if (item.idMusica === juego.Musica_idMusica) {
-                setCancionSeleccionada(valor);
-            }
-        });
 
     }, []);
+
+    const handleChangeDescripcion = ((event) => {
+        esContext ? juego.setDescripcion(event.target.value) : juego_context.setDescripcion(event.target.value);
+    });
+
+    const cambiarImagen = ((_value) => {
+        juego.set(_value);
+    });
+
+    const cambiarPrivacidad = ((event) => {
+        esContext ? juego.setEsPrivadoJuego(event.target.checked) : juego_context.setEsPrivadoJuego(event.target.checked);
+    });
+
+    const cambiarMusica = ((_value) => {
+        juego.set(_value);
+    });
+
+    const cambiarPassword = ((event) => {
+        esContext ? juego.setPassword(event.target.value) : juego_context.setPassword(event.target.value);
+    });
 
     function render() {
         return (
@@ -84,7 +83,7 @@ export default function ConfigurarJuego(props) {
                                     type="text"
                                     name="titulo"
                                     placeholder="Titulo"
-                                    defaultValue={juego.titulo}
+                                    defaultChecked={esContext ? juego.titulo : juego_context.titulo}
                                 />
                             </p>
 
@@ -95,20 +94,18 @@ export default function ConfigurarJuego(props) {
                                 placeholder="Descripción"
                                 type="textarea"
                                 rows="10"
-                                value={juego.descripcion}
+                                value={esContext ? juego.descripcion : juego_context.descripcion}
+                                onChange={handleChangeDescripcion}
                                 cols="50"
                             />
                             <br/>
 
                             <ul>
-                                {privacidad.map((item) => {
-                                    return (
-                                        <CheckBox
-                                            handleCheckChieldElement={handleCheckChieldElement}
-                                            {...item}
-                                        />
-                                    );
-                                })}
+                                <li>
+                                    <input onChange={cambiarPrivacidad} type="checkbox"
+                                           defaultValue={esContext ? juego.esPrivadoJuego : juego_context.esPrivadoJuego}
+                                    /> <label>Es privado</label>
+                                </li>
                             </ul>
                             <p>
                                 <input
@@ -117,6 +114,7 @@ export default function ConfigurarJuego(props) {
                                     name="password"
                                     placeholder="Password"
                                     value={juego.password}
+                                    onChange={cambiarPassword}
                                 />
                             </p>
                         </div>
@@ -127,13 +125,13 @@ export default function ConfigurarJuego(props) {
                                 id="gamecover"
                                 width="450"
                                 height="300"
-                                src={"../../public/img/" + juego.coverJuego}
+                                src={"/img/" + (esContext ? juego.coverJuego : juego_context.coverJuego)}
                                 placeholder="GameCover"
                             />
                             <br/>
 
                             <Select
-                                value={cancionSeleccionada}
+                                value={juego.cancionSeleccionada}
                                 onChange={handleChangeMusica}
                                 options={canciones}
                             />

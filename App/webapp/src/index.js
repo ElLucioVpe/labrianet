@@ -97,9 +97,7 @@ function App() {
                 <Route path="/resumen">
                     <Resumenjuego/>
                 </Route>
-                <Route path="/configurarJuego/:id">
-                    <ConfigurarJuego/>
-                </Route>
+                <Route path="/configurarJuego/:id" component={ConfigurarJuego}/>
                 <Route path="/configurarJuego">
                     <ConfigurarJuego/>
                 </Route>

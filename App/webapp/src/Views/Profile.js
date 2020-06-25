@@ -4,13 +4,14 @@ import ProfileUserStats from '../Components/ProfileUserStats.js'
 import Button from '../Components/Button'
 import '../Css/Profile.css'
 import QuizMasterService from '../Libraries/QuizMasterServices';
+import {useUsuario} from "../Libraries/UserContextLib";
 
 export default function Profile() {
-    const [nickUser, setNickUser] = useState("xdxd");
+    const usuario = useUsuario();
+    const [juegos, setJuegos] = useState([]);
 
     useEffect(() => {
-        //let data = QuizMasterService.obtenerProfile();
-        setNickUser("xdxdxd");
+        //let data = QuizMasterService.obtenerJuegosDeUsuario();
     }, []);
 
     function render() {
@@ -18,11 +19,11 @@ export default function Profile() {
             <div class="profile">
                 <div class="usernameSection">
                     <img className="profile-img" src="img/perfil.png"/>
-                    <h1>{nickUser}</h1>
+                    <h1>{usuario.usuario}</h1>
                     <Button class="item" to="/crear" value="Crear quiz nueva" size="regular"/>
                 </div>
                 <ProfileUserInfo/>
-                <ProfileUserStats/>
+                <ProfileUserStats juegos={juegos}/>
             </div>
         )
     }

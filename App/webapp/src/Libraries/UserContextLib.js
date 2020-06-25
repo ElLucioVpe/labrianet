@@ -32,40 +32,38 @@ export function UsuarioProvider(props) {
     });
 
     useEffect(() => {
-        console.log("me cago en todo lo que cagable willy");
-        if (Cookies.get('username') !== null || Cookies.get('username') !== "") {
-            if (Cookies.get('accessToken') !== null) {
-                setUsuario(Cookies.get('username'));
-                setAccessToken(Cookies.get('accessToken'));
-                setInicioSesion(true);
-                getUserData();
+        async function doIt() {
+            if (Cookies.get('username') != null || Cookies.get('username') === "") {
+                if (Cookies.get('accessToken') != null) {
+                    await setUsuario(Cookies.get('username'));
+                    await setAccessToken(Cookies.get('accessToken'));
+                    await setInicioSesion(true);
+                    await getUserData(Cookies.get('username'), Cookies.get('accessToken'));
+                }
             }
-        }
+        };
+        doIt();
     }, []);
 
-    async function getUserData() {
-        if (usuario !== null && usuario !== "") {
-            Axios.get(BASE_URL + '/api/User/GetUser',
-                {
-                    params: {
-                        id: usuario
-                    },
-                    headers: {
-                        'Accept': 'application/json',
-                        'Authorization': 'Bearer ' + accessToken
-                    }
+    async function getUserData(user, token) {
+        Axios.get(BASE_URL + '/api/User/GetUser',
+            {
+                params: {
+                    id: user
+                },
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': 'Bearer ' + token
                 }
-            ).then(function (response) {
-                setNickname(response.data.nickUser);
-                setFechaUser(response.data.fechaUser);
-                return true;
-            }).catch(function (error) {
-                // handle error
-                return false;
-            });
-        } else {
+            }
+        ).then(function (response) {
+            setNickname(response.data.nickUser);
+            setFechaUser(response.data.fechaUser);
+            return true;
+        }).catch(function (error) {
+            // handle error
             return false;
-        }
+        });
     }
 
     async function login(user, password) {

@@ -11,7 +11,8 @@ export const Input = ({
                           name = "",
                           rows,
                           cols,
-                          onChange
+                          onChange,
+                          onClick
                       }) => {
     size = "input-" + size;
     let html = "";
@@ -34,6 +35,8 @@ export const Input = ({
                 placeholder={placeholder}
                 defaultValue={value}
                 name={name}
+                onChange={onChange}
+                onClick={onClick}
                 id={id}
                 rows={rows}
                 cols={cols}

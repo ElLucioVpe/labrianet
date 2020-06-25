@@ -12,6 +12,7 @@ using Common.DataTransferObjects;
 using BusinessLogic.DataModel.Mappers;
 using BusinessLogic.DataModel.Repositories;
 using BusinessLogic.Controllers;
+using System.IO;
 
 namespace NetRia.Controllers
 {
@@ -92,6 +93,20 @@ namespace NetRia.Controllers
             try
             {
                 BusinessLogic.Controllers.PreguntaController controller = new BusinessLogic.Controllers.PreguntaController();
+
+                if (pregunta.urlAyudaPregunta != "" && !pregunta.urlAyudaPregunta.StartsWith("http"))
+                {
+                    var bytes = Convert.FromBase64String(pregunta.urlAyudaPregunta);
+                    string nombreFile = "imagenAyudaPregunta" + pregunta.idPregunta;
+                    string filePath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "/images/ayuda/" + nombreFile;
+                    using (var imageFile = new FileStream(filePath, FileMode.Create))
+                    {
+                        imageFile.Write(bytes, 0, bytes.Length);
+                        imageFile.Flush();
+                    }
+                    pregunta.urlAyudaPregunta = nombreFile;
+                }
+
                 controller.CreatePregunta(pregunta);
                 response.Success = true;
             }

@@ -30,8 +30,6 @@ export default function CrearJuego() {
     const [titulo, setTitulo] = useState(null);
     const [configurandoRespuesta, setConfigurandoRespuesta] = useState(null);
 
-    console.log(QuizMasterService);
-
     const handleChange = ((event) => {
         setTitulo(event.target.value);
     });
@@ -39,6 +37,7 @@ export default function CrearJuego() {
     useEffect(() => {
         juego.setPreguntas(preguntas);
         juego.setTitulo(titulo);
+        juego.setIdJuego(0);
     }, [preguntas, titulo]);
 
     const crearPregunta = (async (event) => {
