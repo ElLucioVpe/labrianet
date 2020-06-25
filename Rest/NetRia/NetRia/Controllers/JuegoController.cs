@@ -13,6 +13,7 @@ using BusinessLogic.DataModel.Mappers;
 using BusinessLogic.DataModel.Repositories;
 using BusinessLogic.Controllers;
 using System.Security.Claims;
+using System.IO;
 
 namespace NetRia.Controllers
 {
@@ -34,6 +35,16 @@ namespace NetRia.Controllers
             return juegos;
         }
 
+        // GET: api/Juego
+        public IEnumerable<DTOJuego> GetJuegosJugador(string loginName)
+        {
+
+            BusinessLogic.Controllers.JuegoController controller = new BusinessLogic.Controllers.JuegoController();
+            List<DTOJuego> juegos = controller.GetJuegosJugador(loginName);
+
+            return juegos;
+        }
+
         // GET: api/Juego/5
         public IHttpActionResult GetJuego(int id)
         {
@@ -44,6 +55,25 @@ namespace NetRia.Controllers
                 return NotFound();
             }
             return Ok(juego);
+        }
+
+        public IHttpActionResult GetRanking(int id)
+        {
+            BusinessLogic.Controllers.JuegoController controller = new BusinessLogic.Controllers.JuegoController();
+            List<DTORank> ranking = controller.GetRanking(id);
+            if (ranking == null)
+            {
+                return NotFound();
+            }
+            return Ok(ranking);
+        }
+
+        // GET: api/Juego/5
+        public IHttpActionResult GetPlayersQueJugaron(int id)
+        {
+            BusinessLogic.Controllers.JuegoController controller = new BusinessLogic.Controllers.JuegoController();
+            int players = controller.PlayersQueJugaron(id);
+            return Ok(players);
         }
 
         // PUT: api/Juego/5
@@ -100,6 +130,18 @@ namespace NetRia.Controllers
             try
             {
                 BusinessLogic.Controllers.JuegoController controller = new BusinessLogic.Controllers.JuegoController();
+
+                if (juego.coverJuego != "") {
+                    var bytes = Convert.FromBase64String(juego.coverJuego);
+                    string nombreFile = "coverJuego" + juego.idJuego;
+                    string filePath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "/images/covers/" + nombreFile;
+                    using (var imageFile = new FileStream(filePath, FileMode.Create))
+                    {
+                        imageFile.Write(bytes, 0, bytes.Length);
+                        imageFile.Flush();
+                    }
+                    juego.coverJuego = nombreFile;
+                }
                 idGame = controller.CreateJuego(juego);
                 
             }

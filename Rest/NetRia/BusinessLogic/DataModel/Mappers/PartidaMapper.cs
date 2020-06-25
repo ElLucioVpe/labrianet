@@ -9,7 +9,7 @@ using Common.DataTransferObjects;
 
 namespace BusinessLogic.DataModel.Mappers
 {
-    class PartidaMapper
+    public class PartidaMapper
     {
         public DTOPartida MapToDTO(Partida partida)
         {
@@ -39,7 +39,6 @@ namespace BusinessLogic.DataModel.Mappers
                 return null;
             Partida partida = new Partida()
             {
-      
                 Juego_idJuego = dto.Juego_idJuego,
                 nickUsuario = dto.nickUsuario
             };

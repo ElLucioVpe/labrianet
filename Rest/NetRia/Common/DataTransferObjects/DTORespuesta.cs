@@ -10,7 +10,7 @@ namespace Common.DataTransferObjects
     {
         public int idRespuesta { get; set; }
         public int Pregunta_idPregunta { get; set; }
-        public string esCorrectoRespuesta { get; set; }
+        public Nullable<short> esCorrectoRespuesta { get; set; }
         public string contenidoRespuesta { get; set; }
 
         public List<DTOPartida> respondieron { get; set; }

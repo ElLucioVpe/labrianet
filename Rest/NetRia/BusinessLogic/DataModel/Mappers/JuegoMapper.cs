@@ -25,8 +25,19 @@ namespace BusinessLogic.DataModel.Mappers
                 esPrivadoJuego = juego.esPrivadoJuego,
                 coverJuego = juego.coverJuego,
                 Musica_idMusica = juego.Musica_idMusica.GetValueOrDefault(),
-                activadoJuego = juego.activadoJuego
+                activadoJuego = juego.activadoJuego,
+                password = juego.password
             };
+
+            PreguntaMapper _mapperPreg = new PreguntaMapper();
+            if (pJuego.preguntas != null)
+            {
+                foreach (Pregunta preg in juego.preguntas)
+                {
+                    pJuego.preguntas.Add(_mapperPreg.MapToDTO(preg));
+                }
+            }
+
             return pJuego;
         }
         public Juego MapFromDTO(DTOJuego dto)
@@ -42,8 +53,19 @@ namespace BusinessLogic.DataModel.Mappers
                 esPrivadoJuego = dto.esPrivadoJuego,
                 coverJuego = dto.coverJuego,
                 Musica_idMusica = dto.Musica_idMusica,
-                activadoJuego = dto.activadoJuego
+                activadoJuego = dto.activadoJuego,
+                password = dto.password
+
             };
+
+            PreguntaMapper _mapperPreg = new PreguntaMapper();
+            if (dto.preguntas != null)
+            {
+                foreach (DTOPregunta preg in dto.preguntas)
+                {
+                    juego.preguntas.Add(_mapperPreg.MapFromDTOPregunta(preg));
+                }
+            }
 
             return juego;
         }

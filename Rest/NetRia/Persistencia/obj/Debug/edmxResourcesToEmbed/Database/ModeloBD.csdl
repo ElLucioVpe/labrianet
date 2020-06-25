@@ -4,19 +4,10 @@
     <EntitySet Name="Musicas1" EntityType="netriaModel.Musica" />
     <EntitySet Name="Partidas1" EntityType="netriaModel.Partida" />
     <EntitySet Name="Preguntas1" EntityType="netriaModel.Pregunta" />
-    <EntitySet Name="Respuestas1" EntityType="netriaModel.Respuesta" />
     <EntitySet Name="Users1" EntityType="netriaModel.User" />
     <AssociationSet Name="jugo_fk_Jugo_User1" Association="netriaModel.jugo_fk_Jugo_User1">
       <End Role="user" EntitySet="Users1" />
       <End Role="partida" EntitySet="Partidas1" />
-    </AssociationSet>
-    <AssociationSet Name="respuesta_fk_Respuesta_Pregunta1" Association="netriaModel.respuesta_fk_Respuesta_Pregunta1">
-      <End Role="pregunta" EntitySet="Preguntas1" />
-      <End Role="respuesta" EntitySet="Respuestas1" />
-    </AssociationSet>
-    <AssociationSet Name="respondio" Association="netriaModel.respondio">
-      <End Role="partida" EntitySet="Partidas1" />
-      <End Role="respuesta" EntitySet="Respuestas1" />
     </AssociationSet>
     <EntitySet Name="Juegoes1" EntityType="netriaModel.Juego" />
     <AssociationSet Name="juego_fk_Juego_Musica1" Association="netriaModel.juego_fk_Juego_Musica1">
@@ -34,6 +25,15 @@
     <AssociationSet Name="pregunta_fk_Pregunta_Juego1" Association="netriaModel.pregunta_fk_Pregunta_Juego1">
       <End Role="juego" EntitySet="Juegoes1" />
       <End Role="Pregunta" EntitySet="Preguntas1" />
+    </AssociationSet>
+    <EntitySet Name="Respuestas1" EntityType="netriaModel.Respuesta" />
+    <AssociationSet Name="respuesta_fk_Respuesta_Pregunta1" Association="netriaModel.respuesta_fk_Respuesta_Pregunta1">
+      <End Role="Pregunta" EntitySet="Preguntas1" />
+      <End Role="respuesta" EntitySet="Respuestas1" />
+    </AssociationSet>
+    <AssociationSet Name="respondio" Association="netriaModel.respondio">
+      <End Role="Partida" EntitySet="Partidas1" />
+      <End Role="respuesta" EntitySet="Respuestas1" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Musica">
@@ -54,8 +54,8 @@
     <Property Name="User_loginnameUser" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="nickUsuario" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="user" Relationship="netriaModel.jugo_fk_Jugo_User1" FromRole="partida" ToRole="user" />
-    <NavigationProperty Name="respuestas" Relationship="netriaModel.respondio" FromRole="partida" ToRole="respuesta" />
     <NavigationProperty Name="juego" Relationship="netriaModel.jugo_fk_Jugo_Juego" FromRole="Partida" ToRole="juego" />
+    <NavigationProperty Name="respuestas" Relationship="netriaModel.respondio" FromRole="Partida" ToRole="respuesta" />
   </EntityType>
   <EntityType Name="Pregunta">
     <Key>
@@ -68,21 +68,10 @@
     <Property Name="contenidoPregunta" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="tipoPregunta" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="urlAyudaPregunta" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="respuestas" Relationship="netriaModel.respuesta_fk_Respuesta_Pregunta1" FromRole="pregunta" ToRole="respuesta" />
     <NavigationProperty Name="juego" Relationship="netriaModel.pregunta_fk_Pregunta_Juego1" FromRole="Pregunta" ToRole="juego" />
     <Property Name="startAyuda" Type="Int32" />
     <Property Name="endAyuda" Type="Int32" />
-  </EntityType>
-  <EntityType Name="Respuesta">
-    <Key>
-      <PropertyRef Name="idRespuesta" />
-    </Key>
-    <Property Name="idRespuesta" Type="Int32" Nullable="false" />
-    <Property Name="Pregunta_idPregunta" Type="Int32" Nullable="false" />
-    <Property Name="esCorrectoRespuesta" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
-    <Property Name="contenidoRespuesta" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="pregunta" Relationship="netriaModel.respuesta_fk_Respuesta_Pregunta1" FromRole="respuesta" ToRole="pregunta" />
-    <NavigationProperty Name="respondieron" Relationship="netriaModel.respondio" FromRole="respuesta" ToRole="partida" />
+    <NavigationProperty Name="respuestas" Relationship="netriaModel.respuesta_fk_Respuesta_Pregunta1" FromRole="Pregunta" ToRole="respuesta" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -106,22 +95,6 @@
         <PropertyRef Name="User_loginnameUser" />
       </Dependent>
     </ReferentialConstraint>
-  </Association>
-  <Association Name="respuesta_fk_Respuesta_Pregunta1">
-    <End Type="netriaModel.Pregunta" Role="pregunta" Multiplicity="1" />
-    <End Type="netriaModel.Respuesta" Role="respuesta" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="pregunta">
-        <PropertyRef Name="idPregunta" />
-      </Principal>
-      <Dependent Role="respuesta">
-        <PropertyRef Name="Pregunta_idPregunta" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="respondio">
-    <End Type="netriaModel.Partida" Role="partida" Multiplicity="*" />
-    <End Type="netriaModel.Respuesta" Role="respuesta" Multiplicity="*" />
   </Association>
   <EntityType Name="Juego">
     <Key>
@@ -188,5 +161,32 @@
         <PropertyRef Name="Juego_idJuego" />
       </Dependent>
     </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Respuesta">
+    <Key>
+      <PropertyRef Name="idRespuesta" />
+    </Key>
+    <Property Name="idRespuesta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Pregunta_idPregunta" Type="Int32" Nullable="false" />
+    <Property Name="esCorrectoRespuesta" Type="Int16" />
+    <Property Name="contenidoRespuesta" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="pregunta" Relationship="netriaModel.respuesta_fk_Respuesta_Pregunta1" FromRole="respuesta" ToRole="Pregunta" />
+    <NavigationProperty Name="respondieron" Relationship="netriaModel.respondio" FromRole="respuesta" ToRole="Partida" />
+  </EntityType>
+  <Association Name="respuesta_fk_Respuesta_Pregunta1">
+    <End Type="netriaModel.Pregunta" Role="Pregunta" Multiplicity="1" />
+    <End Type="netriaModel.Respuesta" Role="respuesta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pregunta">
+        <PropertyRef Name="idPregunta" />
+      </Principal>
+      <Dependent Role="respuesta">
+        <PropertyRef Name="Pregunta_idPregunta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="respondio">
+    <End Type="netriaModel.Partida" Role="Partida" Multiplicity="*" />
+    <End Type="netriaModel.Respuesta" Role="respuesta" Multiplicity="*" />
   </Association>
 </Schema>

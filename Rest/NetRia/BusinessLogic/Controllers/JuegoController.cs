@@ -33,6 +33,21 @@ namespace BusinessLogic.Controllers
             return juegos;
         }
 
+        public List<DTOJuego> GetJuegosJugador(string loginName)
+        {
+            List<DTOJuego> juegos = new List<DTOJuego>();
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                var entityList = uow.JuegoRepository.GetJuegosJugador(loginName);
+                foreach (var entity in entityList)
+                {
+                    juegos.Add(_mapper.MapToDTO(entity));
+                }
+            }
+            return juegos;
+        }
+
+
         public DTOJuego GetJuego(int id)
         {
             using (UnitOfWork uow = new UnitOfWork())
@@ -47,6 +62,55 @@ namespace BusinessLogic.Controllers
                 return juego;
             }
         }
+
+        public int PlayersQueJugaron(int id)
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                int players = 0;
+                players = uow.JuegoRepository.PlayersQueJugaron(id);
+                return players;
+            }
+        }
+
+        public List<DTORank> GetRanking(int id)
+        {
+            List<DTORank> ranking = new List<DTORank>();
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                var entity = uow.JuegoRepository.Get(id);
+                if (entity == null)
+                {
+                    return null;
+                }
+             
+                    string nickUsuarioActual;
+                    Nullable<int> puntajeActual = 0;
+                    foreach (Partida partida in entity.partidas)
+                    {
+                        nickUsuarioActual = partida.nickUsuario;
+                        foreach (Respuesta respuesta in partida.respuestas)
+                        {
+                            if (respuesta.esCorrectoRespuesta == 1)
+                            {
+
+                                puntajeActual += respuesta.pregunta.puntosPregunta;
+
+                            }
+                        }
+                        DTORank rankingActual = new DTORank()
+                        {
+                            nickUsuario = nickUsuarioActual,
+                            Puntaje = puntajeActual,
+                        };
+                        ranking.Add(rankingActual);
+                    }
+
+                return ranking;
+              
+            }
+        }
+
 
         public void UpdateJuego(int id, DTOJuego juego)
         {
@@ -65,6 +129,7 @@ namespace BusinessLogic.Controllers
                     entity.coverJuego = juego.coverJuego;
                     entity.Musica_idMusica = juego.Musica_idMusica;
                     entity.activadoJuego = juego.activadoJuego;
+                    entity.password = juego.password;
 
                     uow.SaveChanges();
                 }
