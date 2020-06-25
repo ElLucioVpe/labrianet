@@ -2,21 +2,41 @@ import React, {useEffect, useState} from 'react'
 import Button from "../Components/Button";
 import Input from '../Components/Input'
 import QuizPreview from '../Components/QuizPreview'
+import QuizMasterService from '../Libraries/QuizMasterServices';
 
 import "../Css/Jugar.css"
 import CrearJuegoPreguntas from "../Components/CrearJuegoPreguntas";
 
 export default function Jugar() {
-    const [juegos, set_juegos] = useState([]);
+    const [juegos, set_juegos] = useState([{}]);
+    const [juegosBusqueda, set_JuegosBusqueda] = useState([{}]);
+    const [busqueda, setbusqueda] = useState([{}]);
 
-    const crearJuego = (async () => {
-        this.setState({
-            juegos: this.state.juegos.concat({
-                titulo: null,
-                imgUrl: null,
-            })
-        });
+    useEffect(() => {
+        async function doIt() {
+            let data_canciones = await QuizMasterService.obtenerJuegos();
+            await console.log(await QuizMasterService.obtenerJuegos());
+            await set_juegos(data_canciones);
+        }
+        doIt()
+    }, []);
+
+    const filtro = ((event) => {
+        setbusqueda(event.target.value)
     });
+
+    function filtrar() {
+        juegos.forEach((item) => {
+            if(item.titulo.includes(busqueda))
+            {
+                set_JuegosBusqueda(item)
+            }
+            else {
+
+                    }
+
+        });
+    }
 
     function render() {
         return (
@@ -25,13 +45,13 @@ export default function Jugar() {
                     <p>Si tienes un código para unirte a un juego, escríbelo aqui:</p>
                     <div className="relative ml-10">
                         <img className="invite-key" src="/views/jugar/key.webp" alt/>
-                        <Input classList="invite-input" placeholder="QM-XXX-XXX" size="big"/>
+                        <Input classList="invite-input" placeholder="QM-XXX-XXX" size="big" />
                     </div>
                 </div>
                 <div className="card mt-10">
                     <div className="filtro relative">
                         <img className="filter-search" src="/views/jugar/search.png" alt/>
-                        <Input classList="filter-input" placeholder="Filtro" size="big"/>
+                        <Input classList="filter-input" placeholder="Filtro" size="big" onChange={filtro}/>
                     </div>
                     <div
                         className="listado overflow-overlay bg-white border-radius-25px flex flex-direction-row mt-10">
