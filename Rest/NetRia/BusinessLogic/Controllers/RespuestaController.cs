@@ -105,6 +105,24 @@ namespace BusinessLogic.Controllers
 
         }
 
+        public void RespuestaRespondida(int idRespuesta, int idPartida)
+        {
+            try
+            {
+                using (UnitOfWork uow = new UnitOfWork())
+                {
+
+                    uow.RespuestaRepository.RespuestaRespondida(idRespuesta,idPartida);
+                    uow.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
         public void DeleteRespuesta(int id)
         {
             try

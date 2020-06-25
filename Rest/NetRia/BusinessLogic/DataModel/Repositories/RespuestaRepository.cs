@@ -58,6 +58,25 @@ namespace BusinessLogic.DataModel.Repositories
             }
         }
 
+
+        // POST: api/respuesta
+        public void RespuestaRespondida(int idRespuesta, int idPartida)
+        {
+
+            Respuesta respuesta = db.Respuestas.Find(idRespuesta);
+            Partida partida = db.Partidas.Find(idRespuesta);
+
+            respuesta.respondieron.Add(partida);
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+            }
+        }
+
         // DELETE: api/respuesta/5
         public void Delete(int id)
         {
