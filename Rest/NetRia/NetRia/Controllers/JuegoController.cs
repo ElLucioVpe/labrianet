@@ -13,6 +13,7 @@ using BusinessLogic.DataModel.Mappers;
 using BusinessLogic.DataModel.Repositories;
 using BusinessLogic.Controllers;
 using System.Security.Claims;
+using System.IO;
 
 namespace NetRia.Controllers
 {
@@ -129,6 +130,18 @@ namespace NetRia.Controllers
             try
             {
                 BusinessLogic.Controllers.JuegoController controller = new BusinessLogic.Controllers.JuegoController();
+
+                if (juego.coverJuego != "") {
+                    var bytes = Convert.FromBase64String(juego.coverJuego);
+                    string nombreFile = "coverJuego" + juego.idJuego;
+                    string filePath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "/images/covers/" + nombreFile;
+                    using (var imageFile = new FileStream(filePath, FileMode.Create))
+                    {
+                        imageFile.Write(bytes, 0, bytes.Length);
+                        imageFile.Flush();
+                    }
+                    juego.coverJuego = nombreFile;
+                }
                 idGame = controller.CreateJuego(juego);
                 
             }

@@ -59,7 +59,7 @@
     </Key>
     <Property Name="idRespuesta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Pregunta_idPregunta" Type="int" Nullable="false" />
-    <Property Name="esCorrectoRespuesta" Type="nvarchar" MaxLength="45" />
+    <Property Name="esCorrectoRespuesta" Type="smallint" />
     <Property Name="contenidoRespuesta" Type="nvarchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="user">

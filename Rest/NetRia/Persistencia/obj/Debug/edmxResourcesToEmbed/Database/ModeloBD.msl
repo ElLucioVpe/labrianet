@@ -35,16 +35,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Respuestas1">
-      <EntityTypeMapping TypeName="netriaModel.Respuesta">
-        <MappingFragment StoreEntitySet="respuesta">
-          <ScalarProperty Name="contenidoRespuesta" ColumnName="contenidoRespuesta" />
-          <ScalarProperty Name="esCorrectoRespuesta" ColumnName="esCorrectoRespuesta" />
-          <ScalarProperty Name="Pregunta_idPregunta" ColumnName="Pregunta_idPregunta" />
-          <ScalarProperty Name="idRespuesta" ColumnName="idRespuesta" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Users1">
       <EntityTypeMapping TypeName="netriaModel.User">
         <MappingFragment StoreEntitySet="user">
@@ -55,14 +45,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="respondio" TypeName="netriaModel.respondio" StoreEntitySet="respondio">
-      <EndProperty Name="respuesta">
-        <ScalarProperty Name="idRespuesta" ColumnName="Respuesta_idRespuesta" />
-      </EndProperty>
-      <EndProperty Name="partida">
-        <ScalarProperty Name="id" ColumnName="Jugo_idJugo" />
-      </EndProperty>
-    </AssociationSetMapping>
     <EntitySetMapping Name="Juegoes1">
       <EntityTypeMapping TypeName="netriaModel.Juego">
         <MappingFragment StoreEntitySet="juego">
@@ -78,5 +60,23 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Respuestas1">
+      <EntityTypeMapping TypeName="netriaModel.Respuesta">
+        <MappingFragment StoreEntitySet="respuesta">
+          <ScalarProperty Name="contenidoRespuesta" ColumnName="contenidoRespuesta" />
+          <ScalarProperty Name="esCorrectoRespuesta" ColumnName="esCorrectoRespuesta" />
+          <ScalarProperty Name="Pregunta_idPregunta" ColumnName="Pregunta_idPregunta" />
+          <ScalarProperty Name="idRespuesta" ColumnName="idRespuesta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="respondio" TypeName="netriaModel.respondio" StoreEntitySet="respondio">
+      <EndProperty Name="respuesta">
+        <ScalarProperty Name="idRespuesta" ColumnName="Respuesta_idRespuesta" />
+      </EndProperty>
+      <EndProperty Name="Partida">
+        <ScalarProperty Name="id" ColumnName="Jugo_idJugo" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

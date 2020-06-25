@@ -91,7 +91,7 @@ namespace BusinessLogic.Controllers
                         nickUsuarioActual = partida.nickUsuario;
                         foreach (Respuesta respuesta in partida.respuestas)
                         {
-                            if (respuesta.esCorrectoRespuesta == "1")
+                            if (respuesta.esCorrectoRespuesta == 1)
                             {
 
                                 puntajeActual += respuesta.pregunta.puntosPregunta;
