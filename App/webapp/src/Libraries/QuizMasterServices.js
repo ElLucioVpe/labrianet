@@ -73,6 +73,15 @@ const QuizMasterServices = {
             }
         });
     },
+    obtenerJuegosDeUsuario: function (props) {
+        const {data} = Axios.get('http://localhost:44353/api/Juego/GetJuego/'
+            + props.id, {
+            headers: {
+                'Authorization': 'Token ' + process.env.API_TOKEN,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        });
+    },
     obtenerProfile: function (props) {
         const {data} = Axios.get('http://localhost:44353/api/Juego/GetJuego/'
             + props.id, {
@@ -83,7 +92,10 @@ const QuizMasterServices = {
         });
     },
     obtenerListadoMusica: function () {
-        return Axios.get('http://localhost:44353/api/Musica/GetAll');
+        return Axios.get('http://localhost:44353/api/Musica/GetAll').then(response => {
+            // returning the data here allows the caller to get it through another .then(...)
+            return response.data
+        })
     }
 }
 
