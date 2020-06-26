@@ -85,6 +85,13 @@ const QuizMasterServices = {
             }
         });
     },
+    obtenerRanking: function (props){
+        return Axios.get('http://localhost:44353/api/Juego/GetRanking/'+ props.id).then(response => {
+            // returning the data here allows the caller to get it through another .then(...)
+            return response.data
+        }) 
+         
+    },
     obtenerProfile: function (props) {
         const {data} = Axios.get('http://localhost:44353/api/Juego/GetJuego/'
             + props.id, {

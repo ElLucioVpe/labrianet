@@ -79,7 +79,9 @@
     counter-increment: rowNumber;
     content: counter(rowNumber) ".";
     padding-right: 0.3em;
+    justify-content: center;  
     text-align: right;
+
 }
 
 .containerRanking ul.a {

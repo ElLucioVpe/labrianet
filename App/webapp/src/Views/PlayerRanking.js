@@ -1,11 +1,33 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import GameName from "../Components/GameName.js";
 import UserName from "../Components/UserName.js";
 import GameRanking from "../Components/GameRanking.js";
 import "../Css/PlayerRanking.css";
 import Button from "../Components/Button";
+import QuizMasterService from '../Libraries/QuizMasterServices';
 
-export default function PlayerRanking() {
+
+export default function PlayerRanking(props) {
+    const [rankings, set_rankings] = useState([{}]);
+  /* const [juegosBusqueda, set_JuegosBusqueda] = useState([{}]);*/
+    
+  /*const [busqueda, setbusqueda] = useState([{}]);*/
+
+    useEffect(() => {
+        async function doIt() {
+            let data_rankings = await QuizMasterService.obtenerRanking({id:props.match.params.id});
+            await console.log(await QuizMasterService.obtenerRanking({id:props.match.params.id}));
+            await set_rankings(data_rankings);
+        }
+        doIt()
+    }, []);
+    /*function mapearjuego() {
+    rankings.forEach((item) => {
+        <tr>
+            item.
+      </tr>
+    }
+    }*/
     function render() {
         return (
             <div class="Ranking">
@@ -26,126 +48,10 @@ export default function PlayerRanking() {
                     <div class="puntajeGeneral">
                         <div class="scroll">
                             <table cellpadding="0">
-                                <tr>
-                                    <td class="all">Leandro Borges</td>
-                                    <td class="all">700.000pts</td>
-                                </tr>
-                                <tr>
-                                    <td>Maestro</td>
-                                    <td>30.000pts</td>
-                                </tr>
-                                <tr>
-                                    <td>Martín Soca</td>
-                                    <td>900pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>500pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Ramirez</td>
-                                    <td>40pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>37pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>30pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>12pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>12pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>12pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>12pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>12pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>12pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>12pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>12pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>12pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>12pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>12pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>12pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>12pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>12pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>12pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>12pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>12pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>12pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>12pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>12pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>12pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>12pts</td>
-                                </tr>
-                                <tr>
-                                    <td>José Gonzáles</td>
-                                    <td>12pts</td>
-                                </tr>
+                                
+                                {rankings.map((ranking, index) => {
+                                    return <Ranking ranking={ranking}/>;
+                                }) }                            
                             </table>
                         </div>
                     </div>
@@ -159,6 +65,15 @@ export default function PlayerRanking() {
             </div>
         );
     }
+    function Ranking({ ranking }) {
+        return (
+          <tr className="Ranking">
+            <td className="all">{ranking.nickUsuario}</td>
+            <td className="all">{ranking.Puntaje}pts</td>
 
+          </tr>
+        );
+      }
+      
     return render();
 }
