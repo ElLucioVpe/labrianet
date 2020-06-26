@@ -68,6 +68,17 @@ namespace NetRia.Controllers
             return Ok(ranking);
         }
 
+        public IHttpActionResult GetStatsJugadoresInGame(int id)
+        {
+            BusinessLogic.Controllers.JuegoController controller = new BusinessLogic.Controllers.JuegoController();
+            DTOStatsJuego juegoStats = controller.GetStatsJugadoresInGame(id);
+            if (juegoStats == null)
+            {
+                return NotFound();
+            }
+            return Ok(juegoStats);
+        }
+
         // GET: api/Juego/5
         public IHttpActionResult GetPlayersQueJugaron(int id)
         {
