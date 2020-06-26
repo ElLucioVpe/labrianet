@@ -9,34 +9,43 @@ import CrearJuegoPreguntas from "../Components/CrearJuegoPreguntas";
 
 export default function Jugar() {
     const [juegos, set_juegos] = useState([{}]);
-    const [juegosBusqueda, set_JuegosBusqueda] = useState([{}]);
     const [busqueda, setbusqueda] = useState([{}]);
 
     useEffect(() => {
         async function doIt() {
-            let data_canciones = await QuizMasterService.obtenerJuegos();
-            await console.log(await QuizMasterService.obtenerJuegos());
-            await set_juegos(data_canciones);
+            let data_juegos = await QuizMasterService.obtenerJuegos();
+            await set_juegos(data_juegos);
         }
         doIt()
     }, []);
 
     const filtro = ((event) => {
-        setbusqueda(event.target.value)
+        setbusqueda(event.target.value);
     });
 
-    function filtrar() {
-        juegos.forEach((item) => {
-            if(item.titulo.includes(busqueda))
-            {
-                set_JuegosBusqueda(item)
-            }
-            else {
+    useEffect(() => {
+        async function doIt() {
+            let data_juegos = await QuizMasterService.obtenerJuegos();
+            await set_juegos(data_juegos);
+        }
 
+        let tmpArray = [];
+        if(busqueda.length > 0) {
+            juegos.forEach((item) => {
+                //console.log(item.tituloJuego);
+                if(item.tituloJuego != null) {
+                    if(item.tituloJuego.indexOf(busqueda) !== -1)
+                    {
+                        tmpArray.push(item);
                     }
 
-        });
-    }
+                }
+            });
+        } else {
+            doIt()
+        }
+        set_juegos(tmpArray)
+    }, [busqueda]);
 
     function render() {
         return (
