@@ -25,6 +25,7 @@ namespace BusinessLogic.DataModel.Mappers
 
             PartidaMapper _mapperPartida = new PartidaMapper();
             if (respuesta.respondieron != null) {
+                pRespuesta.respondieron = new List<DTOPartida>();
                 foreach (Partida part in respuesta.respondieron)
                 {
                     pRespuesta.respondieron.Add(_mapperPartida.MapToDTO(part));

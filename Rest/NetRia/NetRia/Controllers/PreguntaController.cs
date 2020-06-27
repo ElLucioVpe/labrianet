@@ -46,6 +46,16 @@ namespace NetRia.Controllers
             return Ok(pregunta);
         }
 
+
+        // GET: api/Pregunta/5
+        public IHttpActionResult GetStatsRespuestas(int id)
+        {
+            BusinessLogic.Controllers.PreguntaController controller = new BusinessLogic.Controllers.PreguntaController();
+            List<DTOStatsPregunta> statsPregunta = controller.GetStatsRespuestas(id);
+       
+            return Ok(statsPregunta);
+        }
+
         // PUT: api/Pregunta/5
         [HttpPost]
         public IHttpActionResult UpdatePregunta(int id, DTOPregunta pregunta)

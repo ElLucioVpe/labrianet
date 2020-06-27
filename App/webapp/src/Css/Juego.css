@@ -55,3 +55,28 @@
     margin-top: 50px;
 
 }
+
+.resp-btn {
+    font-family: Lato;
+    border: none;
+    height: 40px;
+    padding: 0 50px;
+    border-radius: 24px;
+    font-size: 17px;
+}
+
+.boton-A {
+    background-color: dodgerblue;
+}
+
+.boton-B {
+    background-color: red;
+}
+
+.boton-C {
+    background-color: limegreen;
+}
+
+.boton-D {
+    background-color: darkviolet;
+}

@@ -51,6 +51,35 @@ namespace BusinessLogic.Controllers
             }
         }
 
+        public List<DTOStatsPregunta> GetStatsRespuestas(int id)
+        {
+            List<DTOStatsPregunta> statsPregunta = new List<DTOStatsPregunta>();
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+
+                var entity = uow.PreguntaRepository.Get(id);
+                if (entity == null)
+                {
+                    return null;
+                }
+                int idResp;
+                int cantUsers = 0;
+                foreach (Respuesta respuesta in entity.respuestas) {
+                    idResp = respuesta.idRespuesta;
+                    cantUsers = respuesta.respondieron.Count;
+
+                    DTOStatsPregunta statActualRespuesta = new DTOStatsPregunta()
+                    {
+                        idRespuesta = idResp,
+                        cantidadRespondieron = cantUsers,
+                    };
+                    statsPregunta.Add(statActualRespuesta);
+                }
+
+                return statsPregunta;
+            }
+        }
+
         public void UpdatePregunta(int id, DTOPregunta pregunta)
         {
 

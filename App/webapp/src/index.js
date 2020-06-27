@@ -21,6 +21,7 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Jugar from "./Views/Jugar";
 import Logout from "./Views/Logout";
 import PreJuego from "./Views/PreJuego";
+import Juego from "./Views/Juego.js";
 
 
 function QuizMaster() {
@@ -73,9 +74,7 @@ function App() {
                 <Route path="/jugar">
                     <Jugar/>
                 </Route>
-                <Route path="/playerRanking">
-                    <PlayerRanking/>
-                </Route>
+              
                 <Route path="/grafica">
                     <Grafica/>
                 </Route>
@@ -88,6 +87,9 @@ function App() {
                 <Route path="/prejuego">
                     <PreJuego/>
                 </Route>
+                <Route path="/playerRanking/:id" component={PlayerRanking}/>
+
+                <Route path="/Juego/:id" component={Juego}/>
                 <Route path="/logout">
                     <Logout/>
                 </Route>

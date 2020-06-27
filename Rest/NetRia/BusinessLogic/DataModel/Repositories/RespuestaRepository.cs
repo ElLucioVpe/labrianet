@@ -64,7 +64,7 @@ namespace BusinessLogic.DataModel.Repositories
         {
 
             Respuesta respuesta = db.Respuestas.Find(idRespuesta);
-            Partida partida = db.Partidas.Find(idRespuesta);
+            Partida partida = db.Partidas.Find(idPartida);
 
             respuesta.respondieron.Add(partida);
 

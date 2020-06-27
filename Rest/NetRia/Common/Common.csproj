@@ -48,6 +48,8 @@
     <Compile Include="DataTransferObjects\DTOPregunta.cs" />
     <Compile Include="DataTransferObjects\DTORank.cs" />
     <Compile Include="DataTransferObjects\DTORespuesta.cs" />
+    <Compile Include="DataTransferObjects\DTOStatsJuego.cs" />
+    <Compile Include="DataTransferObjects\DTOStatsPregunta.cs" />
     <Compile Include="DataTransferObjects\DTOUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
