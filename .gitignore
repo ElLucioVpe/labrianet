@@ -134,8 +134,6 @@ Rest/NetRia/BusinessLogic/bin/Debug/BusinessLogic.pdb
 Rest/NetRia/BusinessLogic/bin/Debug/Persistencia.dll
 Rest/NetRia/BusinessLogic/bin/Debug/Persistencia.dll.config
 Rest/NetRia/BusinessLogic/bin/Debug/Persistencia.pdb
-Rest/NetRia/BusinessLogic/DataModel/Mappers/JuegoMapper.cs
-Rest/NetRia/BusinessLogic/DataModel/Mappers/PreguntaMapper.cs
 Rest/NetRia/BusinessLogic/obj/Debug/BusinessLogic.csproj.CoreCompileInputs.cache
 Rest/NetRia/BusinessLogic/obj/Debug/BusinessLogic.csprojAssemblyReference.cache
 Rest/NetRia/BusinessLogic/obj/Debug/BusinessLogic.dll
