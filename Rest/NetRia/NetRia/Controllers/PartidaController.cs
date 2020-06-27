@@ -34,7 +34,7 @@ namespace NetRia.Controllers
         // GET: api/Partida/5
         public IHttpActionResult GetPartida(int id)
         {
-            PartidaController controller = new PartidaController();
+            BusinessLogic.Controllers.PartidaController controller = new BusinessLogic.Controllers.PartidaController();
             var partida = controller.GetPartida(id);
             if (partida == null)
             {

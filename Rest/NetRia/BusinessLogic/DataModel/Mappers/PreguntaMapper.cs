@@ -31,6 +31,7 @@ namespace BusinessLogic.DataModel.Mappers
 
             RespuestaMapper _mapperResp = new RespuestaMapper();
             if (pregunta.respuestas != null) {
+                pPregunta.respuestas = new List<DTORespuesta>();
                 foreach (Respuesta resp in pregunta.respuestas)
                 {
                     pPregunta.respuestas.Add(_mapperResp.MapToDTO(resp));
