@@ -89,9 +89,10 @@ namespace BusinessLogic.Controllers
                     foreach (Partida partida in entity.partidas)
                     {
                         nickUsuarioActual = partida.nickUsuario;
+                        puntajeActual = 0;
+
                         foreach (Respuesta respuesta in partida.respuestas)
                         {
-                            puntajeActual = 0;
                             if (respuesta.esCorrectoRespuesta == 1)
                             {
 
