@@ -97,6 +97,10 @@ const QuizMasterServices = {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         });
+    },  
+     obtenerRespuestaStats: function (props) {
+        return Axios.get('http://localhost:44353/api/Pregunta/GetStatsRespuestas/'+ props.id).then(response => {
+            return response.data;})
     },
     obtenerRanking: function (props){
         return Axios.get('http://localhost:44353/api/Juego/GetRanking/'+ props.id).then(response => {

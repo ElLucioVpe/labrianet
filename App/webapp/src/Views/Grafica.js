@@ -1,10 +1,11 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 //import './Libraries/canvasjs';
 import CanvasJSReact from '../Libraries/canvasjs.react';
+import QuizMasterService from '../Libraries/QuizMasterServices';
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-export default function Grafica() {
+export default function Grafica(props) {
  /*const data = [{"name": "test1"}, {"name": "test2"}];*/
 
  const [respuesta, set_respuestas] = useState([{}]);
@@ -17,16 +18,16 @@ export default function Grafica() {
            let data_respuesta = await QuizMasterService.obtenerRespuestaStats({id:props.match.params.id});
            await console.log(await QuizMasterService.obtenerRespuestaStats({id:props.match.params.id}));
            
-           await set_juegos(data_respuesta);
+           await set_respuestas(data_respuesta);
            
        }
        doIt()
    }, []);
 
     function render() {
-
+       
         var PreguntaNumber = 9;
-        var esMultiple = true;
+        var esMultiple = false;
         var primerValor = 12;
         var segundoValor = 39;
         var primeraVF = true;//si es la correcta o no
@@ -59,13 +60,25 @@ export default function Grafica() {
                     {
                         // Change type to "doughnut", "line", "splineArea", etc.
                         type: "column",
-                        dataPoints: [
-                            {label: "A", y: primerValor, color: primeraC},
-                            {label: "B", y: segundoValor, color: segundaC}
-                        ]
+                        dataPoints:[]
+                      
                     }
                 ]
             }
+            /*respuesta.forEach(function (item, i) {
+                options1.data...
+               });*/
+            respuesta.forEach(function (ranking,i) {
+             
+                   if(ranking.cantidadRespondieron==!undefined){
+                    console.log(Respuesta(ranking));
+                    options1.data[i].dataPoints.push(Respuesta(ranking));
+                   }else{
+                   
+                   }
+
+            })
+            
         } else {
             var tercerValor = 14;
             var cuartoValor = 2;
@@ -88,9 +101,18 @@ export default function Grafica() {
             }
         }
         const options = options1;
-
-
+        //console.log(options1)
+        function Respuesta(ranking) {   
+            var id =  ranking.idRespuesta;
+            var cant= ranking.cantidadRespondieron;
+            return (
+            {label: id, y: cant, color: primeraC}
+         //console.log(      {label: id, y: cant, color: primeraC});
+  
+       );
+        }
         return (
+            
             <div class="container">
 
                 <CanvasJSChart options={options}

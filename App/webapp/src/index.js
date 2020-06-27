@@ -75,9 +75,8 @@ function App() {
                     <Jugar/>
                 </Route>
               
-                <Route path="/grafica">
-                    <Grafica/>
-                </Route>
+                <Route path="/grafica/:id" component={Grafica}/>
+                   
                 <Route path="/perfil">
                     <Perfil/>
                 </Route>
@@ -90,6 +89,7 @@ function App() {
                 <Route path="/playerRanking/:id" component={PlayerRanking}/>
 
                 <Route path="/Juego/:id" component={Juego}/>
+
                 <Route path="/logout">
                     <Logout/>
                 </Route>
