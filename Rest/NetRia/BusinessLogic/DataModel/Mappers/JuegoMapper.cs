@@ -30,7 +30,7 @@ namespace BusinessLogic.DataModel.Mappers
             };
 
             PreguntaMapper _mapperPreg = new PreguntaMapper();
-            if (pJuego.preguntas != null)
+            if (juego.preguntas != null)
             {
                 foreach (Pregunta preg in juego.preguntas)
                 {
