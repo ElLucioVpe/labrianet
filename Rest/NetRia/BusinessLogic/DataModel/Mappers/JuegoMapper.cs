@@ -32,6 +32,7 @@ namespace BusinessLogic.DataModel.Mappers
             PreguntaMapper _mapperPreg = new PreguntaMapper();
             if (juego.preguntas != null)
             {
+                pJuego.preguntas = new List<DTOPregunta>();
                 foreach (Pregunta preg in juego.preguntas)
                 {
                     pJuego.preguntas.Add(_mapperPreg.MapToDTO(preg));

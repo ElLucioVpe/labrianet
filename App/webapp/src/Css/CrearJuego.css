@@ -50,7 +50,6 @@ img.pregunta_foto {
     border-radius: 50%;
     bottom: 10px;
     right: 10px;
-    pointer-events: none;
 }
 
 .cerrarPregunta {
@@ -68,6 +67,7 @@ img.pregunta_foto {
     width: 20px;
     height: 20px;
 }
+
 @media screen and (max-width: 1000px) {
     .crearPreguntas {
         width: 100%;
@@ -77,18 +77,21 @@ img.pregunta_foto {
         grid-template-columns: 100%;
         grid-template-rows: 450px 1fr;
         column-gap: 20px;
-        
+
     }
-    .inner-tablero{
+
+    .inner-tablero {
         height: 150px;
     }
-    .crearJuegoPreguntasContainer{
+
+    .crearJuegoPreguntasContainer {
         height: 100%;
 
     }
-    .pregunta_foto{
+
+    .pregunta_foto {
         height: 100px;
         width: 10px;
     }
-    
+
 }

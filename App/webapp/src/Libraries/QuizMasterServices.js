@@ -64,21 +64,20 @@ const QuizMasterServices = {
             return false;
         });
     },
-    obtenerJuegos: function (props) {
-        return Axios.get('http://localhost:44353/api/Juego/GetAll/',
-        {
-            headers: {
-                'Authorization': 'Token ' + process.env.API_TOKEN,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }).then(response => {
+    obtenerJuego: function (id) {
+        return Axios.get(BASE_URL + '/api/Juego/GetJuego/'+id,
+            {
+                headers: {
+                    'Authorization': 'Token ' + process.env.API_TOKEN,
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
             // returning the data here allows the caller to get it through another .then(...)
-            return response.data
+            return response.data;
         });
     },
- 
-    obtenerJuego: function (props) {
-        return Axios.get('http://localhost:44353/api/Juego/GetJuego/' + props.id,
+    obtenerJuegos: function (props) {
+        return Axios.get('http://localhost:44353/api/Juego/GetAll/',
         {
             headers: {
                 'Authorization': 'Token ' + process.env.API_TOKEN,
@@ -123,7 +122,34 @@ const QuizMasterServices = {
             // returning the data here allows the caller to get it through another .then(...)
             return response.data
         })
-    }
+    },
+    crearPartida: function (props) {
+        return Axios.post(BASE_URL + '/api/Partida/CreatePartida',
+            {
+                params: {
+                    partida: props
+                }
+            }
+        ).then(function (response) {
+            return true;
+        }).catch(function (error) {
+            return false;
+        });
+    },
+    respuestaRespondida: function (idRespuesta, idPartida) {
+        return Axios.post(BASE_URL + '/api/Respuesta/RespuestaRespondida',
+            {
+                params: {
+                    idRespuesta: idRespuesta,
+                    idPartida: idPartida,
+                }
+            }
+        ).then(function (response) {
+            return true;
+        }).catch(function (error) {
+            return false;
+        });
+    },
 }
 
 export default QuizMasterServices;
