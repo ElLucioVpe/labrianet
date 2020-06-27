@@ -76,6 +76,19 @@ const QuizMasterServices = {
             return response.data
         });
     },
+ 
+    obtenerJuego: function (props) {
+        return Axios.get('http://localhost:44353/api/Juego/GetJuego/' + props.id,
+        {
+            headers: {
+                'Authorization': 'Token ' + process.env.API_TOKEN,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(response => {
+            // returning the data here allows the caller to get it through another .then(...)
+            return response.data
+        });
+    },
     obtenerJuegosDeUsuario: function (props) {
         const {data} = Axios.get('http://localhost:44353/api/Juego/GetJuego/'
             + props.id, {
