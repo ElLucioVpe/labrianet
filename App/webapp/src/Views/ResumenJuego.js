@@ -47,7 +47,7 @@ export default function ResumenJuego(props) {
                         {juegos.preguntas.map((pregunta, index) => {
                                     return <Pregunta pregunta={pregunta}/>;
                                 })}  
-                            {data.map((d) => <li key={d.name}>{d.name}</li>)}
+                            {/*data.map((d) => <li key={d.name}>{d.name}</li>)*/}
                         </ul>
                     </div>
                     <div>
