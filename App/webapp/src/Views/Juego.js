@@ -10,20 +10,23 @@ export default function Juego(props) {
     const [nickname, setNickname] = useState("Anonimo");
     const [info_juego, setInfo_juego] = useState([]);
     const [puntuacion, setPuntuacion] = useState(0);
-    const [numeroPregunta, setNumeroPregunta] = useState(0);
+    const [numeroPregunta, setNumeroPregunta] = useState(1);
     const [numeroRespuesta, setNumeroRespuesta] = useState(-1);
     const [preguntaActual, setPreguntaActual] = useState("");
     const [contesta, setContesta] = useState([]);
     const [counter, setCounter] = useState(-1);
+    const [counterPausa, setCounterPausa] = useState(0);
     const [verGrafica, setVerGrafica] = useState(false);
+    const [juegoTerminado, setJuegoTerminado] = useState(false);
 
     useEffect(() => {
         async function cargarJuego() {
             await QuizMasterService.obtenerJuego(props.match.params.id).then(
                 function (data) {
+                    console.log(data);
                     setInfo_juego(data);
-                    setPreguntaActual(info_juego.preguntas[numeroPregunta]);
-                    setCounter(preguntaActual.segundosPregunta);
+                    setPreguntaActual(data.preguntas[0]);
+                    setCounter(parseInt(data.preguntas[0].segundosPregunta));
                 }
             ).catch(function (error) {
                 // handle error
@@ -31,11 +34,26 @@ export default function Juego(props) {
             });
         }
         cargarJuego()
+
     }, []);
 
     useEffect(() => {
-        counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
-        if(counter === 0) mostrarGrafica(); //Se le acaba el tiempo
+        const timer = counter > 0 && setInterval(() => {
+            if(!verGrafica) {
+                if(counterPausa !== 0) {
+                    setCounterPausa(0);
+                    setCounter(counterPausa);
+                }
+                else setCounter(counter - 1);
+            }
+            else {
+                if(counterPausa === 0) setCounterPausa(counter);
+                setCounter(counter+1);
+            }
+            }
+            , 1000);
+        if(counter === 0 && !verGrafica) mostrarGrafica();//Se le acaba el tiempo
+        return () => clearInterval(timer);
     }, [counter]);
 
     const handleClickRespuesta = ((nroRespuesta) => {
@@ -45,25 +63,34 @@ export default function Juego(props) {
     const terminarJuego = (async () => {
         var dataPartida = {
             "Juego_idJuego": info_juego.idJuego,
-            "User_loginnameUser": usuario.usuario,
             "nickUsuario": nickname
         };
+        if(usuario.inicioSesion) dataPartida["User_loginnameUser"] = usuario.usuario;
+
         var idPartida = await QuizMasterService.crearPartida(dataPartida);
         //Creo la relacion con las preguntas
         let respuestasRespondidas;
         contesta.forEach(respuestasRespondidas = async function (item, i) {
-            await QuizMasterService.contestarRespuesta(item.idRespuesta, idPartida);
+            let exito = await QuizMasterService.respuestaRespondida(item.idRespuesta, idPartida);
+            console.log(exito);
         });
+        setJuegoTerminado(true); //para evitar se ejecute multiples veces
         window.location = '/playerRanking/'+info_juego.idJuego;
+    });
+
+    const chequeo = (() => {
+        if(info_juego.preguntas && (numeroPregunta > info_juego.preguntas.length) && !juegoTerminado && !verGrafica) {
+            terminarJuego();
+        }
     });
 
     const mostrarGrafica = (() => {
         if(verGrafica) {
+
             setVerGrafica(false);
-            handleClickSiguiente();
         } else {
-            setCounter(-1);
             setVerGrafica(true);
+            handleClickSiguiente();
         }
     });
 
@@ -74,29 +101,28 @@ export default function Juego(props) {
             if(respuesta.esCorrectoRespuesta === 1) setPuntuacion(puntuacion+preguntaActual.puntosPregunta);
             setNumeroRespuesta(-1);
         }
-        setNumeroPregunta(numeroPregunta+1);
+        setNumeroPregunta(numeroPregunta+1); //no se modifica hasta terminar la funcion
         if(info_juego.preguntas && (numeroPregunta < info_juego.preguntas.length)) {
             setPreguntaActual(info_juego.preguntas[numeroPregunta]);
-            //setCounter(-1);
-            setVerGrafica(false);
+            setCounter(info_juego.preguntas[numeroPregunta].segundosPregunta);
         } else {
-            //si ya no hay mas preguntas termina el juego
-            terminarJuego();
+            setPreguntaActual("");
         }
     });
 
     function render() {
-        let respuestas, ayuda;
+        chequeo();
+        let respuestas, respuestas2, ayuda;
 
-        if(preguntaActual) {
-            if(preguntaActual.respuestas && preguntaActual.respuestas.length > 0) {
+        if(preguntaActual != null && preguntaActual !== "") {
+            if(preguntaActual.respuestas && preguntaActual.respuestas.length > 1) {
                 respuestas = <div className="PreguntaJuego">
                     <div><Button className="btn-regular" value={"A - "+preguntaActual.respuestas[0].contenidoRespuesta} onClick={() => handleClickRespuesta(0)}/></div>
                     <div><Button className="btn-regular" value={"B - "+preguntaActual.respuestas[1].contenidoRespuesta} onClick={() => handleClickRespuesta(1)}/></div>
                 </div>;
 
-                if(preguntaActual.tipoPregunta === "Quiz") {
-                    respuestas += <div className="PreguntaJuego">
+                if(preguntaActual.tipoPregunta === "Quiz" && preguntaActual.respuestas.length === 4) {
+                    respuestas2 = <div className="PreguntaJuego">
                         <div><Button className="btn-regular" value={"C - "+preguntaActual.respuestas[2].contenidoRespuesta} onClick={() => handleClickRespuesta(2)}/></div>
                         <div><Button className="btn-regular" value={"D - "+preguntaActual.respuestas[3].contenidoRespuesta} onClick={() => handleClickRespuesta(3)}/></div>
                     </div>;
@@ -114,10 +140,14 @@ export default function Juego(props) {
 
         return (
             <div className="juegoMasterParent">
-
                 <div className="TituloNumPreg">
-                    <p>Pregunta <span id="numPreg">{numeroPregunta+1}</span></p>
-                    <p>{preguntaActual.contenidoPregunta}</p>
+                    <p>Pregunta <span id="numPreg">{numeroPregunta}</span></p>
+
+                    {verGrafica ? (
+                        <h4>{puntuacion}pts.</h4>
+                    ) : (
+                        <p>{preguntaActual.contenidoPregunta}</p>
+                    )}
                 </div>
 
                 {verGrafica ? (
@@ -128,11 +158,13 @@ export default function Juego(props) {
                     </div>,
                     <div className="RespuestasJuego">
                         {respuestas}
+                        {respuestas2}
                     </div>
                 )}
 
                 <div className="FooterJuego">
-                    <div>{counter}s</div>
+                    <div>{!verGrafica ? counter+"s" : ""}</div>
+
                     <div><Button className="btn-regular" onClick={() => mostrarGrafica()} value="Siguiente"/></div>
                 </div>
 
