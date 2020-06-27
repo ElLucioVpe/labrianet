@@ -111,6 +111,40 @@ namespace BusinessLogic.Controllers
             }
         }
 
+        public DTOStatsJuego GetStatsJugadoresInGame(int id) {
+
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                var entity = uow.JuegoRepository.Get(id);
+                if (entity == null)
+                {
+                    return null;
+                }
+                int JugadoresActual;
+                int JugadoreSinTerminarActual = 0;
+                int CantPreguntas;
+
+                JugadoresActual = entity.partidas.Count;
+                CantPreguntas = entity.preguntas.Count;
+                
+                foreach(Partida partida in entity.partidas)
+                {
+                    if (partida.respuestas.Count < CantPreguntas) {
+                        JugadoreSinTerminarActual = +1;
+                    }
+                }
+
+                DTOStatsJuego statsJuegoJugadores = new DTOStatsJuego()
+                {
+                    Jugadores = JugadoresActual,
+                    JugadoresSinTerminar = JugadoreSinTerminarActual,
+                };
+
+
+                return statsJuegoJugadores;
+            }
+        }
+
 
         public void UpdateJuego(int id, DTOJuego juego)
         {
