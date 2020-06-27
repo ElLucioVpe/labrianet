@@ -7,13 +7,11 @@ export function JuegoProvider(props) {
     const [juegoTemp, setJuegoTemp] = useState(null);
     const [descripcion, setDescripcion] = useState(null);
     const [password, setPassword] = useState(null);
-    const [preguntaSeleccionada, setPreguntaSeleccionada] = useState(0);
-    const [titulo, setTitulo] = useState("kek");
+    const [titulo, setTitulo] = useState(null);
     const [idMusica, setIdMusica] = useState(null);
     const [coverJuego, setCoverJuego] = useState(null);
     const [coverEsVideo, setCoverEsVideo] = useState(false);
     const [esPrivadoJuego, setEsPrivadoJuego] = useState(false);
-    const [configurandoRespuesta, setConfigurandoRespuesta] = useState(null);
     const [cancionSeleccionada, setCancionSeleccionada] = useState(null);
     const [preguntas, setPreguntas] = useState([{
         titulo: null,

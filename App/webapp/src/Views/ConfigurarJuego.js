@@ -4,9 +4,12 @@ import Select from "react-select";
 import QuizMasterService from '../Libraries/QuizMasterServices';
 import {useJuego} from "../Libraries/JuegoContextLib";
 import {BrowserRouter as useLocation} from "react-router-dom";
-
-import "../Css/ConfigurarJuego.css";
 import Button from "../Components/Button";
+import SubirImagenVideo from "../Components/SubirImagenVideo";
+import update from "immutability-helper";
+import ReactPlayer from "react-player";
+
+import '../Css/ConfigurarJuego.css'
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -17,6 +20,7 @@ export default function ConfigurarJuego(props) {
     const [juego, setJuego] = useState([]);
     const [esContext, setEsContext] = useState(true);
     const inputFile = useRef(null);
+    const [mostrarSubirImagen, setMostrarSubirImagen] = useState(null);
 
     const juego_context = useJuego();
 
@@ -32,7 +36,6 @@ export default function ConfigurarJuego(props) {
             let data = QuizMasterService.obtenerJuego({"id": props.match.params.id});
             setJuego(data);
             setEsContext(false);
-            console.log("wtf!?");
         } else if (juego_context.idJuego != null) {
             setEsContext(true);
         }
@@ -73,6 +76,39 @@ export default function ConfigurarJuego(props) {
         !esContext ? juego.setPassword(event.target.value) : juego_context.setPassword(event.target.value);
     });
 
+    const handleClickImage = (() => {
+        inputFile.current.click();
+    });
+
+    const onImageChange = ((e) => {
+        //esContext ? juego.setCoverJuego(e.target.files[0]) : juego_context.setCoverJuego(e.target.files[0]);
+        subirImagen(e);
+        //this.onImageSubmit()
+    });
+
+    const cambiarImgUrl = ((e) => {
+        //setPreguntas(update(preguntas, {[preguntaSeleccionada]: {imgUrl: {$set: _value}}}));
+        console.log(e);
+        subirImagen(e);
+    });
+
+    const cambiarYouTubeUrl = ((_value) => {
+        !esContext ? juego.setCoverJuego(_value) : juego_context.setCoverJuego(_value);
+        !esContext ? juego.setCoverEsVideo(true) : juego_context.setCoverEsVideo(true);
+    });
+
+    const esVideo = (() => {
+        if ((!esContext ? juego.coverJuego : juego_context.coverJuego) != null) {
+            if ((!esContext ? juego.coverJuego : juego_context.coverJuego).slice(0, 8) === "https://") {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    });
+
     function subirImagen(event) {
         let filesSelected = event.target.files;
         if (filesSelected.length > 0) {
@@ -87,14 +123,12 @@ export default function ConfigurarJuego(props) {
         }
     }
 
-    const handleClickImage = (() => {
-        inputFile.current.click();
+    const cerrarModalSubirImagenVideo = (() => {
+        setMostrarSubirImagen(null);
     });
 
-    const onImageChange = ((e) => {
-        //esContext ? juego.setCoverJuego(e.target.files[0]) : juego_context.setCoverJuego(e.target.files[0]);
-        subirImagen(e);
-        //this.onImageSubmit()
+    const abrirModalSubirImagenVideo = ((respuesta) => {
+        setMostrarSubirImagen(respuesta);
     });
 
     function render() {
@@ -147,16 +181,18 @@ export default function ConfigurarJuego(props) {
                         </div>
 
                         <div className="seccion2-config card ">
-                            <div className="relative width-inherit" onClick={handleClickImage}>
-                                <img
-                                    class="gamecoverImage"
-                                    id="gamecover"
-                                    width="450"
-                                    height="300"
-                                    src={(!esContext ? juego.coverJuego : juego_context.coverJuego) != null ? (!esContext ? juego.coverJuego : juego_context.coverJuego) : 'img/perfil.png'}
-                                    onChange={subirImagen}
-                                />
-                                <div className="absolute imgUpload">
+                            <div className="relative width-inherit text-align-center"
+                                 onClick={abrirModalSubirImagenVideo}>
+                                {
+                                    esVideo() ? <ReactPlayer
+                                        url={(!esContext ? juego.coverJuego : juego_context.coverJuego) != null ? (!esContext ? juego.coverJuego : juego_context.coverJuego) : 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}
+                                    /> : <img class="gamecoverImage"
+                                              id="gamecover"
+                                              width="450"
+                                              height="300"
+                                              src={(!esContext ? juego.coverJuego : juego_context.coverJuego) != null ? (!esContext ? juego.coverJuego : juego_context.coverJuego) : 'img/perfil.png'}/>
+                                }
+                                <div className="absolute imgUpload" onClick={abrirModalSubirImagenVideo}>
                                     <img className="editImg"
                                          src="/views/crear/upload.svg"/>
                                 </div>
@@ -183,6 +219,11 @@ export default function ConfigurarJuego(props) {
                 <form className="display-none">
                     <input type="file" onChange={onImageChange} ref={inputFile}/>
                 </form>
+                {mostrarSubirImagen === null ? '' :
+                    <SubirImagenVideo cerrarModal={cerrarModalSubirImagenVideo}
+                                      cambiarImagen={cambiarImgUrl}
+                                      cambiarYouTubeUrl={cambiarYouTubeUrl}
+                    />}
             </div>
         );
     }
