@@ -75,7 +75,7 @@ export default function Juego(props) {
             console.log(exito);
         });
         setJuegoTerminado(true); //para evitar se ejecute multiples veces
-        window.location = '/playerRanking/'+info_juego.idJuego;
+        window.location = '/playerRanking/'+info_juego.idJuego+'&'+nickname+'&'+puntuacion;
     });
 
     const chequeo = (() => {
@@ -117,14 +117,14 @@ export default function Juego(props) {
         if(preguntaActual != null && preguntaActual !== "") {
             if(preguntaActual.respuestas && preguntaActual.respuestas.length > 1) {
                 respuestas = <div className="PreguntaJuego">
-                    <div><Button className="btn-regular" value={"A - "+preguntaActual.respuestas[0].contenidoRespuesta} onClick={() => handleClickRespuesta(0)}/></div>
-                    <div><Button className="btn-regular" value={"B - "+preguntaActual.respuestas[1].contenidoRespuesta} onClick={() => handleClickRespuesta(1)}/></div>
+                    <div><button className="resp-btn boton-A" onClick={() => handleClickRespuesta(0)}>{"A - "+preguntaActual.respuestas[0].contenidoRespuesta}</button></div>
+                    <div><button className="resp-btn boton-B" onClick={() => handleClickRespuesta(1)}>{"B - "+preguntaActual.respuestas[1].contenidoRespuesta}</button></div>
                 </div>;
 
                 if(preguntaActual.tipoPregunta === "Quiz" && preguntaActual.respuestas.length === 4) {
                     respuestas2 = <div className="PreguntaJuego">
-                        <div><Button className="btn-regular" value={"C - "+preguntaActual.respuestas[2].contenidoRespuesta} onClick={() => handleClickRespuesta(2)}/></div>
-                        <div><Button className="btn-regular" value={"D - "+preguntaActual.respuestas[3].contenidoRespuesta} onClick={() => handleClickRespuesta(3)}/></div>
+                        <div><button className="resp-btn boton-C" onClick={() => handleClickRespuesta(2)}>{"C - "+preguntaActual.respuestas[2].contenidoRespuesta}</button></div>
+                        <div><button className="resp-btn boton-D" onClick={() => handleClickRespuesta(3)}>{"D - "+preguntaActual.respuestas[3].contenidoRespuesta}</button></div>
                     </div>;
                 }
             }
@@ -163,7 +163,7 @@ export default function Juego(props) {
                 )}
 
                 <div className="FooterJuego">
-                    <div>{!verGrafica ? counter+"s" : ""}</div>
+                    <div>{!verGrafica ? <Button className="btn-regular" value={counter+"s"}/> : ""}</div>
 
                     <div><Button className="btn-regular" onClick={() => mostrarGrafica()} value="Siguiente"/></div>
                 </div>

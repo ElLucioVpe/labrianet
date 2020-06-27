@@ -91,6 +91,7 @@ namespace BusinessLogic.Controllers
                         nickUsuarioActual = partida.nickUsuario;
                         foreach (Respuesta respuesta in partida.respuestas)
                         {
+                            puntajeActual = 0;
                             if (respuesta.esCorrectoRespuesta == 1)
                             {
 
@@ -106,7 +107,7 @@ namespace BusinessLogic.Controllers
                         ranking.Add(rankingActual);
                     }
 
-                return ranking;
+                return ranking.OrderByDescending(i => i.Puntaje).ToList();
               
             }
         }

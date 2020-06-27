@@ -9,40 +9,41 @@ import QuizMasterService from '../Libraries/QuizMasterServices';
 
 export default function PlayerRanking(props) {
     const [rankings, set_rankings] = useState([{}]);
-  /* const [juegosBusqueda, set_JuegosBusqueda] = useState([{}]);*/
+    const [partida, set_partida] = useState({nickUsuario: "Anonimo", puntaje: 0});
+    const [nombreJuego, set_nombreJuego] = useState("Game");
     
   /*const [busqueda, setbusqueda] = useState([{}]);*/
 
     useEffect(() => {
         async function doIt() {
             let data_rankings = await QuizMasterService.obtenerRanking({id:props.match.params.id});
-            await console.log(await QuizMasterService.obtenerRanking({id:props.match.params.id}));
+            //await console.log(await QuizMasterService.obtenerRanking({id:props.match.params.id}));
             await set_rankings(data_rankings);
+            set_partida({nickUsuario: props.match.params.nick, puntaje: props.match.params.puntos});
         }
+        async function cargarNombreJuego() {
+            let data_juego = await QuizMasterService.obtenerJuego(props.match.params.id);
+            await set_nombreJuego(data_juego.tituloJuego);
+        }
+        cargarNombreJuego()
         doIt()
     }, []);
-    /*function mapearjuego() {
-    rankings.forEach((item) => {
-        <tr>
-            item.
-      </tr>
-    }
-    }*/
+
     function render() {
         return (
             <div class="Ranking">
                 <div class="containerRanking">
                     <div class="tituloJuego">
                         <grid-center>
-                            <GameName/>
+                            <h>{nombreJuego}</h>
                         </grid-center>
                     </div>
                     <div class="userPuntaje">
                         <div class="contenedor">
                             <div class="flex-item">
-                                <UserName/>
+                                <h>{partida.nickUsuario}</h>
                             </div>
-                            <div class="flex-item derecha">500 pts</div>
+                            <div class="flex-item derecha">{partida.puntaje} pts</div>
                         </div>
                     </div>
                     <div class="puntajeGeneral">
