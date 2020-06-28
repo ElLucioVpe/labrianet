@@ -23,14 +23,15 @@ export default function Juego(props) {
         async function cargarJuego() {
             await QuizMasterService.obtenerJuego(props.match.params.id).then(
                 function (data) {
-                    console.log(data);
+                    //console.log(data);
                     setInfo_juego(data);
                     setPreguntaActual(data.preguntas[0]);
                     setCounter(parseInt(data.preguntas[0].segundosPregunta));
+                    if(props.match.params.nick) setNickname(props.match.params.nick);
+                    else window.location = "/prejuego/:id".replace(":id", props.match.params.id);
                 }
             ).catch(function (error) {
-                // handle error
-                //window.location = "/";
+                window.location = "/";
             });
         }
         cargarJuego()

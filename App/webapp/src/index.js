@@ -84,12 +84,9 @@ function App() {
                 <Route path="/registro">
                     <SignUp/>
                 </Route>
-                <Route path="/prejuego">
-                    <PreJuego/>
-                </Route>
-                <Route path="/playerRanking/:id" component={PlayerRanking}/>
-
-                <Route path="/Juego/:id" component={Juego}/>
+                <Route path="/prejuego/:id" component={PreJuego}/>
+                <Route path="/playerRanking/:id/:nick?/:puntos?" component={PlayerRanking}/>
+                <Route path="/Juego/:id/:nick?" component={Juego}/>
                 <Route path="/logout">
                     <Logout/>
                 </Route>

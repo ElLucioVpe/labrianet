@@ -2,32 +2,48 @@
   PreJuego screen
  */
 .preJuego {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+    width: 80%;
     margin: auto;
-    padding: 50px;
-    background: var(--main2);
+    text-align: center;
+}
+
+.preJuego-infoGame {
+    height: 100%;
+    width: calc(100% - 20px);
+    display: grid;
+    grid-template-columns: 50% 50%;
+    column-gap: 20px;
+}
+
+.preJuego input {
+    height: 30px;
     border-radius: 25px;
-    margin: 0;
+    border: 2px solid var(--main2);
+    padding: 5px;
+    width: 50%;
+    /*padding-left: 20px;*/
 }
 
-
-.infoGame {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 100px;
+.preJuego-info {
 }
 
-.infoGame div {
-    background-color: white;
-    border-radius: 25px;
-    padding: 10px;
-    margin: 20px;
-    align-items: center;
+.preJuego-btn {
+    text-align: center;
 }
+
+.preJuego-btn {
+    width: 50%;
+    font-family: Lato;
+    border: none;
+    height: 50px;
+    padding: 0 50px;
+    border-radius: 24px;
+    font-size: 17px;
+    align: center;
+    margin-top: 10px;
+    background-image: linear-gradient(to right, var(--main4), var(--main5));
+}
+
 
 @media only screen and (max-width: 1000px) {
 
@@ -40,7 +56,7 @@
     }
     .infoGame {
         flex-direction: row;
-    padding: 0px;
+        padding: 0px;
     }
 
     .infoGame div {

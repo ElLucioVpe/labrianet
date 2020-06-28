@@ -80,3 +80,9 @@
 .boton-D {
     background-color: darkviolet;
 }
+
+@media screen and (max-width: 1000px) {
+    .resp-btn{
+        font-size: 10px;
+    }
+}
