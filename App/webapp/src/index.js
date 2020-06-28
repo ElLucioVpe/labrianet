@@ -75,9 +75,8 @@ function App() {
                     <Jugar/>
                 </Route>
               
-                <Route path="/grafica">
-                    <Grafica/>
-                </Route>
+                <Route path="/grafica/:id" component={Grafica}/>
+                   
                 <Route path="/perfil">
                     <Perfil/>
                 </Route>
