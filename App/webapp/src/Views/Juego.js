@@ -3,6 +3,7 @@ import '../Css/Juego.css'
 import QuizMasterService from '../Libraries/QuizMasterServices';
 import {useUsuario} from "../Libraries/UserContextLib";
 import Button from "../Components/Button";
+import YouTube from "react-youtube";
 const BASE_URL = "http://localhost:44353";
 
 export default function Juego(props) {
@@ -31,7 +32,7 @@ export default function Juego(props) {
                     else window.location = "/prejuego/:id".replace(":id", props.match.params.id);
                 }
             ).catch(function (error) {
-                window.location = "/";
+                //window.location = "/";
             });
         }
         cargarJuego()
@@ -111,8 +112,15 @@ export default function Juego(props) {
         }
     });
 
+    const youtube_parser = ((url) => {
+        var regExp = /.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;
+        var match = url.match(regExp);
+        return (match && match[1].length === 11)? match[1] : false;
+    });
+
     function render() {
         chequeo();
+
         let respuestas, respuestas2, ayuda;
 
         if(preguntaActual != null && preguntaActual !== "") {
@@ -132,7 +140,20 @@ export default function Juego(props) {
 
             if(preguntaActual.urlAyudaPregunta.includes("http")) {
                 //video
-                ayuda = <embed id="ayuda-url" src={preguntaActual.urlAyudaPregunta} height={200}/>;
+                var url = preguntaActual.urlAyudaPregunta;
+                var video_id = youtube_parser(url);
+                //console.log("V id: "+video_id);
+
+                var opts = {
+                    height: 300,
+                    width: 550,
+                    playerVars: {
+                        start: preguntaActual.startAyuda,
+                        end: preguntaActual.endAyuda,
+                        autoplay: 1
+                    },
+                };
+                ayuda = <YouTube videoId={video_id} id="ayuda-url" containerClassName={"youtubeContainer"} opts={opts}/>
             } else {
                 //imagen, tal vez con ese formato de url
                 ayuda = <img id="ayuda-url" src={BASE_URL+"/game-images/"+preguntaActual.urlAyudaPregunta} height={200}/>;
@@ -154,12 +175,14 @@ export default function Juego(props) {
                 {verGrafica ? (
                     <h4>Aca deberia haber una grafica</h4>
                 ) : (
-                    <div className="AyudaJuego">
-                        {ayuda}
-                    </div>,
-                    <div className="RespuestasJuego">
-                        {respuestas}
-                        {respuestas2}
+                    <div>
+                        <div className="AyudaJuego">
+                            {ayuda}
+                        </div>
+                        <div className="RespuestasJuego">
+                            {respuestas}
+                            {respuestas2}
+                        </div>
                     </div>
                 )}
 
