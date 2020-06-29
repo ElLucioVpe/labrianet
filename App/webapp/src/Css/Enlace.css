@@ -8,7 +8,6 @@
     margin: auto;
     font-family: Lato;
     font-size: 25px;
-    height: 100%;
     background: var(--main2);
     margin: 0;
 
@@ -26,7 +25,6 @@
 
 .menu2 {
     display: flex;
-    height: 100%;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
@@ -118,4 +116,17 @@ button.aceptar {
     font-size: 20px;
     color: #3b035f;
     background-image: linear-gradient(to right, var(--main4), var(--main5));
+}
+
+.copy-svg {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: white;
+    right: 3px;
+    top: 5px;
+}
+
+.copy-svg img {
+    width: 25px;
 }

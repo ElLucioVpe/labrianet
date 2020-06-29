@@ -12,7 +12,7 @@ let config = {
 
 const QuizMasterServices = {
     crearJuego: function (props) {
-        Axios.post(BASE_URL + '/api/Juego/CreateJuego',
+        return Axios.post(BASE_URL + '/api/Juego/CreateJuego',
             props,
             {
                 'Content-Type': 'application/json',
@@ -20,10 +20,11 @@ const QuizMasterServices = {
                 'Authorization': 'Bearer ' + props.accessToken
             }
         ).then(function (response) {
-            return response;
+            console.log(response.data);
+            return response.data;
         }).catch(function (error) {
-            // handle error
             console.log(error);
+            // handle error
             return false;
         });
     },
@@ -108,7 +109,7 @@ const QuizMasterServices = {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         });
-    },  
+    },
      obtenerRespuestaStats: function (props) {
         return Axios.get(BASE_URL + '/api/Pregunta/GetStatsRespuestas/'+ props.id).then(response => {
             return response.data;})
@@ -117,8 +118,8 @@ const QuizMasterServices = {
         return Axios.get(BASE_URL + '/api/Juego/GetRanking/'+ props.id).then(response => {
             // returning the data here allows the caller to get it through another .then(...)
             return response.data
-        }) 
-         
+        })
+
     },
     obtenerProfile: function (props) {
         const {data} = Axios.get(BASE_URL + '/api/Juego/GetJuego/'
