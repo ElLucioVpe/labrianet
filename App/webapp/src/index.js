@@ -92,9 +92,7 @@ function App() {
                 <Route path="/login">
                     <Login/>
                 </Route>
-                <Route path="/resumen">
-                    <Resumenjuego/>
-                </Route>
+                <Route path="/resumen/:id" component={Resumenjuego}/>
                 <Route path="/configurarJuego/:id" component={ConfigurarJuego}/>
                 <Route path="/configurarJuego">
                     <ConfigurarJuego/>

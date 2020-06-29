@@ -37,7 +37,17 @@
     margin: 0;
 
 }
+.pregunta-container {
+    display: grid;
+    grid-template-columns: 0.5fr, 0.5fr;
+    grid-template-rows: 1fr;
+  }
+.tituloJuego{
+    font-family: Montserrat, Serif;
+    font-weight: 300;
+    font-size: 40px;
 
+}
 .listaPreguntas {
     height: 200px;
     overflow: auto;
