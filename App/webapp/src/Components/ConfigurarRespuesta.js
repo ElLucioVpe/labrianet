@@ -1,9 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import Button from "./Button";
-import DarkThemeSwitcher from "./DarkThemeSwitcher";
-import {Link} from "react-router-dom";
-import {useUsuario} from "../Libraries/UserContextLib";
-import '../Css/Header.css'
 import Input from "./Input";
 
 class ConfigurarRespuesta extends React.Component {

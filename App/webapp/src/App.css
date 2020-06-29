@@ -229,6 +229,10 @@ border-radius-25px {
     width: 100%;
 }
 
+.w-50 {
+    width: 50%;
+}
+
 .absolute {
     position: absolute;
 }

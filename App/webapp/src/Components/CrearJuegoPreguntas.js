@@ -7,6 +7,7 @@ class CrearJuegoPreguntas extends React.Component {
 
         this.state = {
             activo: false,
+            imgUrl: ""
         };
 
         this.eliminarPregunta = this.eliminarPregunta.bind(this);
@@ -29,7 +30,9 @@ class CrearJuegoPreguntas extends React.Component {
                         <p>{this.props.titulo || ''}</p>
                     </div>
                     <div className="text-align-center PreguntaPreviewBox">
-                        <img src={this.props.imgUrl || 'img/perfil.png'} className="PreguntaPreview "/>
+                        <img
+                            src={this.props.imgUrl != null ? (this.props.imgUrl.slice(0, 8) === "https://" ? "http://img.youtube.com/vi/" + this.props.imgUrl.slice(32) + "/3.jpg" : this.props.imgUrl) : '/img/perfil.png'}
+                            className="PreguntaPreview "/>
                     </div>
                     <div className="flex flex-direction-row justify-content-space-between">
                         <p>{this.props.puntaje === null ? '0p' : this.props.puntaje + "p"}</p>

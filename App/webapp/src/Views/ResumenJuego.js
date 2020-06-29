@@ -16,6 +16,7 @@ export default function ResumenJuego(props) {
           async function doIt() {
               let data_juegos = await QuizMasterService.obtenerJuego({id:props.match.params.id});
               await console.log(await QuizMasterService.obtenerJuego({id:props.match.params.id}));
+              
               await set_juegos(data_juegos);
               
           }

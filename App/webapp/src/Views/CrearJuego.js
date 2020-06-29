@@ -1,9 +1,6 @@
 import React, {useEffect, useState} from 'react'
-//import CrearPreguntas from "../Components/CrearPreguntas";
 import Button from "../Components/Button";
-import Input from '../Components/Input'
-import '../Css/CrearJuego.css'
-import '../Css/CrearJuegoPreguntas.css'
+import SubirImagenVideo from "../Components/SubirImagenVideo";
 import CrearJuegoPreguntas from "../Components/CrearJuegoPreguntas";
 import CrearPreguntas from "../Components/CrearPreguntas";
 import {useJuego} from "../Libraries/JuegoContextLib";
@@ -11,24 +8,21 @@ import QuizMasterService from '../Libraries/QuizMasterServices';
 import {useUsuario} from "../Libraries/UserContextLib";
 import ConfigurarRespuesta from "../Components/ConfigurarRespuesta";
 
+import '../Css/CrearJuego.css'
+import '../Css/CrearJuegoPreguntas.css'
+
 import update from 'immutability-helper';
+import Enlace from "./Enlace";
 
 export default function CrearJuego() {
     const usuario = useUsuario();
     const juego = useJuego();
-    const [id, setId] = useState(null);
-    const [preguntas, setPreguntas] = useState([{
-        titulo: null,
-        segundos: null,
-        puntaje: null,
-        imgUrl: null,
-        activo: false,
-        respuestaCorrecta: null,
-        respuestas: [null, null, null, null]
-    }]);
+    const [titulo, setTitulo] = useState(juego.titulo);
+    const [juegoCreado, setJuegoCreado] = useState(false);
+    const [preguntas, setPreguntas] = useState(juego.preguntas);
     const [preguntaSeleccionada, setPreguntaSeleccionada] = useState(0);
-    const [titulo, setTitulo] = useState(null);
     const [configurandoRespuesta, setConfigurandoRespuesta] = useState(null);
+    const [mostrarSubirImagen, setMostrarSubirImagen] = useState(null);
 
     const handleChange = ((event) => {
         setTitulo(event.target.value);
@@ -38,7 +32,7 @@ export default function CrearJuego() {
         juego.setPreguntas(preguntas);
         juego.setTitulo(titulo);
         juego.setIdJuego(0);
-    }, [preguntas, titulo]);
+    }, [preguntas, setPreguntas, titulo, setTitulo]);
 
     const crearPregunta = (async (event) => {
         setPreguntas(preguntas.concat({
@@ -56,9 +50,29 @@ export default function CrearJuego() {
         setPreguntas(update(preguntas, {[preguntaSeleccionada]: {titulo: {$set: _value}}}));
     });
 
-    const cambiarImgUrl = ((_value) => {
+    const cambiarImgUrl = ((e) => {
+        //setPreguntas(update(preguntas, {[preguntaSeleccionada]: {imgUrl: {$set: _value}}}));
+        subirImagen(e);
+    });
+
+    const cambiarYouTubeUrl = ((_value) => {
         setPreguntas(update(preguntas, {[preguntaSeleccionada]: {imgUrl: {$set: _value}}}));
     });
+
+    function subirImagen(event) {
+        let filesSelected = event.target.files;
+        if (filesSelected.length > 0) {
+            var fileToLoad = filesSelected[0];
+            var fileReader = new FileReader();
+
+            fileReader.onload = function (fileLoadedEvent) {
+                //juego.setCoverJuego(fileLoadedEvent.target.result);
+                setPreguntas(update(preguntas, {[preguntaSeleccionada]: {imgUrl: {$set: fileLoadedEvent.target.result}}}));
+                juego.setCoverEsVideo(false);
+            };
+            fileReader.readAsDataURL(fileToLoad);
+        }
+    }
 
     const cambiarSegundos = ((_value) => {
         setPreguntas(update(preguntas, {[preguntaSeleccionada]: {segundos: {$set: _value}}}));
@@ -97,51 +111,62 @@ export default function CrearJuego() {
         setConfigurandoRespuesta(respuesta);
     });
 
-    const obtenerPreguntasDeAPI = (() => {
-        console.log("wip");
+    const abrirModalSubirImagenVideo = ((respuesta) => {
+        setMostrarSubirImagen(respuesta);
     });
 
     const cerrarModalConfigurarRespuesta = (() => {
         setConfigurandoRespuesta(null);
     });
 
+    const cerrarModalSubirImagenVideo = (() => {
+        setMostrarSubirImagen(null);
+    });
+
     const publicarJuego = (async () => {
         var dataJuego = {
             "User_loginnameUser": usuario.usuario,
-            "tituloJuego": (titulo || "Titulo"),
+            "tituloJuego": (juego.titulo || "Titulo"),
             "descripcionJuego": "sample string 4",
-            "esPrivadoJuego": 0,
+            "esPrivadoJuego": 1,
             "coverJuego": juego.coverJuego != null ? juego.coverJuego : "",
             "Musica_idMusica": juego.idMusica != null ? juego.idMusica : "1",
-            "activadoJuego": juego.esPrivadoJuego != null ? juego.esPrivadoJuego : "1",
+            "activadoJuego": juego.esPrivadoJuego === true ? 0 : 1,
             "accessToken": usuario.accessToken,
+            "password": juego.password,
             "preguntas": []
         };
         let xd;
         preguntas.forEach(xd = async function (item, i) {
-            /*console.log(i);
-            console.log(item);*/
             let respuestas = [];
+            let respuestasSinSetear = 0;
             let respuestaCorrecta = item.respuestaCorrecta;
             await item.respuestas.forEach(function (item, i) {
-                respuestas.push({
-                    "esCorrectoRespuesta": respuestaCorrecta === i ? 1 : 0,
-                    "contenidoRespuesta": item != null ? item : "Respuesta"
-                });
+                if (item != null && item !== "") {
+                    respuestas.push({
+                        "esCorrectoRespuesta": respuestaCorrecta === i ? 1 : 0,
+                        "contenidoRespuesta": item != null ? item : "Respuesta"
+                    });
+                } else {
+                    respuestasSinSetear++;
+                }
             });
             await dataJuego.preguntas.push({
                 "segundosPregunta": item.segundos != null ? item.segundos : 40,
                 "puntosPregunta": item.puntaje != null ? item.puntaje : 100,
                 "contenidoPregunta": item.titulo != null ? item.titulo : "Pregunta",
-                "tipoPregunta": "asd",
+                "tipoPregunta": respuestasSinSetear === 2 ? "True/False" : "Quiz",
                 "urlAyudaPregunta": item.imgUrl != null ? item.imgUrl : "",
                 "startAyuda": 1,
                 "endAyuda": 1,
                 "respuestas": respuestas
             });
         });
-        console.log(dataJuego);
-        await QuizMasterService.crearJuego(dataJuego);
+        await console.log(dataJuego);
+        let id = await QuizMasterService.crearJuego(dataJuego);
+        await console.log("pimba " + id);
+        await setJuegoCreado(true);
+        await juego.setIdJuego(id);
     });
 
     function uploadFile(event) {
@@ -155,30 +180,16 @@ export default function CrearJuego() {
         }
     }
 
-    function subirImagen(event) {
-        let filesSelected = event.target.files;
-        if (filesSelected.length > 0) {
-            var fileToLoad = filesSelected[0];
-            var fileReader = new FileReader();
-
-            fileReader.onload = function (fileLoadedEvent) {
-                cambiarImgUrl(fileLoadedEvent.target.result);
-                juego.setCoverEsVideo(false);
-            };
-            fileReader.readAsDataURL(fileToLoad);
-        }
-    }
-
     function render() {
         return (
-            <div class="container" style={{height: '100%'}}>
-                <div class="titleHeader">
+            juegoCreado ? <Enlace id={juego.idJuego}/> : <div className="container" style={{height: '100%'}}>
+                <div className="titleHeader">
                     <input className="input-big mr-10" placeholder="Titulo" onChange={handleChange}
                            value={titulo}/>
                     <Button class="item" to="/configurarJuego" value="Configurar" size="regular"/>
                 </div>
                 <div className="crearPreguntas">
-                    <div className="tablero card mb-20">
+                    <div className="tablero card">
                         <div>
                             <h2>Tablero</h2>
                         </div>
@@ -201,6 +212,7 @@ export default function CrearJuego() {
                         cambiarPuntaje={cambiarPuntaje}
                         cambiarSegundos={cambiarSegundos}
                         configurarRespuesta={setConfigurandoRespuesta}
+                        abrirSubirImagenVideo={abrirModalSubirImagenVideo}
                         subirImagen={subirImagen}
 
                         {...preguntas[preguntaSeleccionada]}/>
@@ -215,6 +227,12 @@ export default function CrearJuego() {
                                          cambiarRespuestaCorrecta={cambiarRespuestaCorrecta}
                                          respuesta={preguntas[preguntaSeleccionada].respuestas[preguntas[preguntaSeleccionada].configurarRespuesta]}
                                          esCorrecta={preguntas[preguntaSeleccionada].respuestaCorrecta}
+                    />}
+                {mostrarSubirImagen === null ? '' :
+                    <SubirImagenVideo cerrarModal={cerrarModalSubirImagenVideo}
+                                      cambiarImagen={cambiarImgUrl}
+                                      cambiarYouTubeUrl={cambiarYouTubeUrl}
+                                      respuesta={preguntas[preguntaSeleccionada].respuestas[preguntas[preguntaSeleccionada].mostrarSubirImagen]}
                     />}
             </div>
         )

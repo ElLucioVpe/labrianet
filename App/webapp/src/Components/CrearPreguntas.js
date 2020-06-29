@@ -1,8 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react'
 import Button from "../Components/Button";
-import Input from '../Components/Input';
-//import CrearJuegoPreguntas from "../Views/CrearJuegoPreguntas";
-//import '../Css/CrearJuegoPreguntas.css'
+import ReactPlayer from "react-player";
 
 export function CrearPreguntas(props) {
     const inputFile = useRef(null);
@@ -10,6 +8,10 @@ export function CrearPreguntas(props) {
 
     const handleClickImage = (() => {
         inputFile.current.click();
+    });
+
+    const handleSubirContenido = ((e) => {
+        props.abrirSubirImagenVideo(e.target.value);
     });
 
     const handleChangeSegundos = ((e) => {
@@ -41,6 +43,18 @@ export function CrearPreguntas(props) {
         //this.onImageSubmit()
     });
 
+    const esVideo = (() => {
+        if (props.imgUrl != null) {
+            if (props.imgUrl.slice(0, 8) === "https://") {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    });
+
     const fileUpload = ((file) => {
         const url = 'http://example.com/file-upload';
         const formData = new FormData();
@@ -68,12 +82,16 @@ export function CrearPreguntas(props) {
                                value={props.puntaje || ''} onChange={handleChangePuntaje}/>
                     </div>
                     <div className="flex w-80 justify-content-center">
-                        <div className="relative width-inherit" onClick={handleClickImage}>
-                            <img className="pregunta_foto"
-                                 src={props.imgUrl || 'img/perfil.png'}/>
+                        <div className="relative width-inherit" onClick={((e) => handleSubirContenido(e))}>
+                            {
+                                esVideo() ? <ReactPlayer
+                                    url={props.imgUrl || 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}
+                                /> : <img className="pregunta_foto"
+                                          src={props.imgUrl || 'img/perfil.png'}/>
+                            }
                             <div className="absolute imgUpload">
                                 <img className="editImg"
-                                     src="/views/crear/upload.svg"/>
+                                     src="/views/crear/upload.svg" onClick={((e) => handleSubirContenido(e))}/>
                             </div>
                         </div>
                     </div>
@@ -92,9 +110,6 @@ export function CrearPreguntas(props) {
                             value={props.respuestas[3] || 'Respuesta 4'} size="regular"
                             onClick={((e) => handleConfigurarRespuesta(e, 3))}/>
                 </div>
-                <form className="display-none">
-                    <input type="file" onChange={onImageChange} ref={inputFile}/>
-                </form>
             </div>
         )
     }
