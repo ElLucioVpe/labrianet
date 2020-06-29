@@ -13,7 +13,7 @@ export const Header = () => {
             <div className="header">
                 <div className="alignLeft">
                     <Link to="/" className="logo">
-                        <img src="logo.svg" alt=""/>
+                        <img src="/logo.svg" alt=""/>
                     </Link>
                     <Link to="/" className="logo">
                         <span>QuizMaster</span>
@@ -23,12 +23,11 @@ export const Header = () => {
                     <DarkThemeSwitcher/>
                     {
                         usuario.inicioSesion ? (
-                            <Button className="item" to="/logout" value="Logout" size="regular"/>
+                            <Button classList="item" to="/logout" value="Logout" size="regular"/>
                         ) : (
-                            <Button className="item" to="/login" value="Login" size="regular"/>
+                            <Button classList="item" to="/login" value="Login" size="regular"/>
                         )
                     }
-
                 </div>
             </div>
         </header>

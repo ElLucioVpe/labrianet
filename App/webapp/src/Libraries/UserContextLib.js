@@ -82,7 +82,6 @@ export function UsuarioProvider(props) {
 
             return !!getUserData();
         }).catch(function (error) {
-            // handle error
             console.log(error);
             return false;
         });
@@ -105,9 +104,9 @@ export function UsuarioProvider(props) {
 
     function logout() {
         setUsuario(null);
-        console.log("usuario eliminado");
-        //deleteToken();
-        process.env.API_TOKEN = '';
+        setInicioSesion(false);
+        Cookies.set('username', '');
+        Cookies.set('accessToken', '');
     }
 
     const value = useMemo(() => {

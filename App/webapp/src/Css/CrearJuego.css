@@ -32,6 +32,7 @@
 img.pregunta_foto {
     height: 50vh;
     width: 100%;
+    object-fit: cover;
 }
 
 .inner-tablero {

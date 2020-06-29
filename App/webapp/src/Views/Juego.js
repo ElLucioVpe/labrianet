@@ -3,6 +3,7 @@ import '../Css/Juego.css'
 import QuizMasterService from '../Libraries/QuizMasterServices';
 import {useUsuario} from "../Libraries/UserContextLib";
 import Button from "../Components/Button";
+
 const BASE_URL = "http://localhost:44353";
 
 export default function Juego(props) {
@@ -33,26 +34,25 @@ export default function Juego(props) {
                 //window.location = "/";
             });
         }
+
         cargarJuego()
 
     }, []);
 
     useEffect(() => {
         const timer = counter > 0 && setInterval(() => {
-            if(!verGrafica) {
-                if(counterPausa !== 0) {
-                    setCounterPausa(0);
-                    setCounter(counterPausa);
+                if (!verGrafica) {
+                    if (counterPausa !== 0) {
+                        setCounterPausa(0);
+                        setCounter(counterPausa);
+                    } else setCounter(counter - 1);
+                } else {
+                    if (counterPausa === 0) setCounterPausa(counter);
+                    setCounter(counter + 1);
                 }
-                else setCounter(counter - 1);
-            }
-            else {
-                if(counterPausa === 0) setCounterPausa(counter);
-                setCounter(counter+1);
-            }
             }
             , 1000);
-        if(counter === 0 && !verGrafica) mostrarGrafica();//Se le acaba el tiempo
+        if (counter === 0 && !verGrafica) mostrarGrafica();//Se le acaba el tiempo
         return () => clearInterval(timer);
     }, [counter]);
 
@@ -65,7 +65,7 @@ export default function Juego(props) {
             "Juego_idJuego": info_juego.idJuego,
             "nickUsuario": nickname
         };
-        if(usuario.inicioSesion) dataPartida["User_loginnameUser"] = usuario.usuario;
+        if (usuario.inicioSesion) dataPartida["User_loginnameUser"] = usuario.usuario;
 
         var idPartida = await QuizMasterService.crearPartida(dataPartida);
         //Creo la relacion con las preguntas
@@ -75,17 +75,17 @@ export default function Juego(props) {
             console.log(exito);
         });
         setJuegoTerminado(true); //para evitar se ejecute multiples veces
-        window.location = '/playerRanking/'+info_juego.idJuego+'&'+nickname+'&'+puntuacion;
+        window.location = '/playerRanking/' + info_juego.idJuego + '&' + nickname + '&' + puntuacion;
     });
 
     const chequeo = (() => {
-        if(info_juego.preguntas && (numeroPregunta > info_juego.preguntas.length) && !juegoTerminado && !verGrafica) {
+        if (info_juego.preguntas && (numeroPregunta > info_juego.preguntas.length) && !juegoTerminado && !verGrafica) {
             terminarJuego();
         }
     });
 
     const mostrarGrafica = (() => {
-        if(verGrafica) {
+        if (verGrafica) {
 
             setVerGrafica(false);
         } else {
@@ -95,14 +95,14 @@ export default function Juego(props) {
     });
 
     const handleClickSiguiente = (() => {
-        if(numeroRespuesta !== -1) {
+        if (numeroRespuesta !== -1) {
             let respuesta = preguntaActual.respuestas[numeroRespuesta];
             setContesta(contesta.concat(respuesta));
-            if(respuesta.esCorrectoRespuesta === 1) setPuntuacion(puntuacion+preguntaActual.puntosPregunta);
+            if (respuesta.esCorrectoRespuesta === 1) setPuntuacion(puntuacion + preguntaActual.puntosPregunta);
             setNumeroRespuesta(-1);
         }
-        setNumeroPregunta(numeroPregunta+1); //no se modifica hasta terminar la funcion
-        if(info_juego.preguntas && (numeroPregunta < info_juego.preguntas.length)) {
+        setNumeroPregunta(numeroPregunta + 1); //no se modifica hasta terminar la funcion
+        if (info_juego.preguntas && (numeroPregunta < info_juego.preguntas.length)) {
             setPreguntaActual(info_juego.preguntas[numeroPregunta]);
             setCounter(info_juego.preguntas[numeroPregunta].segundosPregunta);
         } else {
@@ -114,32 +114,45 @@ export default function Juego(props) {
         chequeo();
         let respuestas, respuestas2, ayuda;
 
-        if(preguntaActual != null && preguntaActual !== "") {
-            if(preguntaActual.respuestas && preguntaActual.respuestas.length > 1) {
+        if (preguntaActual != null && preguntaActual !== "") {
+            if (preguntaActual.respuestas && preguntaActual.respuestas.length > 1) {
                 respuestas = <div className="PreguntaJuego">
-                    <div><button className="resp-btn boton-A" onClick={() => handleClickRespuesta(0)}>{"A - "+preguntaActual.respuestas[0].contenidoRespuesta}</button></div>
-                    <div><button className="resp-btn boton-B" onClick={() => handleClickRespuesta(1)}>{"B - "+preguntaActual.respuestas[1].contenidoRespuesta}</button></div>
+                    <div>
+                        <button className="resp-btn boton-A"
+                                onClick={() => handleClickRespuesta(0)}>{"A - " + preguntaActual.respuestas[0].contenidoRespuesta}</button>
+                    </div>
+                    <div>
+                        <button className="resp-btn boton-B"
+                                onClick={() => handleClickRespuesta(1)}>{"B - " + preguntaActual.respuestas[1].contenidoRespuesta}</button>
+                    </div>
                 </div>;
 
-                if(preguntaActual.tipoPregunta === "Quiz" && preguntaActual.respuestas.length === 4) {
+                if (preguntaActual.tipoPregunta === "Quiz" && preguntaActual.respuestas.length === 4) {
                     respuestas2 = <div className="PreguntaJuego">
-                        <div><button className="resp-btn boton-C" onClick={() => handleClickRespuesta(2)}>{"C - "+preguntaActual.respuestas[2].contenidoRespuesta}</button></div>
-                        <div><button className="resp-btn boton-D" onClick={() => handleClickRespuesta(3)}>{"D - "+preguntaActual.respuestas[3].contenidoRespuesta}</button></div>
+                        <div>
+                            <button className="resp-btn boton-C"
+                                    onClick={() => handleClickRespuesta(2)}>{"C - " + preguntaActual.respuestas[2].contenidoRespuesta}</button>
+                        </div>
+                        <div>
+                            <button className="resp-btn boton-D"
+                                    onClick={() => handleClickRespuesta(3)}>{"D - " + preguntaActual.respuestas[3].contenidoRespuesta}</button>
+                        </div>
                     </div>;
                 }
             }
 
-            if(preguntaActual.urlAyudaPregunta.includes("http")) {
+            if (preguntaActual.urlAyudaPregunta.includes("http")) {
                 //video
                 ayuda = <embed id="ayuda-url" src={preguntaActual.urlAyudaPregunta} height={200}/>;
             } else {
                 //imagen, tal vez con ese formato de url
-                ayuda = <img id="ayuda-url" src={BASE_URL+"/game-images/"+preguntaActual.urlAyudaPregunta} height={200}/>;
+                ayuda = <img id="ayuda-url" src={BASE_URL + "/game-images/" + preguntaActual.urlAyudaPregunta}
+                             height={200}/>;
             }
         }
 
         return (
-            <div className="juegoMasterParent">
+            <div className="juegoMasterParent container">
                 <div className="TituloNumPreg">
                     <p>Pregunta <span id="numPreg">{numeroPregunta}</span></p>
 
@@ -156,14 +169,14 @@ export default function Juego(props) {
                     <div className="AyudaJuego">
                         {ayuda}
                     </div>,
-                    <div className="RespuestasJuego">
-                        {respuestas}
-                        {respuestas2}
-                    </div>
+                        <div className="RespuestasJuego">
+                            {respuestas}
+                            {respuestas2}
+                        </div>
                 )}
 
                 <div className="FooterJuego">
-                    <div>{!verGrafica ? <Button className="btn-regular" value={counter+"s"}/> : ""}</div>
+                    <div>{!verGrafica ? <Button className="btn-regular" value={counter + "s"}/> : ""}</div>
 
                     <div><Button className="btn-regular" onClick={() => mostrarGrafica()} value="Siguiente"/></div>
                 </div>

@@ -12,7 +12,7 @@ let config = {
 
 const QuizMasterServices = {
     crearJuego: function (props) {
-        Axios.post(BASE_URL + '/api/Juego/CreateJuego',
+        return Axios.post(BASE_URL + '/api/Juego/CreateJuego',
             props,
             {
                 'Content-Type': 'application/json',
@@ -20,10 +20,11 @@ const QuizMasterServices = {
                 'Authorization': 'Bearer ' + props.accessToken
             }
         ).then(function (response) {
-            return response;
+            console.log(response.data);
+            return response.data;
         }).catch(function (error) {
-            // handle error
             console.log(error);
+            // handle error
             return false;
         });
     },
@@ -65,7 +66,7 @@ const QuizMasterServices = {
         });
     },
     obtenerJuego: function (id) {
-        return Axios.get(BASE_URL + '/api/Juego/GetJuego/'+id,
+        return Axios.get(BASE_URL + '/api/Juego/GetJuego/' + id,
             {
                 headers: {
                     'Authorization': 'Token ' + process.env.API_TOKEN,
@@ -78,12 +79,12 @@ const QuizMasterServices = {
     },
     obtenerJuegos: function (props) {
         return Axios.get('http://localhost:44353/api/Juego/GetAll/',
-        {
-            headers: {
-                'Authorization': 'Token ' + process.env.API_TOKEN,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }).then(response => {
+            {
+                headers: {
+                    'Authorization': 'Token ' + process.env.API_TOKEN,
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then(response => {
             // returning the data here allows the caller to get it through another .then(...)
             return response.data
         });
@@ -97,12 +98,12 @@ const QuizMasterServices = {
             }
         });
     },
-    obtenerRanking: function (props){
-        return Axios.get('http://localhost:44353/api/Juego/GetRanking/'+ props.id).then(response => {
+    obtenerRanking: function (props) {
+        return Axios.get('http://localhost:44353/api/Juego/GetRanking/' + props.id).then(response => {
             // returning the data here allows the caller to get it through another .then(...)
             return response.data
-        }) 
-         
+        })
+
     },
     obtenerProfile: function (props) {
         const {data} = Axios.get('http://localhost:44353/api/Juego/GetJuego/'
