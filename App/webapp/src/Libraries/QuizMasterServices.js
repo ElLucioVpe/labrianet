@@ -97,6 +97,10 @@ const QuizMasterServices = {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         });
+    },  
+     obtenerRespuestaStats: function (props) {
+        return Axios.get('http://localhost:44353/api/Pregunta/GetStatsRespuestas/'+ props.id).then(response => {
+            return response.data;})
     },
     obtenerRanking: function (props) {
         return Axios.get('http://localhost:44353/api/Juego/GetRanking/' + props.id).then(response => {
@@ -120,27 +124,35 @@ const QuizMasterServices = {
             return response.data
         })
     },
+    obtenerPartida: function (id) {
+        return Axios.get(BASE_URL + '/api/Partida/GetPartida/'+id,
+            {
+                headers: {
+                    'Authorization': 'Token ' + process.env.API_TOKEN,
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+            // returning the data here allows the caller to get it through another .then(...)
+            return response.data;
+        });
+    },
     crearPartida: function (props) {
         return Axios.post(BASE_URL + '/api/Partida/CreatePartida',
+            props,
             {
-                params: {
-                    partida: props
-                }
+                'Authorization': 'Token ' + process.env.API_TOKEN,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
             }
         ).then(function (response) {
-            return true;
+            return response.data;
         }).catch(function (error) {
-            return false;
+            return error;
         });
     },
     respuestaRespondida: function (idRespuesta, idPartida) {
-        return Axios.post(BASE_URL + '/api/Respuesta/RespuestaRespondida',
-            {
-                params: {
-                    idRespuesta: idRespuesta,
-                    idPartida: idPartida,
-                }
-            }
+        return Axios.post(BASE_URL + '/api/Respuesta/RespuestaRespondida?idRespuesta='+
+            idRespuesta+'&idPartida='+idPartida,
         ).then(function (response) {
             return true;
         }).catch(function (error) {
