@@ -157,15 +157,37 @@ namespace BusinessLogic.Controllers
                 {
 
                     Juego entity = uow.JuegoRepository.Get(juego.idJuego);
-                    entity.idJuego = juego.idJuego;
-                    entity.User_loginnameUser = juego.User_loginnameUser;
-                    entity.tituloJuego = juego.tituloJuego;
-                    entity.descripcionJuego = juego.descripcionJuego;
-                    entity.esPrivadoJuego = juego.esPrivadoJuego;
-                    entity.coverJuego = juego.coverJuego;
+                    //Despues lo hacemos mejor
+
+                    if(juego.tituloJuego != null)
+                    {
+                        entity.tituloJuego = juego.tituloJuego;
+                    }
+                    if (juego.descripcionJuego != null){
+                        entity.descripcionJuego = juego.descripcionJuego;
+                    }
+                    if (juego.password != null)
+                    {
+                        entity.password = juego.password;
+                    }
+
+                    if (juego.esPrivadoJuego != null){
+                        entity.esPrivadoJuego = juego.esPrivadoJuego;
+                        //Si el Game es publico no tiene Pass
+                        if (juego.esPrivadoJuego == 0) {
+                            entity.password = null;
+                        }
+                    }
+                    if (juego.coverJuego != null) {
+                        entity.coverJuego = juego.coverJuego;
+                    }
+
+                    if (juego.activadoJuego != null) {
+                        entity.activadoJuego = juego.activadoJuego;
+                    }
+
                     entity.Musica_idMusica = juego.Musica_idMusica;
-                    entity.activadoJuego = juego.activadoJuego;
-                    entity.password = juego.password;
+
 
                     uow.SaveChanges();
                 }
