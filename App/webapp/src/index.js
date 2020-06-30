@@ -15,13 +15,14 @@ import Resumenjuego from "./Views/ResumenJuego";
 import {UsuarioProvider, useUsuario} from "./Libraries/UserContextLib";
 import {JuegoProvider, useJuego} from "./Libraries/JuegoContextLib";
 import ThemeContext, {ThemeProvider} from "./Libraries/ThemeContextLib";
-import "./App.css";
 import Prejuego from "./Views/PreJuego.js";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Jugar from "./Views/Jugar";
 import Logout from "./Views/Logout";
 import PreJuego from "./Views/PreJuego";
 import Juego from "./Views/Juego.js";
+
+import "./App.css";
 
 function QuizMaster() {
     return (
@@ -67,7 +68,9 @@ function App() {
                 <Route path="/crear">
                     <CrearJuego/>
                 </Route>
-                <Route path="/enlace/:id" component={Enlace}/>
+                <Route path="/enlace">
+                    <Enlace/>
+                </Route>
                 <Route path="/jugar">
                     <Jugar/>
                 </Route>
@@ -79,10 +82,7 @@ function App() {
                     <SignUp/>
                 </Route>
                 <Route path="/prejuego/:id" component={PreJuego}/>
-                <Route
-                    path="/playerRanking/:id/:nick?/:puntos?"
-                    component={PlayerRanking}
-                />
+                <Route path="/playerRanking/:id/:nick?/:puntos?" component={PlayerRanking}/>
                 <Route path="/Juego/:id/:nick?" component={Juego}/>
                 <Route path="/logout">
                     <Logout/>
@@ -90,9 +90,7 @@ function App() {
                 <Route path="/login">
                     <Login/>
                 </Route>
-                <Route path="/resumen">
-                    <Resumenjuego/>
-                </Route>
+                <Route path="/resumen/:id" component={Resumenjuego}/>
                 <Route path="/configurarJuego/:id" component={ConfigurarJuego}/>
                 <Route path="/configurarJuego">
                     <ConfigurarJuego/>

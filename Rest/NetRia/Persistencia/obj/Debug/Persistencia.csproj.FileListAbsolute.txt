@@ -28,3 +28,13 @@ C:\GameQuizz\Git\labrianet\Rest\NetRia\Persistencia\obj\Debug\Persistencia.cspro
 C:\GameQuizz\Git\labrianet\Rest\NetRia\Persistencia\obj\Debug\Persistencia.csproj.CopyComplete
 C:\GameQuizz\Git\labrianet\Rest\NetRia\Persistencia\obj\Debug\Persistencia.dll
 C:\GameQuizz\Git\labrianet\Rest\NetRia\Persistencia\obj\Debug\Persistencia.pdb
+C:\Users\Xavel\Desktop\.net\PROYECT\labrianet\Rest\NetRia\Persistencia\bin\Debug\Persistencia.dll.config
+C:\Users\Xavel\Desktop\.net\PROYECT\labrianet\Rest\NetRia\Persistencia\bin\Debug\Persistencia.dll
+C:\Users\Xavel\Desktop\.net\PROYECT\labrianet\Rest\NetRia\Persistencia\bin\Debug\Persistencia.pdb
+C:\Users\Xavel\Desktop\.net\PROYECT\labrianet\Rest\NetRia\Persistencia\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Xavel\Desktop\.net\PROYECT\labrianet\Rest\NetRia\Persistencia\bin\Debug\EntityFramework.dll
+C:\Users\Xavel\Desktop\.net\PROYECT\labrianet\Rest\NetRia\Persistencia\obj\Debug\Persistencia.csprojAssemblyReference.cache
+C:\Users\Xavel\Desktop\.net\PROYECT\labrianet\Rest\NetRia\Persistencia\obj\Debug\Persistencia.csproj.CoreCompileInputs.cache
+C:\Users\Xavel\Desktop\.net\PROYECT\labrianet\Rest\NetRia\Persistencia\obj\Debug\Persistencia.csproj.CopyComplete
+C:\Users\Xavel\Desktop\.net\PROYECT\labrianet\Rest\NetRia\Persistencia\obj\Debug\Persistencia.dll
+C:\Users\Xavel\Desktop\.net\PROYECT\labrianet\Rest\NetRia\Persistencia\obj\Debug\Persistencia.pdb

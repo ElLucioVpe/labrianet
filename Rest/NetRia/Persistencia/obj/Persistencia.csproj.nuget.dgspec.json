@@ -1,26 +1,22 @@
 {
   "format": 1,
   "restore": {
-    "C:\\GameQuizz\\Git\\labrianet\\Rest\\NetRia\\Persistencia\\Persistencia.csproj": {}
+    "C:\\Users\\Xavel\\Desktop\\.net\\PROYECT\\labrianet\\Rest\\NetRia\\Persistencia\\Persistencia.csproj": {}
   },
   "projects": {
-    "C:\\GameQuizz\\Git\\labrianet\\Rest\\NetRia\\Persistencia\\Persistencia.csproj": {
+    "C:\\Users\\Xavel\\Desktop\\.net\\PROYECT\\labrianet\\Rest\\NetRia\\Persistencia\\Persistencia.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\GameQuizz\\Git\\labrianet\\Rest\\NetRia\\Persistencia\\Persistencia.csproj",
+        "projectUniqueName": "C:\\Users\\Xavel\\Desktop\\.net\\PROYECT\\labrianet\\Rest\\NetRia\\Persistencia\\Persistencia.csproj",
         "projectName": "Persistencia",
-        "projectPath": "C:\\GameQuizz\\Git\\labrianet\\Rest\\NetRia\\Persistencia\\Persistencia.csproj",
-        "packagesPath": "C:\\Users\\pagol\\.nuget\\packages\\",
-        "outputPath": "C:\\GameQuizz\\Git\\labrianet\\Rest\\NetRia\\Persistencia\\obj\\",
+        "projectPath": "C:\\Users\\Xavel\\Desktop\\.net\\PROYECT\\labrianet\\Rest\\NetRia\\Persistencia\\Persistencia.csproj",
+        "packagesPath": "C:\\Users\\Xavel\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Xavel\\Desktop\\.net\\PROYECT\\labrianet\\Rest\\NetRia\\Persistencia\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\pagol\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Xavel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net472"

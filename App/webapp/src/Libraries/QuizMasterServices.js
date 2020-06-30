@@ -65,8 +65,8 @@ const QuizMasterServices = {
             return false;
         });
     },
-    obtenerJuego: function (id) {
-        return Axios.get(BASE_URL + '/api/Juego/GetJuego/' + id,
+    obtenerJuego: function (props) {
+        return Axios.get(BASE_URL + '/api/Juego/GetJuego/'+props.id,
             {
                 headers: {
                     'Authorization': 'Token ' + process.env.API_TOKEN,
@@ -88,39 +88,52 @@ const QuizMasterServices = {
             }).then(response => {
             // returning the data here allows the caller to get it through another .then(...)
             return response.data;
+    });
+    obtenerJugadores: function (props){
+        return Axios.get(BASE_URL + '/api/Juego/GetStatsJugadoresInGame/'+props.id,
+        {
+            headers: {
+                'Authorization': 'Token ' + process.env.API_TOKEN,
+                'Accept': 'application/json'
+            }
+        }).then(response => {
+            return response.data;
         });
     },
     obtenerJuegos: function (props) {
-        return Axios.get('http://localhost:44353/api/Juego/GetAll/',
-            {
-                headers: {
-                    'Authorization': 'Token ' + process.env.API_TOKEN,
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            }).then(response => {
+        return Axios.get(BASE_URL + '/api/Juego/GetAll/',
+        {
+            headers: {
+                'Authorization': 'Token ' + process.env.API_TOKEN,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(response => {
             // returning the data here allows the caller to get it through another .then(...)
             return response.data
         });
     },
     obtenerJuegosDeUsuario: function (props) {
-        return Axios.get(BASE_URL + '/api/Juego/GetJuegosJugador?loginName=' + props.usuario).then(response => {
-            return response.data;
-        })
+        const {data} = Axios.get(BASE_URL + '/api/Juego/GetJuego/'
+            + props.id, {
+            headers: {
+                'Authorization': 'Token ' + process.env.API_TOKEN,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        });
     },
-    obtenerRespuestaStats: function (props) {
-        return Axios.get('http://localhost:44353/api/Pregunta/GetStatsRespuestas/' + props.id).then(response => {
-            return response.data;
-        })
+     obtenerRespuestaStats: function (props) {
+        return Axios.get(BASE_URL + '/api/Pregunta/GetStatsRespuestas/'+ props.id).then(response => {
+            return response.data;})
     },
-    obtenerRanking: function (props) {
-        return Axios.get('http://localhost:44353/api/Juego/GetRanking/' + props.id).then(response => {
+    obtenerRanking: function (props){
+        return Axios.get(BASE_URL + '/api/Juego/GetRanking/'+ props.id).then(response => {
             // returning the data here allows the caller to get it through another .then(...)
             return response.data
         })
 
     },
     obtenerProfile: function (props) {
-        const {data} = Axios.get('http://localhost:44353/api/Juego/GetJuego/'
+        const {data} = Axios.get(BASE_URL + '/api/Juego/GetJuego/'
             + props.id, {
             headers: {
                 'Authorization': 'Token ' + process.env.API_TOKEN,
@@ -129,7 +142,7 @@ const QuizMasterServices = {
         });
     },
     obtenerListadoMusica: function () {
-        return Axios.get('http://localhost:44353/api/Musica/GetAll').then(response => {
+        return Axios.get(BASE_URL + '/api/Musica/GetAll').then(response => {
             // returning the data here allows the caller to get it through another .then(...)
             return response.data
         })
