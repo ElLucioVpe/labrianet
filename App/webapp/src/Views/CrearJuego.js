@@ -7,12 +7,11 @@ import {useJuego} from "../Libraries/JuegoContextLib";
 import QuizMasterService from '../Libraries/QuizMasterServices';
 import {useUsuario} from "../Libraries/UserContextLib";
 import ConfigurarRespuesta from "../Components/ConfigurarRespuesta";
+import update from 'immutability-helper';
+import Enlace from "./Enlace";
 
 import '../Css/CrearJuego.css'
 import '../Css/CrearJuegoPreguntas.css'
-
-import update from 'immutability-helper';
-import Enlace from "./Enlace";
 
 export default function CrearJuego() {
     const usuario = useUsuario();
@@ -162,9 +161,7 @@ export default function CrearJuego() {
                 "respuestas": respuestas
             });
         });
-        await console.log(dataJuego);
         let id = await QuizMasterService.crearJuego(dataJuego);
-        await console.log("pimba " + id);
         await setJuegoCreado(true);
         await juego.setIdJuego(id);
     });
