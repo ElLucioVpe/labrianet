@@ -3,6 +3,7 @@ import "../Css/Juego.css";
 import QuizMasterService from "../Libraries/QuizMasterServices";
 import { useUsuario } from "../Libraries/UserContextLib";
 import Button from "../Components/Button";
+import Grafica from "../Components/Grafica.js";
 import YouTube from "react-youtube";
 const BASE_URL = "http://localhost:44353";
 
@@ -243,7 +244,7 @@ export default function Juego(props) {
         </div>
 
         {verGrafica ? (
-          <h4>Aca deberia haber una grafica</h4>
+         <Grafica id={preguntaActual.idPregunta}/>
         ) : (
           <div>
             <div className="AyudaJuego">{ayuda}</div>

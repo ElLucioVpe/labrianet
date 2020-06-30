@@ -9,7 +9,7 @@ import ConfigurarJuego from "./Views/ConfigurarJuego.js";
 import PlayerRanking from "./Views/PlayerRanking.js";
 import Header from "./Components/Header.js";
 import Loading from "./Components/Loading.js";
-import Grafica from "./Views/Grafica.js";
+import Grafica from "./Components/Grafica.js";
 import Enlace from "./Views/Enlace.js";
 import Resumenjuego from "./Views/ResumenJuego";
 import {UsuarioProvider, useUsuario} from "./Libraries/UserContextLib";
