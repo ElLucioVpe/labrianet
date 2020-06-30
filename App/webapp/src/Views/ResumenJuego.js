@@ -15,10 +15,10 @@ export default function ResumenJuego(props) {
   
       useEffect(() => {
           async function doIt() {
-              let data_juegos = await QuizMasterService.obtenerJuego({id:props.match.params.id});
+            let data_juegos = await QuizMasterService.obtenerJuego({id:props.match.params.id});
               let data_jugadores = await QuizMasterService.obtenerJugadores({id:props.match.params.id});
-              await set_jugadores(data_jugadores); 
-              await set_juegos(data_juegos);             
+              await set_jugadores(data_jugadores);
+             await set_juegos(data_juegos);             
               await console.log(await QuizMasterService.obtenerJuego({id:props.match.params.id}));
               await console.log(await QuizMasterService.obtenerJugadores({id:props.match.params.id}));
           }

@@ -9,7 +9,7 @@ import ConfigurarJuego from "./Views/ConfigurarJuego.js";
 import PlayerRanking from "./Views/PlayerRanking.js";
 import Header from "./Components/Header.js";
 import Loading from "./Components/Loading.js";
-import Grafica from "./Views/Grafica.js";
+import Grafica from "./Components/Grafica.js";
 import Enlace from "./Views/Enlace.js";
 import Resumenjuego from "./Views/ResumenJuego";
 import { UsuarioProvider, useUsuario } from "./Libraries/UserContextLib";
@@ -51,46 +51,7 @@ function App() {
 
   if (cargandoUsuario) {
     return (
-        <Router>
-            <Header/>
-            <Switch>
-                <Route exact path="/">
-                    <Index/>
-                </Route>
-                <Route path="/crear">
-                    <CrearJuego/>
-                </Route>
-                <Route path="/enlace">
-                    <Enlace/>
-                </Route>
-                <Route path="/jugar">
-                    <Jugar/>
-                </Route>
-
-                <Route path="/grafica/:id" component={Grafica}/>
-
-                <Route path="/perfil">
-                    <Perfil/>
-                </Route>
-                <Route path="/registro">
-                    <SignUp/>
-                </Route>
-                <Route path="/prejuego/:id" component={PreJuego}/>
-                <Route path="/playerRanking/:id/:nick?/:puntos?" component={PlayerRanking}/>
-                <Route path="/Juego/:id/:nick?" component={Juego}/>
-                <Route path="/logout">
-                    <Logout/>
-                </Route>
-                <Route path="/login">
-                    <Login/>
-                </Route>
-                <Route path="/resumen/:id" component={Resumenjuego}/>
-                <Route path="/configurarJuego/:id" component={ConfigurarJuego}/>
-                <Route path="/configurarJuego">
-                    <ConfigurarJuego/>
-                </Route>
-            </Switch>
-        </Router>
+      <div>Loading</div>
     );
   }
 
@@ -129,9 +90,7 @@ function App() {
         <Route path="/login">
           <Login />
         </Route>
-        <Route path="/resumen">
-          <Resumenjuego />
-        </Route>
+       
         <Route path="/configurarJuego/:id" component={ConfigurarJuego} />
         <Route path="/configurarJuego">
           <ConfigurarJuego />
