@@ -1,4 +1,4 @@
-import React, { Component, useContext, useState } from "react";
+import React, {Component, useContext, useState} from "react";
 import ReactDOM from "react-dom";
 import Index from "./Views/Index.js";
 import CrearJuego from "./Views/CrearJuego.js";
@@ -12,96 +12,94 @@ import Loading from "./Components/Loading.js";
 import Grafica from "./Views/Grafica.js";
 import Enlace from "./Views/Enlace.js";
 import Resumenjuego from "./Views/ResumenJuego";
-import { UsuarioProvider, useUsuario } from "./Libraries/UserContextLib";
-import { JuegoProvider, useJuego } from "./Libraries/JuegoContextLib";
-import ThemeContext, { ThemeProvider } from "./Libraries/ThemeContextLib";
+import {UsuarioProvider, useUsuario} from "./Libraries/UserContextLib";
+import {JuegoProvider, useJuego} from "./Libraries/JuegoContextLib";
+import ThemeContext, {ThemeProvider} from "./Libraries/ThemeContextLib";
 import "./App.css";
 import Prejuego from "./Views/PreJuego.js";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Jugar from "./Views/Jugar";
 import Logout from "./Views/Logout";
 import PreJuego from "./Views/PreJuego";
 import Juego from "./Views/Juego.js";
 
 function QuizMaster() {
-  return (
-    <ThemeProvider>
-      <UsuarioProvider>
-        <JuegoProvider>
-          <App></App>
-        </JuegoProvider>
-      </UsuarioProvider>
-    </ThemeProvider>
-  );
+    return (
+        <ThemeProvider>
+            <UsuarioProvider>
+                <JuegoProvider>
+                    <App></App>
+                </JuegoProvider>
+            </UsuarioProvider>
+        </ThemeProvider>
+    );
 }
 
 function App() {
-  const [error, setError] = useState(null);
-  const { cargandoUsuario, usuario, login, signup, logout } = useUsuario();
-  const { dark } = useContext(ThemeContext);
-  const { id_juego, juegoTemp, cargarJuego, cargarJuegoTemp } = useJuego();
+    const [error, setError] = useState(null);
+    const {cargandoUsuario, usuario, login, signup, logout} = useUsuario();
+    const {dark} = useContext(ThemeContext);
+    const {id_juego, juegoTemp, cargarJuego, cargarJuegoTemp} = useJuego();
 
-  function mostrarError(mensaje) {
-    setError(mensaje);
-  }
+    function mostrarError(mensaje) {
+        setError(mensaje);
+    }
 
-  function esconderError() {
-    setError(null);
-  }
+    function esconderError() {
+        setError(null);
+    }
 
-  if (cargandoUsuario) {
+    if (cargandoUsuario) {
+        return (
+            <div>
+                <Loading/>
+            </div>
+        );
+    }
+
     return (
-      <div>
-        <Loading />
-      </div>
+        <Router>
+            <Header/>
+            <Switch>
+                <Route exact path="/">
+                    <Index/>
+                </Route>
+                <Route path="/crear">
+                    <CrearJuego/>
+                </Route>
+                <Route path="/enlace/:id" component={Enlace}/>
+                <Route path="/jugar">
+                    <Jugar/>
+                </Route>
+                <Route path="/grafica/:id" component={Grafica}/>
+                <Route path="/perfil">
+                    <Perfil/>
+                </Route>
+                <Route path="/registro">
+                    <SignUp/>
+                </Route>
+                <Route path="/prejuego/:id" component={PreJuego}/>
+                <Route
+                    path="/playerRanking/:id/:nick?/:puntos?"
+                    component={PlayerRanking}
+                />
+                <Route path="/Juego/:id/:nick?" component={Juego}/>
+                <Route path="/logout">
+                    <Logout/>
+                </Route>
+                <Route path="/login">
+                    <Login/>
+                </Route>
+                <Route path="/resumen">
+                    <Resumenjuego/>
+                </Route>
+                <Route path="/configurarJuego/:id" component={ConfigurarJuego}/>
+                <Route path="/configurarJuego">
+                    <ConfigurarJuego/>
+                </Route>
+            </Switch>
+        </Router>
     );
-  }
-
-  return (
-    <Router>
-      <Header />
-      <Switch>
-        <Route exact path="/">
-          <Index />
-        </Route>
-        <Route path="/crear">
-          <CrearJuego />
-        </Route>
-        <Route path="/enlace/:id" component={Enlace} />
-        <Route path="/jugar">
-          <Jugar />
-        </Route>
-
-        <Route path="/grafica/:id" component={Grafica} />
-
-        <Route path="/perfil">
-          <Perfil />
-        </Route>
-        <Route path="/registro">
-          <SignUp />
-        </Route>
-        <Route path="/prejuego/:id" component={PreJuego} />
-        <Route
-          path="/playerRanking/:id/:nick?/:puntos?"
-          component={PlayerRanking}
-        />
-        <Route path="/Juego/:id/:nick?" component={Juego} />
-        <Route path="/logout">
-          <Logout />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/resumen">
-          <Resumenjuego />
-        </Route>
-        <Route path="/configurarJuego/:id" component={ConfigurarJuego} />
-        <Route path="/configurarJuego">
-          <ConfigurarJuego />
-        </Route>
-      </Switch>
-    </Router>
-  );
 }
 
-ReactDOM.render(<QuizMaster />, document.getElementById("root"));
+ReactDOM.render(<QuizMaster/>, document.getElementById("root"));
