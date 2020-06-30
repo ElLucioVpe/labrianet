@@ -66,7 +66,7 @@ const QuizMasterServices = {
         });
     },
     obtenerJuego: function (props) {
-        return Axios.get(BASE_URL + '/api/Juego/GetJuego/'+props.id,
+        return Axios.get(BASE_URL + '/api/Juego/GetJuego/' + props.id,
             {
                 headers: {
                     'Authorization': 'Token ' + process.env.API_TOKEN,
@@ -88,26 +88,27 @@ const QuizMasterServices = {
             }).then(response => {
             // returning the data here allows the caller to get it through another .then(...)
             return response.data;
-    });
-    obtenerJugadores: function (props){
-        return Axios.get(BASE_URL + '/api/Juego/GetStatsJugadoresInGame/'+props.id,
-        {
-            headers: {
-                'Authorization': 'Token ' + process.env.API_TOKEN,
-                'Accept': 'application/json'
-            }
-        }).then(response => {
+        });
+    },
+    obtenerJugadores: function (props) {
+        return Axios.get(BASE_URL + '/api/Juego/GetStatsJugadoresInGame/' + props.id,
+            {
+                headers: {
+                    'Authorization': 'Token ' + process.env.API_TOKEN,
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
             return response.data;
         });
     },
     obtenerJuegos: function (props) {
         return Axios.get(BASE_URL + '/api/Juego/GetAll/',
-        {
-            headers: {
-                'Authorization': 'Token ' + process.env.API_TOKEN,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }).then(response => {
+            {
+                headers: {
+                    'Authorization': 'Token ' + process.env.API_TOKEN,
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then(response => {
             // returning the data here allows the caller to get it through another .then(...)
             return response.data
         });
@@ -121,12 +122,13 @@ const QuizMasterServices = {
             }
         });
     },
-     obtenerRespuestaStats: function (props) {
-        return Axios.get(BASE_URL + '/api/Pregunta/GetStatsRespuestas/'+ props.id).then(response => {
-            return response.data;})
+    obtenerRespuestaStats: function (props) {
+        return Axios.get(BASE_URL + '/api/Pregunta/GetStatsRespuestas/' + props.id).then(response => {
+            return response.data;
+        })
     },
-    obtenerRanking: function (props){
-        return Axios.get(BASE_URL + '/api/Juego/GetRanking/'+ props.id).then(response => {
+    obtenerRanking: function (props) {
+        return Axios.get(BASE_URL + '/api/Juego/GetRanking/' + props.id).then(response => {
             // returning the data here allows the caller to get it through another .then(...)
             return response.data
         })
