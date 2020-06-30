@@ -33,7 +33,7 @@ export function UsuarioProvider(props) {
 
     useEffect(() => {
         async function doIt() {
-            if (Cookies.get('username') != null || Cookies.get('username') === "") {
+            if (Cookies.get('username') != null && Cookies.get('username') !== "") {
                 if (Cookies.get('accessToken') != null) {
                     await setUsuario(Cookies.get('username'));
                     await setAccessToken(Cookies.get('accessToken'));

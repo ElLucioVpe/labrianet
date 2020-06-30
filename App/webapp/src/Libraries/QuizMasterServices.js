@@ -114,13 +114,9 @@ const QuizMasterServices = {
         });
     },
     obtenerJuegosDeUsuario: function (props) {
-        const {data} = Axios.get(BASE_URL + '/api/Juego/GetJuego/'
-            + props.id, {
-            headers: {
-                'Authorization': 'Token ' + process.env.API_TOKEN,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        });
+        return Axios.get(BASE_URL + '/api/Juego/GetJuegosJugador?loginName=' + props.usuario).then(response => {
+            return response.data;
+        })
     },
     obtenerRespuestaStats: function (props) {
         return Axios.get(BASE_URL + '/api/Pregunta/GetStatsRespuestas/' + props.id).then(response => {
