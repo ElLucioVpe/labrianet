@@ -147,21 +147,26 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Xavel\\.nuget\\packages\\": {}
+    "C:\\Users\\pagol\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Xavel\\Desktop\\.net\\PROYECT\\labrianet\\Rest\\NetRia\\Persistencia\\Persistencia.csproj",
+      "projectUniqueName": "C:\\GameQuizz\\Git\\labrianet\\Rest\\NetRia\\Persistencia\\Persistencia.csproj",
       "projectName": "Persistencia",
-      "projectPath": "C:\\Users\\Xavel\\Desktop\\.net\\PROYECT\\labrianet\\Rest\\NetRia\\Persistencia\\Persistencia.csproj",
-      "packagesPath": "C:\\Users\\Xavel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Xavel\\Desktop\\.net\\PROYECT\\labrianet\\Rest\\NetRia\\Persistencia\\obj\\",
+      "projectPath": "C:\\GameQuizz\\Git\\labrianet\\Rest\\NetRia\\Persistencia\\Persistencia.csproj",
+      "packagesPath": "C:\\Users\\pagol\\.nuget\\packages\\",
+      "outputPath": "C:\\GameQuizz\\Git\\labrianet\\Rest\\NetRia\\Persistencia\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
+      "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Xavel\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\pagol\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net472"
