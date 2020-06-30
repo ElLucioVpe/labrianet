@@ -1,7 +1,8 @@
 import React from 'react'
-import "../Css/Enlace.css";
 import Button from "../Components/Button";
 import {TwitterShareButton} from 'react-twitter-embed';
+
+import "../Css/Enlace.css";
 
 export default function Enlace(props) {
     function sendToClipboard() {

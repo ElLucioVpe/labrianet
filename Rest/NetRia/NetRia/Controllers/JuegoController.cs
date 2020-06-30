@@ -109,11 +109,6 @@ namespace NetRia.Controllers
                 return BadRequest();
             }
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             DTOBaseResponse response = new DTOBaseResponse();
             try
             {

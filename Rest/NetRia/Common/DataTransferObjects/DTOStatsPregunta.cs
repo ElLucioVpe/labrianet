@@ -10,5 +10,6 @@ namespace Common.DataTransferObjects
     {
         public int idRespuesta { get; set; }
         public int cantidadRespondieron { get; set; }
+        public Nullable<short> esCorrectoRespuesta { get; set; }
     }
 }

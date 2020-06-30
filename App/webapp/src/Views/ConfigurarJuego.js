@@ -3,17 +3,11 @@ import Input from "../Components/Input";
 import Select from "react-select";
 import QuizMasterService from '../Libraries/QuizMasterServices';
 import {useJuego} from "../Libraries/JuegoContextLib";
-import {BrowserRouter as useLocation} from "react-router-dom";
 import Button from "../Components/Button";
 import SubirImagenVideo from "../Components/SubirImagenVideo";
-import update from "immutability-helper";
 import ReactPlayer from "react-player";
 
 import '../Css/ConfigurarJuego.css'
-
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-}
 
 export default function ConfigurarJuego(props) {
     const [canciones, setCanciones] = useState([]);

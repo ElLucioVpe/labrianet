@@ -29,7 +29,7 @@ namespace NetRia
             {
                 DTOUser dto = controller.GetUser(context.UserName); 
                 identity.AddClaim(new Claim(ClaimTypes.Role, "user"));
-                identity.AddClaim(new Claim(ClaimTypes.Email, "correoUser"));
+                identity.AddClaim(new Claim(ClaimTypes.Email, dto.loginnameUser));
                 identity.AddClaim(new Claim("nick", dto.nickUser));
                 identity.AddClaim(new Claim("fecha", dto.fechaUser.ToString()));
 

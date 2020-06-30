@@ -71,8 +71,8 @@ namespace BusinessLogic.Controllers
                     DTOStatsPregunta statActualRespuesta = new DTOStatsPregunta()
                     {
                         idRespuesta = idResp,
-                        cantidadRespondieron = cantUsers,
-                    };
+                        cantidadRespondieron = cantUsers, esCorrectoRespuesta = respuesta.esCorrectoRespuesta
+    };
                     statsPregunta.Add(statActualRespuesta);
                 }
 
