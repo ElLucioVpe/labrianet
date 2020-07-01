@@ -15,7 +15,6 @@ import Resumenjuego from "./Views/ResumenJuego";
 import {UsuarioProvider, useUsuario} from "./Libraries/UserContextLib";
 import {JuegoProvider, useJuego} from "./Libraries/JuegoContextLib";
 import ThemeContext, {ThemeProvider} from "./Libraries/ThemeContextLib";
-import Prejuego from "./Views/PreJuego.js";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Jugar from "./Views/Jugar";
 import Logout from "./Views/Logout";

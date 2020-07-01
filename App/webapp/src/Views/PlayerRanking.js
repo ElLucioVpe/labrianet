@@ -11,8 +11,6 @@ export default function PlayerRanking(props) {
     const [rankings, set_rankings] = useState([{}]);
     const [partida, set_partida] = useState({nickUsuario: "Anonimo", puntaje: 0});
     const [nombreJuego, set_nombreJuego] = useState("Game");
-    
-  /*const [busqueda, setbusqueda] = useState([{}]);*/
 
     useEffect(() => {
         async function doIt() {
@@ -22,7 +20,7 @@ export default function PlayerRanking(props) {
             set_partida({nickUsuario: props.match.params.nick, puntaje: props.match.params.puntos});
         }
         async function cargarNombreJuego() {
-            let data_juego = await QuizMasterService.obtenerJuego(props.match.params.id);
+            let data_juego = await QuizMasterService.obtenerJuego({id: props.match.params.id});
             await set_nombreJuego(data_juego.tituloJuego);
         }
         cargarNombreJuego()
@@ -34,9 +32,7 @@ export default function PlayerRanking(props) {
             <div class="Ranking">
                 <div class="containerRanking">
                     <div class="tituloJuego">
-                        <grid-center>
-                            <h>{nombreJuego}</h>
-                        </grid-center>
+                        <h>{nombreJuego}</h>
                     </div>
                     <div class="userPuntaje">
                         <div class="contenedor">

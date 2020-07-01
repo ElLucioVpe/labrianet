@@ -23,7 +23,10 @@ export const Header = () => {
                     <DarkThemeSwitcher/>
                     {
                         usuario.inicioSesion ? (
-                            <Button classList="item" to="/logout" value="Logout" size="regular"/>
+                            <div className="flex flex-direction-row">
+                                <Button classList="item mr-10" to="/perfil" icon="profile.svg" size="regular"/>
+                                <Button classList="item" to="/logout" value="Logout" size="regular"/>
+                            </div>
                         ) : (
                             <Button classList="item" to="/login" value="Login" size="regular"/>
                         )

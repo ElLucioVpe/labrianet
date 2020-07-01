@@ -33,7 +33,7 @@ export default function PreJuego(props){
 
     useEffect(() => {
         async function cargarJuego() {
-            await QuizMasterService.obtenerJuego(props.match.params.id).then(
+            await QuizMasterService.obtenerJuego({id: props.match.params.id}).then(
                 function (data) {
                     setInfo_juego(data);
                 }

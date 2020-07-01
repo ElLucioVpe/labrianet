@@ -31,3 +31,12 @@ button.alert {
 button.confirm {
     background-image: linear-gradient(to right, #4f9db5, var(--right))
 }
+
+button.btn-icon {
+    border-radius: 50%;
+    padding: 0 10px;
+}
+
+button.btn-icon img {
+    width: 20px;
+}

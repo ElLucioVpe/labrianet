@@ -15,15 +15,17 @@ export default function Juego(props) {
   const [numeroPregunta, setNumeroPregunta] = useState(1);
   const [numeroRespuesta, setNumeroRespuesta] = useState(-1);
   const [preguntaActual, setPreguntaActual] = useState("");
+  const [datosGrafica, setDatosGrafica] = useState({idPregunta: 0, idRespuesta: 0});
   const [contesta, setContesta] = useState([]);
   const [counter, setCounter] = useState(-1);
   const [counterPausa, setCounterPausa] = useState(0);
   const [verGrafica, setVerGrafica] = useState(false);
   const [juegoTerminado, setJuegoTerminado] = useState(false);
+  const [pasar, setPasar] = useState(false);
 
   useEffect(() => {
     async function cargarJuego() {
-      await QuizMasterService.obtenerJuego(props.match.params.id)
+      await QuizMasterService.obtenerJuego({id: props.match.params.id})
         .then(function (data) {
           //console.log(data);
           setInfo_juego(data);
@@ -37,10 +39,9 @@ export default function Juego(props) {
             );
         })
         .catch(function (error) {
-          //window.location = "/";
+          window.location = "/";
         });
     }
-
     cargarJuego();
   }, []);
 
@@ -63,7 +64,11 @@ export default function Juego(props) {
   }, [counter]);
 
   const handleClickRespuesta = (nroRespuesta) => {
-    setNumeroRespuesta(nroRespuesta);
+    if(!pasar){
+      setNumeroRespuesta(nroRespuesta);
+      setPasar(true);
+      setCounter(3);
+    }
   };
 
   const terminarJuego = async () => {
@@ -90,9 +95,9 @@ export default function Juego(props) {
     window.location =
       "/playerRanking/" +
       info_juego.idJuego +
-      "&" +
+      "/" +
       nickname +
-      "&" +
+      "/" +
       puntuacion;
   };
 
@@ -111,25 +116,37 @@ export default function Juego(props) {
     if (verGrafica) {
       setVerGrafica(false);
     } else {
-      setVerGrafica(true);
-      handleClickSiguiente();
+      let idRespuesta = -1;
+      if(numeroRespuesta !== -1 && preguntaActual !== "") idRespuesta = preguntaActual.respuestas[numeroRespuesta].idRespuesta;
+      setDatosGrafica({idPregunta: preguntaActual.idPregunta, idRespuesta: idRespuesta});
+      console.log("A ver ---"+pasar);
+      if(pasar) {
+        setPasar(false);
+        setVerGrafica(true);
+        handleClickSiguiente();
+      } else {
+        setPasar(true);
+        setCounter(3);
+      }
     }
   };
 
   const handleClickSiguiente = () => {
-    if (numeroRespuesta !== -1) {
-      let respuesta = preguntaActual.respuestas[numeroRespuesta];
-      setContesta(contesta.concat(respuesta));
-      if (respuesta.esCorrectoRespuesta === 1)
-        setPuntuacion(puntuacion + preguntaActual.puntosPregunta);
-      setNumeroRespuesta(-1);
-    }
-    setNumeroPregunta(numeroPregunta + 1); //no se modifica hasta terminar la funcion
-    if (info_juego.preguntas && numeroPregunta < info_juego.preguntas.length) {
-      setPreguntaActual(info_juego.preguntas[numeroPregunta]);
-      setCounter(info_juego.preguntas[numeroPregunta].segundosPregunta);
-    } else {
-      setPreguntaActual("");
+    if(pasar) {
+      if (numeroRespuesta !== -1) {
+        let respuesta = preguntaActual.respuestas[numeroRespuesta];
+        setContesta(contesta.concat(respuesta));
+        if (respuesta.esCorrectoRespuesta === 1)
+          setPuntuacion(puntuacion + preguntaActual.puntosPregunta);
+        setNumeroRespuesta(-1);
+      }
+      setNumeroPregunta(numeroPregunta + 1); //no se modifica hasta terminar la funcion
+      if (info_juego.preguntas && numeroPregunta < info_juego.preguntas.length) {
+        setPreguntaActual(info_juego.preguntas[numeroPregunta]);
+        setCounter(info_juego.preguntas[numeroPregunta].segundosPregunta);
+      } else {
+        setPreguntaActual("");
+      }
     }
   };
 
@@ -233,7 +250,8 @@ export default function Juego(props) {
       <div className="juegoMasterParent container">
         <div className="TituloNumPreg">
           <p>
-            Pregunta <span id="numPreg">{numeroPregunta}</span>
+            Pregunta
+            <span id="numPreg">{verGrafica? numeroPregunta-1 : numeroPregunta}</span>
           </p>
 
           {verGrafica ? (
@@ -244,7 +262,7 @@ export default function Juego(props) {
         </div>
 
         {verGrafica ? (
-         <Grafica id={preguntaActual.idPregunta}/>
+         <Grafica idPregunta={datosGrafica.idPregunta} idRespuesta={datosGrafica.idRespuesta}/>
         ) : (
           <div>
             <div className="AyudaJuego">{ayuda}</div>

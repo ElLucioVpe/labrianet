@@ -21,13 +21,15 @@ export default function Profile() {
         doIt();
 
         async function doIt() {
-            let data = await QuizMasterService.obtenerJuegosDeUsuario({
-                usuario: usuario.usuario
-            });
-            console.log(data);
-            setJuegos(data);
+            if (usuario.usuario != null) {
+                let data = await QuizMasterService.obtenerJuegosDeUsuario({
+                    usuario: usuario.usuario
+                });
+                console.log(data);
+                setJuegos(data);
+            }
         }
-    }, [usuario]);
+    }, [usuario.usuario]);
 
     function render() {
         return (
@@ -37,7 +39,7 @@ export default function Profile() {
                     <h1>{usuario.usuario}</h1>
                     <Button class="item" to="/crear" value="Crear quiz nueva" size="regular"/>
                 </div>
-                <ProfileUserInfo/>
+                <ProfileUserInfo juegos={juegos}/>
                 <ProfileUserStats juegos={juegos} desactivarJuego={desactivarJuego}/>
             </div>
         )

@@ -4,7 +4,7 @@
 
 .containerRanking {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto 500px auto;
     grid-template-rows: 50px 100px 500px 50px;
 }
 
@@ -13,6 +13,7 @@
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 2;
+    margin:auto;
     /*background-color: rgb(173, 158, 17);*/
 }
 
@@ -99,7 +100,7 @@
 @media screen and (max-width: 1000px) {
     .containerRanking {
         display: grid;
-        grid-template-columns: auto auto auto;
+        grid-template-columns: auto 300px auto;
         grid-template-rows: 50px 100px 300px 50px;
     }
     
