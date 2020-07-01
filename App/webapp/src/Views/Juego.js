@@ -15,6 +15,7 @@ export default function Juego(props) {
   const [numeroPregunta, setNumeroPregunta] = useState(1);
   const [numeroRespuesta, setNumeroRespuesta] = useState(-1);
   const [preguntaActual, setPreguntaActual] = useState("");
+  const [datosGrafica, setDatosGrafica] = useState({idPregunta: 0, idRespuesta: 0});
   const [contesta, setContesta] = useState([]);
   const [counter, setCounter] = useState(-1);
   const [counterPausa, setCounterPausa] = useState(0);
@@ -23,7 +24,7 @@ export default function Juego(props) {
 
   useEffect(() => {
     async function cargarJuego() {
-      await QuizMasterService.obtenerJuego(props.match.params.id)
+      await QuizMasterService.obtenerJuego({id: props.match.params.id})
         .then(function (data) {
           //console.log(data);
           setInfo_juego(data);
@@ -40,7 +41,6 @@ export default function Juego(props) {
           //window.location = "/";
         });
     }
-
     cargarJuego();
   }, []);
 
@@ -111,6 +111,10 @@ export default function Juego(props) {
     if (verGrafica) {
       setVerGrafica(false);
     } else {
+      let idRespuesta = -1;
+      if(numeroRespuesta !== -1 && preguntaActual !== "") idRespuesta = preguntaActual.respuestas[numeroRespuesta].idRespuesta;
+      console.log(idRespuesta);
+      setDatosGrafica({idPregunta: preguntaActual.idPregunta, idRespuesta: idRespuesta});
       setVerGrafica(true);
       handleClickSiguiente();
     }
@@ -233,7 +237,8 @@ export default function Juego(props) {
       <div className="juegoMasterParent container">
         <div className="TituloNumPreg">
           <p>
-            Pregunta <span id="numPreg">{numeroPregunta}</span>
+            Pregunta
+            <span id="numPreg">{verGrafica? numeroPregunta-1 : numeroPregunta}</span>
           </p>
 
           {verGrafica ? (
@@ -244,7 +249,7 @@ export default function Juego(props) {
         </div>
 
         {verGrafica ? (
-         <Grafica id={preguntaActual.idPregunta}/>
+         <Grafica idPregunta={datosGrafica.idPregunta} idRespuesta={datosGrafica.idRespuesta}/>
         ) : (
           <div>
             <div className="AyudaJuego">{ayuda}</div>

@@ -121,7 +121,10 @@ const QuizMasterServices = {
     obtenerRespuestaStats: function (props) {
         return Axios.get(BASE_URL + '/api/Pregunta/GetStatsRespuestas/' + props.id).then(response => {
             return response.data;
-        })
+        }).catch(error=>{
+            console.log(error);
+            return error;
+        });
     },
     obtenerRanking: function (props) {
         return Axios.get(BASE_URL + '/api/Juego/GetRanking/' + props.id).then(response => {
