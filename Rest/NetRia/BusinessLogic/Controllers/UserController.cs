@@ -67,7 +67,7 @@ namespace BusinessLogic.Controllers
                 using (UnitOfWork uow = new UnitOfWork())
                 {
 
-                    User entity = uow.UserRepository.Get(user.loginnameUser);
+                    User entity = uow.UserRepository.Get(id);
                     entity.loginnameUser = user.loginnameUser;
                     entity.nickUser = user.nickUser;
                     entity.passwordUser = user.passwordUser;

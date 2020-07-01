@@ -89,7 +89,7 @@ namespace BusinessLogic.Controllers
                 using (UnitOfWork uow = new UnitOfWork())
                 {
 
-                    Pregunta entity = uow.PreguntaRepository.Get(pregunta.idPregunta);
+                    Pregunta entity = uow.PreguntaRepository.Get(id);
     
                     entity.contenidoPregunta = pregunta.contenidoPregunta;
                     entity.segundosPregunta = pregunta.segundosPregunta;
@@ -109,16 +109,18 @@ namespace BusinessLogic.Controllers
 
         }
 
-        public void CreatePregunta(DTOPregunta pregunta)
+        public int CreatePregunta(DTOPregunta pregunta)
         {
 
             try
             {
+                int idPregunta;
                 using (UnitOfWork uow = new UnitOfWork())
                 {
 
-                    uow.PreguntaRepository.Create(_mapperPregunta.MapFromDTOPregunta(pregunta));
+                    idPregunta = uow.PreguntaRepository.Create(_mapperPregunta.MapFromDTOPregunta(pregunta));
                     uow.SaveChanges();
+                    return idPregunta;
                 }
             }
             catch (Exception ex)

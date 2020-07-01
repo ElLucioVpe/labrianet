@@ -56,7 +56,7 @@ namespace BusinessLogic.Controllers
                 using (UnitOfWork uow = new UnitOfWork())
                 {
 
-                    Partida entity = uow.PartidaRepository.Get(partida.id);
+                    Partida entity = uow.PartidaRepository.Get(id);
                     entity.id = partida.id;
                     entity.Juego_idJuego = partida.Juego_idJuego;
                     entity.nickUsuario = partida.nickUsuario;
