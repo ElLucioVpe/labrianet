@@ -37,8 +37,7 @@ export default function ResumenJuego(props) {
       <div className="resumenJuego">
         <div className="resumenJuego_Info">
           <div className="COVER-GAME">
-    {/*<img src={"/" + juegos.coverJuego} alt="Mi titulo de la imagen" />*/}
-            <img src="img/perfil.png" alt="Mi titulo de la imagen" height="100%" width="100%" />
+          <img src={"/" + juegos.coverJuego} alt="Mi titulo de la imagen" />
           </div>
           {
             <div>
@@ -128,7 +127,7 @@ export default function ResumenJuego(props) {
         <img
           id="ayuda-url"
           src={BASE_URL + "/game-images/" + pregunta.urlAyudaPregunta}
-          height="50px" width="50px"
+          height="90px" width="120px"
         />
       );
     }
