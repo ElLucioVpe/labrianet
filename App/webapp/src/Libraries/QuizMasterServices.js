@@ -77,18 +77,16 @@ const QuizMasterServices = {
             return response.data;
         });
     },
-    updateJuego: function (id, props) {
-        return Axios.get(BASE_URL + '/api/Juego/UpdateJuego/' + props.id,
-            props,
+    updateJuego: function (props) {
+        return Axios.post(BASE_URL + '/api/Juego/UpdateJuego/' + props.juego.idJuego,
+            props.juego,
             {
                 headers: {
-                    'Authorization': 'Token ' + process.env.API_TOKEN,
-                    'Accept': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': 'Bearer ' + props.accessToken,
                 }
-            }).then(response => {
-            // returning the data here allows the caller to get it through another .then(...)
-            return response.data;
-        });
+            });
     },
     obtenerJugadores: function (props) {
         return Axios.get(BASE_URL + '/api/Juego/GetStatsJugadoresInGame/' + props.id,
