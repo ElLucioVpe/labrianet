@@ -39,7 +39,7 @@ export default function Juego(props) {
             );
         })
         .catch(function (error) {
-          //window.location = "/";
+          window.location = "/";
         });
     }
     cargarJuego();
@@ -95,9 +95,9 @@ export default function Juego(props) {
     window.location =
       "/playerRanking/" +
       info_juego.idJuego +
-      "&" +
+      "/" +
       nickname +
-      "&" +
+      "/" +
       puntuacion;
   };
 
