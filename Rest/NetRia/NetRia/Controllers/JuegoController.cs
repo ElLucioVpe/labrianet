@@ -139,20 +139,90 @@ namespace NetRia.Controllers
             try
             {
                 BusinessLogic.Controllers.JuegoController controller = new BusinessLogic.Controllers.JuegoController();
+                
+                var Base64Image = juego.coverJuego;
+                if(Base64Image != "")
+                {
+                    juego.coverJuego = "Progress";
+                }
 
-                if (juego.coverJuego != "") {
-                    var bytes = Convert.FromBase64String(juego.coverJuego);
-                    string nombreFile = "coverJuego" + juego.idJuego;
-                    string filePath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "/images/covers/" + nombreFile;
+                //Chequeo toda la lista de Preguntas y las pongo en progress
+                List<DTOPregunta> PreguntasConUrlAyuda = new List<DTOPregunta>();
+                int Orden = 0;
+                if (juego.preguntas != null) {
+                    foreach (DTOPregunta preg in juego.preguntas) {
+                        Orden++;
+                        preg.idPregunta = Orden;
+                        if ((preg.urlAyudaPregunta != "") && (!preg.urlAyudaPregunta.StartsWith("http"))) {
+                            DTOPregunta preguntaUrlActual = new DTOPregunta {
+                                idPregunta = Orden,
+                                urlAyudaPregunta = preg.urlAyudaPregunta
+                            };
+                            PreguntasConUrlAyuda.Add(preguntaUrlActual);
+                            preg.urlAyudaPregunta="Progress";
+                        }
+                    }
+
+                }
+
+                //Creo Game y Cambio Cover
+                idGame = controller.CreateJuego(juego);            
+                if (Base64Image != "") {
+                    var bytes = Convert.FromBase64String(Base64Image);
+                    //string nombreFile = "coverJuego" + juego.idJuego;
+                    string nombreFile = idGame+".jpg";
+                    var GeneralPath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "/images/covers/";
+
+                    if (!Directory.Exists(GeneralPath))
+                    {
+                        Directory.CreateDirectory(GeneralPath);
+                    }
+
+                    string filePath = GeneralPath + nombreFile;
                     using (var imageFile = new FileStream(filePath, FileMode.Create))
                     {
                         imageFile.Write(bytes, 0, bytes.Length);
                         imageFile.Flush();
                     }
-                    juego.coverJuego = nombreFile;
+                    DTOJuego UpdateCoverGame = new DTOJuego {
+                        coverJuego = nombreFile,
+                        Musica_idMusica = juego.Musica_idMusica
+                     };
+                   
+
+                    controller.UpdateJuego(idGame, UpdateCoverGame);
                 }
-                idGame = controller.CreateJuego(juego);
+
                 
+                //Chequeo Lista de preguntas en Progress
+                if (PreguntasConUrlAyuda != null) {
+                    DTOJuego MiGameConPreguntas = controller.GetJuego(idGame);
+
+                    foreach (DTOPregunta preg in PreguntasConUrlAyuda) {
+
+                        int idPregunta = MiGameConPreguntas.preguntas.ElementAt(preg.idPregunta-1).idPregunta;
+
+                        var bytes = Convert.FromBase64String(preg.urlAyudaPregunta);
+                        string nombreFile = idPregunta + ".jpg";
+                        var GeneralPath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "/images/ayuda/";
+
+                        if (!Directory.Exists(GeneralPath))
+                        {
+                            Directory.CreateDirectory(GeneralPath);
+                        }
+
+                        string filePath = GeneralPath + nombreFile;
+                        using (var imageFile = new FileStream(filePath, FileMode.Create))
+                        {
+                            imageFile.Write(bytes, 0, bytes.Length);
+                            imageFile.Flush();
+                        }
+
+                        preg.urlAyudaPregunta = nombreFile;
+                        controller.UpdatePreguntaUrlJuego(idGame,idPregunta,preg.urlAyudaPregunta);
+                    }
+                }
+
             }
             catch (Exception ex)
             {

@@ -100,24 +100,45 @@ namespace NetRia.Controllers
             }
 
             DTOBaseResponse response = new DTOBaseResponse();
+            int idPregunta;
             try
             {
                 BusinessLogic.Controllers.PreguntaController controller = new BusinessLogic.Controllers.PreguntaController();
 
-                if (pregunta.urlAyudaPregunta != "" && !pregunta.urlAyudaPregunta.StartsWith("http"))
+                var Base64Image = pregunta.urlAyudaPregunta;
+
+                if (Base64Image != "" && !Base64Image.StartsWith("http"))
                 {
-                    var bytes = Convert.FromBase64String(pregunta.urlAyudaPregunta);
-                    string nombreFile = "imagenAyudaPregunta" + pregunta.idPregunta;
-                    string filePath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "/images/ayuda/" + nombreFile;
+                    pregunta.urlAyudaPregunta = "Progress";
+                }
+
+                idPregunta = controller.CreatePregunta(pregunta);
+
+                if (Base64Image != "" && !Base64Image.StartsWith("http"))
+                {
+                    var bytes = Convert.FromBase64String(Base64Image);
+                    string nombreFile = idPregunta + ".jpg";
+                    var GeneralPath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "/images/ayuda/";
+
+                    if (!Directory.Exists(GeneralPath))
+                    {
+                        Directory.CreateDirectory(GeneralPath);
+                    }
+
+                    string filePath = GeneralPath + nombreFile;
                     using (var imageFile = new FileStream(filePath, FileMode.Create))
                     {
                         imageFile.Write(bytes, 0, bytes.Length);
                         imageFile.Flush();
                     }
-                    pregunta.urlAyudaPregunta = nombreFile;
-                }
+                    DTOPregunta UpdateUrlAyudaPregunta = new DTOPregunta
+                    {
+                        urlAyudaPregunta = nombreFile
+                    };
 
-                controller.CreatePregunta(pregunta);
+
+                    controller.UpdatePregunta(idPregunta, UpdateUrlAyudaPregunta);
+                }
                 response.Success = true;
             }
             catch (Exception ex)

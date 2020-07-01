@@ -54,7 +54,7 @@ namespace BusinessLogic.Controllers
             {
                 using (UnitOfWork uow = new UnitOfWork())
                 {
-                    Respuesta entity = uow.RespuestaRepository.Get(respuesta.idRespuesta);
+                    Respuesta entity = uow.RespuestaRepository.Get(id);
                     entity.idRespuesta = respuesta.idRespuesta;
                     entity.contenidoRespuesta = respuesta.contenidoRespuesta;
                     entity.esCorrectoRespuesta = respuesta.esCorrectoRespuesta;

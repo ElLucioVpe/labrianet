@@ -54,7 +54,7 @@ namespace BusinessLogic.Controllers
                 using (UnitOfWork uow = new UnitOfWork())
                 {
 
-                    Musica entity = uow.MusicaRepository.Get(musica.idMusica);
+                    Musica entity = uow.MusicaRepository.Get(id);
                     entity.idMusica = musica.idMusica;
                     entity.urlMusica = musica.urlMusica;
                     entity.tituloMusica = musica.tituloMusica;

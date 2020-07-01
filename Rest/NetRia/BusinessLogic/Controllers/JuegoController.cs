@@ -147,6 +147,21 @@ namespace BusinessLogic.Controllers
             }
         }
 
+        public void UpdatePreguntaUrlJuego(int idGame, int idPregunta, string UrlPregunta){
+
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                var entity = uow.JuegoRepository.Get(idGame);
+
+                var entityUpdatedPregunta = entity.preguntas.FirstOrDefault(a => a.idPregunta == idPregunta);
+                entityUpdatedPregunta.urlAyudaPregunta=UrlPregunta;
+
+                uow.SaveChanges();
+            }
+
+
+        }
+
 
         public void UpdateJuego(int id, DTOJuego juego)
         {
@@ -156,7 +171,7 @@ namespace BusinessLogic.Controllers
                 using (UnitOfWork uow = new UnitOfWork())
                 {
 
-                    Juego entity = uow.JuegoRepository.Get(juego.idJuego);
+                    Juego entity = uow.JuegoRepository.Get(id);
                     //Despues lo hacemos mejor
 
                     if(juego.tituloJuego != null)

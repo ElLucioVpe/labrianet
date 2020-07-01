@@ -44,7 +44,7 @@ namespace BusinessLogic.DataModel.Repositories
         }
 
         // POST: api/pregunta
-        public void Create(Pregunta pregunta)
+        public int Create(Pregunta pregunta)
         {
 
             db.Preguntas.Add(pregunta);
@@ -52,9 +52,11 @@ namespace BusinessLogic.DataModel.Repositories
             try
             {
                 db.SaveChanges();
+                return pregunta.idPregunta;
             }
             catch (DbUpdateException)
             {
+                return -1;
             }
         }
 
