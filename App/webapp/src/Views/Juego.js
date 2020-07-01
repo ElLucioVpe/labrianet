@@ -21,6 +21,7 @@ export default function Juego(props) {
   const [counterPausa, setCounterPausa] = useState(0);
   const [verGrafica, setVerGrafica] = useState(false);
   const [juegoTerminado, setJuegoTerminado] = useState(false);
+  const [pasar, setPasar] = useState(false);
 
   useEffect(() => {
     async function cargarJuego() {
@@ -63,7 +64,11 @@ export default function Juego(props) {
   }, [counter]);
 
   const handleClickRespuesta = (nroRespuesta) => {
-    setNumeroRespuesta(nroRespuesta);
+    if(!pasar){
+      setNumeroRespuesta(nroRespuesta);
+      setPasar(true);
+      setCounter(3);
+    }
   };
 
   const terminarJuego = async () => {
@@ -113,27 +118,35 @@ export default function Juego(props) {
     } else {
       let idRespuesta = -1;
       if(numeroRespuesta !== -1 && preguntaActual !== "") idRespuesta = preguntaActual.respuestas[numeroRespuesta].idRespuesta;
-      console.log(idRespuesta);
       setDatosGrafica({idPregunta: preguntaActual.idPregunta, idRespuesta: idRespuesta});
-      setVerGrafica(true);
-      handleClickSiguiente();
+      console.log("A ver ---"+pasar);
+      if(pasar) {
+        setPasar(false);
+        setVerGrafica(true);
+        handleClickSiguiente();
+      } else {
+        setPasar(true);
+        setCounter(3);
+      }
     }
   };
 
   const handleClickSiguiente = () => {
-    if (numeroRespuesta !== -1) {
-      let respuesta = preguntaActual.respuestas[numeroRespuesta];
-      setContesta(contesta.concat(respuesta));
-      if (respuesta.esCorrectoRespuesta === 1)
-        setPuntuacion(puntuacion + preguntaActual.puntosPregunta);
-      setNumeroRespuesta(-1);
-    }
-    setNumeroPregunta(numeroPregunta + 1); //no se modifica hasta terminar la funcion
-    if (info_juego.preguntas && numeroPregunta < info_juego.preguntas.length) {
-      setPreguntaActual(info_juego.preguntas[numeroPregunta]);
-      setCounter(info_juego.preguntas[numeroPregunta].segundosPregunta);
-    } else {
-      setPreguntaActual("");
+    if(pasar) {
+      if (numeroRespuesta !== -1) {
+        let respuesta = preguntaActual.respuestas[numeroRespuesta];
+        setContesta(contesta.concat(respuesta));
+        if (respuesta.esCorrectoRespuesta === 1)
+          setPuntuacion(puntuacion + preguntaActual.puntosPregunta);
+        setNumeroRespuesta(-1);
+      }
+      setNumeroPregunta(numeroPregunta + 1); //no se modifica hasta terminar la funcion
+      if (info_juego.preguntas && numeroPregunta < info_juego.preguntas.length) {
+        setPreguntaActual(info_juego.preguntas[numeroPregunta]);
+        setCounter(info_juego.preguntas[numeroPregunta].segundosPregunta);
+      } else {
+        setPreguntaActual("");
+      }
     }
   };
 

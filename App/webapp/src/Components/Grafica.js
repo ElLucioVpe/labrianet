@@ -40,10 +40,10 @@ class Grafica extends React.Component {
                 } else {
                     let id = "";
                     let Color = "";
-                    if(i === 0) {id = "A"; Color = "blue";}
+                    if(i === 0) {id = "A"; Color = "dodgerblue";}
                     if(i === 1) {id = "B"; Color = "red";}
-                    if(i === 2) {id = "C"; Color = "green";}
-                    if(i === 3) {id = "D"; Color = "purple";}
+                    if(i === 2) {id = "C"; Color = "limegreen";}
+                    if(i === 3) {id = "D"; Color = "darkviolet";}
                     if(ranking.idRespuesta === respuestaUsuario)
                         ranking.cantidadRespondieron = ranking.cantidadRespondieron+1;
 
