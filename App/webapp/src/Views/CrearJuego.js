@@ -127,10 +127,10 @@ export default function CrearJuego() {
             "User_loginnameUser": usuario.usuario,
             "tituloJuego": (juego.titulo || "Titulo"),
             "descripcionJuego": "sample string 4",
-            "esPrivadoJuego": 1,
+            "activadoJuego": 1,
             "coverJuego": juego.coverJuego != null ? juego.coverJuego : "",
             "Musica_idMusica": juego.idMusica != null ? juego.idMusica : "1",
-            "activadoJuego": juego.esPrivadoJuego === true ? 0 : 1,
+            "esPrivadoJuego": juego.esPrivadoJuego === true ? 0 : 1,
             "accessToken": usuario.accessToken,
             "password": juego.password,
             "preguntas": []
