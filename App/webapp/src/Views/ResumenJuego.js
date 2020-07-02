@@ -13,7 +13,7 @@ export default function ResumenJuego(props) {
 
   useEffect(() => {
     async function doIt() {
-      if(props.match.params.id === false || props.match.params.id === -1) set_irAenlace(true); //Lo manda a mostrarle el error en enlace
+      if(props.id === false || props.id === -1) set_irAenlace(true); //Lo manda a mostrarle el error en enlace
 
       let data_juegos = await QuizMasterService.obtenerJuego({
         id: props.match.params.id,
@@ -38,7 +38,7 @@ export default function ResumenJuego(props) {
       <div className="resumenJuego">
         <div className="resumenJuego_Info">
           <div className="COVER-GAME">
-          <img src={juegos.coverJuego ? QuizMasterService.getUrlImagen("cover",juegos.coverJuego) : "img/perfil.png"} alt="Mi titulo de la imagen" />
+          <img className ="imagen-Juego" src={juegos.coverJuego ? QuizMasterService.getUrlImagen("cover",juegos.coverJuego) : "img/perfil.png"} alt="Mi titulo de la imagen" />
           </div>
           {
             <div>
