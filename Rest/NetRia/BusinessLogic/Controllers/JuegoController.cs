@@ -63,13 +63,30 @@ namespace BusinessLogic.Controllers
             }
         }
 
-        public int PlayersQueJugaron(int id)
+        public DTOStatsJuego PlayersQueJugaron(string loginname)
         {
             using (UnitOfWork uow = new UnitOfWork())
             {
-                int players = 0;
-                players = uow.JuegoRepository.PlayersQueJugaron(id);
-                return players;
+                DTOStatsJuego retorno = new DTOStatsJuego();
+                var user = uow.UserRepository.Get(loginname);
+                if (user == null) return retorno;
+
+                int JugadoresTotales = 0;
+                int JugadosTotales = 0;
+                
+                foreach(Juego juego in user.juegos)
+                {
+                    DTOStatsJuego temp = GetStatsJugadores(juego.idJuego);
+                    JugadoresTotales += temp.Jugadores;
+                    JugadosTotales += temp.Jugados;
+                }
+                
+                retorno = new DTOStatsJuego()
+                {
+                    Jugadores = JugadoresTotales,
+                    Jugados = JugadosTotales,
+                };
+                return retorno;
             }
         }
 
@@ -113,7 +130,7 @@ namespace BusinessLogic.Controllers
             }
         }
 
-        public DTOStatsJuego GetStatsJugadoresInGame(int id) {
+        public DTOStatsJuego GetStatsJugadores(int id) {
 
             using (UnitOfWork uow = new UnitOfWork())
             {
@@ -122,32 +139,26 @@ namespace BusinessLogic.Controllers
                 {
                     return null;
                 }
-                int JugadoresActual;
-                int JugadoreSinTerminarActual = 0;
-                int CantPreguntas;
-
-                JugadoresActual = entity.partidas.Count;
-                CantPreguntas = entity.preguntas.Count;
+                List<String> Jugadores = new List<String>();
+                int PartidasJugadas = entity.partidas.Count;
                 
                 foreach(Partida partida in entity.partidas)
                 {
-                    if (partida.respuestas.Count < CantPreguntas) {
-                        JugadoreSinTerminarActual = +1;
-                    }
+                    if (partida.User_loginnameUser != "" && partida.User_loginnameUser != null)
+                        if (Jugadores.Contains(partida.User_loginnameUser)) Jugadores.Add(partida.User_loginnameUser);
                 }
 
                 DTOStatsJuego statsJuegoJugadores = new DTOStatsJuego()
                 {
-                    Jugadores = JugadoresActual,
-                    JugadoresSinTerminar = JugadoreSinTerminarActual,
+                    Jugadores = Jugadores.Count,
+                    Jugados = PartidasJugadas,
                 };
-
 
                 return statsJuegoJugadores;
             }
         }
 
-        public void UpdatePreguntaUrlJuego(int idGame, int idPregunta, string UrlPregunta){
+        public void UpdatePreguntaUrlJuego(int idGame, int idPregunta, string UrlPregunta) {
 
             using (UnitOfWork uow = new UnitOfWork())
             {
