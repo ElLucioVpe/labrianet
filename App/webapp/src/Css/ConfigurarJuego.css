@@ -39,7 +39,8 @@
     }
    
     .gamecoverImage{
-        width: 100% /*auto-fit revisar cuando tenga imágenes*/;
+        width: 100% /*revisar cuando tenga imágenes*/;
+        height: auto;
     }
     .seccion1-config{       
         width: 100%;
@@ -56,6 +57,7 @@
         display: grid;
         grid-template-columns: 100% ; 
         grid-template-rows: 50% 50% auto-fit;
+        row-gap: 20px;
         /*column-gap: 20px;*/
     }
 }
