@@ -8,6 +8,7 @@ using Common.DataTransferObjects;
 using BusinessLogic.DataModel;
 using BusinessLogic.DataModel.Mappers;
 using Persistencia.Database;
+using System.IO;
 
 namespace BusinessLogic.Controllers
 {
@@ -90,6 +91,45 @@ namespace BusinessLogic.Controllers
             }
         }
 
+        public string GetImagenes(string tipo, string base64Image)
+        {
+
+            string base64;
+            string pathImage;
+            if (tipo == "Juego")
+            {
+                pathImage = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "/images/covers/";
+            }
+            else if (tipo == "Pregunta")
+            {
+                pathImage = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "/images/ayuda/";
+            }
+            else
+            {
+                return "Tipo No Encontrado";
+            }
+
+            base64 = Convert.ToBase64String(File.ReadAllBytes(pathImage + base64Image));
+            return base64;
+        }
+
+        public List<DTOStatsJuego> GetArrayPlayersQueJugaron(string loginname)
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                List<DTOStatsJuego> retorno = new List<DTOStatsJuego>();
+                var user = uow.UserRepository.Get(loginname);
+                if (user == null) return retorno;
+
+                foreach (Juego juego in user.juegos)
+                {
+                    DTOStatsJuego temp = GetStatsJugadores(juego.idJuego);
+                    retorno.Add(temp);
+                }
+                return retorno;
+            }
+        }
+
         public List<DTORank> GetRanking(int id)
         {
             List<DTORank> ranking = new List<DTORank>();
@@ -145,7 +185,7 @@ namespace BusinessLogic.Controllers
                 foreach(Partida partida in entity.partidas)
                 {
                     if (partida.User_loginnameUser != "" && partida.User_loginnameUser != null)
-                        if (Jugadores.Contains(partida.User_loginnameUser)) Jugadores.Add(partida.User_loginnameUser);
+                        if (!Jugadores.Contains(partida.User_loginnameUser)) Jugadores.Add(partida.User_loginnameUser);
                 }
 
                 DTOStatsJuego statsJuegoJugadores = new DTOStatsJuego()

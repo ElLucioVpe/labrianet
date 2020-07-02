@@ -12,6 +12,7 @@ import Enlace from "./Enlace";
 
 import '../Css/CrearJuego.css'
 import '../Css/CrearJuegoPreguntas.css'
+import ResumenJuego from "./ResumenJuego";
 
 export default function CrearJuego() {
     const usuario = useUsuario();
@@ -205,7 +206,7 @@ export default function CrearJuego() {
 
     function render() {
         return (
-            juegoCreado ? <Enlace id={juego.idJuego}/> : <div className="container" style={{height: '100%'}}>
+            juegoCreado ? <ResumenJuego id={juego.idJuego}/> : <div className="container" style={{height: '100%'}}>
                 <div className="titleHeader">
                     <input className="input-big mr-10" placeholder="Titulo" onChange={handleChange}
                            value={titulo}/>

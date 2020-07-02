@@ -67,9 +67,6 @@ function App() {
                 <Route path="/crear">
                     <CrearJuego/>
                 </Route>
-                <Route path="/enlace">
-                    <Enlace/>
-                </Route>
                 <Route path="/jugar">
                     <Jugar/>
                 </Route>

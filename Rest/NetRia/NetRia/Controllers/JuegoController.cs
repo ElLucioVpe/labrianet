@@ -50,11 +50,16 @@ namespace NetRia.Controllers
            
         }
 
+        public IHttpActionResult GetArrayPlayersQueJugaron(string loginname)
+        {
+            BusinessLogic.Controllers.JuegoController controller = new BusinessLogic.Controllers.JuegoController();
+            List<DTOStatsJuego> retorno = controller.GetArrayPlayersQueJugaron(loginname);
+            return Ok(retorno);
+        }
+
         // GET: api/Juego
-        [Authorize]
         public IHttpActionResult GetJuegosJugador(string loginName)
         {
-
             BusinessLogic.Controllers.JuegoController controller = new BusinessLogic.Controllers.JuegoController();
             List<DTOJuego> juegos = controller.GetJuegosJugador(loginName);
             if (juegos.Count==0)
@@ -130,6 +135,30 @@ namespace NetRia.Controllers
             try
             {
                 BusinessLogic.Controllers.JuegoController controller = new BusinessLogic.Controllers.JuegoController();
+                var juegoOriginal = controller.GetJuego(id);
+                if (juego.coverJuego != "" && juego.coverJuego != juegoOriginal.coverJuego)
+                {
+                    string Base64Image = juego.coverJuego;
+                    var bytes = Convert.FromBase64String(Base64Image);
+                    //string nombreFile = "coverJuego" + juego.idJuego;
+                    string nombreFile = id + ".jpg";
+                    var GeneralPath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "/images/covers/";
+
+                    if (!Directory.Exists(GeneralPath))
+                    {
+                        Directory.CreateDirectory(GeneralPath);
+                    }
+
+                    string filePath = GeneralPath + nombreFile;
+                    using (var imageFile = new FileStream(filePath, FileMode.Create))
+                    {
+                        imageFile.Write(bytes, 0, bytes.Length);
+                        imageFile.Flush();
+                    }
+
+                }
+
+                juego.coverJuego = id + ".jpg";
                 controller.UpdateJuego(id, juego);
                 response.Success = true;
             }

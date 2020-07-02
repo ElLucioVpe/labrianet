@@ -207,7 +207,7 @@ export default function ConfigurarJuego(props) {
                                               id="gamecover"
                                               width="450"
                                               height="300"
-                                              src={(!esContext ? juego.coverJuego : juego_context.coverJuego) != null ? (!esContext ? juego.coverJuego : juego_context.coverJuego) : 'img/perfil.png'}/>
+                                              src={((!esContext ? juego.coverJuego : juego_context.coverJuego) != null  && (!esContext ? juego.coverJuego : juego_context.coverJuego)) ? (!esContext ? QuizMasterService.getUrlImagen("cover", juego.coverJuego) : juego_context.coverJuego) : 'img/perfil.png'}/>
                                 }
                                 <div className="absolute imgUpload" onClick={abrirModalSubirImagenVideo}>
                                     <img className="editImg"

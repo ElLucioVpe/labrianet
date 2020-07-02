@@ -239,7 +239,9 @@ export default function Juego(props) {
         ayuda = (
           <img
             id="ayuda-url"
-            src={BASE_URL + "/game-images/" + preguntaActual.urlAyudaPregunta}
+            src={preguntaActual.urlAyudaPregunta?
+                QuizMasterService.getUrlImagen("ayuda", preguntaActual.urlAyudaPregunta):
+                "img/perfil.png"}
             height={200}
           />
         );
