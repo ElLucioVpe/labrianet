@@ -1,6 +1,5 @@
 import React, {useContext} from 'react';
 import ThemeContext from '../Libraries/ThemeContextLib';
-import Button from "./Button"
 
 import '../Css/DarkThemeSwitcher.css';
 

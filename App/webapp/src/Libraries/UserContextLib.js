@@ -129,7 +129,7 @@ export function UsuarioProvider(props) {
             login,
             logout
         })
-    }, [usuario, cargandoUsuario, inicioSesion]);
+    }, [usuario, cargandoUsuario, inicioSesion, accessToken]);
 
     return <UserContext.Provider value={value} {...props}/>
 }

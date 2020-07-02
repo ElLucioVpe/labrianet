@@ -32,23 +32,34 @@ export default function Login() {
             <div>
                 <h1>Bienvenido!</h1>
             </div>
-            <div>
-                <form onSubmit={handleSubmit}>
-                    <input
-                        className="input"
-                        type="text"
-                        name="username"
-                        placeholder="Usuario"
-                    />
-                    <input
-                        className="input"
-                        type="password"
-                        name="password"
-                        placeholder="********"
-                    />
+            <div className="flex flex-direction-row">
+                <div className="w-50 black-card flex flex-direction-column">
+                    <div className="">
+                        <div className="">
+                            <img className="" src="/views/index/brillar.svg" alt=""/>
+                        </div>
+                    </div>
+                    <p>Todavía no tienes una cuenta?</p><Button class="item" to="/registro" value="Registrate ahora!"
+                                                                size="regular"/>
+                </div>
+                <div className="w-50 align-self-center p-20">
+                    <form onSubmit={handleSubmit}>
+                        <input
+                            className="input"
+                            type="text"
+                            name="username"
+                            placeholder="Usuario"
+                        />
+                        <input
+                            className="input"
+                            type="password"
+                            name="password"
+                            placeholder="********"
+                        />
 
-                    <button type="submit" className="btn-regular">Iniciar sesión</button>
-                </form>
+                        <button type="submit" className="btn-regular">Iniciar sesión</button>
+                    </form>
+                </div>
             </div>
         </div>);
     }
