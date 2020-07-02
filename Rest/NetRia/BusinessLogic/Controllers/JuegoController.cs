@@ -145,7 +145,7 @@ namespace BusinessLogic.Controllers
                 foreach(Partida partida in entity.partidas)
                 {
                     if (partida.User_loginnameUser != "" && partida.User_loginnameUser != null)
-                        if (Jugadores.Contains(partida.User_loginnameUser)) Jugadores.Add(partida.User_loginnameUser);
+                        if (!Jugadores.Contains(partida.User_loginnameUser)) Jugadores.Add(partida.User_loginnameUser);
                 }
 
                 DTOStatsJuego statsJuegoJugadores = new DTOStatsJuego()

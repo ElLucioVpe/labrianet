@@ -6,10 +6,12 @@ import QuizMasterService from '../Libraries/QuizMasterServices';
 import {useUsuario} from "../Libraries/UserContextLib";
 
 import '../Css/Profile.css'
+import QuizMasterServices from "../Libraries/QuizMasterServices";
 
 export default function Profile() {
     const usuario = useUsuario();
     const [juegos, setJuegos] = useState([]);
+    const [stats, setStats] = useState([]);
 
     const desactivarJuego = (async (id) => {
         await QuizMasterService.updateJuego(id, {
@@ -27,6 +29,9 @@ export default function Profile() {
                 });
                 console.log(data);
                 setJuegos(data);
+                console.log(usuario.usuario);
+                let statsJuegosUsuario = await QuizMasterServices.obtenerJugadoresUsuario({loginname: usuario.usuario});
+                setStats(statsJuegosUsuario);
             }
         }
     }, [usuario.usuario]);
@@ -39,7 +44,7 @@ export default function Profile() {
                     <h1>{usuario.usuario}</h1>
                     <Button class="item" to="/crear" value="Crear quiz nueva" size="regular"/>
                 </div>
-                <ProfileUserInfo juegos={juegos}/>
+                <ProfileUserInfo juegos={juegos} stats={stats}/>
                 <ProfileUserStats juegos={juegos} desactivarJuego={desactivarJuego}/>
             </div>
         )
