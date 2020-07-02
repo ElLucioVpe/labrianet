@@ -19,12 +19,11 @@ export default function Profile() {
         var game = juegos[pos];
         if(accion === "Desactivar") game.activadoJuego = 0;
         else game.activadoJuego = 1;
-        console.log(game);
+        //console.log(game);
         await QuizMasterService.updateJuego({
             juego: game,
             accessToken: usuario.accessToken
-        }).then((res) => {
-            console.log(res);
+        }).then(() => {
             setActualizar(!actualizar);
         });
     });

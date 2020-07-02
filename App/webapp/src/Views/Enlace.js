@@ -18,7 +18,7 @@ export default function Enlace(props) {
     function render() {
         return (
             <div class="menu2 container card">
-                {!(props.id === -1 || props.id === false) ? (
+                {!(props.id === undefined ||props.id === -1 || props.id === false) ? (
                     <div className="text-align-center">
                         <h1>¡Tu juego ya está publicado!</h1>
                         <span>Invita a tus amigos a jugarlo</span>

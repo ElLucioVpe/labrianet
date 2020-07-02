@@ -31,7 +31,7 @@ export default function CrearJuego() {
     useEffect(() => {
         juego.setPreguntas(preguntas);
         juego.setTitulo(titulo);
-        juego.setIdJuego(0);
+        //juego.setIdJuego(0);
     }, [preguntas, setPreguntas, titulo, setTitulo]);
 
     const crearPregunta = (async (event) => {
@@ -73,7 +73,7 @@ export default function CrearJuego() {
         //Funcion simple para que pueda ingresar en formato min:seg
         let retorno = 0;
 
-        if (_value === undefined) return retorno; //Evito errores si se publica sin hacer nada aqui
+        if (_value === undefined || !isNaN(parseFloat(_value))) return retorno; //Evito errores si se publica sin hacer nada aqui
         if (_value.includes(":")) {
             let num1 = _value.substring(0, _value.indexOf(":"));
             let num2 = _value.substring(_value.indexOf(":") + 1);
