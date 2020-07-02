@@ -8,6 +8,7 @@ import SubirImagenVideo from "../Components/SubirImagenVideo";
 import ReactPlayer from "react-player";
 
 import '../Css/ConfigurarJuego.css'
+import {useUsuario} from "../Libraries/UserContextLib";
 
 export default function ConfigurarJuego(props) {
     const [canciones, setCanciones] = useState([]);
@@ -15,59 +16,66 @@ export default function ConfigurarJuego(props) {
     const [esContext, setEsContext] = useState(true);
     const inputFile = useRef(null);
     const [mostrarSubirImagen, setMostrarSubirImagen] = useState(null);
+    const [cancionSeleccionada, setCancionSeleccionada] = useState(0);
 
+    const usuario = useUsuario();
     const juego_context = useJuego();
 
     const handleChangeMusica = ((event) => {
         //console.log(event);
-        !esContext ? juego.setCancionSeleccionada(event.value) : juego_context.setCancionSeleccionada(event.value);
+        !esContext ? juego.Musica_idMusica = event.value : juego_context.setCancionSeleccionada(event.value);
     });
 
     useEffect(() => {
-        setCanciones([{value: "0", label: "Musica del juego"}]);
-
-        if ((props.match != null) && (juego_context.idJuego == null)) {
-            let data = QuizMasterService.obtenerJuego({"id": props.match.params.id});
-            setJuego(data);
-            setEsContext(false);
-        } else if (juego_context.idJuego != null) {
-            setEsContext(true);
-        }
-        doIt();
+        setCanciones([{value: "null", label: "Musica del juego"}]);
 
         async function doIt() {
+            if ((props.match != null) && (juego_context.idJuego == null)) {
+                let data = await QuizMasterService.obtenerJuego({id: props.match.params.id});
+
+                await setJuego(data);
+                setEsContext(false);
+            } else if (juego_context.idJuego != null) {
+                setEsContext(true);
+            }
+
             let tmpCanciones = canciones;
             let data_canciones = await QuizMasterService.obtenerListadoMusica();
             await data_canciones.forEach((item) => {
                 let valor = {value: item.idMusica, label: item.tituloMusica};
                 tmpCanciones.push(valor);
-                if (item.idMusica === juego.idMusica) {
-                    !esContext ? juego.setCancionSeleccionada(valor) : juego_context.setCancionSeleccionada(valor);
-                }
+                if ((props.match != null) && (juego_context.idJuego == null)) {
+                    setCancionSeleccionada(valor);
+                } else juego_context.setCancionSeleccionada(valor);
             });
             await setCanciones(tmpCanciones);
         }
+        doIt();
 
     }, []);
 
     const handleChangeDescripcion = ((event) => {
-        !esContext ? juego.setDescripcion(event.target.value) : juego_context.setDescripcion(event.target.value);
+        !esContext ? juego.descripcionJuego = event.target.value : juego_context.setDescripcion(event.target.value);
     });
 
-    const cambiarImagen = ((_value) => {
-        juego.set(_value);
+    const handleChangeTitulo = ((event) => {
+        !esContext ? juego.tituloJuego = event.target.value : juego_context.setTitulo(event.target.value);
     });
+
+    /*const cambiarImagen = ((_value) => {
+        juego.set(_value);
+    });*/
 
     const cambiarPrivacidad = ((event) => {
-        !esContext ? juego.setEsPrivadoJuego(event.target.checked) : juego_context.setEsPrivadoJuego(event.target.checked);
+        !esContext ? juego.esPrivadoJuego = event.target.checked : juego_context.setEsPrivadoJuego(event.target.checked);
     });
 
-    const cambiarMusica = ((_value) => {
+    /*const cambiarMusica = ((_value) => {
         juego.set(_value);
-    });
+    });*/
 
     const cambiarPassword = ((event) => {
-        !esContext ? juego.setPassword(event.target.value) : juego_context.setPassword(event.target.value);
+        !esContext ? juego.password = event.target.value : juego_context.setPassword(event.target.value);
     });
 
     const handleClickImage = (() => {
@@ -87,8 +95,8 @@ export default function ConfigurarJuego(props) {
     });
 
     const cambiarYouTubeUrl = ((_value) => {
-        !esContext ? juego.setCoverJuego(_value) : juego_context.setCoverJuego(_value);
-        !esContext ? juego.setCoverEsVideo(true) : juego_context.setCoverEsVideo(true);
+        !esContext ? juego.coverJuego = _value : juego_context.setCoverJuego(_value);
+        if(esContext) juego_context.setCoverEsVideo(true);
     });
 
     const esVideo = (() => {
@@ -110,10 +118,16 @@ export default function ConfigurarJuego(props) {
             var fileReader = new FileReader();
 
             fileReader.onload = function (fileLoadedEvent) {
-                !esContext ? juego.setCoverJuego(fileLoadedEvent.target.result) : juego_context.setCoverJuego(fileLoadedEvent.target.result);
-                !esContext ? juego.setCoverEsVideo(false) : juego_context.setCoverEsVideo(false);
+                !esContext ? juego.coverJuego = fileLoadedEvent.target.result : juego_context.setCoverJuego(fileLoadedEvent.target.result);
+                if(esContext) juego_context.setCoverEsVideo(false);
             };
             fileReader.readAsDataURL(fileToLoad);
+        }
+    }
+
+    function verificarUsuario() {
+        if(!esContext && juego !== []) {
+            if(usuario.usuario !== juego.User_loginnameUser) window.location = "/";
         }
     }
 
@@ -125,7 +139,15 @@ export default function ConfigurarJuego(props) {
         setMostrarSubirImagen(respuesta);
     });
 
+    const updateJuego = (async() => {
+        if(juego.esPrivadoJuego === true) juego.esPrivadoJuego = 1;
+        else if(juego.esPrivadoJuego === false) juego.esPrivadoJuego = 0;
+
+        await QuizMasterService.updateJuego({juego: juego, accessToken: usuario.accessToken});
+    });
+
     function render() {
+        verificarUsuario();
         return (
             <div className="configuracionJuego container">
                 <form>
@@ -138,7 +160,8 @@ export default function ConfigurarJuego(props) {
                                     type="text"
                                     name="titulo"
                                     placeholder="Titulo"
-                                    defaultChecked={!esContext ? juego.titulo : juego_context.titulo}
+                                    defaultValue={!esContext ? juego.tituloJuego : juego_context.titulo}
+                                    onChange={handleChangeTitulo}
                                 />
                             </p>
 
@@ -149,7 +172,7 @@ export default function ConfigurarJuego(props) {
                                 placeholder="Descripción"
                                 type="textarea"
                                 rows="10"
-                                value={!esContext ? juego.descripcion : juego_context.descripcion}
+                                value={!esContext ? juego.descripcionJuego : juego_context.descripcion}
                                 onChange={handleChangeDescripcion}
                                 cols="50"
                             />
@@ -158,7 +181,7 @@ export default function ConfigurarJuego(props) {
                             <ul>
                                 <li>
                                     <input onChange={cambiarPrivacidad} type="checkbox"
-                                           defaultValue={!esContext ? juego.esPrivadoJuego : juego_context.esPrivadoJuego}
+                                           defaultChecked={!esContext ? juego.esPrivadoJuego : juego_context.esPrivadoJuego}
                                     /> <label>Es privado</label>
                                 </li>
                             </ul>
@@ -168,7 +191,7 @@ export default function ConfigurarJuego(props) {
                                     type="text"
                                     name="password"
                                     placeholder="Password"
-                                    value={juego.password}
+                                    defaultValue={!esContext ? juego.password : juego_context.password}
                                     onChange={cambiarPassword}
                                 />
                             </p>
@@ -194,7 +217,7 @@ export default function ConfigurarJuego(props) {
                             <br/>
 
                             <Select
-                                defaultValue={(!esContext ? juego.cancionSeleccionada : juego_context.cancionSeleccionada) != null ? (!esContext ? juego.cancionSeleccionada : juego_context.cancionSeleccionada) : ''}
+                                value={!esContext ? cancionSeleccionada : juego_context.cancionSeleccionada}
                                 onChange={handleChangeMusica}
                                 options={canciones}
                             />
@@ -205,7 +228,7 @@ export default function ConfigurarJuego(props) {
                         {
                             esContext ?
                                 <Button size="regular" value="Volver" to="/crear"/> :
-                                <Button size="regular" value="Guardar" to="/configurarJuego"/>
+                                <Button size="regular" value="Guardar" onClick={updateJuego}/>
                         }
                     </div>
 

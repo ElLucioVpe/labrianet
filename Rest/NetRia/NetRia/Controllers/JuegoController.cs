@@ -105,6 +105,7 @@ namespace NetRia.Controllers
             var identity_mail = identity.Claims.Where(c => c.Type == ClaimTypes.Email)
                .Select(c => c.Value).SingleOrDefault();
 
+            if (juego == null) return BadRequest();
             if ((id != juego.idJuego) || (juego.User_loginnameUser != identity_mail))
             {
                 return BadRequest();
