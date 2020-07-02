@@ -13,12 +13,11 @@ let config = {
 const QuizMasterServices = {
     crearJuego: function (props) {
         return Axios.post(BASE_URL + '/api/Juego/CreateJuego',
-            props, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'Authorization': `Bearer ${props.accessToken}`
-                }
+            props,
+            {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + props.accessToken
             }
         ).then(function (response) {
             console.log(response.data);
@@ -110,6 +109,16 @@ const QuizMasterServices = {
             return response.data;
         });
     },
+    obtenerArrayJugados: function (props) {
+        return Axios.get(BASE_URL + '/api/Juego/GetArrayPlayersQueJugaron?loginname='+ props.loginname,
+            {
+                headers: {
+                    'Authorization': 'Token ' + process.env.API_TOKEN,
+                }
+            }).then(response => {
+            return response.data;
+        });
+    },
     obtenerJuegos: function (props) {
         return Axios.get(BASE_URL + '/api/Juego/GetAll/',
             {
@@ -130,7 +139,7 @@ const QuizMasterServices = {
     obtenerRespuestaStats: function (props) {
         return Axios.get(BASE_URL + '/api/Pregunta/GetStatsRespuestas/' + props.id).then(response => {
             return response.data;
-        }).catch(error => {
+        }).catch(error=>{
             console.log(error);
             return error;
         });

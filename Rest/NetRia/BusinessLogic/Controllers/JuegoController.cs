@@ -90,6 +90,23 @@ namespace BusinessLogic.Controllers
             }
         }
 
+        public List<DTOStatsJuego> GetArrayPlayersQueJugaron(string loginname)
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                List<DTOStatsJuego> retorno = new List<DTOStatsJuego>();
+                var user = uow.UserRepository.Get(loginname);
+                if (user == null) return retorno;
+
+                foreach (Juego juego in user.juegos)
+                {
+                    DTOStatsJuego temp = GetStatsJugadores(juego.idJuego);
+                    retorno.Add(temp);
+                }
+                return retorno;
+            }
+        }
+
         public List<DTORank> GetRanking(int id)
         {
             List<DTORank> ranking = new List<DTORank>();

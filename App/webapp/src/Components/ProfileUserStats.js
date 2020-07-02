@@ -1,10 +1,12 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Button from "./Button";
+import QuizMasterServices from "../Libraries/QuizMasterServices";
 
 export const ProfileUserStats = (props) => {
-    const desactivarJuego = ((id) => {
-        props.desactivarJuego(id);
-    });
+
+    function desactivarJuego(e) {
+        props.desactivarJuego(e.target.firstChild.nodeValue, e.target.id);
+    }
 
     return (
         <div class="profile-user-stats">
@@ -14,26 +16,29 @@ export const ProfileUserStats = (props) => {
                     <th>Nombre</th>
                     <th>Descripción</th>
                     <th>Pregunta</th>
-                    <th>Jugadores</th>
+                    <th>Jugados</th>
                     <th>Creado</th>
-                    <th></th>
+                    <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
-                {props.juegos.map((pregunta, i) => <tr key={i}>
-                    <td>{pregunta.tituloJuego}</td>
-                    <td>{pregunta.descripcion}</td>
-                    <td>What</td>
-                    <td>{pregunta.tituloJuego}</td>
-                    <td>{pregunta.tituloJuego}</td>
-                    <td><Button class="item" to={"/crear/" + (pregunta.idJuego || "")} value="Editar"
-                                size="regular"/>
-                        <Button class="item"
-                                value={pregunta.activadoJuego === 1 ? "Desactivar" : "Activar"}
-                                size="regular" onClick={desactivarJuego}/>
-                    </td>
-                </tr>)}
-                </tbody>
+                    {props.juegos.map((game, i) =>
+                        <tr key={i}>
+                            <td>{game.tituloJuego}</td>
+                            <td>{game.descripcionJuego}</td>
+                            <td>{game.preguntas.length}</td>
+                            <td>{props.jugados.length > 0 ? props.jugados[i].Jugados : ''}</td>
+                            <td>{game.fechaJuego}</td>
+                            <td><Button class="item" to={"/configurarJuego/" + game.idJuego} value="Editar"
+                                        size="regular"/>
+                                <Button id={i} class="item"
+                                        value={game.activadoJuego === 1 ? "Desactivar" : "Activar"}
+                                        size="regular" onClick={desactivarJuego}/>
+                            </td>
+                        </tr>)
+                    }
+                </tbody>;
+
             </table>
         </div>
     )

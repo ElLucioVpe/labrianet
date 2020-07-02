@@ -4,14 +4,14 @@ import {
 } from "react-router-dom";
 import '../Css/Button.css'
 
-export const Button = ({size = "regular", to = "#", value = "", classList = "", status = "", buttonClass = "", onClick, icon}) => {
+export const Button = ({id="", size = "regular", to = "#", value = "", classList = "", status = "", buttonClass = "", onClick, icon}) => {
     size = "btn-" + size;
     let button;
     if (icon == null) button = <Link to={to} class={classList}>
-        <button class={size + " " + buttonClass + " " + status} onClick={onClick}>{value}</button>
+        <button id={id} class={size + " " + buttonClass + " " + status} onClick={onClick}>{value}</button>
     </Link>;
     else button = <Link to={to} class={classList}>
-        <button class={"btn-icon " + size + " " + buttonClass + " " + status} onClick={onClick}><img src={icon}/>
+        <button id={id} class={"btn-icon " + size + " " + buttonClass + " " + status} onClick={onClick}><img src={icon}/>
         </button>
     </Link>;
     return button;
