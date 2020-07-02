@@ -36,6 +36,7 @@ namespace NetRia.Controllers
         }
 
         // GET: api/Juego
+        [Authorize]
         public IHttpActionResult GetJuegosJugador(string loginName)
         {
 
@@ -125,6 +126,7 @@ namespace NetRia.Controllers
         }
 
         // POST: api/Juego
+        [Authorize]
         [HttpPost]
         public IHttpActionResult CreateJuego(DTOJuego juego)
         {
