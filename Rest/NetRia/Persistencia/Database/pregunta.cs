@@ -30,8 +30,8 @@ namespace Persistencia.Database
         public Nullable<int> startAyuda { get; set; }
         public Nullable<int> endAyuda { get; set; }
     
-        public virtual Juego juego { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Respuesta> respuestas { get; set; }
+        public virtual Juego juego { get; set; }
     }
 }

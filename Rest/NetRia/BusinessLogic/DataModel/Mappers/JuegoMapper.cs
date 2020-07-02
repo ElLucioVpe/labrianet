@@ -26,7 +26,8 @@ namespace BusinessLogic.DataModel.Mappers
                 coverJuego = juego.coverJuego,
                 Musica_idMusica = juego.Musica_idMusica.GetValueOrDefault(),
                 activadoJuego = juego.activadoJuego,
-                password = juego.password
+                password = juego.password,
+                fechaJuego = juego.fechaJuego,
             };
 
             PreguntaMapper _mapperPreg = new PreguntaMapper();
@@ -47,7 +48,6 @@ namespace BusinessLogic.DataModel.Mappers
                 return null;
             Juego juego = new Juego()
             {
-              
                 User_loginnameUser = dto.User_loginnameUser,
                 tituloJuego = dto.tituloJuego,
                 descripcionJuego = dto.descripcionJuego,
@@ -55,8 +55,8 @@ namespace BusinessLogic.DataModel.Mappers
                 coverJuego = dto.coverJuego,
                 Musica_idMusica = dto.Musica_idMusica,
                 activadoJuego = dto.activadoJuego,
-                password = dto.password
-
+                password = dto.password,
+                fechaJuego = dto.fechaJuego
             };
 
             PreguntaMapper _mapperPreg = new PreguntaMapper();

@@ -22,24 +22,6 @@ namespace NetRia.Controllers
             _mapper = new UserMapper();
         }
 
-        /*/Login
-        [HttpPost]
-        public IHttpActionResult Login(string loginname, string password)
-        {
-            DTOBaseResponse response = new DTOBaseResponse();
-            try
-            {
-                UserController controller = new UserController();
-                response.Success = controller.Login(loginname, password);
-            }
-            catch (Exception ex)
-            {
-                response.Success = false;
-                response.Error = ex.ToString();
-            }
-            return Ok(response);
-        }*/
-
         // GET: api/User
         [Authorize]
         [HttpGet]

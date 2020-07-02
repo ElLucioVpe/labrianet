@@ -74,7 +74,7 @@ namespace NetRia.Controllers
         public IHttpActionResult GetStatsJugadoresInGame(int id)
         {
             BusinessLogic.Controllers.JuegoController controller = new BusinessLogic.Controllers.JuegoController();
-            DTOStatsJuego juegoStats = controller.GetStatsJugadoresInGame(id);
+            DTOStatsJuego juegoStats = controller.GetStatsJugadores(id);
             if (juegoStats == null)
             {
                 return NotFound();
@@ -83,10 +83,10 @@ namespace NetRia.Controllers
         }
 
         // GET: api/Juego/5
-        public IHttpActionResult GetPlayersQueJugaron(int id)
+        public IHttpActionResult GetPlayersQueJugaron(string loginname)
         {
             BusinessLogic.Controllers.JuegoController controller = new BusinessLogic.Controllers.JuegoController();
-            int players = controller.PlayersQueJugaron(id);
+            DTOStatsJuego players = controller.PlayersQueJugaron(loginname);
             return Ok(players);
         }
 
@@ -165,7 +165,7 @@ namespace NetRia.Controllers
                     }
 
                 }
-
+                juego.fechaJuego = new DateTime();
                 //Creo Game y Cambio Cover
                 idGame = controller.CreateJuego(juego);            
                 if (Base64Image != "") {
