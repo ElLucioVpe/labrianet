@@ -72,13 +72,13 @@ export default function CrearJuego() {
         //Funcion simple para que pueda ingresar en formato min:seg
         let retorno = 0;
 
-        if(_value === undefined) return retorno; //Evito errores si se publica sin hacer nada aqui
-        if(_value.includes(":")) {
+        if (_value === undefined) return retorno; //Evito errores si se publica sin hacer nada aqui
+        if (_value.includes(":")) {
             let num1 = _value.substring(0, _value.indexOf(":"));
-            let num2 = _value.substring(_value.indexOf(":")+1);
-            console.log(num1+"-"+num2);
-            _value = num1+num2;
-            if(!isNaN(parseFloat(_value)) && !isNaN(_value - 0)) retorno = (num1*60)+num2;
+            let num2 = _value.substring(_value.indexOf(":") + 1);
+            console.log(num1 + "-" + num2);
+            _value = num1 + num2;
+            if (!isNaN(parseFloat(_value)) && !isNaN(_value - 0)) retorno = (num1 * 60) + num2;
             else retorno = 0;
         } else retorno = _value;
         return retorno;
@@ -154,7 +154,7 @@ export default function CrearJuego() {
             "tituloJuego": (juego.titulo || "Titulo"),
             "descripcionJuego": "sample string 4",
             "activadoJuego": 1,
-            "coverJuego": juego.coverJuego != null ? juego.coverJuego : "",
+            "coverJuego": juego.coverJuego != null ? juego.coverJuego.substring(22) : "",
             "Musica_idMusica": juego.idMusica != null ? juego.idMusica : "1",
             "esPrivadoJuego": juego.esPrivadoJuego === true ? 0 : 1,
             "accessToken": usuario.accessToken,
@@ -181,7 +181,7 @@ export default function CrearJuego() {
                 "puntosPregunta": item.puntaje != null ? item.puntaje : 100,
                 "contenidoPregunta": item.titulo != null ? item.titulo : "Pregunta",
                 "tipoPregunta": respuestasSinSetear === 2 ? "True/False" : "Quiz",
-                "urlAyudaPregunta": item.imgUrl != null ? item.imgUrl : "",
+                "urlAyudaPregunta": item.imgUrl != null ? item.imgUrl.substring(22) : "",
                 "startAyuda": convertirAyuda(item.startAyuda),
                 "endAyuda": convertirAyuda(item.endAyuda),
                 "respuestas": respuestas
