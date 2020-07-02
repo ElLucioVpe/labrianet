@@ -58,10 +58,8 @@ namespace NetRia.Controllers
         }
 
         // GET: api/Juego
-        [Authorize]
         public IHttpActionResult GetJuegosJugador(string loginName)
         {
-
             BusinessLogic.Controllers.JuegoController controller = new BusinessLogic.Controllers.JuegoController();
             List<DTOJuego> juegos = controller.GetJuegosJugador(loginName);
             if (juegos.Count==0)
@@ -136,8 +134,9 @@ namespace NetRia.Controllers
             DTOBaseResponse response = new DTOBaseResponse();
             try
             {
-                
-                if (juego.coverJuego != "")
+                BusinessLogic.Controllers.JuegoController controller = new BusinessLogic.Controllers.JuegoController();
+                var juegoOriginal = controller.GetJuego(id);
+                if (juego.coverJuego != "" && juego.coverJuego != juegoOriginal.coverJuego)
                 {
                     string Base64Image = juego.coverJuego;
                     var bytes = Convert.FromBase64String(Base64Image);
@@ -160,7 +159,6 @@ namespace NetRia.Controllers
                 }
 
                 juego.coverJuego = id + ".jpg";
-                BusinessLogic.Controllers.JuegoController controller = new BusinessLogic.Controllers.JuegoController();
                 controller.UpdateJuego(id, juego);
                 response.Success = true;
             }

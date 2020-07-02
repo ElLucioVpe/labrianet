@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useUsuario} from "../Libraries/UserContextLib";
-import {Redirect} from 'react-router'
+import {Redirect} from 'react-router';
 
 export default function Logout() {
     const usuario = useUsuario();

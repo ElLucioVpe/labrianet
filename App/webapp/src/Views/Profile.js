@@ -23,7 +23,8 @@ export default function Profile() {
         await QuizMasterService.updateJuego({
             juego: game,
             accessToken: usuario.accessToken
-        }).then(() => {
+        }).then((res) => {
+            console.log(res);
             setActualizar(!actualizar);
         });
     });
@@ -34,7 +35,7 @@ export default function Profile() {
         async function doIt() {
             if (usuario.usuario != null) {
                 let data = await QuizMasterService.obtenerJuegosDeUsuario({
-                    usuario: usuario.usuario
+                    usuario: usuario.usuario, accessToken: usuario.accessToken
                 });
                 setJuegos(data);
 
@@ -43,10 +44,10 @@ export default function Profile() {
 
                 let data_jugados = await QuizMasterServices.obtenerArrayJugados({loginname: usuario.usuario});
                 setJugados(data_jugados);
-                //console.log(data_jugados);
             }
         }
     }, [usuario.usuario, actualizar]);
+
 
     function render() {
         return (

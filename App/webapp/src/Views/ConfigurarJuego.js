@@ -17,7 +17,6 @@ export default function ConfigurarJuego(props) {
     const inputFile = useRef(null);
     const [mostrarSubirImagen, setMostrarSubirImagen] = useState(null);
     const [cancionSeleccionada, setCancionSeleccionada] = useState(0);
-    const [urlImagen, setUrlImagen] = useState("");
 
     const usuario = useUsuario();
     const juego_context = useJuego();
@@ -50,7 +49,6 @@ export default function ConfigurarJuego(props) {
                 } else juego_context.setCancionSeleccionada(valor);
             });
             await setCanciones(tmpCanciones);
-            setUrlImagen(QuizMasterService.getUrlImagen());
         }
         doIt();
 
