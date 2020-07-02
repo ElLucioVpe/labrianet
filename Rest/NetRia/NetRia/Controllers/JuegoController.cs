@@ -129,6 +129,30 @@ namespace NetRia.Controllers
             DTOBaseResponse response = new DTOBaseResponse();
             try
             {
+                
+                if (juego.coverJuego != "")
+                {
+                    string Base64Image = juego.coverJuego;
+                    var bytes = Convert.FromBase64String(Base64Image);
+                    //string nombreFile = "coverJuego" + juego.idJuego;
+                    string nombreFile = id + ".jpg";
+                    var GeneralPath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "/images/covers/";
+
+                    if (!Directory.Exists(GeneralPath))
+                    {
+                        Directory.CreateDirectory(GeneralPath);
+                    }
+
+                    string filePath = GeneralPath + nombreFile;
+                    using (var imageFile = new FileStream(filePath, FileMode.Create))
+                    {
+                        imageFile.Write(bytes, 0, bytes.Length);
+                        imageFile.Flush();
+                    }
+
+                }
+
+                juego.coverJuego = id + ".jpg";
                 BusinessLogic.Controllers.JuegoController controller = new BusinessLogic.Controllers.JuegoController();
                 controller.UpdateJuego(id, juego);
                 response.Success = true;
