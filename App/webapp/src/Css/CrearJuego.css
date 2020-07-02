@@ -83,7 +83,7 @@ img.pregunta_foto {
         grid-template-columns: 100%;
         grid-template-rows: 450px 1fr;
         column-gap: 20px;
-        direction: rtl;
+   
         row-gap: 5px;
 
     }
@@ -94,6 +94,8 @@ img.pregunta_foto {
     grid-row-start: row-start  0;
 }
     .inner-tablero {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         height: 250px;
     }
 
