@@ -56,7 +56,7 @@ const darkTheme = [
     '--main3: #d1a7a0',
     '--main4: #d4cbb3',
     '--main5: #d2e0bf',
-    '--text1: #4c2f3f',
+    '--text1: #885973',
     '--right: #45CB85',
     '--wrong: #CF4F7E',
     '--background: black',

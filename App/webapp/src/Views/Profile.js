@@ -13,7 +13,7 @@ export default function Profile() {
 
     const desactivarJuego = (async (id) => {
         await QuizMasterService.updateJuego(id, {
-            "activadoJuego": 0
+            "activadoJuego": 0,
         });
     });
 
@@ -21,15 +21,16 @@ export default function Profile() {
         doIt();
 
         async function doIt() {
-            if (usuario.usuario != null) {
+            if (usuario.usuario != null && usuario.accessToken != null) {
                 let data = await QuizMasterService.obtenerJuegosDeUsuario({
-                    usuario: usuario.usuario
+                    usuario: usuario.usuario,
+                    accessToken: usuario.accessToken,
                 });
-                console.log(data);
-                setJuegos(data);
+                await console.log(data);
+                await setJuegos(data);
             }
         }
-    }, [usuario.usuario]);
+    }, [usuario.usuario, usuario.accessToken]);
 
     function render() {
         return (

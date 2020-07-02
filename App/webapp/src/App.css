@@ -245,6 +245,24 @@ border-radius-25px {
     padding: 10px;
 }
 
+.p-20 {
+    padding: 20px;
+}
+
 .mb-20 {
     margin-bottom: 20px;
+}
+
+.align-self-center {
+    align-self: center;
+}
+
+.black-card {
+    border: 5px solid var(--main2);
+    border-radius: 25px;
+    padding: 10px;
+    font-family: Montserrat, Serif;
+    font-size: 25px;
+    max-width: 600px;
+    font-weight: 300;
 }
