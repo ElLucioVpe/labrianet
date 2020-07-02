@@ -30,6 +30,7 @@ namespace Persistencia.Database
         public Nullable<int> Musica_idMusica { get; set; }
         public Nullable<short> activadoJuego { get; set; }
         public string password { get; set; }
+        public Nullable<System.DateTime> fechaJuego { get; set; }
     
         public virtual Musica musica { get; set; }
         public virtual User user { get; set; }

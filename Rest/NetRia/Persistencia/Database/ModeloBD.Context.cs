@@ -29,7 +29,7 @@ namespace Persistencia.Database
         public virtual DbSet<Partida> Partidas { get; set; }
         public virtual DbSet<Pregunta> Preguntas { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Juego> Juegos { get; set; }
         public virtual DbSet<Respuesta> Respuestas { get; set; }
+        public virtual DbSet<Juego> Juegos { get; set; }
     }
 }

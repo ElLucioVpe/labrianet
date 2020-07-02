@@ -8,7 +8,6 @@ using Common.DataTransferObjects;
 using BusinessLogic.DataModel;
 using BusinessLogic.DataModel.Mappers;
 using Persistencia.Database;
-using System.IO;
 
 namespace BusinessLogic.Controllers
 {
@@ -64,13 +63,47 @@ namespace BusinessLogic.Controllers
             }
         }
 
-        public int PlayersQueJugaron(int id)
+        public DTOStatsJuego PlayersQueJugaron(string loginname)
         {
             using (UnitOfWork uow = new UnitOfWork())
             {
-                int players = 0;
-                players = uow.JuegoRepository.PlayersQueJugaron(id);
-                return players;
+                DTOStatsJuego retorno = new DTOStatsJuego();
+                var user = uow.UserRepository.Get(loginname);
+                if (user == null) return retorno;
+
+                int JugadoresTotales = 0;
+                int JugadosTotales = 0;
+                
+                foreach(Juego juego in user.juegos)
+                {
+                    DTOStatsJuego temp = GetStatsJugadores(juego.idJuego);
+                    JugadoresTotales += temp.Jugadores;
+                    JugadosTotales += temp.Jugados;
+                }
+                
+                retorno = new DTOStatsJuego()
+                {
+                    Jugadores = JugadoresTotales,
+                    Jugados = JugadosTotales,
+                };
+                return retorno;
+            }
+        }
+
+        public List<DTOStatsJuego> GetArrayPlayersQueJugaron(string loginname)
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                List<DTOStatsJuego> retorno = new List<DTOStatsJuego>();
+                var user = uow.UserRepository.Get(loginname);
+                if (user == null) return retorno;
+
+                foreach (Juego juego in user.juegos)
+                {
+                    DTOStatsJuego temp = GetStatsJugadores(juego.idJuego);
+                    retorno.Add(temp);
+                }
+                return retorno;
             }
         }
 
@@ -84,37 +117,37 @@ namespace BusinessLogic.Controllers
                 {
                     return null;
                 }
-
-                string nickUsuarioActual;
-                Nullable<int> puntajeActual = 0;
-                foreach (Partida partida in entity.partidas)
-                {
-                    nickUsuarioActual = partida.nickUsuario;
-                    puntajeActual = 0;
-
-                    foreach (Respuesta respuesta in partida.respuestas)
+             
+                    string nickUsuarioActual;
+                    Nullable<int> puntajeActual = 0;
+                    foreach (Partida partida in entity.partidas)
                     {
-                        if (respuesta.esCorrectoRespuesta == 1)
+                        nickUsuarioActual = partida.nickUsuario;
+                        puntajeActual = 0;
+
+                        foreach (Respuesta respuesta in partida.respuestas)
                         {
+                            if (respuesta.esCorrectoRespuesta == 1)
+                            {
 
-                            puntajeActual += respuesta.pregunta.puntosPregunta;
+                                puntajeActual += respuesta.pregunta.puntosPregunta;
 
+                            }
                         }
+                        DTORank rankingActual = new DTORank()
+                        {
+                            nickUsuario = nickUsuarioActual,
+                            Puntaje = puntajeActual,
+                        };
+                        ranking.Add(rankingActual);
                     }
-                    DTORank rankingActual = new DTORank()
-                    {
-                        nickUsuario = nickUsuarioActual,
-                        Puntaje = puntajeActual,
-                    };
-                    ranking.Add(rankingActual);
-                }
 
                 return ranking.OrderByDescending(i => i.Puntaje).ToList();
-
+              
             }
         }
 
-        public DTOStatsJuego GetStatsJugadoresInGame(int id) {
+        public DTOStatsJuego GetStatsJugadores(int id) {
 
             using (UnitOfWork uow = new UnitOfWork())
             {
@@ -123,26 +156,20 @@ namespace BusinessLogic.Controllers
                 {
                     return null;
                 }
-                int JugadoresActual;
-                int JugadoreSinTerminarActual = 0;
-                int CantPreguntas;
-
-                JugadoresActual = entity.partidas.Count;
-                CantPreguntas = entity.preguntas.Count;
-
-                foreach (Partida partida in entity.partidas)
+                List<String> Jugadores = new List<String>();
+                int PartidasJugadas = entity.partidas.Count;
+                
+                foreach(Partida partida in entity.partidas)
                 {
-                    if (partida.respuestas.Count < CantPreguntas) {
-                        JugadoreSinTerminarActual = +1;
-                    }
+                    if (partida.User_loginnameUser != "" && partida.User_loginnameUser != null)
+                        if (!Jugadores.Contains(partida.User_loginnameUser)) Jugadores.Add(partida.User_loginnameUser);
                 }
 
                 DTOStatsJuego statsJuegoJugadores = new DTOStatsJuego()
                 {
-                    Jugadores = JugadoresActual,
-                    JugadoresSinTerminar = JugadoreSinTerminarActual,
+                    Jugadores = Jugadores.Count,
+                    Jugados = PartidasJugadas,
                 };
-
 
                 return statsJuegoJugadores;
             }
@@ -155,7 +182,7 @@ namespace BusinessLogic.Controllers
                 var entity = uow.JuegoRepository.Get(idGame);
 
                 var entityUpdatedPregunta = entity.preguntas.FirstOrDefault(a => a.idPregunta == idPregunta);
-                entityUpdatedPregunta.urlAyudaPregunta = UrlPregunta;
+                entityUpdatedPregunta.urlAyudaPregunta=UrlPregunta;
 
                 uow.SaveChanges();
             }
@@ -163,25 +190,6 @@ namespace BusinessLogic.Controllers
 
         }
 
-        public string GetImagenes(string tipo, string base64Image) {
-
-            string base64;
-            string pathImage;
-            if (tipo == "Juego")
-            {
-                pathImage = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "/images/covers/";
-            }
-            else if (tipo == "Pregunta")
-            {
-               pathImage = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "/images/ayuda/";
-            }
-            else {
-                return "Tipo No Encontrado";
-            }
-
-            base64 = Convert.ToBase64String(File.ReadAllBytes(pathImage+base64Image));
-            return base64;
-        }
 
         public void UpdateJuego(int id, DTOJuego juego)
         {

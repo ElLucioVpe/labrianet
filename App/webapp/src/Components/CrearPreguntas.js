@@ -84,9 +84,9 @@ export function CrearPreguntas(props) {
                 </div>
                 <div className="flex justify-content-center mt-10">
                     <div className="flex flex-direction-column justify-content-center w-20 p-10">
-                        <input placeholder="20s" className="w-80 input-regular" value={props.segundos || ''}
+                        <input placeholder="20s" className="w-80 input-regular mt-10" value={props.segundos || ''}
                                onChange={handleChangeSegundos}/>
-                        <input placeholder="1000 pts" className="w-80 input-regular mt-10"
+                        <input placeholder="1000 pts" className="w-80 input-regular  mt-10"
                                value={props.puntaje || ''} onChange={handleChangePuntaje}/>
                         {esVideo() &&
                             <input placeholder="00:00" className="w-80 input-regular" value={props.startAyuda}

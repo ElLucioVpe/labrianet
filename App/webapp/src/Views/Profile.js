@@ -6,14 +6,25 @@ import QuizMasterService from '../Libraries/QuizMasterServices';
 import {useUsuario} from "../Libraries/UserContextLib";
 
 import '../Css/Profile.css'
+import QuizMasterServices from "../Libraries/QuizMasterServices";
 
 export default function Profile() {
     const usuario = useUsuario();
     const [juegos, setJuegos] = useState([]);
+    const [stats, setStats] = useState([]);
+    const [jugados, setJugados] = useState([]);
+    const [actualizar, setActualizar] = useState(false);
 
-    const desactivarJuego = (async (id) => {
-        await QuizMasterService.updateJuego(id, {
-            "activadoJuego": 0
+    const desactivarJuego = (async (accion, pos) => {
+        var game = juegos[pos];
+        if(accion === "Desactivar") game.activadoJuego = 0;
+        else game.activadoJuego = 1;
+        console.log(game);
+        await QuizMasterService.updateJuego({
+            juego: game,
+            accessToken: usuario.accessToken
+        }).then(() => {
+            setActualizar(!actualizar);
         });
     });
 
@@ -25,11 +36,17 @@ export default function Profile() {
                 let data = await QuizMasterService.obtenerJuegosDeUsuario({
                     usuario: usuario.usuario
                 });
-                console.log(data);
                 setJuegos(data);
+
+                let statsJuegosUsuario = await QuizMasterServices.obtenerJugadoresUsuario({loginname: usuario.usuario});
+                setStats(statsJuegosUsuario);
+
+                let data_jugados = await QuizMasterServices.obtenerArrayJugados({loginname: usuario.usuario});
+                setJugados(data_jugados);
+                //console.log(data_jugados);
             }
         }
-    }, [usuario.usuario]);
+    }, [usuario.usuario, actualizar]);
 
     function render() {
         return (
@@ -39,8 +56,8 @@ export default function Profile() {
                     <h1>{usuario.usuario}</h1>
                     <Button class="item" to="/crear" value="Crear quiz nueva" size="regular"/>
                 </div>
-                <ProfileUserInfo juegos={juegos}/>
-                <ProfileUserStats juegos={juegos} desactivarJuego={desactivarJuego}/>
+                <ProfileUserInfo juegos={juegos} stats={stats}/>
+                <ProfileUserStats juegos={juegos} jugados={jugados} desactivarJuego={desactivarJuego}/>
             </div>
         )
     }

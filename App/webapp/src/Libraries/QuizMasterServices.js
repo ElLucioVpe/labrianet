@@ -88,12 +88,32 @@ const QuizMasterServices = {
                 }
             });
     },
-    obtenerJugadores: function (props) {
+    obtenerJugadoresJuego: function (props) {
         return Axios.get(BASE_URL + '/api/Juego/GetStatsJugadoresInGame/' + props.id,
             {
                 headers: {
                     'Authorization': 'Token ' + process.env.API_TOKEN,
                     'Accept': 'application/json'
+                }
+            }).then(response => {
+            return response.data;
+        });
+    },
+    obtenerJugadoresUsuario: function (props) {
+        return Axios.get(BASE_URL + '/api/Juego/GetPlayersQueJugaron?loginname='+ props.loginname,
+            {
+                headers: {
+                    'Authorization': 'Token ' + process.env.API_TOKEN,
+                }
+            }).then(response => {
+            return response.data;
+        });
+    },
+    obtenerArrayJugados: function (props) {
+        return Axios.get(BASE_URL + '/api/Juego/GetArrayPlayersQueJugaron?loginname='+ props.loginname,
+            {
+                headers: {
+                    'Authorization': 'Token ' + process.env.API_TOKEN,
                 }
             }).then(response => {
             return response.data;

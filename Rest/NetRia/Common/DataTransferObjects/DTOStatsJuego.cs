@@ -9,6 +9,6 @@ namespace Common.DataTransferObjects
     public class DTOStatsJuego
     {
         public int Jugadores { get; set; }
-        public int JugadoresSinTerminar { get; set; }
+        public int Jugados { get; set; }
     }
 }

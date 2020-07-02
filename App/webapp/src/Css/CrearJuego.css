@@ -70,6 +70,11 @@ img.pregunta_foto {
 }
 
 @media screen and (max-width: 1000px) {
+    img.pregunta_foto {
+        height: 150px;
+        width: 100%;
+        object-fit: cover;
+    }
     .crearPreguntas {
         width: 100%;
         margin: auto;
@@ -78,11 +83,20 @@ img.pregunta_foto {
         grid-template-columns: 100%;
         grid-template-rows: 450px 1fr;
         column-gap: 20px;
+   
+        row-gap: 5px;
 
     }
-
+.tablero{
+    grid-row-start: row-start  1;
+}
+.pregunta{
+    grid-row-start: row-start  0;
+}
     .inner-tablero {
-        height: 150px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        height: 250px;
     }
 
     .crearJuegoPreguntasContainer {
