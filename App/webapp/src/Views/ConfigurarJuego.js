@@ -17,6 +17,7 @@ export default function ConfigurarJuego(props) {
     const inputFile = useRef(null);
     const [mostrarSubirImagen, setMostrarSubirImagen] = useState(null);
     const [cancionSeleccionada, setCancionSeleccionada] = useState(0);
+    const [urlImagen, setUrlImagen] = useState("");
 
     const usuario = useUsuario();
     const juego_context = useJuego();
@@ -49,6 +50,7 @@ export default function ConfigurarJuego(props) {
                 } else juego_context.setCancionSeleccionada(valor);
             });
             await setCanciones(tmpCanciones);
+            setUrlImagen(QuizMasterService.getUrlImagen());
         }
         doIt();
 
@@ -207,7 +209,7 @@ export default function ConfigurarJuego(props) {
                                               id="gamecover"
                                               width="450"
                                               height="300"
-                                              src={(!esContext ? juego.coverJuego : juego_context.coverJuego) != null ? (!esContext ? juego.coverJuego : juego_context.coverJuego) : 'img/perfil.png'}/>
+                                              src={((!esContext ? juego.coverJuego : juego_context.coverJuego) != null  && (!esContext ? juego.coverJuego : juego_context.coverJuego)) ? (!esContext ? QuizMasterService.getUrlImagen("cover", juego.coverJuego) : juego_context.coverJuego) : 'img/perfil.png'}/>
                                 }
                                 <div className="absolute imgUpload" onClick={abrirModalSubirImagenVideo}>
                                     <img className="editImg"

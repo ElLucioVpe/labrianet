@@ -201,6 +201,12 @@ const QuizMasterServices = {
             return false;
         });
     },
+    getUrlImagen: function (tipo, nombre) {
+        let url = BASE_URL + "/images/";
+        if(tipo === "cover") url+= "covers/" + nombre;
+        if(tipo === "ayuda") url+= "ayuda/" + nombre;
+        return url;
+    },
 }
 
 export default QuizMasterServices;

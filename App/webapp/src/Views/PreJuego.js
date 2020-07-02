@@ -69,9 +69,9 @@ export default function PreJuego(props){
                             </div>
                             <div id="preJuego-cover" className="preJuego-info cover">
                                 {info_juego.coverJuego ? (
-                                    <img src={"../../public/img/"+info_juego.coverJuego} height={200} width={300}/>
+                                    <img src={QuizMasterService.getUrlImagen("cover", info_juego.coverJuego)} height={200} width={300}/>
                                 ) : (
-                                    <img src={"../../public/img/gamecover.png"} height={200}/>
+                                    <img src={"img/perfil.png"} height={200}/>
                                 )}
                             </div>
                         </div>
