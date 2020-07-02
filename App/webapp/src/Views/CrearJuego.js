@@ -40,6 +40,8 @@ export default function CrearJuego() {
             puntaje: null,
             imgUrl: null,
             activo: false,
+            startAyuda: 0,
+            endAyuda: 0,
             respuestaCorrecta: null,
             respuestas: [null, null, null, null]
         }));
@@ -57,6 +59,30 @@ export default function CrearJuego() {
     const cambiarYouTubeUrl = ((_value) => {
         setPreguntas(update(preguntas, {[preguntaSeleccionada]: {imgUrl: {$set: _value}}}));
     });
+
+    const cambiarStartAyuda = ((_value) => {
+        setPreguntas(update(preguntas, {[preguntaSeleccionada]: {startAyuda: {$set: _value}}}));
+    });
+
+    const cambiarEndAyuda = ((_value) => {
+        setPreguntas(update(preguntas, {[preguntaSeleccionada]: {endAyuda: {$set: _value}}}));
+    });
+
+    function convertirAyuda(_value) {
+        //Funcion simple para que pueda ingresar en formato min:seg
+        let retorno = 0;
+
+        if(_value === undefined) return retorno; //Evito errores si se publica sin hacer nada aqui
+        if(_value.includes(":")) {
+            let num1 = _value.substring(0, _value.indexOf(":"));
+            let num2 = _value.substring(_value.indexOf(":")+1);
+            console.log(num1+"-"+num2);
+            _value = num1+num2;
+            if(!isNaN(parseFloat(_value)) && !isNaN(_value - 0)) retorno = (num1*60)+num2;
+            else retorno = 0;
+        } else retorno = _value;
+        return retorno;
+    }
 
     function subirImagen(event) {
         let filesSelected = event.target.files;
@@ -156,8 +182,8 @@ export default function CrearJuego() {
                 "contenidoPregunta": item.titulo != null ? item.titulo : "Pregunta",
                 "tipoPregunta": respuestasSinSetear === 2 ? "True/False" : "Quiz",
                 "urlAyudaPregunta": item.imgUrl != null ? item.imgUrl : "",
-                "startAyuda": 1,
-                "endAyuda": 1,
+                "startAyuda": convertirAyuda(item.startAyuda),
+                "endAyuda": convertirAyuda(item.endAyuda),
                 "respuestas": respuestas
             });
         });
@@ -208,9 +234,12 @@ export default function CrearJuego() {
                         cambiarPregunta={cambiarPregunta}
                         cambiarPuntaje={cambiarPuntaje}
                         cambiarSegundos={cambiarSegundos}
+                        cambiarStartAyuda={cambiarStartAyuda}
+                        cambiarEndAyuda={cambiarEndAyuda}
                         configurarRespuesta={setConfigurandoRespuesta}
                         abrirSubirImagenVideo={abrirModalSubirImagenVideo}
                         subirImagen={subirImagen}
+                        posicionPregunta={preguntaSeleccionada}
 
                         {...preguntas[preguntaSeleccionada]}/>
                 </div>

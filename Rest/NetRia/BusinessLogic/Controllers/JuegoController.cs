@@ -8,6 +8,7 @@ using Common.DataTransferObjects;
 using BusinessLogic.DataModel;
 using BusinessLogic.DataModel.Mappers;
 using Persistencia.Database;
+using System.IO;
 
 namespace BusinessLogic.Controllers
 {
@@ -83,33 +84,33 @@ namespace BusinessLogic.Controllers
                 {
                     return null;
                 }
-             
-                    string nickUsuarioActual;
-                    Nullable<int> puntajeActual = 0;
-                    foreach (Partida partida in entity.partidas)
+
+                string nickUsuarioActual;
+                Nullable<int> puntajeActual = 0;
+                foreach (Partida partida in entity.partidas)
+                {
+                    nickUsuarioActual = partida.nickUsuario;
+                    puntajeActual = 0;
+
+                    foreach (Respuesta respuesta in partida.respuestas)
                     {
-                        nickUsuarioActual = partida.nickUsuario;
-                        puntajeActual = 0;
-
-                        foreach (Respuesta respuesta in partida.respuestas)
+                        if (respuesta.esCorrectoRespuesta == 1)
                         {
-                            if (respuesta.esCorrectoRespuesta == 1)
-                            {
 
-                                puntajeActual += respuesta.pregunta.puntosPregunta;
+                            puntajeActual += respuesta.pregunta.puntosPregunta;
 
-                            }
                         }
-                        DTORank rankingActual = new DTORank()
-                        {
-                            nickUsuario = nickUsuarioActual,
-                            Puntaje = puntajeActual,
-                        };
-                        ranking.Add(rankingActual);
                     }
+                    DTORank rankingActual = new DTORank()
+                    {
+                        nickUsuario = nickUsuarioActual,
+                        Puntaje = puntajeActual,
+                    };
+                    ranking.Add(rankingActual);
+                }
 
                 return ranking.OrderByDescending(i => i.Puntaje).ToList();
-              
+
             }
         }
 
@@ -128,8 +129,8 @@ namespace BusinessLogic.Controllers
 
                 JugadoresActual = entity.partidas.Count;
                 CantPreguntas = entity.preguntas.Count;
-                
-                foreach(Partida partida in entity.partidas)
+
+                foreach (Partida partida in entity.partidas)
                 {
                     if (partida.respuestas.Count < CantPreguntas) {
                         JugadoreSinTerminarActual = +1;
@@ -147,14 +148,14 @@ namespace BusinessLogic.Controllers
             }
         }
 
-        public void UpdatePreguntaUrlJuego(int idGame, int idPregunta, string UrlPregunta){
+        public void UpdatePreguntaUrlJuego(int idGame, int idPregunta, string UrlPregunta) {
 
             using (UnitOfWork uow = new UnitOfWork())
             {
                 var entity = uow.JuegoRepository.Get(idGame);
 
                 var entityUpdatedPregunta = entity.preguntas.FirstOrDefault(a => a.idPregunta == idPregunta);
-                entityUpdatedPregunta.urlAyudaPregunta=UrlPregunta;
+                entityUpdatedPregunta.urlAyudaPregunta = UrlPregunta;
 
                 uow.SaveChanges();
             }
@@ -162,6 +163,25 @@ namespace BusinessLogic.Controllers
 
         }
 
+        public string GetImagenes(string tipo, string base64Image) {
+
+            string base64;
+            string pathImage;
+            if (tipo == "Juego")
+            {
+                pathImage = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "/images/covers/";
+            }
+            else if (tipo == "Pregunta")
+            {
+               pathImage = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "/images/ayuda/";
+            }
+            else {
+                return "Tipo No Encontrado";
+            }
+
+            base64 = Convert.ToBase64String(File.ReadAllBytes(pathImage+base64Image));
+            return base64;
+        }
 
         public void UpdateJuego(int id, DTOJuego juego)
         {

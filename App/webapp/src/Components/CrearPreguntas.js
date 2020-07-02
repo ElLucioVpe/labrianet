@@ -30,6 +30,14 @@ export function CrearPreguntas(props) {
         props.configurarRespuesta(id);
     });
 
+    const handleChangeStartAyuda = ((e) => {
+        props.cambiarStartAyuda(e.target.value);
+    });
+
+    const handleChangeEndAyuda = ((e) => {
+        props.cambiarEndAyuda(e.target.value);
+    });
+
     const onImageSubmit = ((e) => {
         e.preventDefault(); // Stop form submit
         fileUpload(this.state.file).then((response) => {
@@ -80,6 +88,15 @@ export function CrearPreguntas(props) {
                                onChange={handleChangeSegundos}/>
                         <input placeholder="1000 pts" className="w-80 input-regular  mt-10"
                                value={props.puntaje || ''} onChange={handleChangePuntaje}/>
+                        {esVideo() &&
+                            <input placeholder="00:00" className="w-80 input-regular" value={props.startAyuda}
+                                   onChange={handleChangeStartAyuda}/>
+                        }
+                        {esVideo() &&
+                            <input placeholder="00:20" className="w-80 input-regular" value={props.endAyuda}
+                                   onChange={handleChangeEndAyuda}/>
+                        }
+
                     </div>
                     <div className="flex w-80 justify-content-center">
                         <div className="relative width-inherit" onClick={((e) => handleSubirContenido(e))}>
