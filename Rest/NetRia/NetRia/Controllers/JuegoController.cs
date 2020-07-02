@@ -35,6 +35,21 @@ namespace NetRia.Controllers
             return juegos;
         }
 
+        //Get:
+        public IHttpActionResult GetImagenes(string tipo, string name) {
+
+            try
+            {
+                BusinessLogic.Controllers.JuegoController controller = new BusinessLogic.Controllers.JuegoController();
+                string base64Iamge = controller.GetImagenes(tipo,name);
+                return Ok(base64Iamge);
+            }
+            catch(Exception ex) {
+                return NotFound();
+            }
+           
+        }
+
         // GET: api/Juego
         [Authorize]
         public IHttpActionResult GetJuegosJugador(string loginName)
