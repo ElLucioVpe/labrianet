@@ -50,6 +50,13 @@ namespace NetRia.Controllers
            
         }
 
+        public IHttpActionResult GetArrayPlayersQueJugaron(string loginname)
+        {
+            BusinessLogic.Controllers.JuegoController controller = new BusinessLogic.Controllers.JuegoController();
+            List<DTOStatsJuego> retorno = controller.GetArrayPlayersQueJugaron(loginname);
+            return Ok(retorno);
+        }
+
         // GET: api/Juego
         [Authorize]
         public IHttpActionResult GetJuegosJugador(string loginName)
