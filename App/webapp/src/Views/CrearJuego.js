@@ -222,7 +222,7 @@ export default function CrearJuego() {
     const preguntasNoTienenRespuestaCorrecta = () => {
         let value = false;
         preguntas.forEach(function (pregunta) {
-            if (pregunta.respuestaCorrecta === "") {
+            if (pregunta.respuestaCorrecta === null) {
                 value = true;
             }
         });
