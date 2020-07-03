@@ -9,16 +9,18 @@ class QuizPreview extends React.Component {
 
     render() {
         return (
-            <Link to={"/juego/"+this.props.id}>
-            <div class="QuizPreview m10 card width-fit-content">
-                <div class="width-fit-content">
-                    <img src={this.props.coverJuego ? QuizMasterService.getUrlImagen("cover", this.props.coverJuego):'img/gamecover.png'} className="quiz-preview-img"/>
+            <Link to={"/juego/" + this.props.id}>
+                <div class={"QuizPreview m10 card width-fit-content " + (this.props.isMobile !== true || "mobile")}>
+                    <div class="width-fit-content">
+                        <img
+                            src={this.props.coverJuego ? QuizMasterService.getUrlImagen("cover", this.props.coverJuego) : 'img/gamecover.png'}
+                            className="quiz-preview-img"/>
+                    </div>
+                    <div className="width-fit-content">
+                        <p>{this.props.tituloJuego}</p>
+                    </div>
                 </div>
-                <div className="width-fit-content">
-                    <p>{this.props.tituloJuego}</p>
-                </div>
-            </div>
-                </Link>
+            </Link>
         )
     }
 }

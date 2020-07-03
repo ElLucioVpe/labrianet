@@ -18,6 +18,7 @@ export default function ConfigurarJuego(props) {
     const [mostrarSubirImagen, setMostrarSubirImagen] = useState(null);
     const [cancionSeleccionada, setCancionSeleccionada] = useState(0);
     const [privacidad, setPrivacidad] = useState(0);
+    const [imageUrl, setImageUrl] = useState("img/gamecover.png");
 
     const usuario = useUsuario();
     const juego_context = useJuego();
@@ -37,6 +38,7 @@ export default function ConfigurarJuego(props) {
 
                 await setJuego(data);
                 //console.log(data);
+                setImageUrl(QuizMasterService.getUrlImagen("cover", data.coverJuego))
                 setPrivacidad(data.esPrivadoJuego);
                 setEsContext(false);
             } else if (juego_context.idJuego != null) {
@@ -117,8 +119,10 @@ export default function ConfigurarJuego(props) {
             var fileReader = new FileReader();
 
             fileReader.onload = function (fileLoadedEvent) {
-                !esContext ? juego.coverJuego = fileLoadedEvent.target.result : juego_context.setCoverJuego(fileLoadedEvent.target.result);
+                !esContext ? juego.coverJuego = fileLoadedEvent.target.result.substring(23) : juego_context.setCoverJuego(fileLoadedEvent.target.result);
                 if (esContext) juego_context.setCoverEsVideo(false);
+                else setImageUrl(fileLoadedEvent.target.result);
+                console.log(juego);
             };
             fileReader.readAsDataURL(fileToLoad);
         }
@@ -209,9 +213,9 @@ export default function ConfigurarJuego(props) {
                                               id="gamecover"
                                               width="450"
                                               height="300"
-                                              src={((!esContext ? juego.coverJuego : juego_context.coverJuego) != null && (!esContext ? juego.coverJuego : juego_context.coverJuego)) ? (!esContext ? QuizMasterService.getUrlImagen("cover", juego.coverJuego) : juego_context.coverJuego) : 'img/gamecover.png'}/>
+                                              src={((!esContext ? juego.coverJuego : juego_context.coverJuego) != null && (!esContext ? juego.coverJuego : juego_context.coverJuego)) ? (!esContext ? imageUrl : juego_context.coverJuego) : 'img/gamecover.png'}/>
                                 }
-                                <div className="absolute imgUpload" onClick={abrirModalSubirImagenVideo}>
+                                <div className="absolute imgUpload" onClick={handleClickImage}>
                                     <img className="editImg"
                                          src="/views/crear/upload.svg"/>
                                 </div>
@@ -238,11 +242,6 @@ export default function ConfigurarJuego(props) {
                 <form className="display-none">
                     <input type="file" onChange={onImageChange} ref={inputFile}/>
                 </form>
-                {mostrarSubirImagen === null ? '' :
-                    <SubirImagenVideo cerrarModal={cerrarModalSubirImagenVideo}
-                                      cambiarImagen={cambiarImgUrl}
-                                      cambiarYouTubeUrl={cambiarYouTubeUrl}
-                    />}
             </div>
         );
     }

@@ -1,8 +1,23 @@
-import React from 'react'
+import React, {useLayoutEffect, useState} from 'react'
 import Button from '../Components/Button'
 import '../Css/Index.css'
 
 export default function Index() {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useLayoutEffect(() => {
+        function updateSize() {
+            if (window.innerWidth < 768) {
+                setIsMobile(true);
+            } else {
+                setIsMobile(false);
+            }
+        }
+
+        window.addEventListener('resize', updateSize);
+        updateSize();
+        return () => window.removeEventListener('resize', updateSize);
+    }, []);
 
     function render() {
         return (
@@ -24,7 +39,7 @@ export default function Index() {
                     </div>
                     <p>Crea tus propias trivias y compartela con tus amigos de la forma más fácil y divertida!</p>
                 </div>
-                <div class="main_menu">
+                <div class={"main_menu " + (!isMobile || "mb-20")}>
                     <img class="item" src="logo.svg"/><h1>QuizMaster</h1>
                     <Button class="item" to="/jugar" value="Jugar" size="large"/>
                     <Button class="item" to="/crear" value="Crear" size="large"/>

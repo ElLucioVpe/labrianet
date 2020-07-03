@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useLayoutEffect, useState} from "react";
 import ProfileUserInfo from "../Components/ProfileUserInfo.js";
 import ProfileUserStats from "../Components/ProfileUserStats.js";
 import Button from "../Components/Button";
@@ -11,6 +11,7 @@ import QuizMasterServices from "../Libraries/QuizMasterServices";
 export default function Profile() {
     const usuario = useUsuario();
     const [juegos, setJuegos] = useState([]);
+    const [isMobile, setIsMobile] = useState(false);
     const [stats, setStats] = useState([]);
     const [jugados, setJugados] = useState([]);
     const [actualizar, setActualizar] = useState(false);
@@ -27,6 +28,20 @@ export default function Profile() {
             setActualizar(!actualizar);
         });
     });
+
+    useLayoutEffect(() => {
+        function updateSize() {
+            if (window.innerWidth < 768) {
+                setIsMobile(true);
+            } else {
+                setIsMobile(false);
+            }
+        }
+
+        window.addEventListener('resize', updateSize);
+        updateSize();
+        return () => window.removeEventListener('resize', updateSize);
+    }, []);
 
     useEffect(() => {
         doIt();
