@@ -81,6 +81,11 @@
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
+
+    }
+    .usernameSection h1 {
+        font-size: larger;
+        
     }
 
     .profile-user-stats-table {
