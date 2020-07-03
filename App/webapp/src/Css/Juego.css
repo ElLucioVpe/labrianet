@@ -64,6 +64,10 @@
     font-size: 17px;
 }
 
+.AyudaJuego .item {
+    align-self: center;
+}
+
 .youtubeContainer {
 
 }
@@ -113,7 +117,13 @@
         padding: 0px;
         font-size: 20px;
     }
+
     .AyudaJuego{
         padding: 0px;
+    }
+
+    .AyudaJuego .item {
+        width: 95%;
+        height: auto;
     }
 }

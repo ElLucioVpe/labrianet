@@ -237,12 +237,13 @@ export default function Juego(props) {
       } else {
         //imagen, tal vez con ese formato de url
         ayuda = (
-          <img
+          <img className="item"
             id="ayuda-url"
             src={preguntaActual.urlAyudaPregunta?
                 QuizMasterService.getUrlImagen("ayuda", preguntaActual.urlAyudaPregunta):
                 "img/gamecover.png"}
-            height={200}
+            height={300}
+            width={550}
           />
         );
       }
