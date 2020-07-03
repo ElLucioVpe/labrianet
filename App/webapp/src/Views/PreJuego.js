@@ -1,34 +1,50 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useLayoutEffect, useState} from 'react'
 import Button from '../Components/Button'
 import '../Css/PreJuego.css'
 import QuizMasterService from "../Libraries/QuizMasterServices";
 import {useUsuario} from "../Libraries/UserContextLib";
 import Input from "../Components/Input";
 
-export default function PreJuego(props){
+export default function PreJuego(props) {
     const usuario = useUsuario();
     const [info_juego, setInfo_juego] = useState([]);
     const [nickname, setNickname] = useState("Anonimo");
     const [password, setPassword] = useState("");
     const [counter, setCounter] = useState(-1);
     const [counterPausa, setCounterPausa] = useState(true);
+    const [isMobile, setIsMobile] = useState(false);
+
     const BASE_URL = "http://localhost:44353";
 
     const iniciarJuego = (() => {
-        if(info_juego.password){
-            if(password===info_juego.password){
+        if (info_juego.password) {
+            if (password === info_juego.password) {
                 setCounterPausa(false);
-            }else{
+            } else {
                 alert("Contraseña Incorrecta");
             }
-        }else{
+        } else {
             setCounterPausa(false);
         }
     });
 
-    const countdown = (async() => {
-        if(!counterPausa && counter === -1) setCounter(5);
-        if(counter === 0) {
+    useLayoutEffect(() => {
+        function updateSize() {
+            if (window.innerWidth < 768) {
+                setIsMobile(true);
+            } else {
+                setIsMobile(false);
+            }
+        }
+
+        window.addEventListener('resize', updateSize);
+        updateSize();
+        return () => window.removeEventListener('resize', updateSize);
+    }, []);
+
+    const countdown = (async () => {
+        if (!counterPausa && counter === -1) setCounter(5);
+        if (counter === 0) {
             var url = "/Juego/:id/:nick".replace(':id', props.match.params.id);
             url = url.replace(':nick', nickname);
             window.location = url;
@@ -50,6 +66,7 @@ export default function PreJuego(props){
                 window.location = "/";
             });
         }
+
         cargarJuego()
 
     }, []);
@@ -58,12 +75,12 @@ export default function PreJuego(props){
     function render() {
         countdown();
 
-        function handleChange (event) {
+        function handleChange(event) {
             console.log(event.target.value);
             setNickname(event.target.value);
         }
 
-        function handleChangePassword (event) {
+        function handleChangePassword(event) {
             console.log(event.target.value);
             setPassword(event.target.value);
         }
@@ -76,14 +93,15 @@ export default function PreJuego(props){
 
                 {counterPausa ? (
                     <div>
-                        <div className="preJuego-infoGame">
+                        <div className={"preJuego-infoGame " + (!isMobile || "flex flex-direction-column")}>
                             <div id="preJuego-info" className="preJuego-info info">
                                 <h1>{info_juego.tituloJuego}</h1>
                                 <h5>{info_juego.descripcionJuego}</h5>
                             </div>
                             <div id="preJuego-cover" className="preJuego-info cover">
                                 {info_juego.coverJuego ? (
-                                    <img src={QuizMasterService.getUrlImagen("cover", info_juego.coverJuego)} height={200} width={300}/>
+                                    <img src={QuizMasterService.getUrlImagen("cover", info_juego.coverJuego)}
+                                         height={200} width={300}/>
                                 ) : (
                                     <img src={"img/gamecover.png"} height={200}/>
                                 )}
@@ -91,7 +109,7 @@ export default function PreJuego(props){
                         </div>
                         <div id="preJuego-nickname" className="preJuego-nickname">
                             <label for="input-nick">Nickname:</label>
-                            <Input id="input-nick" type="text" onChange={ handleChange }/>
+                            <Input id="input-nick" type="text" onChange={handleChange}/>
                         </div>
                         {info_juego.password &&
                         <div id="preJuego-password" className="preJuego-nickname">
@@ -100,7 +118,8 @@ export default function PreJuego(props){
                         </div>
                         }
                         <div id="preJuego-btn">
-                            <button className="preJuego-btn" onClick={() => iniciarJuego()} value="Iniciar">Iniciar</button>
+                            <button className="preJuego-btn" onClick={() => iniciarJuego()} value="Iniciar">Iniciar
+                            </button>
                         </div>
                     </div>
                 ) : (
@@ -113,5 +132,6 @@ export default function PreJuego(props){
 
 
     }
+
     return render();
 }

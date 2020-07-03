@@ -84,21 +84,21 @@ export function CrearPreguntas(props) {
                 </div>
                 <div className="flex justify-content-center mt-10">
                     <div className="flex flex-direction-column justify-content-center w-20 p-10">
-                        <input placeholder="20s" className="w-80 input-regular mt-10" value={props.segundos || ''}
+                        <input placeholder="20s" className=" input-regular mt-10 w-100" value={props.segundos || ''}
                                onChange={handleChangeSegundos}/>
-                        <input placeholder="1000 pts" className="w-80 input-regular  mt-10"
+                        <input placeholder="1000 pts" className=" input-regular w-100 mt-10"
                                value={props.puntaje || ''} onChange={handleChangePuntaje}/>
                         {esVideo() &&
-                        <input placeholder="00:00" className="w-80 input-regular" value={props.startAyuda}
+                        <input placeholder="00:00" className=" input-regular w-100" value={props.startAyuda}
                                onChange={handleChangeStartAyuda}/>
                         }
                         {esVideo() &&
-                        <input placeholder="00:20" className="w-80 input-regular" value={props.endAyuda}
+                        <input placeholder="00:20" className=" input-regular w-100" value={props.endAyuda}
                                onChange={handleChangeEndAyuda}/>
                         }
 
                     </div>
-                    <div className="flex w-80 justify-content-center">
+                    <div className="flex w-100 justify-content-center">
                         <div className="relative width-inherit" onClick={((e) => handleSubirContenido(e))}>
                             {
                                 esVideo() ? <ReactPlayer

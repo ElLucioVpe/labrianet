@@ -211,7 +211,7 @@ namespace NetRia.Controllers
                     }
 
                 }
-                juego.fechaJuego = new DateTime();
+                juego.fechaJuego = DateTime.Now;
                 //Creo Game y Cambio Cover
                 idGame = controller.CreateJuego(juego);            
                 if (Base64Image != "") {
@@ -234,7 +234,7 @@ namespace NetRia.Controllers
                     DTOJuego UpdateCoverGame = new DTOJuego {
                         coverJuego = nombreFile,
                         Musica_idMusica = juego.Musica_idMusica
-                     };
+                    };
                    
 
                     controller.UpdateJuego(idGame, UpdateCoverGame);

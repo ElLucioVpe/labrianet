@@ -68,35 +68,40 @@ img.pregunta_foto {
     width: 20px;
     height: 20px;
 }
-
+.crearPreguntas iframe {
+    width: 45vw;
+}
 @media screen and (max-width: 1000px) {
     img.pregunta_foto {
         height: 150px;
         width: 100%;
         object-fit: cover;
     }
+
     .crearPreguntas {
         width: 100%;
         margin: auto;
         margin-top: 20px;
         display: grid;
         grid-template-columns: 100%;
-        grid-template-rows: 450px 1fr;
+        grid-template-rows: fr 1fr;
         column-gap: 20px;
 
         row-gap: 5px;
 
     }
-    .tablero{
-        grid-row-start: row-start  1;
+
+    .tablero {
+        grid-row-start: row-start 1;
     }
-    .pregunta{
-        grid-row-start: row-start  0;
+
+    .pregunta {
+        grid-row-start: row-start 0;
     }
+
     .inner-tablero {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        height: 250px;
     }
 
     .crearJuegoPreguntasContainer {
@@ -109,7 +114,7 @@ img.pregunta_foto {
         width: 10px;
     }
 
-    .input-titulo{
+    .input-titulo {
         width: 90%;
     }
 
@@ -117,5 +122,7 @@ img.pregunta_foto {
         display: inline;
         width: 100%;
     }
-
+    .crearPreguntas iframe {
+        width: 80vw;
+    }
 }

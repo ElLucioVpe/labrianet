@@ -84,20 +84,7 @@ export default function ConfigurarJuego(props) {
     });
 
     const onImageChange = ((e) => {
-        //esContext ? juego.setCoverJuego(e.target.files[0]) : juego_context.setCoverJuego(e.target.files[0]);
         subirImagen(e);
-        //this.onImageSubmit()
-    });
-
-    const cambiarImgUrl = ((e) => {
-        //setPreguntas(update(preguntas, {[preguntaSeleccionada]: {imgUrl: {$set: _value}}}));
-        console.log(e);
-        subirImagen(e);
-    });
-
-    const cambiarYouTubeUrl = ((_value) => {
-        !esContext ? juego.coverJuego = _value : juego_context.setCoverJuego(_value);
-        if (esContext) juego_context.setCoverEsVideo(true);
     });
 
     const esVideo = (() => {
@@ -119,12 +106,13 @@ export default function ConfigurarJuego(props) {
             var fileReader = new FileReader();
 
             fileReader.onload = function (fileLoadedEvent) {
-                !esContext ? juego.coverJuego = fileLoadedEvent.target.result.substring(23) : juego_context.setCoverJuego(fileLoadedEvent.target.result);
+                !esContext ? juego.coverJuego = fileLoadedEvent.target.result.substring(fileLoadedEvent.target.result.indexOf(',',0)+1) : juego_context.setCoverJuego(fileLoadedEvent.target.result);
+                console.log(fileLoadedEvent.target.result);
                 if (esContext) juego_context.setCoverEsVideo(false);
                 else setImageUrl(fileLoadedEvent.target.result);
-                console.log(juego);
+                //console.log(juego);
             };
-            fileReader.readAsDataURL(fileToLoad);
+            fileReader.readAsDataURL(fileToLoad)
         }
     }
 
@@ -209,7 +197,7 @@ export default function ConfigurarJuego(props) {
                                 {
                                     esVideo() ? <ReactPlayer
                                         url={(!esContext ? juego.coverJuego : juego_context.coverJuego) != null ? (!esContext ? juego.coverJuego : juego_context.coverJuego) : 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}
-                                    /> : <img class="gamecoverImage"
+                                    /> : <img className="gamecoverImage"
                                               id="gamecover"
                                               width="450"
                                               height="300"

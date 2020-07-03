@@ -23,6 +23,14 @@
 .descripcion-juego {
     resize: none;
 }
+.grid-configuracionJuego iframe {
+    width: 40vw;
+    position: absolute; left: 10px;
+}
+.configurarYutu{
+    width: 240px;
+    
+}
 @media screen and (max-width: 1000px) {
     body{width: 100%; min-width:200px ;}
     .configuracionJuego input.input{
@@ -59,5 +67,14 @@
         grid-template-rows: 50% 50% auto-fit;
         row-gap: 20px;
         /*column-gap: 20px;*/
+    }
+    .grid-configuracionJuego iframe {
+        width: 80vw;
+            position: absolute; right: 10px;
+
+    }
+    .configurarYutu{
+       
+        width: inherit; 
     }
 }
