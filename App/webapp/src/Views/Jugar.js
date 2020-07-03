@@ -90,7 +90,7 @@ export default function Jugar() {
                     <div
                         className={"listado overflow-overlay bg-white border-radius-25px flex mt-10 " + (isMobile ? "flex-direction-column" : "flex-direction-row")}>
                         {juegos.map((juego, i) => <QuizPreview isMobile={isMobile}
-                                                               key={i} id={i} {...juego}/>)}
+                        key={i} id={juego.idJuego} {...juego}/>)}
                     </div>
                 </div>
             </div>
