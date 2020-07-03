@@ -68,7 +68,9 @@ img.pregunta_foto {
     width: 20px;
     height: 20px;
 }
-
+.crearPreguntas iframe {
+    width: 45vw;
+}
 @media screen and (max-width: 1000px) {
     img.pregunta_foto {
         height: 150px;
@@ -81,7 +83,7 @@ img.pregunta_foto {
         margin-top: 20px;
         display: grid;
         grid-template-columns: 100%;
-        grid-template-rows: 450px 1fr;
+        grid-template-rows: fr 1fr;
         column-gap: 20px;
    
         row-gap: 5px;
@@ -115,5 +117,8 @@ img.pregunta_foto {
     .titleHeader {
         display: inline;
         width: 100%;
+    }
+    .crearPreguntas iframe {
+        width: 80vw;
     }
 }
