@@ -14,15 +14,17 @@ export default function PlayerRanking(props) {
 
     useEffect(() => {
         async function doIt() {
-            let data_rankings = await QuizMasterService.obtenerRanking({id:props.match.params.id});
+            let data_rankings = await QuizMasterService.obtenerRanking({id: props.match.params.id});
             //await console.log(await QuizMasterService.obtenerRanking({id:props.match.params.id}));
             await set_rankings(data_rankings);
             set_partida({nickUsuario: props.match.params.nick, puntaje: props.match.params.puntos});
         }
+
         async function cargarNombreJuego() {
             let data_juego = await QuizMasterService.obtenerJuego({id: props.match.params.id});
             await set_nombreJuego(data_juego.tituloJuego);
         }
+
         cargarNombreJuego()
         doIt()
     }, []);
@@ -45,32 +47,32 @@ export default function PlayerRanking(props) {
                     <div class="puntajeGeneral">
                         <div class="scroll">
                             <table cellpadding="0">
-                                
+
                                 {rankings.map((ranking, index) => {
                                     return <Ranking ranking={ranking}/>;
-                                }) }                            
+                                })}
                             </table>
                         </div>
                     </div>
                     <div class="botoncito">
                         <div class="flex-Button">
-                            {" "}
-                            <Button class="item" to="/index" value="Fin"/>
+                            <Button class="item" to="/" value="Fin"/>
                         </div>
                     </div>
                 </div>
             </div>
         );
     }
-    function Ranking({ ranking }) {
-        return (
-          <tr className="Ranking">
-            <td className="all">{ranking.nickUsuario}</td>
-            <td className="all">{ranking.Puntaje}pts</td>
 
-          </tr>
+    function Ranking(ranking) {
+        return (
+            <tr className="Ranking">
+                <td className="all">{ranking.nickUsuario}</td>
+                <td className="all">{ranking.Puntaje}pts</td>
+
+            </tr>
         );
-      }
-      
+    }
+
     return render();
 }

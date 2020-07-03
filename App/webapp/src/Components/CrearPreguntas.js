@@ -98,7 +98,7 @@ export function CrearPreguntas(props) {
                         }
 
                     </div>
-                    <div className="flex w-80 justify-content-center">
+                    <div className="flex w-100 justify-content-center">
                         <div className="relative width-inherit" onClick={((e) => handleSubirContenido(e))}>
                             {
                                 esVideo() ? <ReactPlayer

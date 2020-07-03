@@ -75,6 +75,7 @@ img.pregunta_foto {
         width: 100%;
         object-fit: cover;
     }
+
     .crearPreguntas {
         width: 100%;
         margin: auto;
@@ -87,16 +88,18 @@ img.pregunta_foto {
         row-gap: 5px;
 
     }
-    .tablero{
-        grid-row-start: row-start  1;
+
+    .tablero {
+        grid-row-start: row-start 1;
     }
-    .pregunta{
-        grid-row-start: row-start  0;
+
+    .pregunta {
+        grid-row-start: row-start 0;
     }
+
     .inner-tablero {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        height: 250px;
     }
 
     .crearJuegoPreguntasContainer {
@@ -109,7 +112,7 @@ img.pregunta_foto {
         width: 10px;
     }
 
-    .input-titulo{
+    .input-titulo {
         width: 90%;
     }
 

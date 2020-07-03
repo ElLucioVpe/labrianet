@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useLayoutEffect, useState} from "react";
 import Button from "../Components/Button";
 import SubirImagenVideo from "../Components/SubirImagenVideo";
 import CrearJuegoPreguntas from "../Components/CrearJuegoPreguntas";
@@ -23,6 +23,21 @@ export default function CrearJuego() {
     const [preguntaSeleccionada, setPreguntaSeleccionada] = useState(0);
     const [configurandoRespuesta, setConfigurandoRespuesta] = useState(null);
     const [mostrarSubirImagen, setMostrarSubirImagen] = useState(null);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useLayoutEffect(() => {
+        function updateSize() {
+            if (window.innerWidth < 768) {
+                setIsMobile(true);
+            } else {
+                setIsMobile(false);
+            }
+        }
+
+        window.addEventListener('resize', updateSize);
+        updateSize();
+        return () => window.removeEventListener('resize', updateSize);
+    }, []);
 
     const handleChange = (event) => {
         setTitulo(event.target.value);
@@ -302,7 +317,7 @@ export default function CrearJuego() {
             <ResumenJuego id={idJuego}/>
         ) : (
             <div className="container" style={{height: "100%"}}>
-                <div className="titleHeader">
+                <div className={"titleHeader " + (!isMobile || "flex")}>
                     <input
                         className="input-big mr-10 input-titulo"
                         placeholder="Titulo"
