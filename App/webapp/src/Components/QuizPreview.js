@@ -12,7 +12,7 @@ class QuizPreview extends React.Component {
             <Link to={"/juego/"+this.props.id}>
             <div class="QuizPreview m10 card width-fit-content">
                 <div class="width-fit-content">
-                    <img src={this.props.coverJuego ? QuizMasterService.getUrlImagen("cover", this.props.coverJuego):'img/perfil.png'} className="quiz-preview-img"/>
+                    <img src={this.props.coverJuego ? QuizMasterService.getUrlImagen("cover", this.props.coverJuego):'img/gamecover.png'} className="quiz-preview-img"/>
                 </div>
                 <div className="width-fit-content">
                     <p>{this.props.tituloJuego}</p>
