@@ -1,5 +1,6 @@
 .quiz-preview-img {
-    height: 5vh;
+    width: 120px;
+    height: auto;
 }
 
 .listado {

@@ -31,7 +31,7 @@ export default function CrearJuego() {
     useEffect(() => {
         juego.setPreguntas(preguntas);
         juego.setTitulo(titulo);
-        juego.setIdJuego(0);
+        //juego.setIdJuego(0);
     }, [preguntas, setPreguntas, titulo, setTitulo]);
 
     const crearPregunta = (async (event) => {
@@ -74,14 +74,17 @@ export default function CrearJuego() {
         let retorno = 0;
 
         if (_value === undefined) return retorno; //Evito errores si se publica sin hacer nada aqui
-        if (_value.includes(":")) {
-            let num1 = _value.substring(0, _value.indexOf(":"));
-            let num2 = _value.substring(_value.indexOf(":") + 1);
-            console.log(num1 + "-" + num2);
-            _value = num1 + num2;
-            if (!isNaN(parseFloat(_value)) && !isNaN(_value - 0)) retorno = (num1 * 60) + num2;
-            else retorno = 0;
-        } else retorno = _value;
+        if (!isNaN(parseFloat(_value)) && !isNaN(_value - 0)) retorno = _value;
+        else{
+            if (_value.includes(":")) {
+                let num1 = _value.substring(0, _value.indexOf(":"));
+                let num2 = _value.substring(_value.indexOf(":") + 1);
+                console.log(num1 + "-" + num2);
+                _value = num1 + num2;
+                if (!isNaN(parseFloat(_value)) && !isNaN(_value - 0)) retorno = (num1 * 60) + num2;
+                else retorno = 0;
+            } else retorno = _value;
+        }
         return retorno;
     }
 

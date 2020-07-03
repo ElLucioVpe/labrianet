@@ -13,13 +13,14 @@ export default function ResumenJuego(props) {
 
   useEffect(() => {
     async function doIt() {
-      if(props.match.params.id === false || props.match.params.id === -1) set_irAenlace(true); //Lo manda a mostrarle el error en enlace
+      console.log(props.id+"-----------");
+      if(props.id === null ||props.id === -1 || props.id === false ||props.id === -1 || props.id === false) set_irAenlace(true); //Lo manda a mostrarle el error en enlace
 
       let data_juegos = await QuizMasterService.obtenerJuego({
-        id: props.match.params.id,
+        id: props.id,
       });
       let data_jugadores = await QuizMasterService.obtenerJugadoresJuego({
-        id: props.match.params.id,
+        id: props.id,
       });
       await set_jugadores(data_jugadores);
       await set_juegos(data_juegos);
@@ -142,7 +143,6 @@ export default function ResumenJuego(props) {
         <div className="pregunta_derecha">
         <div>{ayuda}</div>
         <div>{pregunta.segundosPregunta} seg</div>
-        
         </div>
       </div>
      
