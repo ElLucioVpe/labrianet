@@ -34,7 +34,7 @@ namespace NetRia.Controllers
         // GET: api/Musica/5
         public IHttpActionResult GetMusica(int id)
         {
-            MusicaController controller = new MusicaController();
+            BusinessLogic.Controllers.MusicaController controller = new BusinessLogic.Controllers.MusicaController();
             var musica = controller.GetMusica(id);
             if (musica == null)
             {
@@ -65,7 +65,7 @@ namespace NetRia.Controllers
             DTOBaseResponse response = new DTOBaseResponse();
             try
             {
-                MusicaController controller = new MusicaController();
+                BusinessLogic.Controllers.MusicaController controller = new BusinessLogic.Controllers.MusicaController();
                 controller.UpdateMusica(id, musica);
                 response.Success = true;
             }

@@ -222,6 +222,16 @@ const QuizMasterServices = {
                 return false;
             });
     },
+    obtenerMusica: function (id) {
+        return Axios.get(BASE_URL + "/api/Musica/GetMusica/" + id, {
+            headers: {
+                Authorization: "Token " + process.env.API_TOKEN,
+                Accept: "application/json",
+            },
+        }).then((response) => {
+            return response.data;
+        });
+    },
     getUrlImagen: function (tipo, nombre) {
         let url = BASE_URL + "/images/";
         if (tipo === "cover") url += "covers/" + nombre;

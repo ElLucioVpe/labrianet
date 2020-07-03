@@ -5,7 +5,7 @@ import { useUsuario } from "../Libraries/UserContextLib";
 import Button from "../Components/Button";
 import Grafica from "../Components/Grafica.js";
 import YouTube from "react-youtube";
-const BASE_URL = "http://localhost:44353";
+import Sound from "react-sound";
 
 export default function Juego(props) {
   const usuario = useUsuario();
@@ -22,6 +22,7 @@ export default function Juego(props) {
   const [verGrafica, setVerGrafica] = useState(false);
   const [juegoTerminado, setJuegoTerminado] = useState(false);
   const [pasar, setPasar] = useState(false);
+  const [musicaJuego, setMusicaJuego] = useState("");
 
   useEffect(() => {
     async function cargarJuego() {
@@ -44,6 +45,18 @@ export default function Juego(props) {
     }
     cargarJuego();
   }, []);
+
+  useEffect(() => {
+    //console.log("?????????");
+    async function cargarMusica() {
+      if(info_juego.Musica_idMusica) {
+        await QuizMasterService.obtenerMusica(info_juego.Musica_idMusica).then(function (data) {
+          setMusicaJuego(data.urlMusica);
+        });
+      }
+    }
+    cargarMusica()
+  }, [info_juego]);
 
   useEffect(() => {
     const timer =
@@ -256,6 +269,12 @@ export default function Juego(props) {
             Pregunta
             <span id="numPreg">{verGrafica? numeroPregunta-1 : numeroPregunta}</span>
           </p>
+          <Sound url={musicaJuego}
+                 loop={true}
+                 playStatus={Sound.status.PLAYING}
+                 autoLoad={true}
+                 volume={20}
+          />
 
           {verGrafica ? (
             <h4>{puntuacion}pts.</h4>
