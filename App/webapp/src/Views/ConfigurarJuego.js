@@ -24,6 +24,7 @@ export default function ConfigurarJuego(props) {
 
     const handleChangeMusica = ((event) => {
         //console.log(event);
+        setCancionSeleccionada(event);
         !esContext ? juego.Musica_idMusica = event.value : juego_context.setCancionSeleccionada(event.value);
     });
 

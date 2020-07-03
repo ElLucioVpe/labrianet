@@ -73,15 +73,18 @@ export default function CrearJuego() {
         //Funcion simple para que pueda ingresar en formato min:seg
         let retorno = 0;
 
-        if (_value === undefined || !isNaN(parseFloat(_value))) return retorno; //Evito errores si se publica sin hacer nada aqui
-        if (_value.includes(":")) {
-            let num1 = _value.substring(0, _value.indexOf(":"));
-            let num2 = _value.substring(_value.indexOf(":") + 1);
-            console.log(num1 + "-" + num2);
-            _value = num1 + num2;
-            if (!isNaN(parseFloat(_value)) && !isNaN(_value - 0)) retorno = (num1 * 60) + num2;
-            else retorno = 0;
-        } else retorno = _value;
+        if (_value === undefined) return retorno; //Evito errores si se publica sin hacer nada aqui
+        if (!isNaN(parseFloat(_value)) && !isNaN(_value - 0)) retorno = _value;
+        else{
+            if (_value.includes(":")) {
+                let num1 = _value.substring(0, _value.indexOf(":"));
+                let num2 = _value.substring(_value.indexOf(":") + 1);
+                console.log(num1 + "-" + num2);
+                _value = num1 + num2;
+                if (!isNaN(parseFloat(_value)) && !isNaN(_value - 0)) retorno = (num1 * 60) + num2;
+                else retorno = 0;
+            } else retorno = _value;
+        }
         return retorno;
     }
 
