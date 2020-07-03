@@ -17,6 +17,7 @@ import ResumenJuego from "./ResumenJuego";
 export default function CrearJuego() {
     const usuario = useUsuario();
     const juego = useJuego();
+    const [idJuego, setIdJuego] = useState(-1);
     const [titulo, setTitulo] = useState(juego.titulo);
     const [juegoCreado, setJuegoCreado] = useState(false);
     const [preguntas, setPreguntas] = useState(juego.preguntas);
@@ -174,9 +175,21 @@ export default function CrearJuego() {
         return value;
     });
 
+    const preguntasNoTienenRespuestaCorrecta = (() => {
+        let value = false;
+        preguntas.forEach(function (pregunta) {
+            if (pregunta.respuestaCorrecta === "") {
+                value = true;
+            }
+        });
+        return value;
+    });
+
     const publicarJuego = (async () => {
         if (preguntasTienenRespuestasInpares()) {
             alert("Existen preguntas que no tienen 2 o 4 respuestas ingresadas :(");
+        } else if (preguntasNoTienenRespuestaCorrecta()) {
+            alert("Existen preguntas que no tienen ninguna respuesta correcta :(");
         } else {
             var dataJuego = {
                 "User_loginnameUser": usuario.usuario,
@@ -218,8 +231,11 @@ export default function CrearJuego() {
             });
 
             let id = await QuizMasterService.crearJuego(dataJuego);
+            if (id >= 0) {
+                await juego.eliminarDatos();
+            }
             await setJuegoCreado(true);
-            await juego.setIdJuego(id);
+            await setIdJuego(id);
         }
     });
 
@@ -235,9 +251,8 @@ export default function CrearJuego() {
     }
 
     function render() {
-        console.log(juego.idJuego);
         return (
-            juegoCreado && juego.idJuego != null ? <ResumenJuego id={juego.idJuego}/> :
+            juegoCreado && idJuego != null && idJuego >= 0 ? <ResumenJuego id={idJuego}/> :
                 <div className="container" style={{height: '100%'}}>
                     <div className="titleHeader">
                         <input className="input-big mr-10" placeholder="Titulo" onChange={handleChange}
