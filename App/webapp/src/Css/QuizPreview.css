@@ -11,3 +11,11 @@
 .QuizPreview.mobile {
     width: calc(100% - 70px);
 }
+
+div:not(.mobile) .quiz-preview-img {
+    width: 100%;
+    height: auto;
+    max-height: 100px;
+    max-width: 200px;
+    object-fit: cover;
+}
