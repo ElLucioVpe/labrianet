@@ -39,7 +39,7 @@ export default function ResumenJuego(props) {
       <div className="resumenJuego">
         <div className="resumenJuego_Info">
           <div className="COVER-GAME">
-          <img src={juegos.coverJuego ? QuizMasterService.getUrlImagen("cover",juegos.coverJuego) : "img/gamecover.png"} alt="Mi titulo de la imagen" />
+          <img className="imagen-Juego" src={juegos.coverJuego ? QuizMasterService.getUrlImagen("cover",juegos.coverJuego) : "img/perfil.png"} alt="Mi titulo de la imagen" />
           </div>
           {
             <div>
@@ -80,9 +80,9 @@ export default function ResumenJuego(props) {
             {juegos.preguntas == null ? (
               <div>undefinifo</div>
             ) : (
-            
+
               juegos.preguntas.map((pregunta, i) => {
-                
+
                 return Pregunta(pregunta, i);
               })
             )}
@@ -117,9 +117,9 @@ export default function ResumenJuego(props) {
       var video_id = youtube_parser(url);
       //console.log("V id: "+video_id);
 
-    
+
       ayuda = (
-        <img  id="ayuda-url" 
+        <img  id="ayuda-url"
         src={"https://img.youtube.com/vi/" +video_id+"/default.jpg"}
         />
       );
@@ -134,7 +134,7 @@ export default function ResumenJuego(props) {
       );
     }
     return (
-     
+
       <div className="pregunta-container">
         <div className="pregunta_izquierda">
         <div>1 - {pregunta.tipoPregunta}</div>
@@ -145,7 +145,7 @@ export default function ResumenJuego(props) {
         <div>{pregunta.segundosPregunta} seg</div>
         </div>
       </div>
-     
+
     );
   }
   const youtube_parser = (url) => {
