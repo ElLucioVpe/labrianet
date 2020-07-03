@@ -1,9 +1,13 @@
 .quiz-preview-img {
-    width: 120px;
+    width: 100%;
     height: auto;
 }
 
 .listado {
     padding: 15px;
     border-radius: 25px;
+}
+
+.QuizPreview.mobile {
+    width: calc(100% - 70px);
 }

@@ -37,7 +37,7 @@ img.pregunta_foto {
 
 .inner-tablero {
     max-height: calc(50vh + 90px);
-    overflow: overlay;
+    overflow: auto;
 }
 
 .selected {
@@ -77,6 +77,7 @@ img.pregunta_foto {
         width: 100%;
         object-fit: cover;
     }
+
     .crearPreguntas {
         width: 100%;
         margin: auto;
@@ -85,24 +86,27 @@ img.pregunta_foto {
         grid-template-columns: 100%;
         grid-template-rows: fr 1fr;
         column-gap: 20px;
-   
+
         row-gap: 5px;
 
     }
-    .tablero{
-        grid-row-start: row-start  1;
+
+    .tablero {
+        grid-row-start: row-start 1;
     }
-    .pregunta{
-        grid-row-start: row-start  0;
+
+    .pregunta {
+        grid-row-start: row-start 0;
     }
+
     .inner-tablero {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        height: 250px;
     }
 
     .crearJuegoPreguntasContainer {
         height: 100%;
+
     }
 
     .pregunta_foto {
@@ -110,7 +114,7 @@ img.pregunta_foto {
         width: 10px;
     }
 
-    .input-titulo{
+    .input-titulo {
         width: 90%;
     }
 

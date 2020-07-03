@@ -49,11 +49,9 @@
 
     .preJuego {
         flex-direction: column;
-        height: 100%;
         padding: 20px;
-        width: 100%;
-
     }
+
     .infoGame {
         flex-direction: row;
         padding: 0px;
