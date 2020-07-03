@@ -71,7 +71,7 @@ export function JuegoProvider(props) {
         setCoverJuego,
         coverEsVideo,
         setCoverEsVideo
-    ])
+    ]);
 
     return <JuegoContext.Provider value={value} {...props}/>
 }

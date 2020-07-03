@@ -75,7 +75,7 @@ export default function CrearJuego() {
 
         if (_value === undefined) return retorno; //Evito errores si se publica sin hacer nada aqui
         if (!isNaN(parseFloat(_value)) && !isNaN(_value - 0)) retorno = _value;
-        else{
+        else {
             if (_value.includes(":")) {
                 let num1 = _value.substring(0, _value.indexOf(":"));
                 let num2 = _value.substring(_value.indexOf(":") + 1);
@@ -197,6 +197,7 @@ export default function CrearJuego() {
             });
         });
         let id = await QuizMasterService.crearJuego(dataJuego);
+        console.log("ee ee " + id);
         await setJuegoCreado(true);
         await juego.setIdJuego(id);
     });
@@ -213,63 +214,65 @@ export default function CrearJuego() {
     }
 
     function render() {
+        console.log(juego.idJuego);
         return (
-            juegoCreado ? <ResumenJuego id={juego.idJuego}/> : <div className="container" style={{height: '100%'}}>
-                <div className="titleHeader">
-                    <input className="input-big mr-10" placeholder="Titulo" onChange={handleChange}
-                           value={titulo}/>
-                    <Button class="item" to="/configurarJuego" value="Configurar" size="regular"/>
-                </div>
-                <div className="crearPreguntas">
-                    <div className="tablero card">
-                        <div>
-                            <h2>Tablero</h2>
-                        </div>
-                        <div className="inner-tablero">
-                            {preguntas.map((pregunta, i) => <CrearJuegoPreguntas
-                                key={i} id={i} className={preguntaSeleccionada === i ? 'selected' : ''}
-                                onClick={(e) => cambiarPregunta(i, e)}
-                                eliminarPregunta={eliminarPregunta}
-                                mostrarCerrar={preguntas.length > 1} {...pregunta}/>)}
-                        </div>
-                        <div>
-                            <button className="mt-10 btn-regular"
-                                    onClick={crearPregunta}>Nueva
-                            </button>
-                        </div>
+            juegoCreado && juego.idJuego != null ? <ResumenJuego id={juego.idJuego}/> :
+                <div className="container" style={{height: '100%'}}>
+                    <div className="titleHeader">
+                        <input className="input-big mr-10" placeholder="Titulo" onChange={handleChange}
+                               value={titulo}/>
+                        <Button class="item" to="/configurarJuego" value="Configurar" size="regular"/>
                     </div>
-                    <CrearPreguntas
-                        cambiarTitulo={cambiarTitulo}
-                        cambiarPregunta={cambiarPregunta}
-                        cambiarPuntaje={cambiarPuntaje}
-                        cambiarSegundos={cambiarSegundos}
-                        cambiarStartAyuda={cambiarStartAyuda}
-                        cambiarEndAyuda={cambiarEndAyuda}
-                        configurarRespuesta={setConfigurandoRespuesta}
-                        abrirSubirImagenVideo={abrirModalSubirImagenVideo}
-                        subirImagen={subirImagen}
-                        posicionPregunta={preguntaSeleccionada}
+                    <div className="crearPreguntas">
+                        <div className="tablero card">
+                            <div>
+                                <h2>Tablero</h2>
+                            </div>
+                            <div className="inner-tablero">
+                                {preguntas.map((pregunta, i) => <CrearJuegoPreguntas
+                                    key={i} id={i} className={preguntaSeleccionada === i ? 'selected' : ''}
+                                    onClick={(e) => cambiarPregunta(i, e)}
+                                    eliminarPregunta={eliminarPregunta}
+                                    mostrarCerrar={preguntas.length > 1} {...pregunta}/>)}
+                            </div>
+                            <div>
+                                <button className="mt-10 btn-regular"
+                                        onClick={crearPregunta}>Nueva
+                                </button>
+                            </div>
+                        </div>
+                        <CrearPreguntas
+                            cambiarTitulo={cambiarTitulo}
+                            cambiarPregunta={cambiarPregunta}
+                            cambiarPuntaje={cambiarPuntaje}
+                            cambiarSegundos={cambiarSegundos}
+                            cambiarStartAyuda={cambiarStartAyuda}
+                            cambiarEndAyuda={cambiarEndAyuda}
+                            configurarRespuesta={setConfigurandoRespuesta}
+                            abrirSubirImagenVideo={abrirModalSubirImagenVideo}
+                            subirImagen={subirImagen}
+                            posicionPregunta={preguntaSeleccionada}
 
-                        {...preguntas[preguntaSeleccionada]}/>
+                            {...preguntas[preguntaSeleccionada]}/>
+                    </div>
+                    <div className="flex justify-content-end mt-20">
+                        <Button className="item" size="regular" status="confirm" value="Publicar"
+                                onClick={handleClickPublicarJuego}/>
+                    </div>
+                    {configurandoRespuesta === null ? '' :
+                        <ConfigurarRespuesta cerrarModal={cerrarModalConfigurarRespuesta}
+                                             cambiarRespuesta={cambiarRespuesta}
+                                             cambiarRespuestaCorrecta={cambiarRespuestaCorrecta}
+                                             respuesta={preguntas[preguntaSeleccionada].respuestas[preguntas[preguntaSeleccionada].configurarRespuesta]}
+                                             esCorrecta={preguntas[preguntaSeleccionada].respuestaCorrecta === configurandoRespuesta}
+                        />}
+                    {mostrarSubirImagen === null ? '' :
+                        <SubirImagenVideo cerrarModal={cerrarModalSubirImagenVideo}
+                                          cambiarImagen={cambiarImgUrl}
+                                          cambiarYouTubeUrl={cambiarYouTubeUrl}
+                                          respuesta={preguntas[preguntaSeleccionada].respuestas[preguntas[preguntaSeleccionada].mostrarSubirImagen]}
+                        />}
                 </div>
-                <div className="flex justify-content-end mt-20">
-                    <Button className="item" size="regular" status="confirm" value="Publicar"
-                            onClick={handleClickPublicarJuego}/>
-                </div>
-                {configurandoRespuesta === null ? '' :
-                    <ConfigurarRespuesta cerrarModal={cerrarModalConfigurarRespuesta}
-                                         cambiarRespuesta={cambiarRespuesta}
-                                         cambiarRespuestaCorrecta={cambiarRespuestaCorrecta}
-                                         respuesta={preguntas[preguntaSeleccionada].respuestas[preguntas[preguntaSeleccionada].configurarRespuesta]}
-                                         esCorrecta={preguntas[preguntaSeleccionada].respuestaCorrecta === configurandoRespuesta}
-                    />}
-                {mostrarSubirImagen === null ? '' :
-                    <SubirImagenVideo cerrarModal={cerrarModalSubirImagenVideo}
-                                      cambiarImagen={cambiarImgUrl}
-                                      cambiarYouTubeUrl={cambiarYouTubeUrl}
-                                      respuesta={preguntas[preguntaSeleccionada].respuestas[preguntas[preguntaSeleccionada].mostrarSubirImagen]}
-                    />}
-            </div>
         )
     }
 
