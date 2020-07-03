@@ -128,7 +128,7 @@ export default function ResumenJuego(props) {
       ayuda = (
         <img
           id="ayuda-url"
-          src={pregunta.urlAyudaPregunta ? QuizMasterService.getUrlImagen("ayuda", pregunta.urlAyudaPregunta) : 'img/perfil.png'}
+          src={pregunta.urlAyudaPregunta ? QuizMasterService.getUrlImagen("ayuda", pregunta.urlAyudaPregunta) : 'img/gamecover.png'}
           height="90px" width="120px"
         />
       );
