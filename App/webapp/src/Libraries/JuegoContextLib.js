@@ -23,6 +23,28 @@ export function JuegoProvider(props) {
         respuestas: [null, null, null, null]
     }]);
 
+    const eliminarDatos = () => {
+        setIdJuego(null);
+        setJuegoTemp(null);
+        setDescripcion(null);
+        setPassword(null);
+        setTitulo(null);
+        setIdMusica(null);
+        setCoverJuego(null);
+        setCoverEsVideo(null);
+        setEsPrivadoJuego(null);
+        setCancionSeleccionada(null);
+        setPreguntas([{
+            titulo: null,
+            segundos: null,
+            puntaje: null,
+            imgUrl: null,
+            activo: false,
+            respuestaCorrecta: null,
+            respuestas: [null, null, null, null]
+        }]);
+    }
+
     const value = useMemo(() => {
         return ({
             idJuego,
@@ -46,7 +68,8 @@ export function JuegoProvider(props) {
             coverJuego,
             setCoverJuego,
             coverEsVideo,
-            setCoverEsVideo
+            setCoverEsVideo,
+            eliminarDatos
         })
     }, [
         idJuego,
