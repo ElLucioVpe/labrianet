@@ -157,49 +157,70 @@ export default function CrearJuego() {
         setMostrarSubirImagen(null);
     });
 
-    const publicarJuego = (async () => {
-        var dataJuego = {
-            "User_loginnameUser": usuario.usuario,
-            "tituloJuego": (juego.titulo || "Titulo"),
-            "descripcionJuego": "sample string 4",
-            "activadoJuego": 1,
-            "coverJuego": juego.coverJuego != null ? juego.coverJuego.substring(22) : "",
-            "Musica_idMusica": juego.idMusica != null ? juego.idMusica : "1",
-            "esPrivadoJuego": juego.esPrivadoJuego === true ? 0 : 1,
-            "accessToken": usuario.accessToken,
-            "password": juego.password,
-            "preguntas": []
-        };
-        let xd;
-        preguntas.forEach(xd = async function (item, i) {
-            let respuestas = [];
-            let respuestasSinSetear = 0;
-            let respuestaCorrecta = item.respuestaCorrecta;
-            await item.respuestas.forEach(function (item, i) {
-                if (item != null && item !== "") {
-                    respuestas.push({
-                        "esCorrectoRespuesta": respuestaCorrecta === i ? 1 : 0,
-                        "contenidoRespuesta": item != null ? item : "Respuesta"
-                    });
-                } else {
-                    respuestasSinSetear++;
+    const preguntasTienenRespuestasInpares = (() => {
+        let i = 0;
+        let value = false;
+        preguntas.forEach(function (pregunta) {
+            i = 0;
+            pregunta.respuestas.forEach(function (respuesta) {
+                if (respuesta === null) {
+                    i++
                 }
             });
-            await dataJuego.preguntas.push({
-                "segundosPregunta": item.segundos != null ? item.segundos : 40,
-                "puntosPregunta": item.puntaje != null ? item.puntaje : 100,
-                "contenidoPregunta": item.titulo != null ? item.titulo : "Pregunta",
-                "tipoPregunta": respuestasSinSetear === 2 ? "True/False" : "Quiz",
-                "urlAyudaPregunta": item.imgUrl != null ? item.imgUrl.substring(22) : "",
-                "startAyuda": convertirAyuda(item.startAyuda),
-                "endAyuda": convertirAyuda(item.endAyuda),
-                "respuestas": respuestas
-            });
+            if (i % 2 !== 0 || i === 4) {
+                value = true;
+            }
         });
-        let id = await QuizMasterService.crearJuego(dataJuego);
-        console.log("ee ee " + id);
-        await setJuegoCreado(true);
-        await juego.setIdJuego(id);
+        return value;
+    });
+
+    const publicarJuego = (async () => {
+        if (preguntasTienenRespuestasInpares()) {
+            alert("Existen preguntas que no tienen 2 o 4 respuestas ingresadas :(");
+        } else {
+            var dataJuego = {
+                "User_loginnameUser": usuario.usuario,
+                "tituloJuego": (juego.titulo || "Titulo"),
+                "descripcionJuego": (juego.descripcion || "Titulo"),
+                "activadoJuego": 1,
+                "coverJuego": juego.coverJuego != null ? juego.coverJuego.substring(22) : "",
+                "Musica_idMusica": juego.idMusica != null ? juego.idMusica : "1",
+                "esPrivadoJuego": juego.esPrivadoJuego === true ? 0 : 1,
+                "accessToken": usuario.accessToken,
+                "password": juego.password,
+                "preguntas": []
+            };
+            let xd;
+            preguntas.forEach(xd = async function (item, i) {
+                let respuestas = [];
+                let respuestasSinSetear = 0;
+                let respuestaCorrecta = item.respuestaCorrecta;
+                await item.respuestas.forEach(function (item, i) {
+                    if (item != null && item !== "") {
+                        respuestas.push({
+                            "esCorrectoRespuesta": respuestaCorrecta === i ? 1 : 0,
+                            "contenidoRespuesta": item != null ? item : "Respuesta"
+                        });
+                    } else {
+                        respuestasSinSetear++;
+                    }
+                });
+                await dataJuego.preguntas.push({
+                    "segundosPregunta": item.segundos != null ? item.segundos : 40,
+                    "puntosPregunta": item.puntaje != null ? item.puntaje : 100,
+                    "contenidoPregunta": item.titulo != null ? item.titulo : "Pregunta",
+                    "tipoPregunta": respuestasSinSetear === 2 ? "True/False" : "Quiz",
+                    "urlAyudaPregunta": item.imgUrl != null ? item.imgUrl.substring(22) : "",
+                    "startAyuda": convertirAyuda(item.startAyuda),
+                    "endAyuda": convertirAyuda(item.endAyuda),
+                    "respuestas": respuestas
+                });
+            });
+
+            let id = await QuizMasterService.crearJuego(dataJuego);
+            await setJuegoCreado(true);
+            await juego.setIdJuego(id);
+        }
     });
 
     function uploadFile(event) {
