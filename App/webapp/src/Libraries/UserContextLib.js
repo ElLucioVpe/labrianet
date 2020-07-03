@@ -57,8 +57,8 @@ export function UsuarioProvider(props) {
                 }
             }
         ).then(function (response) {
-            setNickname(response.data.nickUser);
             setFechaUser(response.data.fechaUser);
+            setNickname(response.data.nickUser);
             return true;
         }).catch(function (error) {
             // handle error
@@ -129,7 +129,7 @@ export function UsuarioProvider(props) {
             login,
             logout
         })
-    }, [usuario, cargandoUsuario, inicioSesion, accessToken]);
+    }, [usuario, cargandoUsuario, inicioSesion, accessToken, nickname]);
 
     return <UserContext.Provider value={value} {...props}/>
 }

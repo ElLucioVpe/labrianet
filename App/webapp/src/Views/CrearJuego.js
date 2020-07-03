@@ -165,7 +165,7 @@ export default function CrearJuego() {
             "activadoJuego": 1,
             "coverJuego": juego.coverJuego != null ? juego.coverJuego : "",
             "Musica_idMusica": juego.idMusica != null ? juego.idMusica : "1",
-            "esPrivadoJuego": juego.esPrivadoJuego === true ? 0 : 1,
+            "esPrivadoJuego": juego.esPrivadoJuego === true ? 1 : 0,
             "accessToken": usuario.accessToken,
             "password": juego.password,
             "preguntas": []

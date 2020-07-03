@@ -37,7 +37,7 @@ img.pregunta_foto {
 
 .inner-tablero {
     max-height: calc(50vh + 90px);
-    overflow: overlay;
+    overflow: auto;
 }
 
 .selected {
@@ -83,7 +83,7 @@ img.pregunta_foto {
         grid-template-columns: 100%;
         grid-template-rows: 450px 1fr;
         column-gap: 20px;
-   
+
         row-gap: 5px;
 
     }
@@ -101,6 +101,7 @@ img.pregunta_foto {
 
     .crearJuegoPreguntasContainer {
         height: 100%;
+
     }
 
     .pregunta_foto {
@@ -116,4 +117,5 @@ img.pregunta_foto {
         display: inline;
         width: 100%;
     }
+
 }
