@@ -4,6 +4,7 @@ import QuizMasterService from "../Libraries/QuizMasterServices";
 
 import "../Css/ResumenJuego.css";
 import Enlace from "./Enlace";
+import {useJuego} from "../Libraries/JuegoContextLib";
 //const BASE_URL = "http://localhost:44353";
 export default function ResumenJuego(props) {
 
@@ -13,7 +14,7 @@ export default function ResumenJuego(props) {
 
   useEffect(() => {
     async function doIt() {
-      console.log(props.id+"-----------");
+      //console.log(props.id+"-----------");
       if(props.id === null ||props.id === -1 || props.id === false ||props.id === -1 || props.id === false) set_irAenlace(true); //Lo manda a mostrarle el error en enlace
 
       let data_juegos = await QuizMasterService.obtenerJuego({
@@ -24,7 +25,6 @@ export default function ResumenJuego(props) {
       });
       await set_jugadores(data_jugadores);
       await set_juegos(data_juegos);
-
     }
     doIt();
   }, []);
@@ -39,7 +39,7 @@ export default function ResumenJuego(props) {
       <div className="resumenJuego">
         <div className="resumenJuego_Info">
           <div className="COVER-GAME">
-          <img src={juegos.coverJuego ? QuizMasterService.getUrlImagen("cover",juegos.coverJuego) : "img/perfil.png"} alt="Mi titulo de la imagen" />
+          <img src={juegos.coverJuego ? QuizMasterService.getUrlImagen("cover",juegos.coverJuego) : "img/gamecover.png"} alt="Mi titulo de la imagen" />
           </div>
           {
             <div>
@@ -62,7 +62,7 @@ export default function ResumenJuego(props) {
             </div>
           }
           <div id="GAME PLAY">
-            <Button class="item" to="/jugar" value="Jugar" size="large" />
+            <Button class="item" onClick={onClickJugar} value="Jugar" size="large" />
           </div>
         </div>
         <div className="resumenJuego_Preguntas">

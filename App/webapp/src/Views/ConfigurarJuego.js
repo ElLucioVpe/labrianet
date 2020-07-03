@@ -32,7 +32,7 @@ export default function ConfigurarJuego(props) {
         setCanciones([{value: "null", label: "Musica del juego"}]);
 
         async function doIt() {
-            if ((props.match != null) && (juego_context.idJuego == null)) {
+            if ((props.match != null) ) {
                 let data = await QuizMasterService.obtenerJuego({id: props.match.params.id});
 
                 await setJuego(data);

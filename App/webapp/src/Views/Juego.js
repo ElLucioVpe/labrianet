@@ -241,7 +241,7 @@ export default function Juego(props) {
             id="ayuda-url"
             src={preguntaActual.urlAyudaPregunta?
                 QuizMasterService.getUrlImagen("ayuda", preguntaActual.urlAyudaPregunta):
-                "img/perfil.png"}
+                "img/gamecover.png"}
             height={200}
           />
         );
