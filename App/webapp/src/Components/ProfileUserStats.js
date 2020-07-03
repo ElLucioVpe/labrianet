@@ -15,7 +15,7 @@ export const ProfileUserStats = (props) => {
                 <tr>
                     <th>Nombre</th>
                     <th>Descripción</th>
-                    <th>Pregunta</th>
+                    <th>Preguntas</th>
                     <th>Jugados</th>
                     <th>Creado</th>
                     <th>Acciones</th>

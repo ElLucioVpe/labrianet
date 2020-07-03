@@ -78,37 +78,68 @@
         grid-column-start: 2;
         grid-column-end: 1;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: flex-start;
         align-items: center;
 
     }
     .usernameSection h1 {
         font-size: larger;
-        
-    }
-
-    .profile-user-stats-table {
-        width: 100%;
-        padding: 0%;
     }
 
     .profile-user-stats table {
-        border-collapse: collapse;
-        border-spacing: 0;
-        empty-cells: show;
-        border: 1px solid var(--main1);
-        border-radius: 0px;
-        padding: 0%;
+        width: 100%;
+        border: 0;
     }
 
-    .profile-user-stats tr {
-        padding: 0%;
+    .profile-user-stats table caption {
+        font-size: 1.3em;
     }
 
-    .profile-user-stats td {
-        padding: 0%;
+    .profile-user-stats table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;}
+
+    .profile-user-stats table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
     }
+
+    .profile-user-stats table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+    }
+    .profile-user-stats table td::before {
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .profile-user-stats table td:last-child {
+        border-bottom: 0;
+    }
+
+    .profile-user-stats .item {
+        margin: auto;
+        align-self: center;
+    }
+
+    /*Nombres de labels por columna*/
+    .profile-user-stats td:nth-of-type(1):before { content: "Nombre"; }
+    .profile-user-stats td:nth-of-type(2):before { content: "Descripción"; }
+    .profile-user-stats td:nth-of-type(3):before { content: "Preguntas"; }
+    .profile-user-stats td:nth-of-type(4):before { content: "Jugados"; }
+    .profile-user-stats td:nth-of-type(5):before { content: "Creado"; }
+    /*td:nth-of-type(6):before { content: "Acciones"; } no queda muy bien este*/
 }
 
 .dark-mode .profile-user-stats tr:nth-child(2n) td {
