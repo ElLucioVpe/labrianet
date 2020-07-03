@@ -9,12 +9,21 @@ export default function PreJuego(props){
     const usuario = useUsuario();
     const [info_juego, setInfo_juego] = useState([]);
     const [nickname, setNickname] = useState("Anonimo");
+    const [password, setPassword] = useState("");
     const [counter, setCounter] = useState(-1);
     const [counterPausa, setCounterPausa] = useState(true);
     const BASE_URL = "http://localhost:44353";
 
     const iniciarJuego = (() => {
-        setCounterPausa(false);
+        if(info_juego.password){
+            if(password===info_juego.password){
+                setCounterPausa(false);
+            }else{
+                alert("Contraseña Incorrecta");
+            }
+        }else{
+            setCounterPausa(false);
+        }
     });
 
     const countdown = (async() => {
@@ -38,7 +47,7 @@ export default function PreJuego(props){
                     setInfo_juego(data);
                 }
             ).catch(function (error) {
-                //window.location = "/";
+                window.location = "/";
             });
         }
         cargarJuego()
@@ -52,6 +61,11 @@ export default function PreJuego(props){
         function handleChange (event) {
             console.log(event.target.value);
             setNickname(event.target.value);
+        }
+
+        function handleChangePassword (event) {
+            console.log(event.target.value);
+            setPassword(event.target.value);
         }
 
         return (
@@ -71,13 +85,17 @@ export default function PreJuego(props){
                                 {info_juego.coverJuego ? (
                                     <img src={QuizMasterService.getUrlImagen("cover", info_juego.coverJuego)} height={200} width={300}/>
                                 ) : (
-                                    <img src={"img/perfil.png"} height={200}/>
+                                    <img src={"img/gamecover.png"} height={200}/>
                                 )}
                             </div>
                         </div>
                         <div id="preJuego-nickname" className="preJuego-nickname">
                             <label for="input-nick">Nickname:</label>
                             <Input id="input-nick" type="text" onChange={ handleChange }/>
+                        </div>
+                        <div id="preJuego-password" className="preJuego-nickname">
+                            <label htmlFor="input-password">Password:</label>
+                            <Input id="input-password" type="password" onChange={handleChangePassword}/>
                         </div>
                         <div id="preJuego-btn">
                             <button className="preJuego-btn" onClick={() => iniciarJuego()} value="Iniciar">Iniciar</button>
