@@ -26,7 +26,7 @@ export default function Profile() {
         }).then(() => {
             setActualizar(!actualizar);
         });
-    };
+    });
 
     useEffect(() => {
         doIt();
