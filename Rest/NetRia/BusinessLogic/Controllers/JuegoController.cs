@@ -239,10 +239,6 @@ namespace BusinessLogic.Controllers
 
                     if (juego.esPrivadoJuego != null){
                         entity.esPrivadoJuego = juego.esPrivadoJuego;
-                        //Si el Game es publico no tiene Pass
-                        if (juego.esPrivadoJuego == 0) {
-                            entity.password = null;
-                        }
                     }
                     if (juego.coverJuego != null) {
                         entity.coverJuego = juego.coverJuego;

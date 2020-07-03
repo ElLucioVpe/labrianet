@@ -130,3 +130,10 @@ button.aceptar {
 .copy-svg img {
     width: 25px;
 }
+
+@media screen and (max-width: 1000px) {
+    .enlace-input {
+        width: 90%;
+        font-size: small;
+    }
+}

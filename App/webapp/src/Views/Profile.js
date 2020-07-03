@@ -15,17 +15,17 @@ export default function Profile() {
   const [jugados, setJugados] = useState([]);
   const [actualizar, setActualizar] = useState(false);
 
-  const desactivarJuego = async (accion, pos) => {
-    var game = juegos[pos];
-    if (accion === "Desactivar") game.activadoJuego = 0;
-    else game.activadoJuego = 1;
-    console.log(game);
-    await QuizMasterService.updateJuego({
-      juego: game,
-      accessToken: usuario.accessToken,
-    }).then((res) => {
-      console.log(res);
-      setActualizar(!actualizar);
+    const desactivarJuego = (async (accion, pos) => {
+        var game = juegos[pos];
+        if(accion === "Desactivar") game.activadoJuego = 0;
+        else game.activadoJuego = 1;
+        //console.log(game);
+        await QuizMasterService.updateJuego({
+            juego: game,
+            accessToken: usuario.accessToken
+        }).then(() => {
+            setActualizar(!actualizar);
+        });
     });
   };
 

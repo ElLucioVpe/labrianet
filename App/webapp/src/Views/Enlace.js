@@ -18,7 +18,7 @@ export default function Enlace(props) {
     function render() {
         return (
             <div class="menu2 container card">
-                {!(props.id === -1 || props.id === false) ? (
+                {!(props.id === undefined ||props.id === -1 || props.id === false) ? (
                     <div className="text-align-center">
                         <h1>¡Tu juego ya está publicado!</h1>
                         <span>Invita a tus amigos a jugarlo</span>
@@ -34,11 +34,10 @@ export default function Enlace(props) {
                     </div>
                 )}
                 <div className="LinkInput w-50 mt-20 relative">
-                    <input id="game-url" className="input-big mr-10" placeholder="Titulo" readOnly={true}
+                    <input id="game-url" className="input-big mr-10 enlace-input" placeholder="Titulo" readOnly={true}
                            value={"http://localhost/juego/" + props.id}/>
                     <div className="copy-svg flex justify-content-center absolute" onClick={sendToClipboard}>
-                        <img
-                            src="/views/crear/copy.svg"/>
+                        <img src="/views/crear/copy.svg"/>
                     </div>
                 </div>
                 <div>

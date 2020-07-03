@@ -17,12 +17,14 @@ export default function ConfigurarJuego(props) {
     const inputFile = useRef(null);
     const [mostrarSubirImagen, setMostrarSubirImagen] = useState(null);
     const [cancionSeleccionada, setCancionSeleccionada] = useState(0);
+    const [privacidad, setPrivacidad] = useState(0);
 
     const usuario = useUsuario();
     const juego_context = useJuego();
 
     const handleChangeMusica = ((event) => {
         //console.log(event);
+        setCancionSeleccionada(event);
         !esContext ? juego.Musica_idMusica = event.value : juego_context.setCancionSeleccionada(event.value);
     });
 
@@ -34,8 +36,11 @@ export default function ConfigurarJuego(props) {
                 let data = await QuizMasterService.obtenerJuego({id: props.match.params.id});
 
                 await setJuego(data);
+                //console.log(data);
+                setPrivacidad(data.esPrivadoJuego);
                 setEsContext(false);
             } else if (juego_context.idJuego != null) {
+                setPrivacidad(juego_context.esPrivadoJuego);
                 setEsContext(true);
             }
 
@@ -63,17 +68,10 @@ export default function ConfigurarJuego(props) {
         !esContext ? juego.tituloJuego = event.target.value : juego_context.setTitulo(event.target.value);
     });
 
-    /*const cambiarImagen = ((_value) => {
-        juego.set(_value);
-    });*/
-
     const cambiarPrivacidad = ((event) => {
         !esContext ? juego.esPrivadoJuego = event.target.checked : juego_context.setEsPrivadoJuego(event.target.checked);
+        setPrivacidad(event.target.checked);
     });
-
-    /*const cambiarMusica = ((_value) => {
-        juego.set(_value);
-    });*/
 
     const cambiarPassword = ((event) => {
         !esContext ? juego.password = event.target.value : juego_context.setPassword(event.target.value);
@@ -144,7 +142,10 @@ export default function ConfigurarJuego(props) {
         if (juego.esPrivadoJuego === true) juego.esPrivadoJuego = 1;
         else if (juego.esPrivadoJuego === false) juego.esPrivadoJuego = 0;
 
-        await QuizMasterService.updateJuego({juego: juego, accessToken: usuario.accessToken});
+        await QuizMasterService.updateJuego({juego: juego, accessToken: usuario.accessToken}).then(() =>
+        {
+            alert("El juego fue actualizado");
+        });
     });
 
     function render() {
@@ -181,9 +182,9 @@ export default function ConfigurarJuego(props) {
 
                             <ul>
                                 <li>
-                                    <input onChange={cambiarPrivacidad} type="checkbox"
-                                           defaultChecked={!esContext ? juego.esPrivadoJuego : juego_context.esPrivadoJuego}
-                                    /> <label>Es privado</label>
+                                    <input name="privacidad" onChange={cambiarPrivacidad} type="checkbox"
+                                               checked={privacidad}/>
+                                    <label for="privacidad" >Es privado</label>
                                 </li>
                             </ul>
                             <p>
