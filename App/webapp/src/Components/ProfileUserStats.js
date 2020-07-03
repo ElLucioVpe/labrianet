@@ -28,7 +28,7 @@ export const ProfileUserStats = (props) => {
                         <td>{game.descripcionJuego}</td>
                         <td>{game.preguntas.length}</td>
                         <td>{props.jugados.length > 0 ? props.jugados[i].Jugados : ''}</td>
-                        <td>{game.fechaJuego}</td>
+                        <td>{game.fechaJuego && game.fechaJuego.replace("T", " ")}</td>
                         <td><Button class="item" to={"/configurarJuego/" + game.idJuego} value="Editar"
                                     size="regular"/>
                             <Button id={i} class="item"
