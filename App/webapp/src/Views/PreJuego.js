@@ -93,10 +93,12 @@ export default function PreJuego(props){
                             <label for="input-nick">Nickname:</label>
                             <Input id="input-nick" type="text" onChange={ handleChange }/>
                         </div>
+                        {info_juego.password &&
                         <div id="preJuego-password" className="preJuego-nickname">
                             <label htmlFor="input-password">Password:</label>
                             <Input id="input-password" type="password" onChange={handleChangePassword}/>
                         </div>
+                        }
                         <div id="preJuego-btn">
                             <button className="preJuego-btn" onClick={() => iniciarJuego()} value="Iniciar">Iniciar</button>
                         </div>
