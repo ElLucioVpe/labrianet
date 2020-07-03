@@ -240,7 +240,7 @@ export default function CrearJuego() {
                 tituloJuego: juego.titulo || "Titulo",
                 descripcionJuego: juego.descripcion || "",
                 activadoJuego: 1,
-                coverJuego: juego.coverJuego != null ? (juego.coverJuego.substring(0, 8) === "https://" ? juego.coverJuego : juego.coverJuego.substring(22)) : "",
+                coverJuego: juego.coverJuego != null ? (juego.coverJuego.substring(0,8) === "https://" ? juego.coverJuego : juego.coverJuego.substring(juego.coverJuego.indexOf(',',0)+1)) : "",
                 Musica_idMusica: juego.idMusica != null ? juego.idMusica : "1",
                 esPrivadoJuego: juego.esPrivadoJuego === true ? 1 : 0,
                 accessToken: usuario.accessToken,
@@ -248,8 +248,7 @@ export default function CrearJuego() {
                 preguntas: [],
             };
             let xd;
-            preguntas.forEach(
-                (xd = async function (item, i) {
+            preguntas.forEach((xd = async function (item, i) {
                     let respuestas = [];
                     let respuestasSinSetear = 0;
                     let respuestaCorrecta = item.respuestaCorrecta;
@@ -268,7 +267,7 @@ export default function CrearJuego() {
                         puntosPregunta: item.puntaje != null ? item.puntaje : 100,
                         contenidoPregunta: item.titulo != null ? item.titulo : "Pregunta",
                         tipoPregunta: respuestasSinSetear === 2 ? "True/False" : "Quiz",
-                        urlAyudaPregunta: item.imgUrl != null ? (item.imgUrl.substring(0, 8) === "https://" ? item.imgUrl : item.imgUrl.substring(22)) : "",
+                        urlAyudaPregunta: item.imgUrl != null ? (item.imgUrl.substring(0,8) === "https://" ? item.imgUrl : item.imgUrl.substring(item.imgUrl.indexOf(',',0)+1)) : "",
                         startAyuda: convertirAyuda(item.startAyuda),
                         endAyuda: convertirAyuda(item.endAyuda),
                         respuestas: respuestas,
@@ -276,10 +275,11 @@ export default function CrearJuego() {
                 })
             );
 
+            console.log(dataJuego);
             let id = await QuizMasterService.crearJuego(dataJuego);
             if (id >= 0) {
                 await juego.eliminarDatos();
-            }
+            }console.log("gg");
             await setJuegoCreado(true);
             await juego.setIdJuego(id);
             await setIdJuego(id);
