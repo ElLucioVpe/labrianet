@@ -39,7 +39,7 @@ export default function ResumenJuego(props) {
       <div className="resumenJuego">
         <div className="resumenJuego_Info">
           <div className="COVER-GAME">
-          <img src={juegos.coverJuego ? QuizMasterService.getUrlImagen("cover",juegos.coverJuego) : "img/perfil.png"} alt="Mi titulo de la imagen" />
+          <img className="imagen-Juego" src={juegos.coverJuego ? QuizMasterService.getUrlImagen("cover",juegos.coverJuego) : "img/perfil.png"} alt="Mi titulo de la imagen" />
           </div>
           {
             <div>
