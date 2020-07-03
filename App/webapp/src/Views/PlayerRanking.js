@@ -49,7 +49,7 @@ export default function PlayerRanking(props) {
                             <table cellpadding="0">
 
                                 {rankings.map((ranking, index) => {
-                                    return <Ranking ranking={ranking}/>;
+                                    return Ranking(ranking);
                                 })}
                             </table>
                         </div>
