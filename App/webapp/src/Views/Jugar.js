@@ -62,7 +62,7 @@ export default function Jugar() {
                     <p>Si tienes un código para unirte a un juego, escríbelo aqui:</p>
                     <div className="relative ml-10">
                         <img className="invite-key" src="/views/jugar/key.webp" alt/>
-                        <Input className="invite-input" onKeyDown={handleEnlace} type="text" placeholder="www.gamequiz.com/juego/1" size="big"/>
+                        <Input classList="invite-input" onKeyDown={handleEnlace} type="text" placeholder="www.gamequiz.com/juego/1" size="big"/>
                     </div>
                 </div>
                 <div className="card mt-10">
