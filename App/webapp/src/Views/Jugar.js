@@ -23,6 +23,14 @@ export default function Jugar() {
         setbusqueda(event.target.value);
     });
 
+    const handleEnlace = ((event) => {
+        if(event.key === 'Enter') {
+            let url = event.target.value;
+            if(url.includes("/juego/")) window.location = url;
+            else alert("El formato del enlace es incorrecto");
+        }
+    });
+
     useEffect(() => {
         async function doIt() {
             let data_juegos = await QuizMasterService.obtenerJuegos();
@@ -54,7 +62,7 @@ export default function Jugar() {
                     <p>Si tienes un código para unirte a un juego, escríbelo aqui:</p>
                     <div className="relative ml-10">
                         <img className="invite-key" src="/views/jugar/key.webp" alt/>
-                        <Input classList="invite-input" placeholder="QM-XXX-XXX" size="big" />
+                        <Input classList="invite-input" onKeyDown={handleEnlace} type="text" placeholder="www.gamequiz.com/juego/1" size="big"/>
                     </div>
                 </div>
                 <div className="card mt-10">
