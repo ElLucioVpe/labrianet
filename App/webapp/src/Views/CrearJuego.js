@@ -203,50 +203,6 @@ export default function CrearJuego() {
     setMostrarSubirImagen(null);
   };
 
-    const publicarJuego = (async () => {
-        var dataJuego = {
-            "User_loginnameUser": usuario.usuario,
-            "tituloJuego": (juego.titulo || "Titulo"),
-            "descripcionJuego": (juego.descripcion || ""),
-            "activadoJuego": 1,
-            "coverJuego": juego.coverJuego != null ? juego.coverJuego : "",
-            "Musica_idMusica": juego.idMusica != null ? juego.idMusica : "1",
-            "esPrivadoJuego": juego.esPrivadoJuego === true ? 1 : 0,
-            "accessToken": usuario.accessToken,
-            "password": juego.password,
-            "preguntas": []
-        };
-        let xd;
-        preguntas.forEach(xd = async function (item, i) {
-            let respuestas = [];
-            let respuestasSinSetear = 0;
-            let respuestaCorrecta = item.respuestaCorrecta;
-            await item.respuestas.forEach(function (item, i) {
-                if (item != null && item !== "") {
-                    respuestas.push({
-                        "esCorrectoRespuesta": respuestaCorrecta === i ? 1 : 0,
-                        "contenidoRespuesta": item != null ? item : "Respuesta"
-                    });
-                } else {
-                    respuestasSinSetear++;
-                }
-            });
-            await dataJuego.preguntas.push({
-                "segundosPregunta": item.segundos != null ? item.segundos : 40,
-                "puntosPregunta": item.puntaje != null ? item.puntaje : 100,
-                "contenidoPregunta": item.titulo != null ? item.titulo : "Pregunta",
-                "tipoPregunta": respuestasSinSetear === 2 ? "True/False" : "Quiz",
-                "urlAyudaPregunta": item.imgUrl != null ? item.imgUrl : "",
-                "startAyuda": convertirAyuda(item.startAyuda),
-                "endAyuda": convertirAyuda(item.endAyuda),
-                "respuestas": respuestas
-            });
-        });
-        console.log(dataJuego);
-        let id = await QuizMasterService.crearJuego(dataJuego);
-        //console.log("ee ee " + id);
-        await setJuegoCreado(true);
-        await juego.setIdJuego(id);
   const preguntasTienenRespuestasInpares = () => {
     let i = 0;
     let value = false;
@@ -286,7 +242,7 @@ export default function CrearJuego() {
         activadoJuego: 1,
         coverJuego: juego.coverJuego != null ? juego.coverJuego : "",
         Musica_idMusica: juego.idMusica != null ? juego.idMusica : "1",
-        esPrivadoJuego: juego.esPrivadoJuego === true ? 1 : 0,
+        esPrivadoJuego: juego.esPrivadoJuego === true ? 0 : 1,
         accessToken: usuario.accessToken,
         password: juego.password,
         preguntas: [],
