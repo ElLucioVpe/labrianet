@@ -222,7 +222,7 @@ export default function CrearJuego() {
     const preguntasNoTienenRespuestaCorrecta = () => {
         let value = false;
         preguntas.forEach(function (pregunta) {
-            if (pregunta.respuestaCorrecta === "") {
+            if (pregunta.respuestaCorrecta === null) {
                 value = true;
             }
         });
@@ -242,7 +242,7 @@ export default function CrearJuego() {
                 activadoJuego: 1,
                 coverJuego: juego.coverJuego != null ? (juego.coverJuego.substring(0, 8) === "https://" ? juego.coverJuego : juego.coverJuego.substring(22)) : "",
                 Musica_idMusica: juego.idMusica != null ? juego.idMusica : "1",
-                esPrivadoJuego: juego.esPrivadoJuego === true ? 0 : 1,
+                esPrivadoJuego: juego.esPrivadoJuego === true ? 1 : 0,
                 accessToken: usuario.accessToken,
                 password: juego.password,
                 preguntas: [],
