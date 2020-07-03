@@ -31,7 +31,7 @@ class CrearJuegoPreguntas extends React.Component {
                     </div>
                     <div className="text-align-center PreguntaPreviewBox">
                         <img
-                            src={this.props.imgUrl != null ? (this.props.imgUrl.slice(0, 8) === "https://" ? "http://img.youtube.com/vi/" + this.props.imgUrl.slice(32) + "/3.jpg" : this.props.imgUrl) : '/img/perfil.png'}
+                            src={this.props.imgUrl != null ? (this.props.imgUrl.slice(0, 8) === "https://" ? "http://img.youtube.com/vi/" + this.props.imgUrl.slice(32) + "/3.jpg" : this.props.imgUrl) : '/img/gamecover.png'}
                             className="PreguntaPreview "/>
                     </div>
                     <div className="flex flex-direction-row justify-content-space-between">

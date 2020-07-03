@@ -50,6 +50,7 @@ export default function ConfigurarJuego(props) {
             });
             await setCanciones(tmpCanciones);
         }
+
         doIt();
 
     }, []);
@@ -96,7 +97,7 @@ export default function ConfigurarJuego(props) {
 
     const cambiarYouTubeUrl = ((_value) => {
         !esContext ? juego.coverJuego = _value : juego_context.setCoverJuego(_value);
-        if(esContext) juego_context.setCoverEsVideo(true);
+        if (esContext) juego_context.setCoverEsVideo(true);
     });
 
     const esVideo = (() => {
@@ -119,15 +120,15 @@ export default function ConfigurarJuego(props) {
 
             fileReader.onload = function (fileLoadedEvent) {
                 !esContext ? juego.coverJuego = fileLoadedEvent.target.result : juego_context.setCoverJuego(fileLoadedEvent.target.result);
-                if(esContext) juego_context.setCoverEsVideo(false);
+                if (esContext) juego_context.setCoverEsVideo(false);
             };
             fileReader.readAsDataURL(fileToLoad);
         }
     }
 
     function verificarUsuario() {
-        if(!esContext && juego !== []) {
-            if(usuario.usuario !== juego.User_loginnameUser) window.location = "/";
+        if (!esContext && juego !== []) {
+            if (usuario.usuario !== juego.User_loginnameUser) window.location = "/";
         }
     }
 
@@ -139,9 +140,9 @@ export default function ConfigurarJuego(props) {
         setMostrarSubirImagen(respuesta);
     });
 
-    const updateJuego = (async() => {
-        if(juego.esPrivadoJuego === true) juego.esPrivadoJuego = 1;
-        else if(juego.esPrivadoJuego === false) juego.esPrivadoJuego = 0;
+    const updateJuego = (async () => {
+        if (juego.esPrivadoJuego === true) juego.esPrivadoJuego = 1;
+        else if (juego.esPrivadoJuego === false) juego.esPrivadoJuego = 0;
 
         await QuizMasterService.updateJuego({juego: juego, accessToken: usuario.accessToken});
     });
@@ -207,7 +208,7 @@ export default function ConfigurarJuego(props) {
                                               id="gamecover"
                                               width="450"
                                               height="300"
-                                              src={((!esContext ? juego.coverJuego : juego_context.coverJuego) != null  && (!esContext ? juego.coverJuego : juego_context.coverJuego)) ? (!esContext ? QuizMasterService.getUrlImagen("cover", juego.coverJuego) : juego_context.coverJuego) : 'img/perfil.png'}/>
+                                              src={((!esContext ? juego.coverJuego : juego_context.coverJuego) != null && (!esContext ? juego.coverJuego : juego_context.coverJuego)) ? (!esContext ? QuizMasterService.getUrlImagen("cover", juego.coverJuego) : juego_context.coverJuego) : 'img/gamecover.png'}/>
                                 }
                                 <div className="absolute imgUpload" onClick={abrirModalSubirImagenVideo}>
                                     <img className="editImg"

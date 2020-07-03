@@ -123,9 +123,14 @@ export default function CrearJuego() {
     const eliminarPregunta = (async (id) => {
         if (preguntas.length > 1) {
             if (preguntas.length === 2) {
-                await cambiarPregunta(0);
+                await setPreguntaSeleccionada(0);
+                await setPreguntas(preguntas.filter((_, i) => i !== id));
+            } else if (id === preguntaSeleccionada) {
+                await setPreguntaSeleccionada(0);
+                await setPreguntas(preguntas.filter((_, i) => i !== id));
+            } else {
+                await setPreguntas(preguntas.filter((_, i) => i !== id));
             }
-            await setPreguntas(preguntas.filter((_, i) => i !== id));
         }
     });
 
@@ -253,7 +258,7 @@ export default function CrearJuego() {
                                          cambiarRespuesta={cambiarRespuesta}
                                          cambiarRespuestaCorrecta={cambiarRespuestaCorrecta}
                                          respuesta={preguntas[preguntaSeleccionada].respuestas[preguntas[preguntaSeleccionada].configurarRespuesta]}
-                                         esCorrecta={preguntas[preguntaSeleccionada].respuestaCorrecta}
+                                         esCorrecta={preguntas[preguntaSeleccionada].respuestaCorrecta === configurandoRespuesta}
                     />}
                 {mostrarSubirImagen === null ? '' :
                     <SubirImagenVideo cerrarModal={cerrarModalSubirImagenVideo}
