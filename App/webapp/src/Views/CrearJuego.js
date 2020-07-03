@@ -190,14 +190,15 @@ export default function CrearJuego() {
                 "puntosPregunta": item.puntaje != null ? item.puntaje : 100,
                 "contenidoPregunta": item.titulo != null ? item.titulo : "Pregunta",
                 "tipoPregunta": respuestasSinSetear === 2 ? "True/False" : "Quiz",
-                "urlAyudaPregunta": item.imgUrl != null ? item.imgUrl.substring(22) : "",
+                "urlAyudaPregunta": item.imgUrl != null ? item.imgUrl : "",
                 "startAyuda": convertirAyuda(item.startAyuda),
                 "endAyuda": convertirAyuda(item.endAyuda),
                 "respuestas": respuestas
             });
         });
+        console.log(dataJuego);
         let id = await QuizMasterService.crearJuego(dataJuego);
-        console.log("ee ee " + id);
+        //console.log("ee ee " + id);
         await setJuegoCreado(true);
         await juego.setIdJuego(id);
     });
@@ -219,7 +220,7 @@ export default function CrearJuego() {
             juegoCreado && juego.idJuego != null ? <ResumenJuego id={juego.idJuego}/> :
                 <div className="container" style={{height: '100%'}}>
                     <div className="titleHeader">
-                        <input className="input-big mr-10" placeholder="Titulo" onChange={handleChange}
+                        <input className="input-big mr-10 input-titulo" placeholder="Titulo" onChange={handleChange}
                                value={titulo}/>
                         <Button class="item" to="/configurarJuego" value="Configurar" size="regular"/>
                     </div>
